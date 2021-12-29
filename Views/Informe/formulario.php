@@ -8,7 +8,7 @@
         <div class="col-12">                
             <h5>VEHÍCULO</h5>
         </div>
-        <div class="col-4" style=" height: 200px">
+        <div class="col-6" style=" height: 200px">
             <div class="form-group">
                 <label for="numero">NÚMERO</label>
                 <input type="text" class="form-control" id="numero" name="numero" readonly value="<?php echo $vehiculo; ?>">
@@ -19,24 +19,14 @@
                 <input type="hidden" class="form-control" id="empresa" name="empresa" readonly value="<?php echo $resultado['IDEMPRESA']?>">
             </div>
         </div>
-        <div class="col-4" style=" height: 200px">
+        <div class="col-6" style=" height: 200px">
             <div class="form-group">
                 <label for="kilometrosant">KLM ANT.</label>
                 <input type="text" class="form-control" id="kilometrosant" name="kilometrosant" placeholder="" readonly value="<?php echo $resultado['klm'] ?>">
             </div>
             <div class="form-group">
-                <label for="litros">LITROS</label>
-                <input type="text" class="form-control" id="litros" name="litros" placeholder="" >
-            </div>
-        </div>
-        <div class="col-4" style=" height: 200px">
-            <div class="form-group">
                 <label for="matricula">MATRÍCULA</label>
                 <input type="text" class="form-control" id="matricula" name="matricula" placeholder="" readonly value="<?php echo $resultado['matricula'] ?>">
-            </div>
-            <div class="form-group">
-                <label for="kilometros">KILÓMETROS</label>
-                <input type="text" class="form-control" id="kilometros" name="kilometros" placeholder="" >
             </div>
         </div>
     </div>
@@ -125,154 +115,47 @@
         <div class="col-12">                
             <h5>ESTADO FLOTA</h5>
         </div>
-        <div class="col-4">
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="okflota" name="okflota" class="custom-control-input" value="1" required="true" onclick="okEstadoFlota();">
-                <label class="custom-control-label" for="okflota">OK</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="revisionflota" name="okflota" class="custom-control-input" value="0" required="true" onclick="revisionEstadoFlota();">
-                <label class="custom-control-label" for="revisionflota">REVISIÓN</label>
-            </div>
-        </div>
-        <div class="col-8">
+        <div class="col-8 offset-2">
             <div class="row bordes">
                 <div class="col-12">
                     <h6>REVISIÓN VEHÍCULO</h6>
                 </div>
                 <div class="col-12 col-md-6">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input revision-vehiculo" id="asientos" name="asientos">
-                        <label class="custom-control-label" for="asientos">ASIENTOS</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input revision-vehiculo" id="lunas" name="lunas">
-                        <label class="custom-control-label" for="lunas">LUNAS</label>
-                    </div>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input revision-vehiculo" id="barras" name="barras">
-                        <label class="custom-control-label" for="barras">BARRAS</label>
+                        <label class="custom-control-label" for="barras">ASIDEROS/BARRAS</label>
                     </div>
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input revision-vehiculo" id="puesto" name="puesto">
-                        <label class="custom-control-label" for="puesto">PUESTO CONDUCTOR</label>
+                        <input type="checkbox" class="custom-control-input revision-vehiculo" id="pulsadores" name="pulsadores">
+                        <label class="custom-control-label" for="pulsadores">PULSADORES</label>
                     </div>
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input revision-vehiculo" id="limpiezaext" name="limpiezaext">
-                        <label class="custom-control-label" for="limpiezaext">LIMPIEZA EXTERIOR</label>
+                        <input type="checkbox" class="custom-control-input revision-vehiculo" id="suspension" name="suspension">
+                        <label class="custom-control-label" for="suspension">SUSPENSIÓN</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input revision-vehiculo" id="ayudavisual" name="ayudavisual">
+                        <label class="custom-control-label" for="ayudavisual">AYUDA VISUAL</label>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input revision-vehiculo" id="carroceria" name="carroceria">
-                        <label class="custom-control-label" for="carroceria">CARROCERIA</label>
+                        <input type="checkbox" class="custom-control-input revision-vehiculo" id="ayudasonora" name="ayudasonora">
+                        <label class="custom-control-label" for="ayudasonora">AYUDA SONORA</label>
                     </div>
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input revision-vehiculo" id="lucesint" name="lucesint">
-                        <label class="custom-control-label" for="lucesint">LUCES INTERIOR</label>
+                        <input type="checkbox" class="custom-control-input revision-vehiculo" id="avisosae" name="avisosae">
+                        <label class="custom-control-label" for="avisosae">AVISOS VOCALES PARADAS SAE</label>
                     </div>
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input revision-vehiculo" id="lucesext" name="lucesext">
-                        <label class="custom-control-label" for="lucesext">LUCES EXTERIOR</label>
+                        <input type="checkbox" class="custom-control-input revision-vehiculo" id="espacio" name="espacio">
+                        <label class="custom-control-label" for="espacio">ESPACIOS RESERVADOS</label>
                     </div>
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input revision-vehiculo" id="grafitis" name="grafitis">
-                        <label class="custom-control-label" for="grafitis">GRAFITIS</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input revision-vehiculo" id="limpiezaint" name="limpiezaint">
-                        <label class="custom-control-label" for="limpiezaint">LIMPIEZA INTERIOR</label>
+                        <input type="checkbox" class="custom-control-input revision-vehiculo" id="cinturones" name="cinturones">
+                        <label class="custom-control-label" for="cinturones">CINTURONES PMR</label>
                     </div>
                 </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="row align-items-center mt-5 bordes">
-        <div class="col-12 mb-2">                
-            <h5>INFORMACIÓN AL USUARIO EN EL VEHÍCULO</h5>
-        </div>
-        <div class="col-4">
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline1" name="okinfo" class="custom-control-input" value="1" required="true" onclick="okEstadoInfo();">
-                <label class="custom-control-label" for="customRadioInline1">OK</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline2" name="okinfo" class="custom-control-input" value="0" required="true" onclick="revisionEstadoInfo();">
-                <label class="custom-control-label" for="customRadioInline2">REVISIÓN</label>
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="row bordes">
-                <div class="col-12">
-                    <h6>REVISIÓN VEHÍCULO</h6>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input info-vehiculo" id="cartel" name="cartel">
-                        <label class="custom-control-label" for="cartel">CARTEL IDENT. LÍNEA DESTINO</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input info-vehiculo" id="medios" name="medios">
-                        <label class="custom-control-label" for="medios">MEDIOS CONTACTO CONSORCIO</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input info-vehiculo" id="senial" name="senial">
-                        <label class="custom-control-label" for="senial">SEÑAL EMBARAZADA / ANCIANO</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input info-vehiculo" id="tarifas" name="tarifas">
-                        <label class="custom-control-label" for="tarifas">TARIFAS VIGENTES</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input info-vehiculo" id="video" name="video">
-                        <label class="custom-control-label" for="video">AVISO VIDEOVIGILANCIA</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input info-vehiculo" id="fumar" name="fumar">
-                        <label class="custom-control-label" for="fumar">PROHIBIDO FUMAR</label>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input info-vehiculo" id="emergencia" name="emergencia">
-                        <label class="custom-control-label" for="emergencia">ESPECIF. CASO EMERGENCIA</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input info-vehiculo" id="libro" name="libro">
-                        <label class="custom-control-label" for="libro">LIBRO DE RECLAMACIONES</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input info-vehiculo" id="reglamento" name="reglamento">
-                        <label class="custom-control-label" for="reglamento">REGLAMENTO VIAJEROS</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input info-vehiculo" id="cambio" name="cambio">
-                        <label class="custom-control-label" for="cambio">CAMBIOS MAX. PERMITIDO</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input info-vehiculo" id="ddd" name="ddd">
-                        <label class="custom-control-label" for="ddd">CARTEL D.D.D.</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="row align-items-center mt-5 bordes">
-        <div class="col-12 mb-2">                
-            <h5>CONTROL DE LIMPIEZA DE VEHICULOS</h5>
-        </div>
-        <div class="col-6">
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="limpiezaprof" name="limpiezaprof">
-                <label class="custom-control-label" for="limpiezaprof">LIMPIEZA PROFUNDA</label>
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="limpiezasuelos" name="limpiezasuelos">
-                <label class="custom-control-label" for="limpiezasuelos">LIMPIEZA SUELOS</label>
             </div>
         </div>
 

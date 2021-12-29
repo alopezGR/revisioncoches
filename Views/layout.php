@@ -28,7 +28,7 @@
             .bordes{
                 border-bottom: solid 1px #999;
                 border-left: solid 1px #999;
-                padding-bottom: 20px;
+                padding-bottom: 20px; 
             }
 
         </style>
