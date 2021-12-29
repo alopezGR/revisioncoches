@@ -34,9 +34,7 @@ class InformeController {
         
         $datos = $_POST;
         
-        $resultadoFlota = Informe::insertFlota($datos);
-        
-        $resultadoInforma = Informe::insertarInforma($datos);
+        $resultadoFlota = Informe::insertDatos($datos);
 		
 		$resultadoRampa = true;
         
@@ -46,7 +44,7 @@ class InformeController {
             }
         }
         
-        if($resultadoFlota && $resultadoInforma && $resultadoRampa){        
+        if($resultadoFlota && $resultadoRampa){        
             $_SESSION['exito'] = "true";
         } else {
             $_SESSION['error'] = "true";
