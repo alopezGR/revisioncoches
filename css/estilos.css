@@ -1,0 +1,134 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 07-ene-2020, 16:12:25
+    Author     : alopez
+*//*
+body{
+    background-color: whitesmoke;
+}
+.margin10{
+    margin-top:10%;
+}
+.lightButton{
+
+    color: #000;
+    background-color: #fff;
+    border:solid 1px #000;
+}
+
+.margin-top-nav{
+    margin-top: 5%;
+}
+
+span.errorLog{
+    color:red;
+}
+h1{
+    margin-bottom: 0.5em;
+}
+
+li.active > a{
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+li.nav-item > a.nav-link{
+    color:#fff !important;
+}
+
+nav.navbar a:focus, nav.navbar a:hover{
+    outline: solid white 1px
+}
+
+
+
+.formulario {
+    border: solid 1px #DDD;
+    background: white;
+    padding: 3%;
+}
+
+div.barraHorizontal {
+  border-top: 1px solid #bbb;
+  width: 100%;
+}*/
+
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 07-ene-2020, 16:12:25
+    Author     : alopez
+*/
+
+footer {
+    z-index: 2 !important;
+}
+
+.display-none{
+    display: none !important;
+}
+
+.radioRampa{
+    position: absolute;
+    clip: rect(0,0,0,0);
+    pointer-events: none;
+}
+
+.boton{
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.boton-exito{
+    color: #28a745;
+    border-color: #28a745;
+}
+
+.boton-exito.activo{
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+.boton-exito:hover{
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.boton-danger{
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.boton-danger.activo{
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+.boton-danger:hover{
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+    
