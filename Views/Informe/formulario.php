@@ -122,33 +122,33 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                     <div class="mb-2">
                         <span class="mr-2">ASIDEROS/BARRAS</span>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="barras" id="barras" value="1">
+                            <input class="form-check-input" type="radio" name="barras" id="barras" value="1" required>
                             <label class="form-check-label" for="barras">Ok</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="barras" id="barrasNo" value="0">
+                            <input class="form-check-input" type="radio" name="barras" id="barrasNo" value="0" required>
                             <label class="form-check-label" for="barrasNo">No ok</label>
                         </div>
                     </div>
                     <div class="mb-2">
                         <span class="mr-2">PULSADORES</span>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="pulsadores" id="pulsadores" value="1">
+                            <input class="form-check-input" type="radio" name="pulsadores" id="pulsadores" value="1" required>
                             <label class="form-check-label" for="pulsadores">Ok</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="pulsadores" id="pulsadoresNo" value="0">
+                            <input class="form-check-input" type="radio" name="pulsadores" id="pulsadoresNo" value="0" required>
                             <label class="form-check-label" for="pulsadoresNo">No ok</label>
                         </div>
                     </div>
                     <div class="mb-2">
                         <span class="mr-2">SUSPENSIÓN</span>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="suspension" id="suspension" value="1">
+                            <input class="form-check-input" type="radio" name="suspension" id="suspension" value="1" required>
                             <label class="form-check-label" for="suspension">Ok</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="suspension" id="suspensionNo" value="0">
+                            <input class="form-check-input" type="radio" name="suspension" id="suspensionNo" value="0" required>
                             <label class="form-check-label" for="suspensionNo">No ok</label>
                         </div>
                     </div>
@@ -157,22 +157,22 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                     <div class="mb-2">
                         <span class="mr-2">ESPACIOS RESERVADOS</span>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="espacio" id="espacio" value="1">
+                            <input class="form-check-input" type="radio" name="espacio" id="espacio" value="1" required>
                             <label class="form-check-label" for="espacio">Ok</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="espacio" id="espacioNo" value="0">
+                            <input class="form-check-input" type="radio" name="espacio" id="espacioNo" value="0" required>
                             <label class="form-check-label" for="espacioNo">No ok</label>
                         </div>
                     </div>
                     <div class="mb-2">
                         <span class="mr-2">CINTURONES PMR</span>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="cinturones" id="cinturones" value="1">
+                            <input class="form-check-input" type="radio" name="cinturones" id="cinturones" value="1" required>
                             <label class="form-check-label" for="cinturones">Ok</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="cinturones" id="cinturonesNo" value="0">
+                            <input class="form-check-input" type="radio" name="cinturones" id="cinturonesNo" value="0" required>
                             <label class="form-check-label" for="cinturonesNo">No ok</label>
                         </div>
                     </div>
