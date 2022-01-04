@@ -60,22 +60,24 @@ class Informe {
         $fecha = date_format($datetime, 'Y-m-d');
         $hora = date_format($datetime, 'H:i:s');
 
-        $queryFlota = " INSERT INTO `estadoaccesibilidad` (`id`, `idempresa`, `idvehiculo`, `fecha`, barras, pulsadores, `suspension`, 
-        `espacio`, `cinturones`, `idusuario`, `hora`, `traspasado`) 
-        VALUES (NULL, :idempresa, :idvehiculo, :fecha, :barras, :pulsadores, :suspension, :espacio, :cinturones, :idusuario, :hora, 0)";
+        $queryFlota = " INSERT INTO `estadoaccesibilidad` (`id`, `idempresa`, `idvehiculo`, `idusuario`, `fecha`, `hora`, `kneeling`, 
+        `cinturonespmr`, `barras`, `rampa`, `pulsadoresrampa`, `senlumrampa`, `acusticarampa`, `traspasado`) 
+        VALUES (NULL, :idempresa, :idvehiculo, :idusuario, :fecha, :hora, :kneeling, :cinturonespmr, :barras, :rampa, :pulsadoresrampa, :senlumrampa, :acusticarampa, '0')";
 
         $stFlota = $conn->prepare($queryFlota);
 
         $stFlota->bindParam(":idempresa", $datos['empresa']);
         $stFlota->bindParam(":idvehiculo", $datos['idvehiculo']);
         $stFlota->bindParam(":fecha", $fecha);
-        $stFlota->bindValue(":barras", $datos['barras']);
-        $stFlota->bindValue(":pulsadores", $datos['pulsadores']);
-        $stFlota->bindValue(":suspension", $datos['suspension']);
-        $stFlota->bindValue(":espacio", $datos['espacio']);
-        $stFlota->bindValue(":cinturones", $datos['cinturones']);
-        $stFlota->bindValue(":idusuario", isset($datos['idusuario']) ? $datos['idusuario'] : 0);
         $stFlota->bindValue(":hora", $hora);
+        $stFlota->bindValue(":kneeling", $datos['kneeling']);
+        $stFlota->bindValue(":cinturonespmr", $datos['cinturonespmr']);
+        $stFlota->bindValue(":barras", $datos['barras']);
+        $stFlota->bindValue(":rampa", $datos['rampa']);
+        $stFlota->bindValue(":pulsadoresrampa", $datos['pulsadoresrampa']);
+        $stFlota->bindValue(":senlumrampa", $datos['senlumrampa']);
+        $stFlota->bindValue(":acusticarampa", $datos['acusticarampa']);
+        $stFlota->bindValue(":idusuario", isset($datos['idusuario']) ? $datos['idusuario'] : 0);
         
         $stFlota->execute();
         

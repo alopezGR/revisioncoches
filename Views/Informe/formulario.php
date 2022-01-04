@@ -33,92 +33,72 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
 
     <div class="row align-items-center mt-5 bordes">
         <div class="col-12">
-            <h5>RAMPAS</h5>
+            <h5>ESTADO FLOTA</h5>
         </div>
-
-        <?php
-        $numRampas = count($rampas);
-        if ($numRampas > 0) {
-            $tamColumnas = (12 / $numRampas);
-
-            for ($i = 0; $i < $numRampas; $i++) {
-        ?>
-                <input type="hidden" name="tipo-<?php echo $rampas[$i]['id'] ?>" value="<?php echo $rampas[$i]['codigo'] ?>">
-                <div class="col-6 d-flex justify-content-center">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#r-<?php echo $rampas[$i]['id'] ?>">
-                        Rampa <?php echo $i + 1; ?>
-                    </button>
+        <div class="col-11 offset-1 mt-2">
+            <div class="row bordes">
+                <div class="col-12 mb-3">
+                    <h6>REVISIÓN VEHÍCULO</h6>
                 </div>
-
-                <div class="modal fade" id="r-<?php echo $rampas[$i]['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="r-<?php echo $rampas[$i]['id'] ?>Label" aria-hidden="true">
-                    <div class="modal-dialog" role="document" style="margin-top: 250px">
-                        <div class="modal-content ">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="r-<?php echo $rampas[$i]['id'] ?>Label">Rampa <?php echo $i + 1; ?></h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-6 d-flex justify-content-center">
-
-                                        <label class="boton boton-exito" id="ok<?php echo $rampas[$i]['id'] ?>">
-                                            <input onclick="hideCamposExtras(<?php echo $rampas[$i]['id'] ?>, this)" class="radioRampa" type="radio" name="r-<?php echo $rampas[$i]['id'] ?>" value="1" autocomplete="off"> Ok
-                                        </label>
-
-                                    </div>
-                                    <div class="col-6 d-flex justify-content-center">
-
-                                        <label class="boton boton-danger " id="nook<?php echo $rampas[$i]['id'] ?>">
-                                            <input onclick="mostrarCamposExtra(<?php echo $rampas[$i]['id'] ?>, this);" class="radioRampa" id="radioRampa<?php echo $rampas[$i]['id'] ?>" type="radio" autocomplete="off"> No ok
-                                        </label>
-
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="card card-body display-none" id="card-<?php echo $rampas[$i]['id'] ?>">
-                                        <div class="row">
-                                            <div class="col-6 d-flex justify-content-center">
-
-                                                <label class="boton boton-exito" id="revision<?php echo $rampas[$i]['id'] ?>">
-                                                    <input onclick="revision(<?php echo $rampas[$i]['id'] ?>, this)" class="radioRampa" type="radio" name="r-<?php echo $rampas[$i]['id'] ?>" value="2" autocomplete="off"> Revision
-                                                </label>
-
-                                            </div>
-                                            <div class="col-6 d-flex justify-content-center">
-
-                                                <label class="boton boton-danger " id="averia<?php echo $rampas[$i]['id'] ?>">
-                                                    <input onclick="averia(<?php echo $rampas[$i]['id'] ?>, this);" class="radioRampa" id="radioRampa<?php echo $rampas[$i]['id'] ?>" type="radio" autocomplete="off" name="r-<?php echo $rampas[$i]['id'] ?>" value="3"> Gestionar Avería
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            </div>
+                <div class="col-12 col-xl-6">
+                    <div class="mb-2">
+                        <span class="mr-2">RAMPA</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="rampa" id="rampa" value="1" required>
+                            <label class="form-check-label" for="rampa">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="rampa" id="rampaNo" value="0" required>
+                            <label class="form-check-label" for="rampaNo">No ok</label>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <span class="mr-2">ACÚSTICA RAMPA</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="acusticarampa" id="acusticarampa" value="1" required>
+                            <label class="form-check-label" for="acusticarampa">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="acusticarampa" id="acusticarampaNo" value="0" required>
+                            <label class="form-check-label" for="acusticarampaNo">No ok</label>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <span class="mr-2">SEÑALIZACIÓN LUMINOSA RAMPA</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="senlumrampa" id="senlumrampa" value="1" required>
+                            <label class="form-check-label" for="senlumrampa">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="senlumrampa" id="senlumrampaNo" value="0" required>
+                            <label class="form-check-label" for="senlumrampaNo">No ok</label>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <span class="mr-2">PULSADORES RAMPA</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="pulsadores" id="pulsadores" value="1" required>
+                            <label class="form-check-label" for="pulsadores">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="pulsadores" id="pulsadoresNo" value="0" required>
+                            <label class="form-check-label" for="pulsadoresNo">No ok</label>
                         </div>
                     </div>
                 </div>
+                <div class="col-12 col-xl-6">
 
-        <?php
-            }
-        }
-        ?>
-
-    </div>
-    <div class="row align-items-center mt-5 bordes">
-        <div class="col-12">
-            <h5>ESTADO FLOTA</h5>
-        </div>
-        <div class="col-8 offset-2">
-            <div class="row bordes">
-                <div class="col-12">
-                    <h6>REVISIÓN VEHÍCULO</h6>
-                </div>
-                <div class="col-12 col-md-6">
+                    <div class="mb-2">
+                        <span class="mr-2">CINTURONES PMR</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="cinturonespmr" id="cinturonespmr" value="1" required>
+                            <label class="form-check-label" for="cinturonespmr">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="cinturonespmr" id="cinturonespmrNo" value="0" required>
+                            <label class="form-check-label" for="cinturonespmrNo">No ok</label>
+                        </div>
+                    </div>
                     <div class="mb-2">
                         <span class="mr-2">ASIDEROS/BARRAS</span>
                         <div class="form-check form-check-inline">
@@ -131,49 +111,14 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                         </div>
                     </div>
                     <div class="mb-2">
-                        <span class="mr-2">PULSADORES</span>
+                        <span class="mr-2">KNEELING</span>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="pulsadores" id="pulsadores" value="1" required>
-                            <label class="form-check-label" for="pulsadores">Ok</label>
+                            <input class="form-check-input" type="radio" name="kneeling" id="kneeling" value="1" required>
+                            <label class="form-check-label" for="kneeling">Ok</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="pulsadores" id="pulsadoresNo" value="0" required>
-                            <label class="form-check-label" for="pulsadoresNo">No ok</label>
-                        </div>
-                    </div>
-                    <div class="mb-2">
-                        <span class="mr-2">SUSPENSIÓN</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="suspension" id="suspension" value="1" required>
-                            <label class="form-check-label" for="suspension">Ok</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="suspension" id="suspensionNo" value="0" required>
-                            <label class="form-check-label" for="suspensionNo">No ok</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="mb-2">
-                        <span class="mr-2">ESPACIOS RESERVADOS</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="espacio" id="espacio" value="1" required>
-                            <label class="form-check-label" for="espacio">Ok</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="espacio" id="espacioNo" value="0" required>
-                            <label class="form-check-label" for="espacioNo">No ok</label>
-                        </div>
-                    </div>
-                    <div class="mb-2">
-                        <span class="mr-2">CINTURONES PMR</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="cinturones" id="cinturones" value="1" required>
-                            <label class="form-check-label" for="cinturones">Ok</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="cinturones" id="cinturonesNo" value="0" required>
-                            <label class="form-check-label" for="cinturonesNo">No ok</label>
+                            <input class="form-check-input" type="radio" name="kneeling" id="kneelingNo" value="0" required>
+                            <label class="form-check-label" for="kneelingNo">No ok</label>
                         </div>
                     </div>
                 </div>
