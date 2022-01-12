@@ -77,11 +77,11 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                     <div class="mb-2">
                         <span class="mr-2">PULSADORES RAMPA</span>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="pulsadores" id="pulsadores" value="1" required>
+                            <input class="form-check-input" type="radio" name="pulsadoresrampa" id="pulsadores" value="1" required>
                             <label class="form-check-label" for="pulsadores">Ok</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="pulsadores" id="pulsadoresNo" value="0" required>
+                            <input class="form-check-input" type="radio" name="pulsadoresrampa" id="pulsadoresNo" value="0" required>
                             <label class="form-check-label" for="pulsadoresNo">No ok</label>
                         </div>
                     </div>
