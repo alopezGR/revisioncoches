@@ -87,7 +87,17 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                     </div>
                 </div>
                 <div class="col-12 col-xl-6">
-
+                    <div class="mb-2">
+                        <span class="mr-2">RAMPA AUTOMÁTICA</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="rampaauto" id="rampauato" value="1" required>
+                            <label class="form-check-label" for="rampaauto">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="rampaauto" id="rampaautoNo" value="0" required>
+                            <label class="form-check-label" for="rampaautoNo">No ok</label>
+                        </div>
+                    </div>
                     <div class="mb-2">
                         <span class="mr-2">CINTURONES PMR</span>
                         <div class="form-check form-check-inline">
