@@ -1,4 +1,3 @@
-
 <div class="row justify-content-center">
     <?php
     if (isset($_SESSION['error']) && $_SESSION['error'])
@@ -20,6 +19,13 @@
                     El vehículo introducido no se encuentra registrado. Prueba de nuevo.
                  </div>";
     unset($_SESSION['vehiculoIncorrecto']);
+    ?>
+    <?php
+    if (isset($_SESSION['passwordCambiada']) && $_SESSION['passwordCambiada'] == "true")
+        echo " <div class='col-12 alert alert-success' role='alert'>
+                    La contraseña se ha actualizado correctamente.
+                 </div>";
+    unset($_SESSION['passwordCambiada']);
     ?>
     <div class="col-md-5 col-8 formulario">
         <form action='index.php?controller=informe&action=formulario' method='post'>

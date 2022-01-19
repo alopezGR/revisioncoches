@@ -61,13 +61,15 @@ class Informe {
         $hora = date_format($datetime, 'H:i:s');
 
         $queryFlota = " INSERT INTO `estadoaccesibilidad` (`id`, `idempresa`, `idvehiculo`, `idusuario`, `fecha`, `hora`, `kneeling`, 
-        `cinturonespmr`, `barras`, `rampa`, rampaauto, `pulsadoresrampa`, `senlumrampa`, `acusticarampa`, `traspasado`) 
-        VALUES (NULL, :idempresa, :idvehiculo, :idusuario, :fecha, :hora, :kneeling, :cinturonespmr, :barras, :rampa, :rampaauto, :pulsadoresrampa, :senlumrampa, :acusticarampa, '0')";
+        `cinturonespmr`, `barras`, `rampa`, rampaauto, `pulsadoresrampa`, `senlumrampa`, `acusticarampa`, `traspasado`, usuario) 
+        VALUES (NULL, :idempresa, :idvehiculo, :idusuario, :fecha, :hora, :kneeling, :cinturonespmr, :barras, :rampa, 
+        :rampaauto, :pulsadoresrampa, :senlumrampa, :acusticarampa, '0', :usuario)";
 
         $stFlota = $conn->prepare($queryFlota);
 
         $stFlota->bindParam(":idempresa", $datos['empresa']);
         $stFlota->bindParam(":idvehiculo", $datos['idvehiculo']);
+        $stFlota->bindValue(":idusuario", isset($datos['idusuario']) ? $datos['idusuario'] : 0);
         $stFlota->bindParam(":fecha", $fecha);
         $stFlota->bindValue(":hora", $hora);
         $stFlota->bindValue(":kneeling", $datos['kneeling']);
@@ -78,7 +80,7 @@ class Informe {
         $stFlota->bindValue(":pulsadoresrampa", $datos['pulsadoresrampa']);
         $stFlota->bindValue(":senlumrampa", $datos['senlumrampa']);
         $stFlota->bindValue(":acusticarampa", $datos['acusticarampa']);
-        $stFlota->bindValue(":idusuario", isset($datos['idusuario']) ? $datos['idusuario'] : 0);
+        $stFlota->bindValue(":usuario", $datos['usuario']);
         
         $stFlota->execute();
         
