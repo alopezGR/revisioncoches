@@ -60,7 +60,7 @@ class InformeController
             }
 
             if ($resultadoFlota && $resultadoRampa) {
-                Usuario::registroLogin($_SESSION['user'], 'Realizada revisión coche '. $datos['idvehiculo']);
+                Usuario::registroLogin($_SESSION['user'], 'Realizada revision coche '. $datos['idvehiculo']);
                 $_SESSION['exito'] = "true";
             } else {
                 $_SESSION['error'] = "true";
