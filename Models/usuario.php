@@ -23,6 +23,9 @@ class Usuario
         if ($autenticado) {
             $_SESSION['logged'] = "true";
             $_SESSION['user'] = $usuarioDb['usuario'];
+            if($usuarioDb['admin'] == 1){
+                $_SESSION['admin'] = true;
+            }
             $logged = true;
             if ($usuarioDb['cambiada'] == 0) {
                 $_SESSION['cambioPassword'] = true;

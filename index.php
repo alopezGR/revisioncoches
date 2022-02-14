@@ -32,11 +32,11 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
     $controller = $_GET['controller'];
     $action = $_GET['action'];
 } else if (isset($_SESSION['logged']) && $_SESSION['logged']) {
-    $controller = 'informe';
+    $controller = 'accesibilidad';
     $action = 'index';
 } else {
-    $controller = 'informe';
-    $action = 'subir';
+    $controller = 'accesibilidad';
+    $action = 'index';
 }
 
 //carga la vista layout.php

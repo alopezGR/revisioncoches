@@ -1,12 +1,14 @@
 <?php
 
 /**
- * Descripción: Controlador para la entidad fichero
+ * 
+ * Descripción: Controlador para la entidad Accesibilidad
  * @author Alfonso López Velasco <alopez@gruporuiz.com>
  * @date: 25-02-2017
  * @version 1.0
+ * 
  */
-class InformeController
+class AccesibilidadController
 {
 
     public function __construct()
@@ -16,7 +18,7 @@ class InformeController
     public function index()
     {
         if (isset($_SESSION['logged'])) {
-            require_once 'Views/Informe/index.php';
+            require_once 'Views/Accesibilidad/index.php';
         } else {
             require_once 'Views/Usuario/login.php';
         }
@@ -27,14 +29,14 @@ class InformeController
         if (isset($_SESSION['logged'])) {
             $vehiculo = strtoupper($_POST['vehiculo']);
 
-            $resultado = Informe::getInfoVehiculo($vehiculo);
+            $resultado = Accesibilidad::getInfoVehiculo($vehiculo);
 
             if ($resultado == false || $resultado['id'] == '1478') {
                 $_SESSION['vehiculoIncorrecto'] = 'true';
-                require_once 'Views/Informe/index.php';
+                require_once 'Views/Accesibilidad/index.php';
             } else {
-                $rampas = Informe::getRampasVehiculo($vehiculo);
-                require_once 'Views/Informe/formulario.php';
+                $rampas = Accesibilidad::getRampasVehiculo($vehiculo);
+                require_once 'Views/Accesibilidad/formulario.php';
             }
         } else {
             require_once 'Views/Usuario/login.php';
@@ -49,18 +51,18 @@ class InformeController
 
             $datos['usuario'] = $_SESSION['user'];
 
-            $resultadoFlota = Informe::insertDatos($datos);
+            $resultadoFlota = Accesibilidad::insertDatos($datos);
 
             $resultadoRampa = true;
 
             foreach ($datos as $key => $value) {
                 if (strpos($key, "r-") !== false) {
-                    $resultadoRampa &= Informe::insertarRampa($datos, substr($key, 2));
+                    $resultadoRampa &= Accesibilidad::insertarRampa($datos, substr($key, 2));
                 }
             }
 
             if ($resultadoFlota && $resultadoRampa) {
-                Usuario::registroLogin($_SESSION['user'], 'Realizada revision coche '. $datos['idvehiculo']);
+                Usuario::registroLogin($_SESSION['user'], 'Realizada revision coche ' . $datos['idvehiculo']);
                 $_SESSION['exito'] = "true";
             } else {
                 $_SESSION['error'] = "true";

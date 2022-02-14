@@ -6,14 +6,17 @@ function call($controller, $action) {
     require_once('Controllers/' . $controller . '_controller.php');
     //crea el controlador
     switch ($controller) {
-        case 'informe':
-            require_once('Models/informe.php');
+        case 'accesibilidad':
+            require_once('Models/accesibilidad.php');
             require_once('Models/usuario.php');
-            $controller = new InformeController();
+            $controller = new AccesibilidadController();
             break;
         case 'usuario':
             require_once('Models/usuario.php');
             $controller = new UsuarioController();
+            break;
+        case 'error':
+            $controller = new ErrorController();
             break;
     }
     //llama a la acción del controlador
@@ -22,7 +25,8 @@ function call($controller, $action) {
 
 //array con los controladores y sus respectivas acciones
 $controllers = array(
-    'informe' => ['index', 'formulario', 'procesarFormulario'],
+    'error' =>  ['index'],
+    'accesibilidad' => ['index', 'formulario', 'procesarFormulario'],
     'usuario' => ['login', 'checkLogin' ,'salir', 'registroLogin', 'formularioCambioPassword', 'cambiarPassword']
 );
 //verifica que el controlador enviado desde index.php esté dentro del arreglo controllers
@@ -32,8 +36,8 @@ if (array_key_exists($controller, $controllers)) {
         //llama  la función call y le pasa el controlador a llamar y la acción (método) que está dentro del controlador
         call($controller, $action);
     } else {
-        call('informe', 'index');
+        call('accesibilidad', 'index');
     }
 } else {// le pasa el nombre del controlador y la pagina de error
-    call('usuario', 'index');
+    call('error', 'index');
 }

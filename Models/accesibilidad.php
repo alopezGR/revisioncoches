@@ -1,6 +1,6 @@
 <?php
 
-class Informe {
+class Accesibilidad {
 
     public static function getInfoVehiculo($vehiculo) {
 

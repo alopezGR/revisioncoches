@@ -2,7 +2,7 @@
 $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa Ruiz');
 ?>
 
-<form method="post" action="index.php?controller=informe&action=procesarFormulario">
+<form method="post" action="index.php?controller=accesibilidad&action=procesarFormulario">
     <input type="hidden" value="<?php echo $resultado['id'] ?>" name="idvehiculo">
     <div class="row align-items-center bordes">
         <div class="col-12">
