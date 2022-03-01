@@ -32,7 +32,7 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
     $controller = $_GET['controller'];
     $action = $_GET['action'];
 } else if (isset($_SESSION['logged']) && $_SESSION['logged']) {
-    $controller = 'accesibilidad';
+    $controller = 'menu';
     $action = 'index';
 } else {
     $controller = 'accesibilidad';

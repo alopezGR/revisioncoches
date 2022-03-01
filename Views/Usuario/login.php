@@ -6,7 +6,7 @@
                     El ususario o la contraseña son incorrectos.
                  </div>";
     ?>
-    <div class="col-5 formulario">
+    <div class="col-8 formulario">
         <form action='index.php?controller=usuario&action=checkLogin' method='post'>
             <legend>
                 <h2>Login</h2>

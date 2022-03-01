@@ -1,7 +1,7 @@
 <?php
 
 include 'vehiculo.php';
-class Accesibilidad Extends Vehiculo{
+class Documentacion Extends Vehiculo{
 
     public static function insertDatos($datos) {
         $conn = Db::getConector();
