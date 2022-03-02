@@ -2,7 +2,7 @@
 
 /**
  * 
- * Descripción: Controlador para la entidad Accesibilidad
+ * Descripción: Controlador para la entidad Limpieza
  * @author Alfonso López Velasco <alopez@gruporuiz.com>
  * @date: 25-02-2017
  * @version 1.0
@@ -18,7 +18,7 @@ class LimpiezaController
     public function index()
     {
         if (isset($_SESSION['logged'])) {
-            require_once 'Views/Accesibilidad/index.php';
+            require_once 'Views/Limpieza/index.php';
         } else {
             require_once 'Views/Usuario/login.php';
         }
@@ -29,14 +29,14 @@ class LimpiezaController
         if (isset($_SESSION['logged'])) {
             $vehiculo = strtoupper($_POST['vehiculo']);
 
-            $resultado = Accesibilidad::getInfoVehiculo($vehiculo);
+            $resultado = Limpieza::getInfoVehiculo($vehiculo);
 
             if ($resultado == false || $resultado['id'] == '1478') {
                 $_SESSION['vehiculoIncorrecto'] = 'true';
-                require_once 'Views/Accesibilidad/index.php';
+                require_once 'Views/Limpieza/index.php';
             } else {
-                $rampas = Accesibilidad::getRampasVehiculo($vehiculo);
-                require_once 'Views/Accesibilidad/formulario.php';
+                $rampas = Limpieza::getRampasVehiculo($vehiculo);
+                require_once 'Views/Limpieza/formulario.php';
             }
         } else {
             require_once 'Views/Usuario/login.php';
@@ -51,13 +51,13 @@ class LimpiezaController
 
             $datos['usuario'] = $_SESSION['user'];
 
-            $resultadoFlota = Accesibilidad::insertDatos($datos);
+            $resultadoFlota = Limpieza::insertDatos($datos);
 
             $resultadoRampa = true;
 
             foreach ($datos as $key => $value) {
                 if (strpos($key, "r-") !== false) {
-                    $resultadoRampa &= Accesibilidad::insertarRampa($datos, substr($key, 2));
+                    $resultadoRampa &= Limpieza::insertarRampa($datos, substr($key, 2));
                 }
             }
 

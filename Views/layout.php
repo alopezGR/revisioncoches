@@ -54,7 +54,7 @@
             <div class="d-flex <?php echo ($controller == 'menu' && $action == 'index') ? "justify-content-end" : "justify-content-between"; ?> mt-2 mb-5">
                 <?php
                 if (!($controller == 'menu' && $action == 'index')) {
-                    echo "<a class='btn btn-danger' href='javascript:window.history.back()'>Volver</a>";
+                    echo "<a class='btn btn-warning' href='javascript:window.history.back()'>Volver</a>";
                 }
                 ?>
                 <?php

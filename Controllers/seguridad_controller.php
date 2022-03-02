@@ -2,7 +2,7 @@
 
 /**
  * 
- * Descripción: Controlador para la entidad Accesibilidad
+ * Descripción: Controlador para la entidad Seguridad
  * @author Alfonso López Velasco <alopez@gruporuiz.com>
  * @date: 25-02-2017
  * @version 1.0
@@ -18,7 +18,7 @@ class SeguridadController
     public function index()
     {
         if (isset($_SESSION['logged'])) {
-            require_once 'Views/Accesibilidad/index.php';
+            require_once 'Views/Seguridad/index.php';
         } else {
             require_once 'Views/Usuario/login.php';
         }
@@ -29,14 +29,14 @@ class SeguridadController
         if (isset($_SESSION['logged'])) {
             $vehiculo = strtoupper($_POST['vehiculo']);
 
-            $resultado = Accesibilidad::getInfoVehiculo($vehiculo);
+            $resultado = Seguridad::getInfoVehiculo($vehiculo);
 
             if ($resultado == false || $resultado['id'] == '1478') {
                 $_SESSION['vehiculoIncorrecto'] = 'true';
-                require_once 'Views/Accesibilidad/index.php';
+                require_once 'Views/Seguridad/index.php';
             } else {
-                $rampas = Accesibilidad::getRampasVehiculo($vehiculo);
-                require_once 'Views/Accesibilidad/formulario.php';
+                $rampas = Seguridad::getRampasVehiculo($vehiculo);
+                require_once 'Views/Seguridad/formulario.php';
             }
         } else {
             require_once 'Views/Usuario/login.php';
@@ -51,13 +51,13 @@ class SeguridadController
 
             $datos['usuario'] = $_SESSION['user'];
 
-            $resultadoFlota = Accesibilidad::insertDatos($datos);
+            $resultadoFlota = Seguridad::insertDatos($datos);
 
             $resultadoRampa = true;
 
             foreach ($datos as $key => $value) {
                 if (strpos($key, "r-") !== false) {
-                    $resultadoRampa &= Accesibilidad::insertarRampa($datos, substr($key, 2));
+                    $resultadoRampa &= Seguridad::insertarRampa($datos, substr($key, 2));
                 }
             }
 
