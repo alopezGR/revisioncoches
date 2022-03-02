@@ -51,17 +51,11 @@ class PegatinasController
 
             $datos['usuario'] = $_SESSION['user'];
 
-            $resultadoFlota = Pegatinas::insertDatos($datos);
+            $resultadoPegatinas = Pegatinas::insertDatos($datos);
 
             $resultadoRampa = true;
 
-            foreach ($datos as $key => $value) {
-                if (strpos($key, "r-") !== false) {
-                    $resultadoRampa &= Pegatinas::insertarRampa($datos, substr($key, 2));
-                }
-            }
-
-            if ($resultadoFlota && $resultadoRampa) {
+            if ($resultadoPegatinas && $resultadoRampa) {
                 Usuario::registroLogin($_SESSION['user'], 'Realizada revision coche ' . $datos['idvehiculo']);
                 $_SESSION['exito'] = "true";
             } else {
