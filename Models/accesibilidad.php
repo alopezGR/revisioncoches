@@ -11,7 +11,7 @@ class Accesibilidad Extends Vehiculo{
         $fecha = date_format($datetime, 'Y-m-d');
         $hora = date_format($datetime, 'H:i:s');
 
-        $queryFlota = " INSERT INTO `estadoaccesibilidad` (`id`, `idempresa`, `idvehiculo`, `idusuario`, `fecha`, `hora`, `kneeling`, 
+        $queryFlota = " INSERT INTO `estado_accesibilidad` (`id`, `idempresa`, `idvehiculo`, `idusuario`, `fecha`, `hora`, `kneeling`, 
         `cinturonespmr`, `barras`, `rampa`, rampaauto, `pulsadoresrampa`, `senlumrampa`, `acusticarampa`, `traspasado`, usuario) 
         VALUES (NULL, :idempresa, :idvehiculo, :idusuario, :fecha, :hora, :kneeling, :cinturonespmr, :barras, :rampa, 
         :rampaauto, :pulsadoresrampa, :senlumrampa, :acusticarampa, '0', :usuario)";
