@@ -19,7 +19,7 @@
     </div>
     <?php if (isset($_SESSION['admin'])) { ?>
         <div class="col-lg-6 col-sm-12 mt-5">
-            <a class="btn botonera" href="index.php?controller=exportar&action=exportarExcel">Exportar datos a Excel</a>
+            <a class="btn botonera" href="index.php?controller=exportar&action=index">Exportar datos a Excel</a>
         </div>
     <?php } ?>
 </div>

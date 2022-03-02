@@ -35,6 +35,10 @@ function call($controller, $action) {
             require_once('Models/usuario.php');
             $controller = new UsuarioController();
             break;
+        case 'exportar':
+            require_once('Models/exportar.php');
+            $controller = new ExportarController();
+            break;
         case 'menu':
             // require_once('Models/usuario.php');
             $controller = new MenuController();
@@ -56,6 +60,7 @@ $controllers = array(
     'limpieza' => ['index', 'formulario', 'procesarFormulario'],
     'pegatinas' => ['index', 'formulario', 'procesarFormulario'],
     'seguridad' => ['index', 'formulario', 'procesarFormulario'],
+    'exportar' => ['index', 'exportarRevisiones'],
     'usuario' => ['login', 'checkLogin' ,'salir', 'registroLogin', 'formularioCambioPassword', 'cambiarPassword']
 );
 //verifica que el controlador enviado desde index.php esté dentro del arreglo controllers
