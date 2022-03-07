@@ -35,7 +35,6 @@ class PegatinasController
                 $_SESSION['vehiculoIncorrecto'] = 'true';
                 require_once 'Views/Pegatinas/index.php';
             } else {
-                $rampas = Pegatinas::getRampasVehiculo($vehiculo);
                 require_once 'Views/Pegatinas/formulario.php';
             }
         } else {
@@ -53,9 +52,7 @@ class PegatinasController
 
             $resultadoPegatinas = Pegatinas::insertDatos($datos);
 
-            $resultadoRampa = true;
-
-            if ($resultadoPegatinas && $resultadoRampa) {
+            if ($resultadoPegatinas) {
                 Usuario::registroLogin($_SESSION['user'], 'Realizada revision coche ' . $datos['idvehiculo']);
                 $_SESSION['exito'] = "true";
             } else {
