@@ -49,19 +49,11 @@ class DocumentacionController
 
             $datos = $_POST;
 
-            $datos['usuario'] = $_SESSION['user'];
+            $datos['USUARIO'] = $_SESSION['user'];
 
             $resultadoFlota = Documentacion::insertDatos($datos);
 
-            $resultadoRampa = true;
-
-            foreach ($datos as $key => $value) {
-                if (strpos($key, "r-") !== false) {
-                    $resultadoRampa &= Documentacion::insertarRampa($datos, substr($key, 2));
-                }
-            }
-
-            if ($resultadoFlota && $resultadoRampa) {
+            if ($resultadoFlota) {
                 Usuario::registroLogin($_SESSION['user'], 'Realizada revision coche ' . $datos['idvehiculo']);
                 $_SESSION['exito'] = "true";
             } else {
