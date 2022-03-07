@@ -5,30 +5,30 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
     <h3>ESTADO PEGATINAS</h3>
 </div>
 <form method="post" action="index.php?controller=pegatinas&action=procesarFormulario">
-    <input type="hidden" value="<?php echo $resultado['id'] ?>" name="idvehiculo">
+    <input type="hidden" value="<?php echo $resultado['id'] ?>" name="IDVEHICULO">
     <div class="row align-items-center bordes">
         <div class="col-12">
             <h5>VEHÍCULO</h5>
         </div>
         <div class="col-6" style=" height: 200px">
             <div class="form-group">
-                <label for="numero">NÚMERO</label>
-                <input type="text" class="form-control" id="numero" name="numero" readonly value="<?php echo $vehiculo; ?>">
+                <label for="NUMERO">NÚMERO</label>
+                <input type="text" class="form-control" id="NUMERO" name="NUMERO" readonly value="<?php echo $vehiculo; ?>">
             </div>
             <div class="form-group">
-                <label for="empresa">Empresa</label>
-                <input type="text" class="form-control" id="empresa" readonly value="<?php echo $empresas[$resultado['IDEMPRESA']] ?>">
-                <input type="hidden" class="form-control" id="empresa" name="empresa" readonly value="<?php echo $resultado['IDEMPRESA'] ?>">
+                <label for="EMPRESA">Empresa</label>
+                <input type="text" class="form-control" id="EMPRESA" readonly value="<?php echo $empresas[$resultado['IDEMPRESA']] ?>">
+                <input type="hidden" class="form-control" id="EMPRESA" name="EMPRESA" readonly value="<?php echo $resultado['IDEMPRESA'] ?>">
             </div>
         </div>
         <div class="col-6" style=" height: 200px">
             <div class="form-group">
-                <label for="kilometrosant">KLM ANT.</label>
-                <input type="text" class="form-control" id="kilometrosant" name="kilometrosant" placeholder="" readonly value="<?php echo $resultado['klm'] ?>">
+                <label for="KILOMETROSANT">KLM ANT.</label>
+                <input type="text" class="form-control" id="KILOMETROSANT" name="KILOMETROSANT" placeholder="" readonly value="<?php echo $resultado['klm'] ?>">
             </div>
             <div class="form-group">
-                <label for="matricula">MATRÍCULA</label>
-                <input type="text" class="form-control" id="matricula" name="matricula" placeholder="" readonly value="<?php echo $resultado['matricula'] ?>">
+                <label for="MATRICULA">MATRÍCULA</label>
+                <input type="text" class="form-control" id="MATRICULA" name="MATRICULA" placeholder="" readonly value="<?php echo $resultado['matricula'] ?>">
             </div>
         </div>
     </div>

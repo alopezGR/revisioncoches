@@ -48,12 +48,12 @@ class PegatinasController
 
             $datos = $_POST;
 
-            $datos['usuario'] = $_SESSION['user'];
+            $datos['USUARIO'] = $_SESSION['user'];
 
             $resultadoPegatinas = Pegatinas::insertDatos($datos);
 
             if ($resultadoPegatinas) {
-                Usuario::registroLogin($_SESSION['user'], 'Realizada revision coche ' . $datos['idvehiculo']);
+                Usuario::registroLogin($_SESSION['user'], 'Realizada revision coche ' . $datos['IDVEHICULO']);
                 $_SESSION['exito'] = "true";
             } else {
                 $_SESSION['error'] = "true";

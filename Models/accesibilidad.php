@@ -12,26 +12,36 @@ class Accesibilidad Extends Vehiculo{
         $hora = date_format($datetime, 'H:i:s');
 
         $queryFlota = " INSERT INTO `estado_accesibilidad` (`id`, `idempresa`, `idvehiculo`, `idusuario`, `fecha`, `hora`, `kneeling`, 
-        `cinturonespmr`, `barras`, `rampa`, rampaauto, `pulsadoresrampa`, `senlumrampa`, `acusticarampa`, `traspasado`, usuario) 
-        VALUES (NULL, :idempresa, :idvehiculo, :idusuario, :fecha, :hora, :kneeling, :cinturonespmr, :barras, :rampa, 
-        :rampaauto, :pulsadoresrampa, :senlumrampa, :acusticarampa, '0', :usuario)";
+        `cinturonespmr`, `barras`, `rampa`, rampaauto, `pulsadoresrampa`, `senlumrampa`, `acusticarampa`, `kneeling_obs`, 
+        `cinturonespmr_obs`, `barras_obs`, `rampa_obs`, rampaauto_obs, `pulsadoresrampa_obs`, `senlumrampa_obs`, `acusticarampa_obs`, `traspasado`, usuario) 
+        VALUES (NULL, :IDEMPRESA, :IDVEHICULO, :IDUSUARIO, :FECHA, :HORA, :KNEELING, :CINTURONESPMR, :BARRAS, :RAMPA, 
+        :RAMPAAUTO, :PULSADORESRAMPA, :SENLUMRAMPA, :ACUSTICARAMPA, :KNEELING_OBS, :CINTURONESPMR_OBS, :BARRAS_OBS, :RAMPA_OBS, 
+        :RAMPAAUTO_OBS, :PULSADORESRAMPA_OBS, :SENLUMRAMPA_OBS, :ACUSTICARAMPA_OBS, '0', :USUARIO)";
 
         $stFlota = $conn->prepare($queryFlota);
 
-        $stFlota->bindParam(":idempresa", $datos['empresa']);
-        $stFlota->bindParam(":idvehiculo", $datos['idvehiculo']);
-        $stFlota->bindValue(":idusuario", isset($datos['idusuario']) ? $datos['idusuario'] : 0);
-        $stFlota->bindParam(":fecha", $fecha);
-        $stFlota->bindValue(":hora", $hora);
-        $stFlota->bindValue(":kneeling", $datos['kneeling']);
-        $stFlota->bindValue(":cinturonespmr", $datos['cinturonespmr']);
-        $stFlota->bindValue(":barras", $datos['barras']);
-        $stFlota->bindValue(":rampa", $datos['rampa']);
-        $stFlota->bindValue(":rampaauto", $datos['rampaauto']);
-        $stFlota->bindValue(":pulsadoresrampa", $datos['pulsadoresrampa']);
-        $stFlota->bindValue(":senlumrampa", $datos['senlumrampa']);
-        $stFlota->bindValue(":acusticarampa", $datos['acusticarampa']);
-        $stFlota->bindValue(":usuario", $datos['usuario']);
+        $stFlota->bindParam(":IDEMPRESA", $datos['EMPRESA']);
+        $stFlota->bindParam(":IDVEHICULO", $datos['IDVEHICULO']);
+        $stFlota->bindValue(":IDUSUARIO", isset($datos['IDUSUARIO']) ? $datos['IDUSUARIO'] : 0);
+        $stFlota->bindParam(":FECHA", $fecha);
+        $stFlota->bindValue(":HORA", $hora);
+        $stFlota->bindValue(":KNEELING", $datos['KNEELING']);
+        $stFlota->bindValue(":CINTURONESPMR", $datos['CINTURONESPMR']);
+        $stFlota->bindValue(":BARRAS", $datos['BARRAS']);
+        $stFlota->bindValue(":RAMPA", $datos['RAMPA']);
+        $stFlota->bindValue(":RAMPAAUTO", $datos['RAMPAAUTO']);
+        $stFlota->bindValue(":PULSADORESRAMPA", $datos['PULSADORESRAMPA']);
+        $stFlota->bindValue(":SENLUMRAMPA", $datos['SENLUMRAMPA']);
+        $stFlota->bindValue(":ACUSTICARAMPA", !empty($datos['ACUSTICARAMPA']) ? $datos['ACUSTICARAMPA'] : NULL);
+        $stFlota->bindValue(":KNEELING_OBS", !empty($datos['KNEELING_OBS']) ? $datos['KNEELING_OBS'] : NULL);
+        $stFlota->bindValue(":CINTURONESPMR_OBS", !empty($datos['CINTURONESPMR_OBS']) ? $datos['CINTURONESPMR_OBS'] : NULL);
+        $stFlota->bindValue(":BARRAS_OBS", !empty($datos['BARRAS_OBS']) ? $datos['BARRAS_OBS'] : NULL);
+        $stFlota->bindValue(":RAMPA_OBS", !empty($datos['RAMPA_OBS']) ? $datos['RAMPA_OBS'] : NULL);
+        $stFlota->bindValue(":RAMPAAUTO_OBS", !empty($datos['RAMPAAUTO_OBS']) ? $datos['RAMPAAUTO_OBS'] : NULL);
+        $stFlota->bindValue(":PULSADORESRAMPA_OBS", !empty($datos['PULSADORESRAMPA_OBS']) ? $datos['PULSADORESRAMPA_OBS'] : NULL);
+        $stFlota->bindValue(":SENLUMRAMPA_OBS", !empty($datos['SENLUMRAMPA_OBS']) ? $datos['SENLUMRAMPA_OBS'] : NULL);
+        $stFlota->bindValue(":ACUSTICARAMPA_OBS", !empty($datos['ACUSTICARAMPA_OBS']) ? $datos['ACUSTICARAMPA_OBS'] : NULL);
+        $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
         
         $stFlota->execute();
         
@@ -42,37 +52,45 @@ class Accesibilidad Extends Vehiculo{
         }
     }
     
-    public static function insertarRampa($datos, $idRampa){
+    // public static function insertarRampa($datos, $idRampa){
         
-        $datetime = date_create();
+    //     $datetime = date_create();
 
-        $fecha = date_format($datetime, 'Y-m-d');
-        $hora = date_format($datetime, 'H:i:s');
+    //     $fecha = date_format($datetime, 'Y-m-d');
+    //     $hora = date_format($datetime, 'H:i:s');
         
-        $conn = Db::getConector();
+    //     $conn = Db::getConector();
         
-        $queryRampa = "INSERT INTO controlrampa (idempresa,idbus,idrampa,fecha,tipo,idorden,hora,idusuario) 
-                        values (:idempresa,:idbus,:idrampa,:fecha,:tipo,:idorden,:hora,:idusuario)";
+    //     $queryRampa = "INSERT INTO controlrampa (idempresa,idbus,idrampa,fecha,tipo,IDORDEN,hora,idusuario) 
+    //                     values (:idempresa,:idbus,:idrampa,:fecha,:tipo,:idorden,:hora,:idusuario)";
         
-        $stRampa = $conn->prepare($queryRampa);
+    //     $stRampa = $conn->prepare($queryRampa);
         
-        $stRampa->bindParam(":idempresa", $datos['empresa']);
-        $stRampa->bindParam(":idbus", $datos['idvehiculo']);
-        $stRampa->bindParam(":idrampa", $idRampa);
-        $stRampa->bindParam(":fecha", $fecha);
-        $stRampa->bindParam(":tipo", $datos["tipo-$idRampa"]);
-        $stRampa->bindValue(":idorden", $datos["r-$idRampa"]);
-        $stRampa->bindParam(":hora", $hora);
-        $stRampa->bindValue(":idusuario", isset($datos['idusuario']) ? 1 : 0);
+    //     $stRampa->bindParam(":IDEMPRESA", $datos['EMPRESA']);
+    //     $stRampa->bindParam(":IDBUS", $datos['IDVEHICULO']);
+    //     $stRampa->bindParam(":IDRAMPA", $idRampa);
+    //     $stRampa->bindParam(":FECHA", $fecha);
+    //     $stRampa->bindParam(":TIPO", $datos["tipo-$idRampa"]);
+    //     $stRampa->bindValue(":IDORDEN", $datos["r-$idRampa"]);
+    //     $stRampa->bindParam(":HORA", $hora);
+    //     $stRampa->bindValue(":IDUSUARIO", isset($datos['idusuario']) ? 1 : 0);
+    //     $stRampa->bindParam(":IDEMPRESA_OBS", $datos['empresa']);
+    //     $stRampa->bindParam(":IDBUS_OBS", $datos['idvehiculo']);
+    //     $stRampa->bindParam(":IDRAMPA_OBS", $idRampa);
+    //     $stRampa->bindParam(":FECHA_OBS", $fecha);
+    //     $stRampa->bindParam(":TIPO_OBS", $datos["tipo-$idRampa"]);
+    //     $stRampa->bindValue(":IDORDEN_OBS", $datos["r-$idRampa"]);
+    //     $stRampa->bindParam(":HORA_OBS", $hora);
+    //     $stRampa->bindValue(":IDUSUARIO_OBS", isset($datos['idusuario']) ? 1 : 0);
         
-        $stRampa->execute();
+    //     $stRampa->execute();
         
-        if($stRampa){
-            return true;
-        } else {
-            return false;
-        }
+    //     if($stRampa){
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
         
-    }
+    // }
 
 }
