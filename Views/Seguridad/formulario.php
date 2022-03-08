@@ -33,12 +33,12 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
 
     <div class="row align-items-center mt-5 bordes">
         <div class="col-12">
-            <h5>ESTADO DOCUMENTACIÓN</h5>
+            <h5>ESTADO ELEMENTOS DE SEGURIDAD</h5>
         </div>
         <div class="col-11 offset-1 mt-2">
             <div class="row bordes">
                 <div class="col-12 mb-3">
-                    <h6>REVISIÓN DOCUMENTACIÓN VEHÍCULO</h6>
+                    <h6>REVISIÓN ELEMENTOS DE SEGURIDAD DEL VEHÍCULO</h6>
                 </div>
                 <div class="col-12">
                     <div class="mb-2">

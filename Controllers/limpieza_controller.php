@@ -35,7 +35,6 @@ class LimpiezaController
                 $_SESSION['vehiculoIncorrecto'] = 'true';
                 require_once 'Views/Limpieza/index.php';
             } else {
-                $rampas = Limpieza::getRampasVehiculo($vehiculo);
                 require_once 'Views/Limpieza/formulario.php';
             }
         } else {
@@ -49,20 +48,12 @@ class LimpiezaController
 
             $datos = $_POST;
 
-            $datos['usuario'] = $_SESSION['user'];
+            $datos['USUARIO'] = $_SESSION['user'];
 
             $resultadoFlota = Limpieza::insertDatos($datos);
 
-            $resultadoRampa = true;
-
-            foreach ($datos as $key => $value) {
-                if (strpos($key, "r-") !== false) {
-                    $resultadoRampa &= Limpieza::insertarRampa($datos, substr($key, 2));
-                }
-            }
-
-            if ($resultadoFlota && $resultadoRampa) {
-                Usuario::registroLogin($_SESSION['user'], 'Realizada revision coche ' . $datos['idvehiculo']);
+            if ($resultadoFlota) {
+                Usuario::registroLogin($_SESSION['user'], 'Realizada revision coche ' . $datos['IDVEHICULO']);
                 $_SESSION['exito'] = "true";
             } else {
                 $_SESSION['error'] = "true";
