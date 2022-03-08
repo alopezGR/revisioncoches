@@ -54,7 +54,7 @@ class DocumentacionController
             $resultadoFlota = Documentacion::insertDatos($datos);
 
             if ($resultadoFlota) {
-                Usuario::registroLogin($_SESSION['user'], 'Realizada revision coche ' . $datos['idvehiculo']);
+                Usuario::registroLogin($_SESSION['user'], 'Realizada revision coche ' . $datos['IDVEHICULO']);
                 $_SESSION['exito'] = "true";
             } else {
                 $_SESSION['error'] = "true";

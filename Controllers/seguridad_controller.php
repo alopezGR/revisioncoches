@@ -49,20 +49,12 @@ class SeguridadController
 
             $datos = $_POST;
 
-            $datos['usuario'] = $_SESSION['user'];
+            $datos['USUARIO'] = $_SESSION['user'];
 
             $resultadoFlota = Seguridad::insertDatos($datos);
 
-            $resultadoRampa = true;
-
-            foreach ($datos as $key => $value) {
-                if (strpos($key, "r-") !== false) {
-                    $resultadoRampa &= Seguridad::insertarRampa($datos, substr($key, 2));
-                }
-            }
-
-            if ($resultadoFlota && $resultadoRampa) {
-                Usuario::registroLogin($_SESSION['user'], 'Realizada revision coche ' . $datos['idvehiculo']);
+            if ($resultadoFlota) {
+                Usuario::registroLogin($_SESSION['user'], 'Realizada revision coche ' . $datos['IDVEHICULO']);
                 $_SESSION['exito'] = "true";
             } else {
                 $_SESSION['error'] = "true";
