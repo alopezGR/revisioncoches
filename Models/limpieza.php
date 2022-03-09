@@ -1,6 +1,6 @@
 <?php
 
-include 'vehiculo.php';
+include_once 'vehiculo.php';
 class Limpieza Extends Vehiculo{
 
     public static function insertDatos($datos){

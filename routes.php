@@ -1,7 +1,8 @@
 <?php
 
 //función que llama al controlador y su respectiva acción, que son pasados como parámetros
-function call($controller, $action) {
+function call($controller, $action)
+{
     //importa el controlador desde la carpeta Controllers
     require_once('Controllers/' . $controller . '_controller.php');
     //crea el controlador
@@ -37,6 +38,11 @@ function call($controller, $action) {
             break;
         case 'exportar':
             require_once('Models/exportar.php');
+            require_once('Models/accesibilidad.php');
+            require_once('Models/documentacion.php');
+            require_once('Models/pegatinas.php');
+            require_once('Models/limpieza.php');
+            require_once('Models/seguridad.php');
             $controller = new ExportarController();
             break;
         case 'menu':
@@ -48,7 +54,7 @@ function call($controller, $action) {
             break;
     }
     //llama a la acción del controlador
-    $controller->{$action }();
+    $controller->{$action}();
 }
 
 //array con los controladores y sus respectivas acciones
@@ -61,7 +67,7 @@ $controllers = array(
     'pegatinas' => ['index', 'formulario', 'procesarFormulario'],
     'seguridad' => ['index', 'formulario', 'procesarFormulario'],
     'exportar' => ['index', 'exportarRevisiones'],
-    'usuario' => ['login', 'checkLogin' ,'salir', 'registroLogin', 'formularioCambioPassword', 'cambiarPassword']
+    'usuario' => ['login', 'checkLogin', 'salir', 'registroLogin', 'formularioCambioPassword', 'cambiarPassword']
 );
 //verifica que el controlador enviado desde index.php esté dentro del arreglo controllers
 if (array_key_exists($controller, $controllers)) {
@@ -72,6 +78,6 @@ if (array_key_exists($controller, $controllers)) {
     } else {
         call('menu', 'index');
     }
-} else {// le pasa el nombre del controlador y la pagina de error
+} else { // le pasa el nombre del controlador y la pagina de error
     call('error', 'error');
 }

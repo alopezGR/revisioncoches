@@ -1,6 +1,6 @@
 <?php
 
-include 'vehiculo.php';
+include_once 'vehiculo.php';
 class Pegatinas extends Vehiculo
 {
     /**

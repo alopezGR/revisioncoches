@@ -1,9 +1,11 @@
 <?php
 
-include 'vehiculo.php';
-class Accesibilidad Extends Vehiculo{
+include_once 'vehiculo.php';
+class Accesibilidad extends Vehiculo
+{
 
-    public static function insertDatos($datos) {
+    public static function insertDatos($datos)
+    {
         $conn = Db::getConector();
 
         $datetime = date_create();
@@ -11,10 +13,10 @@ class Accesibilidad Extends Vehiculo{
         $fecha = date_format($datetime, 'Y-m-d');
         $hora = date_format($datetime, 'H:i:s');
 
-        $queryFlota = " INSERT INTO `estado_accesibilidad` (`id`, `idempresa`, `idvehiculo`, `idusuario`, `fecha`, `hora`, `kneeling`, 
+        $queryFlota = " INSERT INTO `estado_accesibilidad` (`id`, `idempresa`, `idvehiculo`, codigo_vehiculo, `idusuario`, `fecha`, `hora`, `kneeling`, 
         `cinturonespmr`, `barras`, `rampa`, rampaauto, `pulsadoresrampa`, `senlumrampa`, `acusticarampa`, `kneeling_obs`, 
         `cinturonespmr_obs`, `barras_obs`, `rampa_obs`, rampaauto_obs, `pulsadoresrampa_obs`, `senlumrampa_obs`, `acusticarampa_obs`, `traspasado`, usuario) 
-        VALUES (NULL, :IDEMPRESA, :IDVEHICULO, :IDUSUARIO, :FECHA, :HORA, :KNEELING, :CINTURONESPMR, :BARRAS, :RAMPA, 
+        VALUES (NULL, :IDEMPRESA, :IDVEHICULO, :CODIGO_VEHICULO, :IDUSUARIO, :FECHA, :HORA, :KNEELING, :CINTURONESPMR, :BARRAS, :RAMPA, 
         :RAMPAAUTO, :PULSADORESRAMPA, :SENLUMRAMPA, :ACUSTICARAMPA, :KNEELING_OBS, :CINTURONESPMR_OBS, :BARRAS_OBS, :RAMPA_OBS, 
         :RAMPAAUTO_OBS, :PULSADORESRAMPA_OBS, :SENLUMRAMPA_OBS, :ACUSTICARAMPA_OBS, '0', :USUARIO)";
 
@@ -22,6 +24,7 @@ class Accesibilidad Extends Vehiculo{
 
         $stFlota->bindParam(":IDEMPRESA", $datos['EMPRESA']);
         $stFlota->bindParam(":IDVEHICULO", $datos['IDVEHICULO']);
+        $stFlota->bindParam(":CODIGO_VEHICULO", $datos['CODIGO_VEHICULO']);
         $stFlota->bindValue(":IDUSUARIO", isset($datos['IDUSUARIO']) ? $datos['IDUSUARIO'] : 0);
         $stFlota->bindParam(":FECHA", $fecha);
         $stFlota->bindValue(":HORA", $hora);
@@ -42,55 +45,164 @@ class Accesibilidad Extends Vehiculo{
         $stFlota->bindValue(":SENLUMRAMPA_OBS", !empty($datos['SENLUMRAMPA_OBS']) ? $datos['SENLUMRAMPA_OBS'] : NULL);
         $stFlota->bindValue(":ACUSTICARAMPA_OBS", !empty($datos['ACUSTICARAMPA_OBS']) ? $datos['ACUSTICARAMPA_OBS'] : NULL);
         $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
-        
+
         $stFlota->execute();
-        
-        if($stFlota){
+
+        if ($stFlota) {
             return true;
         } else {
             return false;
         }
     }
-    
-    // public static function insertarRampa($datos, $idRampa){
-        
-    //     $datetime = date_create();
 
-    //     $fecha = date_format($datetime, 'Y-m-d');
-    //     $hora = date_format($datetime, 'H:i:s');
-        
-    //     $conn = Db::getConector();
-        
-    //     $queryRampa = "INSERT INTO controlrampa (idempresa,idbus,idrampa,fecha,tipo,IDORDEN,hora,idusuario) 
-    //                     values (:idempresa,:idbus,:idrampa,:fecha,:tipo,:idorden,:hora,:idusuario)";
-        
-    //     $stRampa = $conn->prepare($queryRampa);
-        
-    //     $stRampa->bindParam(":IDEMPRESA", $datos['EMPRESA']);
-    //     $stRampa->bindParam(":IDBUS", $datos['IDVEHICULO']);
-    //     $stRampa->bindParam(":IDRAMPA", $idRampa);
-    //     $stRampa->bindParam(":FECHA", $fecha);
-    //     $stRampa->bindParam(":TIPO", $datos["tipo-$idRampa"]);
-    //     $stRampa->bindValue(":IDORDEN", $datos["r-$idRampa"]);
-    //     $stRampa->bindParam(":HORA", $hora);
-    //     $stRampa->bindValue(":IDUSUARIO", isset($datos['idusuario']) ? 1 : 0);
-    //     $stRampa->bindParam(":IDEMPRESA_OBS", $datos['empresa']);
-    //     $stRampa->bindParam(":IDBUS_OBS", $datos['idvehiculo']);
-    //     $stRampa->bindParam(":IDRAMPA_OBS", $idRampa);
-    //     $stRampa->bindParam(":FECHA_OBS", $fecha);
-    //     $stRampa->bindParam(":TIPO_OBS", $datos["tipo-$idRampa"]);
-    //     $stRampa->bindValue(":IDORDEN_OBS", $datos["r-$idRampa"]);
-    //     $stRampa->bindParam(":HORA_OBS", $hora);
-    //     $stRampa->bindValue(":IDUSUARIO_OBS", isset($datos['idusuario']) ? 1 : 0);
-        
-    //     $stRampa->execute();
-        
-    //     if($stRampa){
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-        
-    // }
+    public static function obtenerRevisionesPorFecha($fecha, $empresa)
+    {
+        $conn = Db::getConector();
 
+        $query = "SELECT * FROM estado_accesibilidad WHERE fecha = '$fecha' and idempresa = $empresa ORDER BY hora DESC";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            return $st->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+    public static function generarHoja($spreadsheet, $fechaInicio, $empresa)
+    {
+
+        $revisiones = Accesibilidad::obtenerRevisionesPorFecha($fechaInicio, $empresa);
+
+        $sheet = $spreadsheet->createSheet();
+
+        $sheet->setTitle("Revisiones Estado Accesibilidad");
+
+        $sheet->getStyle('A:E')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A:E')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+
+        $sheet->getColumnDimension('A')->setAutoSize(true);
+        $sheet->getColumnDimension('B')->setAutoSize(true);
+        $sheet->getColumnDimension('C')->setAutoSize(true);
+        $sheet->getColumnDimension('D')->setWidth(100);
+        $sheet->getStyle('D')->getAlignment()->setWrapText(true);
+        $sheet->getColumnDimension('E')->setAutoSize(true);
+
+        $fila = 1;
+
+        foreach ($revisiones as $revision) {
+            $filaInicio = $fila;
+
+            $estiloNegrita = [
+                'font' => [
+                    'bold' => true,
+                ]
+            ];
+
+            $estiloCabeceraTabla = [
+                'fill' => [
+                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'startColor' => [
+                        'argb' => 'FFC5D9F1'
+                    ]
+                ],
+                'font' => [
+                    'bold' => true,
+                ]
+            ];
+
+            $sheet->setCellValue("A$fila", "REVISIÓN VEHÍCULO:  {$revision['codigo_vehiculo']}");
+            $sheet->getStyle("A$fila")->applyFromArray($estiloNegrita);
+
+            $fila += 2;
+            $sheet->setCellValue("A$fila", "FECHA REVISIÓN");
+            $sheet->getStyle("A$fila")->applyFromArray($estiloNegrita);
+            $sheet->setCellValue("B$fila", "$fechaInicio {$revision['hora']}");
+
+            $sheet->setCellValue("C$fila", "REVISOR");
+            $sheet->getStyle("C$fila")->applyFromArray($estiloNegrita);
+            $sheet->setCellValue("D$fila", "{$revision['usuario']}");
+            $fila += 2;
+            $sheet->setCellValue("B$fila", "OK");
+            $sheet->setCellValue("C$fila", "NO OK");
+            $sheet->setCellValue("D$fila", "OBSERVACIONES");
+            $sheet->getStyle("B$fila:D$fila")->applyFromArray($estiloCabeceraTabla);
+
+            $fila++;
+            $sheet->setCellValue("A$fila", "KNEELING");
+            if ($revision['kneeling'] == 1) {
+                $sheet->setCellValue("B$fila", "X");
+            } else {
+                $sheet->setCellValue("C$fila", "X");
+            }
+            $sheet->setCellValue("D$fila", "{$revision['kneeling_obs']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", "CINTURONES PMR");
+            if ($revision['cinturonespmr'] == 1) {
+                $sheet->setCellValue("B$fila", "X");
+            } else {
+                $sheet->setCellValue("C$fila", "X");
+            }
+            $sheet->setCellValue("D$fila", "{$revision['cinturonespmr_obs']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", "ASIDEROS/BARRAS");
+            if ($revision['barras'] == 1) {
+                $sheet->setCellValue("B$fila", "X");
+            } else {
+                $sheet->setCellValue("C$fila", "X");
+            }
+            $sheet->setCellValue("D$fila", "{$revision['barras_obs']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", "RAMPA");
+            if ($revision['rampa'] == 1) {
+                $sheet->setCellValue("B$fila", "X");
+            } else {
+                $sheet->setCellValue("C$fila", "X");
+            }
+            $sheet->setCellValue("D$fila", "{$revision['rampa_obs']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", "RAMPA AUTOMÁTICA");
+            if ($revision['rampaauto'] == 1) {
+                $sheet->setCellValue("B$fila", "X");
+            } else {
+                $sheet->setCellValue("C$fila", "X");
+            }
+            $sheet->setCellValue("D$fila", "{$revision['rampaauto_obs']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", "PULSADORES RAMPA");
+            if ($revision['pulsadoresrampa'] == 1) {
+                $sheet->setCellValue("B$fila", "X");
+            } else {
+                $sheet->setCellValue("C$fila", "X");
+            }
+            $sheet->setCellValue("D$fila", "{$revision['pulsadoresrampa_obs']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", "SEÑALIZACIÓN LUMINOSA RAMPA");
+            if ($revision['senlumrampa'] == 1) {
+                $sheet->setCellValue("B$fila", "X");
+            } else {
+                $sheet->setCellValue("C$fila", "X");
+            }
+            $sheet->setCellValue("D$fila", "{$revision['senlumrampa_obs']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", "ACÚSTICA RAMPA");
+            if ($revision['acusticarampa'] == 1) {
+                $sheet->setCellValue("B$fila", "X");
+            } else {
+                $sheet->setCellValue("C$fila", "X");
+            }
+            $sheet->setCellValue("D$fila", "{$revision['acusticarampa_obs']}");
+
+            $sheet->getStyle("A{$filaInicio}:D$fila")->applyFromArray(array('borders' => [
+                'outline' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                ],
+            ],));
+
+            $fila += 3;
+        }
+    }
 }
