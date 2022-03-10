@@ -20,6 +20,8 @@ class Exportar
         Accesibilidad::generarHoja($spreadsheet, $fechaInicio, $empresa);
         Documentacion::generarHoja($spreadsheet, $fechaInicio, $empresa);
         Seguridad::generarHoja($spreadsheet, $fechaInicio, $empresa);
+        Limpieza::generarHoja($spreadsheet, $fechaInicio, $empresa);
+        Pegatinas::generarHoja($spreadsheet, $fechaInicio, $empresa);
 
         $spreadsheet->removeSheetByIndex(0);
         $spreadsheet->setActiveSheetIndex(0);

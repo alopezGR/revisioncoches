@@ -287,8 +287,8 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                             <label class="form-check-label" for="CABINA_CONDUCTOR_LINo">No ok</label>
                         </div>
                         <div class="form-group">
-                            <label for="CABINA_CONDUCTOR_OBS">OBSERVACIONES</label>
-                            <textarea class="form-control" id="CABINA_CONDUCTOR_OBS" rows="2" name="CABINA_CONDUCTOR_OBS"></textarea>
+                            <label for="CABINA_CONDUCTOR_LI_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="CABINA_CONDUCTOR_LI_OBS" rows="2" name="CABINA_CONDUCTOR_LI_OBS"></textarea>
                         </div>
                     </div>
                     <div class="mb-2">

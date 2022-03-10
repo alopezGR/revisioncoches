@@ -13,7 +13,7 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
         <div class="col-6" style=" height: 200px">
             <div class="form-group">
                 <label for="NUMERO">NÚMERO</label>
-                <input type="text" class="form-control" id="NUMERO" name="NUMERO" readonly value="<?php echo $vehiculo; ?>">
+                <input type="text" class="form-control" id="NUMERO" name="CODIGO_VEHICULO" readonly value="<?php echo $vehiculo; ?>">
             </div>
             <div class="form-group">
                 <label for="EMPRESA">Empresa</label>
