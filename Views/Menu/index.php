@@ -1,3 +1,12 @@
+<script>
+    <?php
+    if (isset($_SESSION['nombre_fichero_descarga'])) {
+    ?>
+        window.open("descargar.php", "Diseño Web")
+    <?php
+    }
+    ?>
+</script>
 <div class="row justify-content-center">
     <div class="col-8">
         <h1 class="text-center">Opciones</h1>

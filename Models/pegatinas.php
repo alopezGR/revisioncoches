@@ -1306,7 +1306,7 @@ class Pegatinas extends Vehiculo
             $sheet->setCellValue("D$fila", "{$revisionesPegatinasInteriorMampara[$i]['WEB_EMPRESA_OBS']}");
             $fila += 3;
 
-            //Pegatinas Interior Mampara
+            //Pegatinas Interior Trasera
             $sheet->setCellValue("A$fila", "PEGATINAS INTERIOR TRASERO");
             $sheet->getStyle("A$fila")->applyFromArray($estiloNegrita);
 

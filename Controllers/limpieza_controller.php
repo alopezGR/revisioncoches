@@ -53,7 +53,7 @@ class LimpiezaController
             $resultadoFlota = Limpieza::insertDatos($datos);
 
             if ($resultadoFlota) {
-                Usuario::registroLogin($_SESSION['user'], 'Realizada revision coche ' . $datos['IDVEHICULO']);
+                Usuario::registroLogin($_SESSION['user'], 'Realizada revision de limpieza al coche ' . $datos['IDVEHICULO']);
                 $_SESSION['exito'] = "true";
             } else {
                 $_SESSION['error'] = "true";

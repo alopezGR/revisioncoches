@@ -41,11 +41,11 @@
         <div class="container">
             <div class="row mt-1">
                 <div class="col-12 d-flex justify-content-center">
-                    <img src="images/Logo-GR.png" width="20%" />
+                    <a href="index.php" width="20%"><img src="images/Logo-GR.png"  /></a>
                 </div>
             </div>
             <div class="row"></div>
-            <div class="d-flex <?php echo (($controller == 'menu' && $action == 'index')) ? "justify-content-end" : "justify-content-between"; ?> mt-2 mb-5">
+            <div class="d-flex <?php echo (($controller == 'menu' && $action == 'index')) ? "justify-content-between" : "justify-content-between"; ?> mt-2 mb-5">
                 <?php
                 if (!($controller == 'menu' && $action == 'index') && isset($_SESSION['logged'])) {
                     echo "<a class='btn btn-outline-primary' href='javascript:window.history.back()'>Volver</a>";
@@ -53,6 +53,7 @@
                 ?>
                 <?php
                 if (isset($_SESSION['logged'])) {
+                    echo "<a class='btn btn-success' href='index.php'>Inicio</a>";
                     echo "<a class='btn btn-danger' href='index.php?controller=usuario&action=salir'>Salir</a>";
                 }
                 ?>

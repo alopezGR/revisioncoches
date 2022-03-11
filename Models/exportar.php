@@ -27,5 +27,7 @@ class Exportar
         $spreadsheet->setActiveSheetIndex(0);
         $writer = new Xlsx($spreadsheet);
         $writer->save("ficheros/$nombreFichero");
+
+        $_SESSION['nombre_fichero_descarga'] = $nombreFichero;
     }
 }

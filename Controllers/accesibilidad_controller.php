@@ -54,7 +54,7 @@ class AccesibilidadController
             $resultadoFlota = Accesibilidad::insertDatos($datos);
 
             if ($resultadoFlota) {
-                Usuario::registroLogin($_SESSION['user'], 'Realizada revision coche ' . $datos['IDVEHICULO']);
+                Usuario::registroLogin($_SESSION['user'], 'Realizada revision de accesibilidad al coche ' . $datos['IDVEHICULO']);
                 $_SESSION['exito'] = "true";
             } else {
                 $_SESSION['error'] = "true";
