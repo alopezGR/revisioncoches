@@ -62,12 +62,11 @@ class UsuarioController
         $user = $_POST['usuario'];
         $cambio = Usuario::cambioPassword($user, $pass);
 
-        if($cambio){
+        if ($cambio) {
             unset($_SESSION['cambioPassword']);
             $_SESSION['passwordCambiada'] = true;
             header('Location: index.php');
         }
-
     }
 
     /**
@@ -79,9 +78,7 @@ class UsuarioController
      */
     public function salir()
     {
-        unset($_SESSION['logged']); // borra el registro logged de la variable $_SESSION
-        unset($_SESSION['user']); // borra el registro user de la variable $_SESSION
-        unset($_SESSION['admin']); // borra el registro admin de la variable $_SESSION
+        session_destroy();
         require_once 'Views/Usuario/logout.php'; // Carga la página de logout que redirigirá al usuario a la página de inicio
     }
 }
