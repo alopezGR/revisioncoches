@@ -11,7 +11,7 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
         <div class="col-6" style=" height: 200px">
             <div class="form-group">
                 <label for="NUMERO">NÚMERO</label>
-                <input type="text" class="form-control" id="NUMERO" name="NUMERO" readonly value="<?php echo $vehiculo; ?>">
+                <input type="text" class="form-control" id="NUMERO" name="CODIGO_VEHICULO" readonly value="<?php echo $vehiculo; ?>">
             </div>
             <div class="form-group">
                 <label for="EMPRESA">Empresa</label>
@@ -42,104 +42,196 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                 </div>
                 <div class="col-12">
                     <div class="mb-2">
-                        <span class="mr-2">CARROCERÍA</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="CARROCERIA_LE" id="CARROCERIA_LE" value="1" required>
-                            <label class="form-check-label" for="CARROCERIA_LE">Ok</label>
+                        <div class="form-group">
+                            <span class="mr-2">LIMPIEZA CARROCERÍA</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_CARROCERIA_LE" id="LIM_CARROCERIA_LE" value="1" required>
+                                <label class="form-check-label" for="LIM_CARROCERIA_LE">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_CARROCERIA_LE" id="LIM_CARROCERIA_LENo" value="0" required>
+                                <label class="form-check-label" for="LIM_CARROCERIA_LENo">No ok</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="CARROCERIA_LE" id="CARROCERIA_LENo" value="0" required>
-                            <label class="form-check-label" for="CARROCERIA_LENo">No ok</label>
+                        <div class="form-group">
+                            <span class="mr-2">CONSERVACIÓN CARROCERÍA</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_CARROCERIA_LE" id="CON_CARROCERIA_LE" value="1" required>
+                                <label class="form-check-label" for="CON_CARROCERIA_LE">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_CARROCERIA_LE" id="CON_CARROCERIA_LENo" value="0" required>
+                                <label class="form-check-label" for="CON_CARROCERIA_LENo">No ok</label>
+                            </div>
                         </div>
+
                         <div class="form-group">
                             <label for="CARROCERIA_LE_OBS">OBSERVACIONES</label>
                             <textarea class="form-control" id="CARROCERIA_LE_OBS" rows="2" name="CARROCERIA_LE_OBS"></textarea>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        <span class="mr-2">VENTANAS LATERALES</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="VENTANAS_LATERALES_LE" id="VENTANAS_LATERALES_LE" value="1" required>
-                            <label class="form-check-label" for="VENTANAS_LATERALES_LE">Ok</label>
+                    <div class="mt-5">
+                        <div class="form-group">
+                            <span class="mr-2">LIMPIEZA VENTANAS LATERALES</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_VENTANAS_LATERALES_LE" id="LIM_VENTANAS_LATERALES_LE" value="1" required>
+                                <label class="form-check-label" for="LIM_VENTANAS_LATERALES_LE">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_VENTANAS_LATERALES_LE" id="LIM_VENTANAS_LATERALES_LENo" value="0" required>
+                                <label class="form-check-label" for="LIM_VENTANAS_LATERALES_LENo">No ok</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="VENTANAS_LATERALES_LE" id="VENTANAS_LATERALES_LENo" value="0" required>
-                            <label class="form-check-label" for="VENTANAS_LATERALES_LENo">No ok</label>
+                        <div class="form-group">
+                            <span class="mr-2">CONSERVACIÓN VENTANAS LATERALES</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_VENTANAS_LATERALES_LE" id="CON_VENTANAS_LATERALES_LE" value="1" required>
+                                <label class="form-check-label" for="CON_VENTANAS_LATERALES_LE">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_VENTANAS_LATERALES_LE" id="CON_VENTANAS_LATERALES_LENo" value="0" required>
+                                <label class="form-check-label" for="CON_VENTANAS_LATERALES_LENo">No ok</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="VENTANAS_LATERALES_LE_OBS">OBSERVACIONES</label>
                             <textarea class="form-control" id="VENTANAS_LATERALES_LE_OBS" rows="2" name="VENTANAS_LATERALES_LE_OBS"></textarea>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        <span class="mr-2">PUERTAS</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="PUERTAS_LE" id="PUERTAS_LE" value="1" required>
-                            <label class="form-check-label" for="PUERTAS_LE">Ok</label>
+                    <div class="mt-5">
+                        <div class="form-group">
+                            <span class="mr-2">LIMPIEZA PUERTAS</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_PUERTAS_LE" id="LIM_PUERTAS_LE" value="1" required>
+                                <label class="form-check-label" for="LIM_PUERTAS_LE">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_PUERTAS_LE" id="LIM_PUERTAS_LENo" value="0" required>
+                                <label class="form-check-label" for="LIM_PUERTAS_LENo">No ok</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="PUERTAS_LE" id="PUERTAS_LENo" value="0" required>
-                            <label class="form-check-label" for="PUERTAS_LENo">No ok</label>
+                        <div class="form-group">
+                            <span class="mr-2">CONSERVACIÓN PUERTAS</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_PUERTAS_LE" id="CON_PUERTAS_LE" value="1" required>
+                                <label class="form-check-label" for="CON_PUERTAS_LE">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_PUERTAS_LE" id="CON_PUERTAS_LENo" value="0" required>
+                                <label class="form-check-label" for="CON_PUERTAS_LENo">No ok</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="PUERTAS_LE_OBS">OBSERVACIONES</label>
                             <textarea class="form-control" id="PUERTAS_LE_OBS" rows="2" name="PUERTAS_LE_OBS"></textarea>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        <span class="mr-2">LUNAS</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="LUNAS_LE" id="LUNAS_LE" value="1" required>
-                            <label class="form-check-label" for="LUNAS_LE">Ok</label>
+                    <div class="mt-5">
+                        <div class="form-group">
+                            <span class="mr-2">LIMPIEZA LUNAS</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_LUNAS_LE" id="LIM_LUNAS_LE" value="1" required>
+                                <label class="form-check-label" for="LIM_LUNAS_LE">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_LUNAS_LE" id="LIM_LUNAS_LENo" value="0" required>
+                                <label class="form-check-label" for="LIM_LUNAS_LENo">No ok</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="LUNAS_LE" id="LUNAS_LENo" value="0" required>
-                            <label class="form-check-label" for="LUNAS_LENo">No ok</label>
+                        <div class="form-group">
+                            <span class="mr-2">CONSERVACIÓN LUNAS</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_LUNAS_LE" id="CON_LUNAS_LE" value="1" required>
+                                <label class="form-check-label" for="CON_LUNAS_LE">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_LUNAS_LE" id="CON_LUNAS_LENo" value="0" required>
+                                <label class="form-check-label" for="CON_LUNAS_LENo">No ok</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="LUNAS_LE_OBS">OBSERVACIONES</label>
                             <textarea class="form-control" id="LUNAS_LE_OBS" rows="2" name="LUNAS_LE_OBS"></textarea>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        <span class="mr-2">ESPEJOS RETROVISORES</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="ESPEJOS_RETROVISORES_LE" id="ESPEJOS_RETROVISORES_LE" value="1" required>
-                            <label class="form-check-label" for="ESPEJOS_RETROVISORES_LE">Ok</label>
+                    <div class="mt-5">
+                        <div class="form-group">
+                            <span class="mr-2">LIMPIEZA ESPEJOS RETROVISORES</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_ESPEJOS_RETROVISORES_LE" id="LIM_ESPEJOS_RETROVISORES_LE" value="1" required>
+                                <label class="form-check-label" for="LIM_ESPEJOS_RETROVISORES_LE">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_ESPEJOS_RETROVISORES_LE" id="LIM_ESPEJOS_RETROVISORES_LENo" value="0" required>
+                                <label class="form-check-label" for="LIM_ESPEJOS_RETROVISORES_LENo">No ok</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="ESPEJOS_RETROVISORES_LE" id="ESPEJOS_RETROVISORES_LENo" value="0" required>
-                            <label class="form-check-label" for="ESPEJOS_RETROVISORES_LENo">No ok</label>
+                        <div class="form-group">
+                            <span class="mr-2">CONSERVACIÓN ESPEJOS RETROVISORES</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_ESPEJOS_RETROVISORES_LE" id="CON_ESPEJOS_RETROVISORES_LE" value="1" required>
+                                <label class="form-check-label" for="CON_ESPEJOS_RETROVISORES_LE">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_ESPEJOS_RETROVISORES_LE" id="CON_ESPEJOS_RETROVISORES_LENo" value="0" required>
+                                <label class="form-check-label" for="CON_ESPEJOS_RETROVISORES_LENo">No ok</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="ESPEJOS_RETROVISORES_LE_OBS">OBSERVACIONES</label>
                             <textarea class="form-control" id="ESPEJOS_RETROVISORES_LE_OBS" rows="2" name="ESPEJOS_RETROVISORES_LE_OBS"></textarea>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        <span class="mr-2">LUCES</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="LUCES_LE" id="LUCES_LE" value="1" required>
-                            <label class="form-check-label" for="LUCES_LE">Ok</label>
+                    <div class="mt-5">
+                        <div class="form-group">
+                            <span class="mr-2">LIMPIEZA LUCES</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_LUCES_LE" id="LIM_LUCES_LE" value="1" required>
+                                <label class="form-check-label" for="LIM_LUCES_LE">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_LUCES_LE" id="LIM_LUCES_LENo" value="0" required>
+                                <label class="form-check-label" for="LIM_LUCES_LENo">No ok</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="LUCES_LE" id="LUCES_LENo" value="0" required>
-                            <label class="form-check-label" for="LUCES_LENo">No ok</label>
+                        <div class="form-group">
+                            <span class="mr-2">CONSERVACIÓN LUCES</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_LUCES_LE" id="CON_LUCES_LE" value="1" required>
+                                <label class="form-check-label" for="CON_LUCES_LE">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_LUCES_LE" id="CON_LUCES_LENo" value="0" required>
+                                <label class="form-check-label" for="CON_LUCES_LENo">No ok</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="LUCES_LE_OBS">OBSERVACIONES</label>
                             <textarea class="form-control" id="LUCES_LE_OBS" rows="2" name="LUCES_LE_OBS"></textarea>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        <span class="mr-2">INDICADORES</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="INDICADORES_LE" id="INDICADORES_LE" value="1" required>
-                            <label class="form-check-label" for="INDICADORES_LE">Ok</label>
+                    <div class="mt-5">
+                        <div class="form-group">
+                            <span class="mr-2">LIMPIEZA INDICADORES</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_INDICADORES_LE" id="LIM_INDICADORES_LE" value="1" required>
+                                <label class="form-check-label" for="LIM_INDICADORES_LE">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_INDICADORES_LE" id="LIM_INDICADORES_LENo" value="0" required>
+                                <label class="form-check-label" for="LIM_INDICADORES_LENo">No ok</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="INDICADORES_LE" id="INDICADORES_LENo" value="0" required>
-                            <label class="form-check-label" for="INDICADORES_LENo">No ok</label>
+                        <div class="form-group">
+                            <span class="mr-2">CONSERVACIÓN INDICADORES</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_INDICADORES_LE" id="CON_INDICADORES_LE" value="1" required>
+                                <label class="form-check-label" for="CON_INDICADORES_LE">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_INDICADORES_LE" id="CON_INDICADORES_LENo" value="0" required>
+                                <label class="form-check-label" for="CON_INDICADORES_LENo">No ok</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="INDICADORES_LE_OBS">OBSERVACIONES</label>
@@ -156,165 +248,308 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                     <h6>REVISIÓN LIMPIEZA INTERIOR</h6>
                 </div>
                 <div class="col-12">
-                    <div class="mb-2">
-                        <span class="mr-2">SUELO</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="SUELO_LI" id="SUELO_LI" value="1" required>
-                            <label class="form-check-label" for="SUELO_LI">Ok</label>
+                    <div class="mt-5">
+                        <div class="form-group">
+                            <span class="mr-2">LIMPIEZA SUELO</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_SUELO_LI" id="LIM_SUELO_LI" value="1" required>
+                                <label class="form-check-label" for="LIM_SUELO_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_SUELO_LI" id="LIM_SUELO_LINo" value="0" required>
+                                <label class="form-check-label" for="LIM_SUELO_LINo">No ok</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="SUELO_LI" id="SUELO_LINo" value="0" required>
-                            <label class="form-check-label" for="SUELO_LINo">No ok</label>
+                        <div class="form-group">
+                            <span class="mr-2">CONSERVACIÓN SUELO</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_SUELO_LI" id="CON_SUELO_LI" value="1" required>
+                                <label class="form-check-label" for="CON_SUELO_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_SUELO_LI" id="CON_SUELO_LINo" value="0" required>
+                                <label class="form-check-label" for="CON_SUELO_LINo">No ok</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="SUELO_LI_OBS">OBSERVACIONES</label>
                             <textarea class="form-control" id="SUELO_LI_OBS" rows="2" name="SUELO_LI_OBS"></textarea>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        <span class="mr-2">ROTULOS LUMINOSOS</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="ROTULOS_LUMINOSOS_LI" id="ROTULOS_LUMINOSOS_LI" value="1" required>
-                            <label class="form-check-label" for="ROTULOS_LUMINOSOS_LI">Ok</label>
+                    <div class="mt-5">
+                        <div class="form-group">
+                            <span class="mr-2">LIMPIEZA ROTULOS LUMINOSOS</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_ROTULOS_LUMINOSOS_LI" id="LIM_ROTULOS_LUMINOSOS_LI" value="1" required>
+                                <label class="form-check-label" for="LIM_ROTULOS_LUMINOSOS_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_ROTULOS_LUMINOSOS_LI" id="LIM_ROTULOS_LUMINOSOS_LINo" value="0" required>
+                                <label class="form-check-label" for="LIM_ROTULOS_LUMINOSOS_LINo">No ok</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="ROTULOS_LUMINOSOS_LI" id="ROTULOS_LUMINOSOS_LINo" value="0" required>
-                            <label class="form-check-label" for="ROTULOS_LUMINOSOS_LINo">No ok</label>
+                        <div class="form-group">
+                            <span class="mr-2">CONSERVACIÓN ROTULOS LUMINOSOS</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_ROTULOS_LUMINOSOS_LI" id="CON_ROTULOS_LUMINOSOS_LI" value="1" required>
+                                <label class="form-check-label" for="CON_ROTULOS_LUMINOSOS_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_ROTULOS_LUMINOSOS_LI" id="CON_ROTULOS_LUMINOSOS_LINo" value="0" required>
+                                <label class="form-check-label" for="CON_ROTULOS_LUMINOSOS_LINo">No ok</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="ROTULOS_LUMINOSOS_LI_OBS">OBSERVACIONES</label>
                             <textarea class="form-control" id="ROTULOS_LUMINOSOS_LI_OBS" rows="2" name="ROTULOS_LUMINOSOS_LI_OBS"></textarea>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        <span class="mr-2">PAREDES</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="PAREDES_LI" id="PAREDES_LI" value="1" required>
-                            <label class="form-check-label" for="PAREDES_LI">Ok</label>
+                    <div class="mt-5">
+                        <div class="form-group">
+                            <span class="mr-2">LIMPIEZA PAREDES</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_PAREDES_LI" id="LIM_PAREDES_LI" value="1" required>
+                                <label class="form-check-label" for="LIM_PAREDES_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_PAREDES_LI" id="LIM_PAREDES_LINo" value="0" required>
+                                <label class="form-check-label" for="LIM_PAREDES_LINo">No ok</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="PAREDES_LI" id="PAREDES_LINo" value="0" required>
-                            <label class="form-check-label" for="PAREDES_LINo">No ok</label>
+                        <div class="form-group">
+                            <span class="mr-2">CONSERVACIÓN PAREDES</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_PAREDES_LI" id="CON_PAREDES_LI" value="1" required>
+                                <label class="form-check-label" for="CON_PAREDES_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_PAREDES_LI" id="CON_PAREDES_LINo" value="0" required>
+                                <label class="form-check-label" for="CON_PAREDES_LINo">No ok</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="PAREDES_LI_OBS">OBSERVACIONES</label>
                             <textarea class="form-control" id="PAREDES_LI_OBS" rows="2" name="PAREDES_LI_OBS"></textarea>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        <span class="mr-2">PUERTAS</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="PUERTAS_LI" id="PUERTAS_LI" value="1" required>
-                            <label class="form-check-label" for="PUERTAS_LI">Ok</label>
+                    <div class="mt-5">
+                        <div class="form-group">
+                            <span class="mr-2">LIMPIEZA PUERTAS</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_PUERTAS_LI" id="LIM_PUERTAS_LI" value="1" required>
+                                <label class="form-check-label" for="LIM_PUERTAS_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_PUERTAS_LI" id="LIM_PUERTAS_LINo" value="0" required>
+                                <label class="form-check-label" for="LIM_PUERTAS_LINo">No ok</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="PUERTAS_LI" id="PUERTAS_LINo" value="0" required>
-                            <label class="form-check-label" for="PUERTAS_LINo">No ok</label>
+                        <div class="form-group">
+                            <span class="mr-2">CONSERVACIÓN PUERTAS</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_PUERTAS_LI" id="CON_PUERTAS_LI" value="1" required>
+                                <label class="form-check-label" for="CON_PUERTAS_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_PUERTAS_LI" id="CON_PUERTAS_LINo" value="0" required>
+                                <label class="form-check-label" for="CON_PUERTAS_LINo">No ok</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="PUERTAS_LI_OBS">OBSERVACIONES</label>
                             <textarea class="form-control" id="PUERTAS_LI_OBS" rows="2" name="PUERTAS_LI_OBS"></textarea>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        <span class="mr-2">VENTANAS LATERALES</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="VENTANAS_LATERALES_LI" id="VENTANAS_LATERALES_LI" value="1" required>
-                            <label class="form-check-label" for="VENTANAS_LATERALES_LI">Ok</label>
+                    <div class="mt-5">
+                        <div class="form-group">
+                            <span class="mr-2">LIMPIEZA VENTANAS LATERALES</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_VENTANAS_LATERALES_LI" id="LIM_VENTANAS_LATERALES_LI" value="1" required>
+                                <label class="form-check-label" for="LIM_VENTANAS_LATERALES_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_VENTANAS_LATERALES_LI" id="LIM_VENTANAS_LATERALES_LINo" value="0" required>
+                                <label class="form-check-label" for="LIM_VENTANAS_LATERALES_LINo">No ok</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="VENTANAS_LATERALES_LI" id="VENTANAS_LATERALES_LINo" value="0" required>
-                            <label class="form-check-label" for="VENTANAS_LATERALES_LINo">No ok</label>
+                        <div class="form-group">
+                            <span class="mr-2">CONSERVACIÓN VENTANAS LATERALES</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_VENTANAS_LATERALES_LI" id="CON_VENTANAS_LATERALES_LI" value="1" required>
+                                <label class="form-check-label" for="CON_VENTANAS_LATERALES_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_VENTANAS_LATERALES_LI" id="CON_VENTANAS_LATERALES_LINo" value="0" required>
+                                <label class="form-check-label" for="CON_VENTANAS_LATERALES_LINo">No ok</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="VENTANAS_LATERALES_LI_OBS">OBSERVACIONES</label>
                             <textarea class="form-control" id="VENTANAS_LATERALES_LI_OBS" rows="2" name="VENTANAS_LATERALES_LI_OBS"></textarea>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        <span class="mr-2">ASIENTOS</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="ASIENTOS_LI" id="ASIENTOS_LI" value="1" required>
-                            <label class="form-check-label" for="ASIENTOS_LI">Ok</label>
+                    <div class="mt-5">
+                        <div class="form-group">
+                            <span class="mr-2">LIMPIEZA ASIENTOS</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_ASIENTOS_LI" id="LIM_ASIENTOS_LI" value="1" required>
+                                <label class="form-check-label" for="LIM_ASIENTOS_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_ASIENTOS_LI" id="LIM_ASIENTOS_LINo" value="0" required>
+                                <label class="form-check-label" for="LIM_ASIENTOS_LINo">No ok</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="ASIENTOS_LI" id="ASIENTOS_LINo" value="0" required>
-                            <label class="form-check-label" for="ASIENTOS_LINo">No ok</label>
+                        <div class="form-group">
+                            <span class="mr-2">CONSERVACIÓN ASIENTOS</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_ASIENTOS_LI" id="CON_ASIENTOS_LI" value="1" required>
+                                <label class="form-check-label" for="CON_ASIENTOS_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_ASIENTOS_LI" id="CON_ASIENTOS_LINo" value="0" required>
+                                <label class="form-check-label" for="CON_ASIENTOS_LINo">No ok</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="ASIENTOS_LI_OBS">OBSERVACIONES</label>
                             <textarea class="form-control" id="ASIENTOS_LI_OBS" rows="2" name="ASIENTOS_LI_OBS"></textarea>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        <span class="mr-2">LUMINARIAS</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="LUMINARIAS_LI" id="LUMINARIAS_LI" value="1" required>
-                            <label class="form-check-label" for="LUMINARIAS_LI">Ok</label>
+                    <div class="mt-5">
+                        <div class="form-group">
+                            <span class="mr-2">LIMPIEZA LUMINARIAS</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_LUMINARIAS_LI" id="LIM_LUMINARIAS_LI" value="1" required>
+                                <label class="form-check-label" for="LIM_LUMINARIAS_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_LUMINARIAS_LI" id="LIM_LUMINARIAS_LINo" value="0" required>
+                                <label class="form-check-label" for="LIM_LUMINARIAS_LINo">No ok</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="LUMINARIAS_LI" id="LUMINARIAS_LINo" value="0" required>
-                            <label class="form-check-label" for="LUMINARIAS_LINo">No ok</label>
+                        <div class="form-group">
+                            <span class="mr-2">CONSERVACIÓN LUMINARIAS</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_LUMINARIAS_LI" id="CON_LUMINARIAS_LI" value="1" required>
+                                <label class="form-check-label" for="CON_LUMINARIAS_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_LUMINARIAS_LI" id="CON_LUMINARIAS_LINo" value="0" required>
+                                <label class="form-check-label" for="CON_LUMINARIAS_LINo">No ok</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="LUMINARIAS_LI_OBS">OBSERVACIONES</label>
                             <textarea class="form-control" id="LUMINARIAS_LI_OBS" rows="2" name="LUMINARIAS_LI_OBS"></textarea>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        <span class="mr-2">ASIDEROS Y BARRAS</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="ASIDEROS_BARRAS_LI" id="ASIDEROS_BARRAS_LI" value="1" required>
-                            <label class="form-check-label" for="ASIDEROS_BARRAS_LI">Ok</label>
+                    <div class="mt-5">
+                        <div class="form-group">
+                            <span class="mr-2">LIMPIEZA ASIDEROS Y BARRAS</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_ASIDEROS_BARRAS_LI" id="LIM_ASIDEROS_BARRAS_LI" value="1" required>
+                                <label class="form-check-label" for="LIM_ASIDEROS_BARRAS_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_ASIDEROS_BARRAS_LI" id="LIM_ASIDEROS_BARRAS_LINo" value="0" required>
+                                <label class="form-check-label" for="LIM_ASIDEROS_BARRAS_LINo">No ok</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="ASIDEROS_BARRAS_LI" id="ASIDEROS_BARRAS_LINo" value="0" required>
-                            <label class="form-check-label" for="ASIDEROS_BARRAS_LINo">No ok</label>
+                        <div class="form-group">
+                            <span class="mr-2">CONSERVACIÓN ASIDEROS Y BARRAS</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_ASIDEROS_BARRAS_LI" id="CON_ASIDEROS_BARRAS_LI" value="1" required>
+                                <label class="form-check-label" for="CON_ASIDEROS_BARRAS_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_ASIDEROS_BARRAS_LI" id="CON_ASIDEROS_BARRAS_LINo" value="0" required>
+                                <label class="form-check-label" for="CON_ASIDEROS_BARRAS_LINo">No ok</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="ASIDEROS_BARRAS_LI_OBS">OBSERVACIONES</label>
                             <textarea class="form-control" id="ASIDEROS_BARRAS_LI_OBS" rows="2" name="ASIDEROS_BARRAS_LI_OBS"></textarea>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        <span class="mr-2">CABINA DEL CONDUCTOR</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="CABINA_CONDUCTOR_LI" id="CABINA_CONDUCTOR_LI" value="1" required>
-                            <label class="form-check-label" for="CABINA_CONDUCTOR_LI">Ok</label>
+                    <div class="mt-5">
+                        <div class="form-group">
+                            <span class="mr-2">LIMPIEZA CABINA DEL CONDUCTOR</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_CABINA_CONDUCTOR_LI" id="LIM_CABINA_CONDUCTOR_LI" value="1" required>
+                                <label class="form-check-label" for="LIM_CABINA_CONDUCTOR_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_CABINA_CONDUCTOR_LI" id="LIM_CABINA_CONDUCTOR_LINo" value="0" required>
+                                <label class="form-check-label" for="LIM_CABINA_CONDUCTOR_LINo">No ok</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="CABINA_CONDUCTOR_LI" id="CABINA_CONDUCTOR_LINo" value="0" required>
-                            <label class="form-check-label" for="CABINA_CONDUCTOR_LINo">No ok</label>
+                        <div class="form-group">
+                            <span class="mr-2">CONSERVACIÓN CABINA DEL CONDUCTOR</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_CABINA_CONDUCTOR_LI" id="CON_CABINA_CONDUCTOR_LI" value="1" required>
+                                <label class="form-check-label" for="CON_CABINA_CONDUCTOR_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_CABINA_CONDUCTOR_LI" id="CON_CABINA_CONDUCTOR_LINo" value="0" required>
+                                <label class="form-check-label" for="CON_CABINA_CONDUCTOR_LINo">No ok</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="CABINA_CONDUCTOR_LI_OBS">OBSERVACIONES</label>
                             <textarea class="form-control" id="CABINA_CONDUCTOR_LI_OBS" rows="2" name="CABINA_CONDUCTOR_LI_OBS"></textarea>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        <span class="mr-2">PULSADORES RAMPA</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="PULSADORES_RAMPA_LI" id="PULSADORES_RAMPA_LI" value="1" required>
-                            <label class="form-check-label" for="PULSADORES_RAMPA_LI">Ok</label>
+                    <div class="mt-5">
+                        <div class="form-group">
+                            <span class="mr-2">LIMPIEZA PULSADORES RAMPA</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_PULSADORES_RAMPA_LI" id="LIM_PULSADORES_RAMPA_LI" value="1" required>
+                                <label class="form-check-label" for="LIM_PULSADORES_RAMPA_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_PULSADORES_RAMPA_LI" id="LIM_PULSADORES_RAMPA_LINo" value="0" required>
+                                <label class="form-check-label" for="LIM_PULSADORES_RAMPA_LINo">No ok</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="PULSADORES_RAMPA_LI" id="PULSADORES_RAMPA_LINo" value="0" required>
-                            <label class="form-check-label" for="PULSADORES_RAMPA_LINo">No ok</label>
+                        <div class="form-group">
+                            <span class="mr-2">CONSERVACIÓN PULSADORES RAMPA</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_PULSADORES_RAMPA_LI" id="CON_PULSADORES_RAMPA_LI" value="1" required>
+                                <label class="form-check-label" for="CON_PULSADORES_RAMPA_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_PULSADORES_RAMPA_LI" id="CON_PULSADORES_RAMPA_LINo" value="0" required>
+                                <label class="form-check-label" for="CON_PULSADORES_RAMPA_LINo">No ok</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="PULSADORES_RAMPA_LI_OBS">OBSERVACIONES</label>
                             <textarea class="form-control" id="PULSADORES_RAMPA_LI_OBS" rows="2" name="PULSADORES_RAMPA_LI_OBS"></textarea>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        <span class="mr-2">SALPICADERO</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="SALPICADERO_LI" id="SALPICADERO_LI" value="1" required>
-                            <label class="form-check-label" for="SALPICADERO_LI">Ok</label>
+                    <div class="mt-5">
+                        <div class="form-group">
+                            <span class="mr-2">LIMPIEZA SALPICADERO</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_SALPICADERO_LI" id="LIM_SALPICADERO_LI" value="1" required>
+                                <label class="form-check-label" for="LIM_SALPICADERO_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="LIM_SALPICADERO_LI" id="LIM_SALPICADERO_LINo" value="0" required>
+                                <label class="form-check-label" for="LIM_SALPICADERO_LINo">No ok</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="SALPICADERO_LI" id="SALPICADERO_LINo" value="0" required>
-                            <label class="form-check-label" for="SALPICADERO_LINo">No ok</label>
+                        <div class="form-group">
+                            <span class="mr-2">CONSERVACIÓN SALPICADERO</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_SALPICADERO_LI" id="CON_SALPICADERO_LI" value="1" required>
+                                <label class="form-check-label" for="CON_SALPICADERO_LI">Ok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="CON_SALPICADERO_LI" id="CON_SALPICADERO_LINo" value="0" required>
+                                <label class="form-check-label" for="CON_SALPICADERO_LINo">No ok</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="SALPICADERO_LI_OBS">OBSERVACIONES</label>
@@ -336,4 +571,4 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
 
 </form>
 <script src="js/script.js"></script>
-<script src="js/observaciones_obligatorias.js"></script>
+<script src="js/observaciones_obligatorias_lc.js"></script>
