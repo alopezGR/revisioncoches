@@ -68,106 +68,114 @@ class Documentacion Extends Vehiculo{
 
         $sheet = $spreadsheet->createSheet();
 
+        $estiloNegrita = [
+            'font' => [
+                'bold' => true,
+            ]
+        ];
+
+        $estiloCabeceraTabla = [
+            'fill' => [
+                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'startColor' => [
+                    'argb' => 'FFC5D9F1'
+                ]
+            ],
+            'font' => [
+                'bold' => true,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                ]
+            ]
+        ];
+
         $sheet->setTitle("Revisiones Estado Documentación");
 
-        $sheet->getStyle('A:E')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle('A:E')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('A:G')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A:G')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 
         $sheet->getColumnDimension('A')->setAutoSize(true);
         $sheet->getColumnDimension('B')->setAutoSize(true);
         $sheet->getColumnDimension('C')->setAutoSize(true);
-        $sheet->getColumnDimension('D')->setWidth(100);
-        $sheet->getStyle('D')->getAlignment()->setWrapText(true);
+        $sheet->getColumnDimension('D')->setAutoSize(true);
+        $sheet->getColumnDimension('E')->setWidth(10);
+        $sheet->getColumnDimension('F')->setWidth(10);
+        $sheet->getColumnDimension('G')->setWidth(100);
 
-        $sheet->getColumnDimension('E')->setAutoSize(true);
+        $sheet->getStyle('G')->getAlignment()->setWrapText(true);
 
-        $fila = 1;
+        $sheet->setCellValue("A1", "Fecha Revisión");
+        $sheet->setCellValue("B1", "Vehículo");
+        $sheet->setCellValue("C1", "Revisor");
+        $sheet->setCellValue("D1", "Campo");
+        $sheet->setCellValue("E1", "OK");
+        $sheet->setCellValue("F1", "NO OK");
+        $sheet->setCellValue("G1", "Observaciones");
+        $sheet->getStyle("A1:G1")->applyFromArray($estiloCabeceraTabla);
+
+        $fila = 2;
 
         foreach ($revisiones as $revision) {
             $filaInicio = $fila;
 
-            $estiloNegrita = [
-                'font' => [
-                    'bold' => true,
-                ]
-            ];
-
-            $estiloCabeceraTabla = [
-                'fill' => [
-                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                    'startColor' => [
-                        'argb' => 'FFC5D9F1'
-                    ]
-                ],
-                'font' => [
-                    'bold' => true,
-                ]
-            ];
-
-            $sheet->setCellValue("A$fila", "REVISIÓN VEHÍCULO:  {$revision['CODIGO_VEHICULO']}");
-            $sheet->getStyle("A$fila")->applyFromArray($estiloNegrita);
-
-            $fila += 2;
-            $sheet->setCellValue("A$fila", "FECHA REVISIÓN");
-            $sheet->getStyle("A$fila")->applyFromArray($estiloNegrita);
-            $sheet->setCellValue("B$fila", "$fechaInicio {$revision['HORA']}");
-
-            $sheet->setCellValue("C$fila", "REVISOR");
-            $sheet->getStyle("C$fila")->applyFromArray($estiloNegrita);
-            $sheet->setCellValue("D$fila", "{$revision['USUARIO']}");
-            $fila += 2;
-            $sheet->setCellValue("B$fila", "OK");
-            $sheet->setCellValue("C$fila", "NO OK");
-            $sheet->setCellValue("D$fila", "OBSERVACIONES");
-            $sheet->getStyle("B$fila:D$fila")->applyFromArray($estiloCabeceraTabla);
-
-            $fila++;
-            $sheet->setCellValue("A$fila", "LIBRO DE RECLAMACIONES");
+            $sheet->setCellValue("A$fila", $revision['FECHA']);
+            $sheet->setCellValue("B$fila", $revision['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revision['USUARIO']);
+            $sheet->setCellValue("D$fila", "LIBRO DE RECLAMACIONES");
             if ($revision['LIBRO_RECLAMACIONES'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("E$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revision['LIBRO_RECLAMACIONES_OBS']}");
+            $sheet->setCellValue("G$fila", "{$revision['LIBRO_RECLAMACIONES_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", "SEGURO VEHÍCULO");
+            $sheet->setCellValue("A$fila", $revision['FECHA']);
+            $sheet->setCellValue("B$fila", $revision['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revision['USUARIO']);
+            $sheet->setCellValue("D$fila", "SEGURO VEHÍCULO");
             if ($revision['SEGURO_VEHICULO'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("E$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revision['SEGURO_VEHICULO_OBS']}");
+            $sheet->setCellValue("G$fila", "{$revision['SEGURO_VEHICULO_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", "ITV");
+            $sheet->setCellValue("A$fila", $revision['FECHA']);
+            $sheet->setCellValue("B$fila", $revision['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revision['USUARIO']);
+            $sheet->setCellValue("D$fila", "ITV");
             if ($revision['ITV'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("E$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revision['ITV_OBS']}");
+            $sheet->setCellValue("G$fila", "{$revision['ITV_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", "FICHA TÉNICA");
+            $sheet->setCellValue("A$fila", $revision['FECHA']);
+            $sheet->setCellValue("B$fila", $revision['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revision['USUARIO']);
+            $sheet->setCellValue("D$fila", "FICHA TÉNICA");
             if ($revision['FICHA_TECNICA'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("E$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revision['FICHA_TECNICA_OBS']}");
+            $sheet->setCellValue("G$fila", "{$revision['FICHA_TECNICA_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", "TACÓGRAFO");
+            $sheet->setCellValue("A$fila", $revision['FECHA']);
+            $sheet->setCellValue("B$fila", $revision['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revision['USUARIO']);
+            $sheet->setCellValue("D$fila", "TACÓGRAFO");
             if ($revision['TACOGRAFO'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("E$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revision['TACOGRAFO_OBS']}");
-            $sheet->getStyle("A{$filaInicio}:D$fila")->applyFromArray(array('borders' => [
-                'outline' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
-            ],));
+            $sheet->setCellValue("G$fila", "{$revision['TACOGRAFO_OBS']}");
 
-            $fila += 3;
+            $fila += 2;
         }
     }
 

@@ -31,7 +31,7 @@ class Limpieza extends Vehiculo
         `VENTANAS_LATERALES`, `PUERTAS`, `LUNAS`, `ESPEJOS_RETROVISORES`, `LUCES`, `INDICADORES`, `CARROCERIA_OBS`, `VENTANAS_LATERALES_OBS`, 
         `PUERTAS_OBS`, `LUNAS_OBS`, `ESPEJOS_RETROVISORES_OBS`, `LUCES_OBS`, `INDICADORES_OBS`, `TRASPASADO`, `USUARIO`) 
         VALUES (NULL, :ID_EMPRESA, :ID_VEHICULO, :CODIGO_VEHICULO, :ID_USUARIO, :FECHA, :HORA, :CARROCERIA, :VENTANAS_LATERALES, :PUERTAS, :LUNAS, :ESPEJOS_RETROVISORES, :LUCES, 
-        :INDICADORES_OBS, :CARROCERIA_OBS, :VENTANAS_LATERALES_OBS, :PUERTAS_OBS, :LUNAS_OBS, :ESPEJOS_RETROVISORES_OBS, :LUCES_OBS, :INDICADORES_OBS, '0', :USUARIO)";
+        :INDICADORES, :CARROCERIA_OBS, :VENTANAS_LATERALES_OBS, :PUERTAS_OBS, :LUNAS_OBS, :ESPEJOS_RETROVISORES_OBS, :LUCES_OBS, :INDICADORES_OBS, '0', :USUARIO)";
 
         $stFlota = $conn->prepare($queryFlota);
 
@@ -309,222 +309,398 @@ class Limpieza extends Vehiculo
 
         $revisionesLimpiezaExterior = Limpieza::obtenerLimpiezaExteriorFecha($fechaInicio, $empresa);
         $revisionesLimpiezaInterior = Limpieza::obtenerLimpiezaInteriorFecha($fechaInicio, $empresa);
+        $revisionesConservacionExterior = Limpieza::obtenerConservacionExteriorFecha($fechaInicio, $empresa);
+        $revisionesConservacionInterior = Limpieza::obtenerConservacionInteriorFecha($fechaInicio, $empresa);
 
         $sheet = $spreadsheet->createSheet();
 
+        $estiloNegrita = [
+            'font' => [
+                'bold' => true,
+            ]
+        ];
+
+        $estiloCabeceraTabla = [
+            'fill' => [
+                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'startColor' => [
+                    'argb' => 'FFC5D9F1'
+                ]
+            ],
+            'font' => [
+                'bold' => true,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                ]
+            ]
+        ];
+
         $sheet->setTitle("Revisiones Estado Limpieza");
 
-        $sheet->getStyle('A:E')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle('A:E')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('A:K')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A:K')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 
         $sheet->getColumnDimension('A')->setAutoSize(true);
         $sheet->getColumnDimension('B')->setAutoSize(true);
         $sheet->getColumnDimension('C')->setAutoSize(true);
-        $sheet->getColumnDimension('D')->setWidth(100);
-        $sheet->getStyle('D')->getAlignment()->setWrapText(true);
-
+        $sheet->getColumnDimension('D')->setAutoSize(true);
         $sheet->getColumnDimension('E')->setAutoSize(true);
+        $sheet->getColumnDimension('F')->setWidth(10);
+        $sheet->getColumnDimension('G')->setWidth(10);
+        $sheet->getColumnDimension('H')->setWidth(70);
+        $sheet->getColumnDimension('I')->setWidth(10);
+        $sheet->getColumnDimension('J')->setWidth(10);
+        $sheet->getColumnDimension('K')->setWidth(70);
 
-        $fila = 1;
+        $sheet->getStyle('H')->getAlignment()->setWrapText(true);
+        $sheet->getStyle('K')->getAlignment()->setWrapText(true);
+
+        $sheet->setCellValue("A1", "Fecha Revisión");
+        $sheet->setCellValue("B1", "Vehículo");
+        $sheet->setCellValue("C1", "Revisor");
+        $sheet->setCellValue("D1", "Zona");
+        $sheet->setCellValue("E1", "Campo");
+        $sheet->setCellValue("F1", "OK");
+        $sheet->setCellValue("G1", "NO OK");
+        $sheet->setCellValue("H1", "Observaciones");
+        $sheet->setCellValue("I1", "OK");
+        $sheet->setCellValue("J1", "NO OK");
+        $sheet->setCellValue("K1", "Observaciones");
+        $sheet->getStyle("A1:K1")->applyFromArray($estiloCabeceraTabla);
+
+        $fila = 2;
 
         for ($i = 0; $i < count($revisionesLimpiezaExterior); $i++) {
             $filaInicio = $fila;
-
-            $estiloNegrita = [
-                'font' => [
-                    'bold' => true,
-                ]
-            ];
-
-            $estiloCabeceraTabla = [
-                'fill' => [
-                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                    'startColor' => [
-                        'argb' => 'FFC5D9F1'
-                    ]
-                ],
-                'font' => [
-                    'bold' => true,
-                ]
-            ];
-
-            $sheet->setCellValue("A$fila", "REVISIÓN VEHÍCULO:  {$revisionesLimpiezaExterior[$i]['CODIGO_VEHICULO']}");
-            $sheet->getStyle("A$fila")->applyFromArray($estiloNegrita);
-
-            $fila += 2;
-            $sheet->setCellValue("A$fila", "FECHA REVISIÓN");
-            $sheet->getStyle("A$fila")->applyFromArray($estiloNegrita);
-            $sheet->setCellValue("B$fila", "$fechaInicio {$revisionesLimpiezaExterior[$i]['HORA']}");
-
-            $sheet->setCellValue("C$fila", "REVISOR");
-            $sheet->getStyle("C$fila")->applyFromArray($estiloNegrita);
-            $sheet->setCellValue("D$fila", "{$revisionesLimpiezaExterior[$i]['USUARIO']}");
-            $fila += 2;
-
-            $sheet->setCellValue("A$fila", "LIMPIEZA EXTERIOR");
-            $sheet->getStyle("A$fila")->applyFromArray($estiloNegrita);
-
-            $fila++;
-            $sheet->setCellValue("B$fila", "OK");
-            $sheet->setCellValue("C$fila", "NO OK");
-            $sheet->setCellValue("D$fila", "OBSERVACIONES");
-            $sheet->getStyle("B$fila:D$fila")->applyFromArray($estiloCabeceraTabla);
-
-            $fila++;
-            $sheet->setCellValue("A$fila", "CARROCERÍA");
+            
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA']);
+            $sheet->setCellValue("B$fila", $revisionesLimpiezaExterior[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesLimpiezaExterior[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Exterior');
+            $sheet->setCellValue("E$fila", "CARROCERÍA");
             if ($revisionesLimpiezaExterior[$i]['CARROCERIA'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("G$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revisionesLimpiezaExterior[$i]['CARROCERIA_OBS']}");
+            $sheet->setCellValue("H$fila", "{$revisionesLimpiezaExterior[$i]['CARROCERIA_OBS']}");
+            if ($revisionesConservacionExterior[$i]['CARROCERIA'] == 1) {
+                $sheet->setCellValue("I$fila", "X");
+            } else {
+                $sheet->setCellValue("J$fila", "X");
+            }
+            $sheet->setCellValue("K$fila", "{$revisionesConservacionExterior[$i]['CARROCERIA_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", "VENTANAS LATERALES");
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA']);
+            $sheet->setCellValue("B$fila", $revisionesLimpiezaExterior[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesLimpiezaExterior[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Exterior');
+            $sheet->setCellValue("E$fila", "VENTANAS LATERALES");
             if ($revisionesLimpiezaExterior[$i]['VENTANAS_LATERALES'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("G$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revisionesLimpiezaExterior[$i]['VENTANAS_LATERALES_OBS']}");
+            $sheet->setCellValue("H$fila", "{$revisionesLimpiezaExterior[$i]['VENTANAS_LATERALES_OBS']}");
+            if ($revisionesConservacionExterior[$i]['VENTANAS_LATERALES'] == 1) {
+                $sheet->setCellValue("I$fila", "X");
+            } else {
+                $sheet->setCellValue("J$fila", "X");
+            }
+            $sheet->setCellValue("K$fila", "{$revisionesConservacionExterior[$i]['VENTANAS_LATERALES_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", "PUERTAS");
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA']);
+            $sheet->setCellValue("B$fila", $revisionesLimpiezaExterior[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesLimpiezaExterior[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Exterior');
+            $sheet->setCellValue("E$fila", "PUERTAS");
             if ($revisionesLimpiezaExterior[$i]['PUERTAS'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("G$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revisionesLimpiezaExterior[$i]['PUERTAS_OBS']}");
+            $sheet->setCellValue("H$fila", "{$revisionesLimpiezaExterior[$i]['PUERTAS_OBS']}");
+            if ($revisionesConservacionExterior[$i]['PUERTAS'] == 1) {
+                $sheet->setCellValue("I$fila", "X");
+            } else {
+                $sheet->setCellValue("J$fila", "X");
+            }
+            $sheet->setCellValue("K$fila", "{$revisionesConservacionExterior[$i]['PUERTAS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", "LUNAS");
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA']);
+            $sheet->setCellValue("B$fila", $revisionesLimpiezaExterior[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesLimpiezaExterior[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Exterior');
+            $sheet->setCellValue("E$fila", "LUNAS");
             if ($revisionesLimpiezaExterior[$i]['LUNAS'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("G$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revisionesLimpiezaExterior[$i]['LUNAS_OBS']}");
+            $sheet->setCellValue("H$fila", "{$revisionesLimpiezaExterior[$i]['LUNAS_OBS']}");
+            if ($revisionesConservacionExterior[$i]['LUNAS'] == 1) {
+                $sheet->setCellValue("I$fila", "X");
+            } else {
+                $sheet->setCellValue("J$fila", "X");
+            }
+            $sheet->setCellValue("K$fila", "{$revisionesConservacionExterior[$i]['LUNAS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", "ESPEJOS RETROVISORES");
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA']);
+            $sheet->setCellValue("B$fila", $revisionesLimpiezaExterior[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesLimpiezaExterior[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Exterior');
+            $sheet->setCellValue("E$fila", "ESPEJOS RETROVISORES");
             if ($revisionesLimpiezaExterior[$i]['ESPEJOS_RETROVISORES'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("G$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revisionesLimpiezaExterior[$i]['ESPEJOS_RETROVISORES_OBS']}");
+            $sheet->setCellValue("H$fila", "{$revisionesLimpiezaExterior[$i]['ESPEJOS_RETROVISORES_OBS']}");
+            if ($revisionesConservacionExterior[$i]['ESPEJOS_RETROVISORES'] == 1) {
+                $sheet->setCellValue("I$fila", "X");
+            } else {
+                $sheet->setCellValue("J$fila", "X");
+            }
+            $sheet->setCellValue("K$fila", "{$revisionesConservacionExterior[$i]['ESPEJOS_RETROVISORES_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", "LUCES");
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA']);
+            $sheet->setCellValue("B$fila", $revisionesLimpiezaExterior[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesLimpiezaExterior[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Exterior');
+            $sheet->setCellValue("E$fila", "LUCES");
             if ($revisionesLimpiezaExterior[$i]['LUCES'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("G$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revisionesLimpiezaExterior[$i]['LUCES_OBS']}");
+            $sheet->setCellValue("H$fila", "{$revisionesLimpiezaExterior[$i]['LUCES_OBS']}");
+            if ($revisionesConservacionExterior[$i]['LUCES'] == 1) {
+                $sheet->setCellValue("I$fila", "X");
+            } else {
+                $sheet->setCellValue("J$fila", "X");
+            }
+            $sheet->setCellValue("K$fila", "{$revisionesConservacionExterior[$i]['LUCES_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", "INDICADORES");
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA']);
+            $sheet->setCellValue("B$fila", $revisionesLimpiezaExterior[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesLimpiezaExterior[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Exterior');
+            $sheet->setCellValue("E$fila", "INDICADORES");
             if ($revisionesLimpiezaExterior[$i]['INDICADORES'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("G$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revisionesLimpiezaExterior[$i]['INDICADORES_OBS']}");
+            $sheet->setCellValue("H$fila", "{$revisionesLimpiezaExterior[$i]['INDICADORES_OBS']}");
+            if ($revisionesConservacionExterior[$i]['INDICADORES'] == 1) {
+                $sheet->setCellValue("I$fila", "X");
+            } else {
+                $sheet->setCellValue("J$fila", "X");
+            }
+            $sheet->setCellValue("K$fila", "{$revisionesConservacionExterior[$i]['INDICADORES_OBS']}");
+            $fila+=2;
 
-            $fila += 3;
+            //Limpieza Interior
 
-            $sheet->setCellValue("A$fila", "LIMPIEZA INTERIOR");
-            $sheet->getStyle("A$fila")->applyFromArray($estiloNegrita);
-
-            $fila++;
-            $sheet->setCellValue("B$fila", "OK");
-            $sheet->setCellValue("C$fila", "NO OK");
-            $sheet->setCellValue("D$fila", "OBSERVACIONES");
-            $sheet->getStyle("B$fila:D$fila")->applyFromArray($estiloCabeceraTabla);
-
-            $fila++;
-            $sheet->setCellValue("A$fila", "SUELO");
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior');
+            $sheet->setCellValue("E$fila", "SUELO");
             if ($revisionesLimpiezaInterior[$i]['SUELO'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("G$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revisionesLimpiezaInterior[$i]['SUELO_OBS']}");
+            $sheet->setCellValue("H$fila", "{$revisionesLimpiezaInterior[$i]['SUELO_OBS']}");
+            if ($revisionesConservacionInterior[$i]['SUELO'] == 1) {
+                $sheet->setCellValue("I$fila", "X");
+            } else {
+                $sheet->setCellValue("J$fila", "X");
+            }
+            $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['SUELO_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", "ROTULOS LUMINOSOS");
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior');
+            $sheet->setCellValue("E$fila", "ROTULOS LUMINOSOS");
             if ($revisionesLimpiezaInterior[$i]['ROTULOS_LUMINOSOS'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("G$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revisionesLimpiezaInterior[$i]['ROTULOS_LUMINOSOS_OBS']}");
+            $sheet->setCellValue("H$fila", "{$revisionesLimpiezaInterior[$i]['ROTULOS_LUMINOSOS_OBS']}");
+            if ($revisionesConservacionInterior[$i]['ROTULOS_LUMINOSOS'] == 1) {
+                $sheet->setCellValue("I$fila", "X");
+            } else {
+                $sheet->setCellValue("J$fila", "X");
+            }
+            $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['ROTULOS_LUMINOSOS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", "PUERTAS");
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior');
+            $sheet->setCellValue("E$fila", "PUERTAS");
             if ($revisionesLimpiezaInterior[$i]['PUERTAS'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("G$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revisionesLimpiezaInterior[$i]['PUERTAS_OBS']}");
+            $sheet->setCellValue("H$fila", "{$revisionesLimpiezaInterior[$i]['PUERTAS_OBS']}");
+            if ($revisionesConservacionInterior[$i]['PUERTAS'] == 1) {
+                $sheet->setCellValue("I$fila", "X");
+            } else {
+                $sheet->setCellValue("J$fila", "X");
+            }
+            $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['PUERTAS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", "VENTANAS_LATERALES");
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior');
+            $sheet->setCellValue("E$fila", "PAREDES");
+            if ($revisionesLimpiezaInterior[$i]['PAREDES'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesLimpiezaInterior[$i]['PAREDES_OBS']}");
+            if ($revisionesConservacionInterior[$i]['PAREDES'] == 1) {
+                $sheet->setCellValue("I$fila", "X");
+            } else {
+                $sheet->setCellValue("J$fila", "X");
+            }
+            $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['PAREDES_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior');
+            $sheet->setCellValue("E$fila", "VENTANAS_LATERALES");
             if ($revisionesLimpiezaInterior[$i]['VENTANAS_LATERALES'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("G$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revisionesLimpiezaInterior[$i]['VENTANAS_LATERALES_OBS']}");
+            $sheet->setCellValue("H$fila", "{$revisionesLimpiezaInterior[$i]['VENTANAS_LATERALES_OBS']}");
+            if ($revisionesConservacionInterior[$i]['VENTANAS_LATERALES'] == 1) {
+                $sheet->setCellValue("I$fila", "X");
+            } else {
+                $sheet->setCellValue("J$fila", "X");
+            }
+            $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['VENTANAS_LATERALES_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", "ASIENTOS");
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior');
+            $sheet->setCellValue("E$fila", "ASIENTOS");
             if ($revisionesLimpiezaInterior[$i]['ASIENTOS'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("G$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revisionesLimpiezaInterior[$i]['ASIENTOS_OBS']}");
+            $sheet->setCellValue("H$fila", "{$revisionesLimpiezaInterior[$i]['ASIENTOS_OBS']}");
+            if ($revisionesConservacionInterior[$i]['ASIENTOS'] == 1) {
+                $sheet->setCellValue("I$fila", "X");
+            } else {
+                $sheet->setCellValue("J$fila", "X");
+            }
+            $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['ASIENTOS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", "LUMINARIAS");
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior');
+            $sheet->setCellValue("E$fila", "LUMINARIAS");
             if ($revisionesLimpiezaInterior[$i]['LUMINARIAS'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("G$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revisionesLimpiezaInterior[$i]['LUMINARIAS_OBS']}");
+            $sheet->setCellValue("H$fila", "{$revisionesLimpiezaInterior[$i]['LUMINARIAS_OBS']}");
+            if ($revisionesConservacionInterior[$i]['LUMINARIAS'] == 1) {
+                $sheet->setCellValue("I$fila", "X");
+            } else {
+                $sheet->setCellValue("J$fila", "X");
+            }
+            $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['LUMINARIAS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", "ASIDEROS/BARRAS");
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior');
+            $sheet->setCellValue("E$fila", "ASIDEROS/BARRAS");
             if ($revisionesLimpiezaInterior[$i]['ASIDEROS_BARRAS'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("G$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revisionesLimpiezaInterior[$i]['ASIDEROS_BARRAS_OBS']}");
+            $sheet->setCellValue("H$fila", "{$revisionesLimpiezaInterior[$i]['ASIDEROS_BARRAS_OBS']}");
+            if ($revisionesConservacionInterior[$i]['ASIDEROS_BARRAS'] == 1) {
+                $sheet->setCellValue("I$fila", "X");
+            } else {
+                $sheet->setCellValue("J$fila", "X");
+            }
+            $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['ASIDEROS_BARRAS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", "CABINA DEL CONDUCTOR");
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior');
+            $sheet->setCellValue("E$fila", "CABINA DEL CONDUCTOR");
             if ($revisionesLimpiezaInterior[$i]['CABINA_CONDUCTOR'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("G$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revisionesLimpiezaInterior[$i]['CABINA_CONDUCTOR_OBS']}");
+            $sheet->setCellValue("H$fila", "{$revisionesLimpiezaInterior[$i]['CABINA_CONDUCTOR_OBS']}");
+            if ($revisionesConservacionInterior[$i]['CABINA_CONDUCTOR'] == 1) {
+                $sheet->setCellValue("I$fila", "X");
+            } else {
+                $sheet->setCellValue("J$fila", "X");
+            }
+            $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['CABINA_CONDUCTOR_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", "PULSADORES PARADA");
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior');
+            $sheet->setCellValue("E$fila", "PULSADORES PARADA");
             if ($revisionesLimpiezaInterior[$i]['PULSADORES_PARADA'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("G$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revisionesLimpiezaInterior[$i]['PULSADORES_PARADA_OBS']}");
+            $sheet->setCellValue("H$fila", "{$revisionesLimpiezaInterior[$i]['PULSADORES_PARADA_OBS']}");
+            if ($revisionesConservacionInterior[$i]['PULSADORES_PARADA'] == 1) {
+                $sheet->setCellValue("I$fila", "X");
+            } else {
+                $sheet->setCellValue("J$fila", "X");
+            }
+            $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['PULSADORES_PARADA_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", "SALPICADERO");
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior');
+            $sheet->setCellValue("E$fila", "SALPICADERO");
             if ($revisionesLimpiezaInterior[$i]['SALPICADERO'] == 1) {
-                $sheet->setCellValue("B$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             } else {
-                $sheet->setCellValue("C$fila", "X");
+                $sheet->setCellValue("G$fila", "X");
             }
-            $sheet->setCellValue("D$fila", "{$revisionesLimpiezaInterior[$i]['SALPICADERO_OBS']}");
-
-
-            $sheet->getStyle("A{$filaInicio}:D$fila")->applyFromArray(array('borders' => [
-                'outline' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
-            ],));
+            $sheet->setCellValue("H$fila", "{$revisionesLimpiezaInterior[$i]['SALPICADERO_OBS']}");
+            if ($revisionesConservacionInterior[$i]['SALPICADERO'] == 1) {
+                $sheet->setCellValue("I$fila", "X");
+            } else {
+                $sheet->setCellValue("J$fila", "X");
+            }
+            $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['SALPICADERO_OBS']}");
 
             $fila += 3;
         }
