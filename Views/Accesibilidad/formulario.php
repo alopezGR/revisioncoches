@@ -57,7 +57,37 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                         </div>
                     </div>
                     <div class="mb-2">
-                        <span class="mr-2">ACÚSTICA RAMPA</span>
+                        <span class="mr-2">RAMPA AUTOMÁTICA</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="RAMPAAUTO" id="rampauato" value="1" required>
+                            <label class="form-check-label" for="RAMPAAUTO">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="RAMPAAUTO" id="RAMPAAUTONo" value="0" required>
+                            <label class="form-check-label" for="RAMPAAUTONo">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="RAMPAAUTO_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="RAMPAAUTO_OBS" rows="2" name="RAMPAAUTO_OBS"></textarea>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <span class="mr-2">ELEVADOR</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ELEVADOR" id="ELEVADOR" value="1" required>
+                            <label class="form-check-label" for="ELEVADOR">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ELEVADOR" id="ELEVADORNo" value="0" required>
+                            <label class="form-check-label" for="ELEVADORNo">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="ELEVADOR_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="ELEVADOR_OBS" rows="2" name="ELEVADOR_OBS"></textarea>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <span class="mr-2">SEÑALIZACIÓN ACÚSTICA RAMPA</span>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="ACUSTICARAMPA" id="ACUSTICARAMPA" value="1" required>
                             <label class="form-check-label" for="ACUSTICARAMPA">Ok</label>
@@ -103,21 +133,6 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                     </div>
                 </div>
                 <div class="col-12 ">
-                    <div class="mb-2">
-                        <span class="mr-2">RAMPA AUTOMÁTICA</span>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="RAMPAAUTO" id="rampauato" value="1" required>
-                            <label class="form-check-label" for="RAMPAAUTO">Ok</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="RAMPAAUTO" id="RAMPAAUTONo" value="0" required>
-                            <label class="form-check-label" for="RAMPAAUTONo">No ok</label>
-                        </div>
-                        <div class="form-group">
-                            <label for="RAMPAAUTO_OBS">OBSERVACIONES</label>
-                            <textarea class="form-control" id="RAMPAAUTO_OBS" rows="2" name="RAMPAAUTO_OBS"></textarea>
-                        </div>
-                    </div>
                     <div class="mb-2">
                         <span class="mr-2">CINTURONES PMR</span>
                         <div class="form-check form-check-inline">
