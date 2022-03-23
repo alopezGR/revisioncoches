@@ -72,7 +72,7 @@ footer {
 
 .botonera {
     width: 100%;
-    height: 100px;
+    min-height: 100px;
     line-height: 90px;
     font-size: 2em;
     font-weight: bold;
