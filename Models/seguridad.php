@@ -54,11 +54,11 @@ class Seguridad extends Vehiculo
         }
     }
 
-    public static function obtenerRevisionesPorFecha($fecha, $empresa)
+    public static function obtenerRevisionesPorFecha($fechaInicio, $fechaFin, $empresa)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM estado_seguridad WHERE fecha = '$fecha' and ID_EMPRESA = $empresa ORDER BY hora DESC";
+        $query = "SELECT * FROM estado_seguridad WHERE fecha between '$fechaInicio' and '$fechaFin' and ID_EMPRESA = $empresa ORDER BY fecha, hora";
 
         $st = $conn->prepare($query);
 
@@ -71,10 +71,10 @@ class Seguridad extends Vehiculo
         }
     }
 
-    public static function generarHoja($spreadsheet, $fechaInicio, $empresa)
+    public static function generarHoja($spreadsheet, $fechaInicio, $fechaFin, $empresa)
     {
 
-        $revisiones = Seguridad::obtenerRevisionesPorFecha($fechaInicio, $empresa);
+        $revisiones = Seguridad::obtenerRevisionesPorFecha($fechaInicio, $fechaFin, $empresa);
 
         $sheet = $spreadsheet->createSheet();
 
@@ -131,100 +131,95 @@ class Seguridad extends Vehiculo
         foreach ($revisiones as $revision) {
             $filaInicio = $fila;
 
-            $sheet->setCellValue("A$fila", $revision['fecha']);
-            $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
-            $sheet->setCellValue("C$fila", $revision['usuario']);
-            $sheet->setCellValue("E$fila", "EXTINTORES");
+            $sheet->setCellValue("A$fila", $revision['FECHA'] . ' ' . $revision['HORA']);
+            $sheet->setCellValue("B$fila", $revision['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revision['USUARIO']);
+            $sheet->setCellValue("D$fila", "EXTINTORES");
             if ($revision['EXTINTORES'] == 1) {
-                $sheet->setCellValue("F$fila", "X");
+                $sheet->setCellValue("E$fila", "X");
             } else {
-                $sheet->setCellValue("G$fila", "X");
+                $sheet->setCellValue("F$fila", "X");
             }
-            $sheet->setCellValue("H$fila", "{$revision['EXTINTORES_OBS']}");
+            $sheet->setCellValue("G$fila", "{$revision['EXTINTORES_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revision['fecha']);
-            $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
-            $sheet->setCellValue("C$fila", $revision['usuario']);
+            $sheet->setCellValue("A$fila", $revision['FECHA'] . ' ' . $revision['HORA']);
+            $sheet->setCellValue("B$fila", $revision['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revision['USUARIO']);
             $sheet->setCellValue("D$fila", "TRIÁNGULOS");
             if ($revision['TRIANGULOS'] == 1) {
                 $sheet->setCellValue("E$fila", "X");
             } else {
                 $sheet->setCellValue("F$fila", "X");
             }
-            $sheet->setCellValue("H$fila", "{$revision['TRIANGULOS_OBS']}");
+            $sheet->setCellValue("G$fila", "{$revision['TRIANGULOS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revision['fecha']);
-            $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
-            $sheet->setCellValue("C$fila", $revision['usuario']);
+            $sheet->setCellValue("A$fila", $revision['FECHA'] . ' ' . $revision['HORA']);
+            $sheet->setCellValue("B$fila", $revision['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revision['USUARIO']);
             $sheet->setCellValue("D$fila", "CALZO");
             if ($revision['CALZO'] == 1) {
                 $sheet->setCellValue("E$fila", "X");
             } else {
                 $sheet->setCellValue("F$fila", "X");
             }
-            $sheet->setCellValue("H$fila", "{$revision['CALZO_OBS']}");
+            $sheet->setCellValue("G$fila", "{$revision['CALZO_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revision['fecha']);
-            $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
-            $sheet->setCellValue("C$fila", $revision['usuario']);
+            $sheet->setCellValue("A$fila", $revision['FECHA'] . ' ' . $revision['HORA']);
+            $sheet->setCellValue("B$fila", $revision['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revision['USUARIO']);
             $sheet->setCellValue("D$fila", "CHALECO");
             if ($revision['CHALECO'] == 1) {
                 $sheet->setCellValue("E$fila", "X");
             } else {
                 $sheet->setCellValue("F$fila", "X");
             }
-            $sheet->setCellValue("H$fila", "{$revision['CHALECO_OBS']}");
+            $sheet->setCellValue("G$fila", "{$revision['CHALECO_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revision['fecha']);
-            $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
-            $sheet->setCellValue("C$fila", $revision['usuario']);
+            $sheet->setCellValue("A$fila", $revision['FECHA'] . ' ' . $revision['HORA']);
+            $sheet->setCellValue("B$fila", $revision['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revision['USUARIO']);
             $sheet->setCellValue("D$fila", "GUANTES");
             if ($revision['GUANTES'] == 1) {
                 $sheet->setCellValue("E$fila", "X");
             } else {
                 $sheet->setCellValue("F$fila", "X");
             }
-            $sheet->setCellValue("H$fila", "{$revision['GUANTES_OBS']}");
+            $sheet->setCellValue("G$fila", "{$revision['GUANTES_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revision['fecha']);
-            $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
-            $sheet->setCellValue("C$fila", $revision['usuario']);
+            $sheet->setCellValue("A$fila", $revision['FECHA'] . ' ' . $revision['HORA']);
+            $sheet->setCellValue("B$fila", $revision['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revision['USUARIO']);
             $sheet->setCellValue("D$fila", "BOTIQUÍN");
             if ($revision['BOTIQUIN'] == 1) {
                 $sheet->setCellValue("E$fila", "X");
             } else {
                 $sheet->setCellValue("F$fila", "X");
             }
-            $sheet->setCellValue("H$fila", "{$revision['BOTIQUIN_OBS']}");
+            $sheet->setCellValue("G$fila", "{$revision['BOTIQUIN_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revision['fecha']);
-            $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
-            $sheet->setCellValue("C$fila", $revision['usuario']);
+            $sheet->setCellValue("A$fila", $revision['FECHA'] . ' ' . $revision['HORA']);
+            $sheet->setCellValue("B$fila", $revision['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revision['USUARIO']);
             $sheet->setCellValue("D$fila", "MARTILLOS");
             if ($revision['MARTILLOS'] == 1) {
                 $sheet->setCellValue("E$fila", "X");
             } else {
                 $sheet->setCellValue("F$fila", "X");
             }
-            $sheet->setCellValue("H$fila", "{$revision['MARTILLOS_OBS']}");
+            $sheet->setCellValue("G$fila", "{$revision['MARTILLOS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revision['fecha']);
-            $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
-            $sheet->setCellValue("C$fila", $revision['usuario']);
+            $sheet->setCellValue("A$fila", $revision['FECHA'] . ' ' . $revision['HORA']);
+            $sheet->setCellValue("B$fila", $revision['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revision['USUARIO']);
             $sheet->setCellValue("D$fila", "CINTURONES ASIENTOS");
             if ($revision['CINTURONES_ASIENTOS'] == 1) {
                 $sheet->setCellValue("E$fila", "X");
             } else {
                 $sheet->setCellValue("F$fila", "X");
             }
-            $sheet->setCellValue("H$fila", "{$revision['CINTURONES_ASIENTOS_OBS']}");
-            $sheet->getStyle("A{$filaInicio}:D$fila")->applyFromArray(array('borders' => [
-                'outline' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
-            ],));
+            $sheet->setCellValue("G$fila", "{$revision['CINTURONES_ASIENTOS_OBS']}");
 
-            $fila += 3;
+            $fila += 2;
         }
     }
 }

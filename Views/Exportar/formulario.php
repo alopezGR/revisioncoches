@@ -5,8 +5,10 @@
         </div>
         <div class="col-8 mt-5" style=" height: auto">
             <div class="form-group">
-                <label for="numero">FECHA</label>
-                <input id="fecha1" class="form-control" type="text" name="FECHA_INICIO" placeholder="YYYY/MM/DD" required/>
+                <label for="FECHA_INICIO">FECHA INICIO</label>
+                <input id="FECHA_INICIO" class="form-control" type="text" name="FECHA_INICIO" placeholder="YYYY/MM/DD" required/>
+                <label for="FECHA_FIN">FECHA FIN</label>
+                <input type="text" class="form-control" name="FECHA_FIN" id="FECHA_FIN" placeholder="YYYY/MM/DD" required>
             </div>
             <div class="form-group">
                 <label for="empresa">EMPRESA</label>
@@ -31,10 +33,11 @@
 <script src="js/lightpick/lightpick.js"></script>
 <script>
     var picker = new Lightpick({
-        field: document.getElementById('fecha1'),
+        field: document.getElementById('FECHA_INICIO'),
+        secondField: document.getElementById('FECHA_FIN'),
         parentEl: 'body',
         hideOnBodyClick: true,
-        singleDate: true,
+        singleDate: false,
         repick: true,
         format: 'YYYY-MM-DD',
         selectForward: true,

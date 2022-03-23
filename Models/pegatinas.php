@@ -544,11 +544,11 @@ class Pegatinas extends Vehiculo
         }
     }
 
-    public static function obtenerPegatinasExteriorFrontalFecha($fecha, $empresa)
+    public static function obtenerPegatinasExteriorFrontalFecha($fechaInicio, $fechaFin, $empresa)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM peg_ext_frontal WHERE fecha = '$fecha' and ID_EMPRESA = $empresa ORDER BY hora DESC";
+        $query = "SELECT * FROM peg_ext_frontal WHERE fecha between '$fechaInicio' and '$fechaFin' and ID_EMPRESA = $empresa ORDER BY fecha, hora ";
 
         $st = $conn->prepare($query);
 
@@ -561,11 +561,11 @@ class Pegatinas extends Vehiculo
         }
     }
 
-    public static function obtenerPegatinasExteriorLateralDerechoFecha($fecha, $empresa)
+    public static function obtenerPegatinasExteriorLateralDerechoFecha($fechaInicio, $fechaFin, $empresa)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM peg_ext_lateral_derecho WHERE fecha = '$fecha' and ID_EMPRESA = $empresa ORDER BY hora DESC";
+        $query = "SELECT * FROM peg_ext_lateral_derecho WHERE fecha between '$fechaInicio' and '$fechaFin' and ID_EMPRESA = $empresa ORDER BY fecha, hora ";
 
         $st = $conn->prepare($query);
 
@@ -578,11 +578,11 @@ class Pegatinas extends Vehiculo
         }
     }
 
-    public static function obtenerPegatinasExteriorLateralIzquierdoFecha($fecha, $empresa)
+    public static function obtenerPegatinasExteriorLateralIzquierdoFecha($fechaInicio, $fechaFin, $empresa)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM peg_ext_lateral_izq WHERE fecha = '$fecha' and ID_EMPRESA = $empresa ORDER BY hora DESC";
+        $query = "SELECT * FROM peg_ext_lateral_izq WHERE fecha between '$fechaInicio' and '$fechaFin' and ID_EMPRESA = $empresa ORDER BY fecha, hora ";
 
         $st = $conn->prepare($query);
 
@@ -595,11 +595,11 @@ class Pegatinas extends Vehiculo
         }
     }
 
-    public static function obtenerPegatinasExteriorLunaFecha($fecha, $empresa)
+    public static function obtenerPegatinasExteriorLunaFecha($fechaInicio, $fechaFin, $empresa)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM peg_ext_lunas WHERE fecha = '$fecha' and ID_EMPRESA = $empresa ORDER BY hora DESC";
+        $query = "SELECT * FROM peg_ext_lunas WHERE fecha between '$fechaInicio' and '$fechaFin' and ID_EMPRESA = $empresa ORDER BY fecha, hora ";
 
         $st = $conn->prepare($query);
 
@@ -612,11 +612,11 @@ class Pegatinas extends Vehiculo
         }
     }
 
-    public static function obtenerPegatinasExteriorTraseraFecha($fecha, $empresa)
+    public static function obtenerPegatinasExteriorTraseraFecha($fechaInicio, $fechaFin, $empresa)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM peg_ext_trasera WHERE fecha = '$fecha' and ID_EMPRESA = $empresa ORDER BY hora DESC";
+        $query = "SELECT * FROM peg_ext_trasera WHERE fecha between '$fechaInicio' and '$fechaFin' and ID_EMPRESA = $empresa ORDER BY fecha, hora ";
 
         $st = $conn->prepare($query);
 
@@ -629,11 +629,11 @@ class Pegatinas extends Vehiculo
         }
     }
 
-    public static function obtenerPegatinasInteriorCentralFecha($fecha, $empresa)
+    public static function obtenerPegatinasInteriorCentralFecha($fechaInicio, $fechaFin, $empresa)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM peg_int_central WHERE fecha = '$fecha' and ID_EMPRESA = $empresa ORDER BY hora DESC";
+        $query = "SELECT * FROM peg_int_central WHERE fecha between '$fechaInicio' and '$fechaFin' and ID_EMPRESA = $empresa ORDER BY fecha, hora ";
 
         $st = $conn->prepare($query);
 
@@ -646,11 +646,11 @@ class Pegatinas extends Vehiculo
         }
     }
 
-    public static function obtenerPegatinasInteriorDelanteroFecha($fecha, $empresa)
+    public static function obtenerPegatinasInteriorDelanteroFecha($fechaInicio, $fechaFin, $empresa)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM peg_int_del WHERE fecha = '$fecha' and ID_EMPRESA = $empresa ORDER BY hora DESC";
+        $query = "SELECT * FROM peg_int_del WHERE fecha between '$fechaInicio' and '$fechaFin' and ID_EMPRESA = $empresa ORDER BY fecha, hora ";
 
         $st = $conn->prepare($query);
 
@@ -663,11 +663,11 @@ class Pegatinas extends Vehiculo
         }
     }
 
-    public static function obtenerPegatinasInteriorLunaFecha($fecha, $empresa)
+    public static function obtenerPegatinasInteriorLunaFecha($fechaInicio, $fechaFin, $empresa)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM peg_int_luna WHERE fecha = '$fecha' and ID_EMPRESA = $empresa ORDER BY hora DESC";
+        $query = "SELECT * FROM peg_int_luna WHERE fecha between '$fechaInicio' and '$fechaFin' and ID_EMPRESA = $empresa ORDER BY fecha, hora ";
 
         $st = $conn->prepare($query);
 
@@ -680,11 +680,11 @@ class Pegatinas extends Vehiculo
         }
     }
 
-    public static function obtenerPegatinasInteriorMamparaFecha($fecha, $empresa)
+    public static function obtenerPegatinasInteriorMamparaFecha($fechaInicio, $fechaFin, $empresa)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM peg_int_mampara WHERE fecha = '$fecha' and ID_EMPRESA = $empresa ORDER BY hora DESC";
+        $query = "SELECT * FROM peg_int_mampara WHERE fecha between '$fechaInicio' and '$fechaFin' and ID_EMPRESA = $empresa ORDER BY fecha, hora ";
 
         $st = $conn->prepare($query);
 
@@ -697,11 +697,11 @@ class Pegatinas extends Vehiculo
         }
     }
 
-    public static function obtenerPegatinasInteriorTraseraFecha($fecha, $empresa)
+    public static function obtenerPegatinasInteriorTraseraFecha($fechaInicio, $fechaFin, $empresa)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM peg_int_trasera WHERE fecha = '$fecha' and ID_EMPRESA = $empresa ORDER BY hora DESC";
+        $query = "SELECT * FROM peg_int_trasera WHERE fecha between '$fechaInicio' and '$fechaFin' and ID_EMPRESA = $empresa ORDER BY fecha, hora ";
 
         $st = $conn->prepare($query);
 
@@ -714,19 +714,19 @@ class Pegatinas extends Vehiculo
         }
     }
 
-    public static function generarHoja($spreadsheet, $fechaInicio, $empresa)
+    public static function generarHoja($spreadsheet, $fechaInicio, $fechaFin, $empresa)
     {
 
-        $revisionesPegatinasExteriorFrontal = Pegatinas::obtenerPegatinasExteriorFrontalFecha($fechaInicio, $empresa);
-        $revisionesPegatinasExteriorLateralDerecho = Pegatinas::obtenerPegatinasExteriorLateralDerechoFecha($fechaInicio, $empresa);
-        $revisionesPegatinasExteriorLateralIzquierdo = Pegatinas::obtenerPegatinasExteriorLateralIzquierdoFecha($fechaInicio, $empresa);
-        $revisionesPegatinasExteriorLuna = Pegatinas::obtenerPegatinasExteriorLunaFecha($fechaInicio, $empresa);
-        $revisionesPegatinasExteriorTrasera = Pegatinas::obtenerPegatinasExteriorTraseraFecha($fechaInicio, $empresa);
-        $revisionesPegatinasInteriorCentral = Pegatinas::obtenerPegatinasInteriorCentralFecha($fechaInicio, $empresa);
-        $revisionesPegatinasInteriorDelantero = Pegatinas::obtenerPegatinasInteriorDelanteroFecha($fechaInicio, $empresa);
-        $revisionesPegatinasInteriorLuna = Pegatinas::obtenerPegatinasInteriorLunaFecha($fechaInicio, $empresa);
-        $revisionesPegatinasInteriorMampara = Pegatinas::obtenerPegatinasInteriorMamparaFecha($fechaInicio, $empresa);
-        $revisionesPegatinasInteriorTrasera = Pegatinas::obtenerPegatinasInteriorTraseraFecha($fechaInicio, $empresa);
+        $revisionesPegatinasExteriorFrontal = Pegatinas::obtenerPegatinasExteriorFrontalFecha($fechaInicio, $fechaFin, $empresa);
+        $revisionesPegatinasExteriorLateralDerecho = Pegatinas::obtenerPegatinasExteriorLateralDerechoFecha($fechaInicio, $fechaFin, $empresa);
+        $revisionesPegatinasExteriorLateralIzquierdo = Pegatinas::obtenerPegatinasExteriorLateralIzquierdoFecha($fechaInicio, $fechaFin, $empresa);
+        $revisionesPegatinasExteriorLuna = Pegatinas::obtenerPegatinasExteriorLunaFecha($fechaInicio, $fechaFin, $empresa);
+        $revisionesPegatinasExteriorTrasera = Pegatinas::obtenerPegatinasExteriorTraseraFecha($fechaInicio, $fechaFin, $empresa);
+        $revisionesPegatinasInteriorCentral = Pegatinas::obtenerPegatinasInteriorCentralFecha($fechaInicio, $fechaFin, $empresa);
+        $revisionesPegatinasInteriorDelantero = Pegatinas::obtenerPegatinasInteriorDelanteroFecha($fechaInicio, $fechaFin, $empresa);
+        $revisionesPegatinasInteriorLuna = Pegatinas::obtenerPegatinasInteriorLunaFecha($fechaInicio, $fechaFin, $empresa);
+        $revisionesPegatinasInteriorMampara = Pegatinas::obtenerPegatinasInteriorMamparaFecha($fechaInicio, $fechaFin, $empresa);
+        $revisionesPegatinasInteriorTrasera = Pegatinas::obtenerPegatinasInteriorTraseraFecha($fechaInicio, $fechaFin, $empresa);
 
         $sheet = $spreadsheet->createSheet();
 
@@ -777,10 +777,10 @@ class Pegatinas extends Vehiculo
         for ($i = 0; $i < count($revisionesPegatinasExteriorFrontal); $i++) {
             $filaInicio = $fila;
 
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorFrontal[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorFrontal[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorFrontal[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorFrontal[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorFrontal[$i]['USUARIO']);
-            $sheet->setCellValue("D$fila", 'Exterior');
+            $sheet->setCellValue("D$fila", 'Exterior Frontal');
             $sheet->setCellValue("E$fila", "LOGO CRTM");
             if ($revisionesPegatinasExteriorFrontal[$i]['CRTM_LOGO'] == 1) {
                 $sheet->setCellValue("F$fila", "X");
@@ -789,7 +789,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorFrontal[$i]['CRTM_LOGO_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorFrontal[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorFrontal[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorFrontal[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorFrontal[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorFrontal[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Frontal');
@@ -801,7 +801,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorFrontal[$i]['LOGO_EMPRESA_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorFrontal[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorFrontal[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorFrontal[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorFrontal[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorFrontal[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Frontal');
@@ -813,7 +813,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorFrontal[$i]['MINUSVALIDO_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorFrontal[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorFrontal[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorFrontal[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorFrontal[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorFrontal[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Frontal');
@@ -827,7 +827,7 @@ class Pegatinas extends Vehiculo
             $fila++;
 
             //Pegatina exterior lateral derecho
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
@@ -839,7 +839,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['LOGO_EMPRESA_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
@@ -851,7 +851,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['WEB_CRTM_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
@@ -863,7 +863,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['PMR_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
@@ -875,7 +875,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['STOP_COVID_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
@@ -887,7 +887,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['SALIDA_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
@@ -899,7 +899,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['ENTRADA_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
@@ -911,7 +911,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['MINUSVALIDO_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
@@ -923,7 +923,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['CAMARA_COMERCIO_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
@@ -935,7 +935,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['SALIDA_EMERGENCIA_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
@@ -947,7 +947,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['GRUPO_RUIZ_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
@@ -959,7 +959,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['NUMERO_VEHICULO_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
@@ -971,7 +971,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['APERTURA_EMERGENCIA_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
@@ -986,7 +986,7 @@ class Pegatinas extends Vehiculo
 
             //Pegatinas exterior lateral izquierdo
 
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralIzquierdo[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Izquierdo');
@@ -998,7 +998,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralIzquierdo[$i]['CRTM_LOGO_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralIzquierdo[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Izquierdo');
@@ -1010,7 +1010,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralIzquierdo[$i]['LOGO_EMPRESA_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralIzquierdo[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Izquierdo');
@@ -1022,7 +1022,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralIzquierdo[$i]['WEB_CRTM_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralIzquierdo[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Izquierdo');
@@ -1034,7 +1034,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralIzquierdo[$i]['CAMARA_COMERCIO_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralIzquierdo[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Izquierdo');
@@ -1046,7 +1046,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralIzquierdo[$i]['SALIDA_EMERGENCIA_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralIzquierdo[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Izquierdo');
@@ -1058,7 +1058,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralIzquierdo[$i]['GRUPO_RUIZ_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralIzquierdo[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Lateral Izquierdo');
@@ -1073,7 +1073,7 @@ class Pegatinas extends Vehiculo
 
             //Pegatinas exterior luna
 
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLuna[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLuna[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLuna[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLuna[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLuna[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Luna Exterior');
@@ -1085,7 +1085,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLuna[$i]['SALIDA_EMERGENCIA_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLuna[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLuna[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLuna[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLuna[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLuna[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Luna Exterior');
@@ -1100,7 +1100,7 @@ class Pegatinas extends Vehiculo
 
             //Pegatinas Exterior Trasera
 
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorTrasera[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorTrasera[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorTrasera[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorTrasera[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorTrasera[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Trasero');
@@ -1112,7 +1112,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorTrasera[$i]['CRTM_LOGO_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorTrasera[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorTrasera[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorTrasera[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorTrasera[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorTrasera[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Trasero');
@@ -1124,7 +1124,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorTrasera[$i]['WEB_CRTM_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorTrasera[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorTrasera[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorTrasera[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorTrasera[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorTrasera[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Trasero');
@@ -1136,7 +1136,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorTrasera[$i]['WEB_EMPRESA_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorTrasera[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorTrasera[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorTrasera[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorTrasera[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorTrasera[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Trasero');
@@ -1148,7 +1148,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorTrasera[$i]['NUMERO_VEHICULO_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorTrasera[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorTrasera[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorTrasera[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorTrasera[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorTrasera[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior Trasero');
@@ -1163,7 +1163,7 @@ class Pegatinas extends Vehiculo
 
             //Pegatinas Interior Central
 
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorCentral[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorCentral[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorCentral[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorCentral[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorCentral[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Central');
@@ -1175,7 +1175,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorCentral[$i]['TARIFAS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorCentral[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorCentral[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorCentral[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorCentral[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorCentral[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Central');
@@ -1187,7 +1187,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorCentral[$i]['PLAN_EVACUACION_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorCentral[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorCentral[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorCentral[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorCentral[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorCentral[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Central');
@@ -1199,7 +1199,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorCentral[$i]['COVID_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorCentral[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorCentral[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorCentral[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorCentral[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorCentral[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Central');
@@ -1214,7 +1214,7 @@ class Pegatinas extends Vehiculo
 
             //Pegatinas Interior Delantero
 
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorDelantero[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorDelantero[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorDelantero[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Delantero');
@@ -1226,7 +1226,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorDelantero[$i]['VIDEOVIGILANCIA_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorDelantero[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorDelantero[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorDelantero[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Delantero');
@@ -1238,7 +1238,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorDelantero[$i]['PROHIBIDO_FUMAR_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorDelantero[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorDelantero[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorDelantero[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Delantero');
@@ -1250,7 +1250,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorDelantero[$i]['PTM_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorDelantero[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorDelantero[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorDelantero[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Delantero');
@@ -1262,7 +1262,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorDelantero[$i]['CAMBIO_MAXIMO_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorDelantero[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorDelantero[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorDelantero[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Delantero');
@@ -1274,7 +1274,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorDelantero[$i]['TARIFAS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorDelantero[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorDelantero[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorDelantero[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Delantero');
@@ -1286,7 +1286,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorDelantero[$i]['OCUPACION_MAXIMA_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorDelantero[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorDelantero[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorDelantero[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Delantero');
@@ -1298,7 +1298,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorDelantero[$i]['BOTIQUIN_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorDelantero[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorDelantero[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorDelantero[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Delantero');
@@ -1313,10 +1313,10 @@ class Pegatinas extends Vehiculo
 
 
             //Pegatinas Lunas Interiores
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorLuna[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorLuna[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorLuna[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorLuna[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorLuna[$i]['USUARIO']);
-            $sheet->setCellValue("D$fila", 'Interior Delantero');
+            $sheet->setCellValue("D$fila", 'Luna Interior');
             $sheet->setCellValue("E$fila", "CINTURONES DE SEGURIDAD");
             if ($revisionesPegatinasInteriorLuna[$i]['CINTURON_SEGURIDAD'] == 1) {
                 $sheet->setCellValue("F$fila", "X");
@@ -1325,10 +1325,10 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorLuna[$i]['CINTURON_SEGURIDAD_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorLuna[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorLuna[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorLuna[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorLuna[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorLuna[$i]['USUARIO']);
-            $sheet->setCellValue("D$fila", 'Interior Delantero');
+            $sheet->setCellValue("D$fila", 'Luna Interior');
             $sheet->setCellValue("E$fila", "MARTILLOS");
             if ($revisionesPegatinasInteriorLuna[$i]['MARTILLOS'] == 1) {
                 $sheet->setCellValue("F$fila", "X");
@@ -1337,10 +1337,10 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorLuna[$i]['MARTILLOS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorLuna[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorLuna[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorLuna[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorLuna[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorLuna[$i]['USUARIO']);
-            $sheet->setCellValue("D$fila", 'Interior Delantero');
+            $sheet->setCellValue("D$fila", 'Luna Interior');
             $sheet->setCellValue("E$fila", "EXTINTORES");
             if ($revisionesPegatinasInteriorLuna[$i]['EXTINTORES'] == 1) {
                 $sheet->setCellValue("F$fila", "X");
@@ -1352,7 +1352,7 @@ class Pegatinas extends Vehiculo
 
 
             //Pegatinas Interior Mampara
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorMampara[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorMampara[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorMampara[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorMampara[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorMampara[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Mampara');
@@ -1364,7 +1364,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorMampara[$i]['TARIFAS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorMampara[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorMampara[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorMampara[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorMampara[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorMampara[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Mampara');
@@ -1376,7 +1376,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorMampara[$i]['PERRO_GUIA_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorMampara[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorMampara[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorMampara[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorMampara[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorMampara[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Mampara');
@@ -1388,7 +1388,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorMampara[$i]['ZONA_RESERVADA_PMR_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorMampara[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorMampara[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorMampara[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorMampara[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorMampara[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Mampara');
@@ -1400,7 +1400,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorMampara[$i]['TELEFONO_OPERADOR_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorMampara[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorMampara[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorMampara[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorMampara[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorMampara[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Mampara');
@@ -1412,7 +1412,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorMampara[$i]['WEB_CRTM_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorMampara[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorMampara[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorMampara[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorMampara[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorMampara[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Mampara');
@@ -1426,7 +1426,7 @@ class Pegatinas extends Vehiculo
             $fila++;
 
             //Pegatinas Interior Trasera
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorTrasera[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorTrasera[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorTrasera[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorTrasera[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorTrasera[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Trasera');
@@ -1438,7 +1438,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorTrasera[$i]['MARTILLO_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorTrasera[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorTrasera[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorTrasera[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorTrasera[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorTrasera[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Trasera');
@@ -1450,7 +1450,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorTrasera[$i]['PROHIBIDO_FUMAR_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorTrasera[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorTrasera[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorTrasera[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorTrasera[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorTrasera[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Trasera');
@@ -1462,7 +1462,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorTrasera[$i]['PMR_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorTrasera[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorTrasera[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorTrasera[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorTrasera[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorTrasera[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior Trasera');
@@ -1474,7 +1474,7 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorTrasera[$i]['VIDEOVIGILANCIA_OBS']}");
 
-            $fila += 3;
+            $fila += 2;
         }
     }
 }

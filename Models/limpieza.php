@@ -236,11 +236,11 @@ class Limpieza extends Vehiculo
         }
     }
 
-    public static function obtenerLimpiezaExteriorFecha($fecha, $empresa)
+    public static function obtenerLimpiezaExteriorFecha($fechaInicio, $fechaFin, $empresa)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM estado_limpieza_exterior WHERE fecha = '$fecha' and ID_EMPRESA = $empresa ORDER BY hora DESC";
+        $query = "SELECT * FROM estado_limpieza_exterior WHERE fecha between '$fechaInicio' and '$fechaFin' and ID_EMPRESA = $empresa ORDER BY fecha, hora";
 
         $st = $conn->prepare($query);
 
@@ -253,11 +253,11 @@ class Limpieza extends Vehiculo
         }
     }
 
-    public static function obtenerLimpiezaInteriorFecha($fecha, $empresa)
+    public static function obtenerLimpiezaInteriorFecha($fechaInicio, $fechaFin, $empresa)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM estado_limpieza_interior WHERE fecha = '$fecha' and ID_EMPRESA = $empresa ORDER BY hora DESC";
+        $query = "SELECT * FROM estado_limpieza_interior WHERE fecha between '$fechaInicio' and '$fechaFin' and ID_EMPRESA = $empresa ORDER BY fecha, hora";
 
         $st = $conn->prepare($query);
 
@@ -270,11 +270,11 @@ class Limpieza extends Vehiculo
         }
     }
 
-    public static function obtenerConservacionExteriorFecha($fecha, $empresa)
+    public static function obtenerConservacionExteriorFecha($fechaInicio, $fechaFin, $empresa)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM estado_limpieza_exterior WHERE fecha = '$fecha' and ID_EMPRESA = $empresa ORDER BY hora DESC";
+        $query = "SELECT * FROM estado_limpieza_exterior WHERE fecha between '$fechaInicio' and '$fechaFin' and ID_EMPRESA = $empresa ORDER BY fecha, hora";
 
         $st = $conn->prepare($query);
 
@@ -287,11 +287,11 @@ class Limpieza extends Vehiculo
         }
     }
 
-    public static function obtenerConservacionInteriorFecha($fecha, $empresa)
+    public static function obtenerConservacionInteriorFecha($fechaInicio, $fechaFin, $empresa)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM estado_limpieza_interior WHERE fecha = '$fecha' and ID_EMPRESA = $empresa ORDER BY hora DESC";
+        $query = "SELECT * FROM estado_limpieza_interior WHERE fecha between '$fechaInicio' and '$fechaFin' and ID_EMPRESA = $empresa ORDER BY fecha, hora";
 
         $st = $conn->prepare($query);
 
@@ -304,13 +304,13 @@ class Limpieza extends Vehiculo
         }
     }
 
-    public static function generarHoja($spreadsheet, $fechaInicio, $empresa)
+    public static function generarHoja($spreadsheet, $fechaInicio, $fechaFin, $empresa)
     {
 
-        $revisionesLimpiezaExterior = Limpieza::obtenerLimpiezaExteriorFecha($fechaInicio, $empresa);
-        $revisionesLimpiezaInterior = Limpieza::obtenerLimpiezaInteriorFecha($fechaInicio, $empresa);
-        $revisionesConservacionExterior = Limpieza::obtenerConservacionExteriorFecha($fechaInicio, $empresa);
-        $revisionesConservacionInterior = Limpieza::obtenerConservacionInteriorFecha($fechaInicio, $empresa);
+        $revisionesLimpiezaExterior = Limpieza::obtenerLimpiezaExteriorFecha($fechaInicio, $fechaFin, $empresa);
+        $revisionesLimpiezaInterior = Limpieza::obtenerLimpiezaInteriorFecha($fechaInicio, $fechaFin, $empresa);
+        $revisionesConservacionExterior = Limpieza::obtenerConservacionExteriorFecha($fechaInicio, $fechaFin, $empresa);
+        $revisionesConservacionInterior = Limpieza::obtenerConservacionInteriorFecha($fechaInicio, $fechaFin, $empresa);
 
         $sheet = $spreadsheet->createSheet();
 
@@ -375,7 +375,7 @@ class Limpieza extends Vehiculo
         for ($i = 0; $i < count($revisionesLimpiezaExterior); $i++) {
             $filaInicio = $fila;
             
-            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA'] . ' ' . $revisionesLimpiezaExterior[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesLimpiezaExterior[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesLimpiezaExterior[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior');
@@ -393,7 +393,7 @@ class Limpieza extends Vehiculo
             }
             $sheet->setCellValue("K$fila", "{$revisionesConservacionExterior[$i]['CARROCERIA_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA'] . ' ' . $revisionesLimpiezaExterior[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesLimpiezaExterior[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesLimpiezaExterior[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior');
@@ -411,7 +411,7 @@ class Limpieza extends Vehiculo
             }
             $sheet->setCellValue("K$fila", "{$revisionesConservacionExterior[$i]['VENTANAS_LATERALES_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA'] . ' ' . $revisionesLimpiezaExterior[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesLimpiezaExterior[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesLimpiezaExterior[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior');
@@ -429,7 +429,7 @@ class Limpieza extends Vehiculo
             }
             $sheet->setCellValue("K$fila", "{$revisionesConservacionExterior[$i]['PUERTAS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA'] . ' ' . $revisionesLimpiezaExterior[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesLimpiezaExterior[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesLimpiezaExterior[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior');
@@ -447,7 +447,7 @@ class Limpieza extends Vehiculo
             }
             $sheet->setCellValue("K$fila", "{$revisionesConservacionExterior[$i]['LUNAS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA'] . ' ' . $revisionesLimpiezaExterior[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesLimpiezaExterior[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesLimpiezaExterior[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior');
@@ -465,7 +465,7 @@ class Limpieza extends Vehiculo
             }
             $sheet->setCellValue("K$fila", "{$revisionesConservacionExterior[$i]['ESPEJOS_RETROVISORES_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA'] . ' ' . $revisionesLimpiezaExterior[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesLimpiezaExterior[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesLimpiezaExterior[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior');
@@ -483,7 +483,7 @@ class Limpieza extends Vehiculo
             }
             $sheet->setCellValue("K$fila", "{$revisionesConservacionExterior[$i]['LUCES_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaExterior[$i]['FECHA'] . ' ' . $revisionesLimpiezaExterior[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesLimpiezaExterior[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesLimpiezaExterior[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Exterior');
@@ -500,11 +500,11 @@ class Limpieza extends Vehiculo
                 $sheet->setCellValue("J$fila", "X");
             }
             $sheet->setCellValue("K$fila", "{$revisionesConservacionExterior[$i]['INDICADORES_OBS']}");
-            $fila+=2;
+            $fila++;
 
             //Limpieza Interior
 
-            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA'] . ' ' . $revisionesLimpiezaInterior[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior');
@@ -522,7 +522,7 @@ class Limpieza extends Vehiculo
             }
             $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['SUELO_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA'] . ' ' . $revisionesLimpiezaInterior[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior');
@@ -540,7 +540,7 @@ class Limpieza extends Vehiculo
             }
             $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['ROTULOS_LUMINOSOS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA'] . ' ' . $revisionesLimpiezaInterior[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior');
@@ -558,7 +558,7 @@ class Limpieza extends Vehiculo
             }
             $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['PUERTAS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA'] . ' ' . $revisionesLimpiezaInterior[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior');
@@ -576,7 +576,7 @@ class Limpieza extends Vehiculo
             }
             $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['PAREDES_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA'] . ' ' . $revisionesLimpiezaInterior[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior');
@@ -594,7 +594,7 @@ class Limpieza extends Vehiculo
             }
             $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['VENTANAS_LATERALES_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA'] . ' ' . $revisionesLimpiezaInterior[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior');
@@ -612,7 +612,7 @@ class Limpieza extends Vehiculo
             }
             $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['ASIENTOS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA'] . ' ' . $revisionesLimpiezaInterior[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior');
@@ -630,7 +630,7 @@ class Limpieza extends Vehiculo
             }
             $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['LUMINARIAS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA'] . ' ' . $revisionesLimpiezaInterior[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior');
@@ -648,7 +648,7 @@ class Limpieza extends Vehiculo
             }
             $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['ASIDEROS_BARRAS_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA'] . ' ' . $revisionesLimpiezaInterior[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior');
@@ -666,7 +666,7 @@ class Limpieza extends Vehiculo
             }
             $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['CABINA_CONDUCTOR_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA'] . ' ' . $revisionesLimpiezaInterior[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior');
@@ -684,7 +684,7 @@ class Limpieza extends Vehiculo
             }
             $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['PULSADORES_PARADA_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA']);
+            $sheet->setCellValue("A$fila", $revisionesLimpiezaInterior[$i]['FECHA'] . ' ' . $revisionesLimpiezaInterior[$i]['HORA']);
             $sheet->setCellValue("B$fila", $revisionesLimpiezaInterior[$i]['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revisionesLimpiezaInterior[$i]['USUARIO']);
             $sheet->setCellValue("D$fila", 'Interior');
@@ -702,7 +702,7 @@ class Limpieza extends Vehiculo
             }
             $sheet->setCellValue("K$fila", "{$revisionesConservacionInterior[$i]['SALPICADERO_OBS']}");
 
-            $fila += 3;
+            $fila += 2;
         }
     }
 }

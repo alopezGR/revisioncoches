@@ -57,11 +57,11 @@ class Accesibilidad extends Vehiculo
         }
     }
 
-    public static function obtenerRevisionesPorFecha($fecha, $empresa)
+    public static function obtenerRevisionesPorFecha($fechaInicio, $fechaFin, $empresa)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM estado_accesibilidad WHERE fecha = '$fecha' and idempresa = $empresa ORDER BY hora DESC";
+        $query = "SELECT * FROM estado_accesibilidad WHERE fecha between '$fechaInicio' and '$fechaFin' and idempresa = $empresa ORDER BY fecha, hora ";
 
         $st = $conn->prepare($query);
 
@@ -74,10 +74,10 @@ class Accesibilidad extends Vehiculo
         }
     }
 
-    public static function generarHoja($spreadsheet, $fechaInicio, $empresa)
+    public static function generarHoja($spreadsheet, $fechaInicio, $fechaFin, $empresa)
     {
 
-        $revisiones = Accesibilidad::obtenerRevisionesPorFecha($fechaInicio, $empresa);
+        $revisiones = Accesibilidad::obtenerRevisionesPorFecha($fechaInicio, $fechaFin, $empresa);
 
         $sheet = $spreadsheet->createSheet();
 
@@ -135,7 +135,7 @@ class Accesibilidad extends Vehiculo
             $filaInicio = $fila;
 
 
-            $sheet->setCellValue("A$fila", $revision['fecha']);
+            $sheet->setCellValue("A$fila", $revision['fecha'] . ' ' . $revision['hora']);
             $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
             $sheet->setCellValue("C$fila", $revision['usuario']);
             $sheet->setCellValue("D$fila", "KNEELING");
@@ -146,7 +146,7 @@ class Accesibilidad extends Vehiculo
             }
             $sheet->setCellValue("G$fila", "{$revision['kneeling_obs']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revision['fecha']);
+            $sheet->setCellValue("A$fila", $revision['fecha'] . ' ' . $revision['hora']);
             $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
             $sheet->setCellValue("C$fila", $revision['usuario']);
             $sheet->setCellValue("D$fila", "CINTURONES PMR");
@@ -157,7 +157,7 @@ class Accesibilidad extends Vehiculo
             }
             $sheet->setCellValue("G$fila", "{$revision['cinturonespmr_obs']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revision['fecha']);
+            $sheet->setCellValue("A$fila", $revision['fecha'] . ' ' . $revision['hora']);
             $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
             $sheet->setCellValue("C$fila", $revision['usuario']);
             $sheet->setCellValue("D$fila", "ASIDEROS/BARRAS");
@@ -168,7 +168,7 @@ class Accesibilidad extends Vehiculo
             }
             $sheet->setCellValue("G$fila", "{$revision['barras_obs']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revision['fecha']);
+            $sheet->setCellValue("A$fila", $revision['fecha'] . ' ' . $revision['hora']);
             $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
             $sheet->setCellValue("C$fila", $revision['usuario']);
             $sheet->setCellValue("D$fila", "RAMPA");
@@ -179,7 +179,7 @@ class Accesibilidad extends Vehiculo
             }
             $sheet->setCellValue("G$fila", "{$revision['rampa_obs']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revision['fecha']);
+            $sheet->setCellValue("A$fila", $revision['fecha'] . ' ' . $revision['hora']);
             $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
             $sheet->setCellValue("C$fila", $revision['usuario']);
             $sheet->setCellValue("D$fila", "RAMPA AUTOMÁTICA");
@@ -190,7 +190,7 @@ class Accesibilidad extends Vehiculo
             }
             $sheet->setCellValue("G$fila", "{$revision['rampaauto_obs']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revision['fecha']);
+            $sheet->setCellValue("A$fila", $revision['fecha'] . ' ' . $revision['hora']);
             $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
             $sheet->setCellValue("C$fila", $revision['usuario']);
             $sheet->setCellValue("D$fila", "PULSADORES RAMPA");
@@ -201,7 +201,7 @@ class Accesibilidad extends Vehiculo
             }
             $sheet->setCellValue("G$fila", "{$revision['pulsadoresrampa_obs']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revision['fecha']);
+            $sheet->setCellValue("A$fila", $revision['fecha'] . ' ' . $revision['hora']);
             $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
             $sheet->setCellValue("C$fila", $revision['usuario']);
             $sheet->setCellValue("D$fila", "SEÑALIZACIÓN LUMINOSA RAMPA");
@@ -212,7 +212,7 @@ class Accesibilidad extends Vehiculo
             }
             $sheet->setCellValue("G$fila", "{$revision['senlumrampa_obs']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revision['fecha']);
+            $sheet->setCellValue("A$fila", $revision['fecha'] . ' ' . $revision['hora']);
             $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
             $sheet->setCellValue("C$fila", $revision['usuario']);
             $sheet->setCellValue("D$fila", "ACÚSTICA RAMPA");

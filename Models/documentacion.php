@@ -45,10 +45,10 @@ class Documentacion Extends Vehiculo{
         }
     }
 
-    public static function obtenerRevisionesPorFecha($fecha, $empresa){
+    public static function obtenerRevisionesPorFecha($fechaInicio, $fechaFin, $empresa){
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM estado_documentacion WHERE fecha = '$fecha' and ID_EMPRESA = $empresa ORDER BY hora DESC";
+        $query = "SELECT * FROM estado_documentacion WHERE fecha between '$fechaInicio' and '$fechaFin' and ID_EMPRESA = $empresa ORDER BY fecha, hora";
 
         $st = $conn->prepare($query);
 
@@ -61,10 +61,10 @@ class Documentacion Extends Vehiculo{
         }
     }
 
-    public static function generarHoja($spreadsheet, $fechaInicio, $empresa)
+    public static function generarHoja($spreadsheet, $fechaInicio, $fechaFin, $empresa)
     {
 
-        $revisiones = Documentacion::obtenerRevisionesPorFecha($fechaInicio, $empresa);
+        $revisiones = Documentacion::obtenerRevisionesPorFecha($fechaInicio, $fechaFin, $empresa);
 
         $sheet = $spreadsheet->createSheet();
 
@@ -120,7 +120,7 @@ class Documentacion Extends Vehiculo{
         foreach ($revisiones as $revision) {
             $filaInicio = $fila;
 
-            $sheet->setCellValue("A$fila", $revision['FECHA']);
+            $sheet->setCellValue("A$fila", $revision['FECHA'] . ' ' . $revision['HORA']);
             $sheet->setCellValue("B$fila", $revision['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revision['USUARIO']);
             $sheet->setCellValue("D$fila", "LIBRO DE RECLAMACIONES");
@@ -131,7 +131,7 @@ class Documentacion Extends Vehiculo{
             }
             $sheet->setCellValue("G$fila", "{$revision['LIBRO_RECLAMACIONES_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revision['FECHA']);
+            $sheet->setCellValue("A$fila", $revision['FECHA'] . ' ' . $revision['HORA']);
             $sheet->setCellValue("B$fila", $revision['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revision['USUARIO']);
             $sheet->setCellValue("D$fila", "SEGURO VEHÍCULO");
@@ -142,7 +142,7 @@ class Documentacion Extends Vehiculo{
             }
             $sheet->setCellValue("G$fila", "{$revision['SEGURO_VEHICULO_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revision['FECHA']);
+            $sheet->setCellValue("A$fila", $revision['FECHA'] . ' ' . $revision['HORA']);
             $sheet->setCellValue("B$fila", $revision['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revision['USUARIO']);
             $sheet->setCellValue("D$fila", "ITV");
@@ -153,7 +153,7 @@ class Documentacion Extends Vehiculo{
             }
             $sheet->setCellValue("G$fila", "{$revision['ITV_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revision['FECHA']);
+            $sheet->setCellValue("A$fila", $revision['FECHA'] . ' ' . $revision['HORA']);
             $sheet->setCellValue("B$fila", $revision['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revision['USUARIO']);
             $sheet->setCellValue("D$fila", "FICHA TÉNICA");
@@ -164,7 +164,7 @@ class Documentacion Extends Vehiculo{
             }
             $sheet->setCellValue("G$fila", "{$revision['FICHA_TECNICA_OBS']}");
             $fila++;
-            $sheet->setCellValue("A$fila", $revision['FECHA']);
+            $sheet->setCellValue("A$fila", $revision['FECHA'] . ' ' . $revision['HORA']);
             $sheet->setCellValue("B$fila", $revision['CODIGO_VEHICULO']);
             $sheet->setCellValue("C$fila", $revision['USUARIO']);
             $sheet->setCellValue("D$fila", "TACÓGRAFO");
