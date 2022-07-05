@@ -79,3 +79,7 @@ footer {
     color: white;
     background-color: #008ED1;
 }
+
+.display-none {
+    display: none !important;
+}

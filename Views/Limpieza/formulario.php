@@ -16,7 +16,7 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
             <div class="form-group">
                 <label for="EMPRESA">Empresa</label>
                 <input type="text" class="form-control" id="EMPRESA" readonly value="<?php echo $empresas[$resultado['IDEMPRESA']] ?>">
-                <input type="hidden" class="form-control" id="EMPRESA" name="EMPRESA" readonly value="<?php echo $resultado['IDEMPRESA'] ?>">
+                <input type="hidden" class="form-control" id="EMPRESA_ID" name="EMPRESA" readonly value="<?php echo $resultado['IDEMPRESA'] ?>">
             </div>
         </div>
         <div class="col-6" style=" height: 200px">
@@ -39,6 +39,10 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
             <div class="row bordes">
                 <div class="col-12 mb-3">
                     <h6>ESTADO LIMPIEZA EXTERIOR</h6>
+                    <div id="REVISION_LIMPIEZA_EXTERIOR" class="custom-control custom-checkbox display-none" style="margin: 25px 0px 50px 0px;">
+                        <input type="checkbox" class="custom-control-input" id="NO_LIMPIEZA_EXTERIOR">
+                        <label class="custom-control-label" for="NO_LIMPIEZA_EXTERIOR">No realizar revisión</label>
+                    </div>
                 </div>
                 <div class="col-12">
                     <div class="mb-2">
