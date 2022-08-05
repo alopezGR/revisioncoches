@@ -1,7 +1,7 @@
 let radiobuttons = document.querySelectorAll('input[type=radio]');
 let empresa = document.getElementById('EMPRESA_ID').value;
 
-if (empresa == 10) {
+if (empresa == 21) {
     radiobuttons.forEach(function(elem) {
         elem.removeAttribute('required');
     })
@@ -17,7 +17,9 @@ radiobuttons.forEach(function(element) {
         if (limpieza.checked || conservacion.checked) {
             let idObservacionesElemento = nombre + "_OBS";
             let observacionesElemento = document.getElementById(idObservacionesElemento);
-            observacionesElemento.setAttribute("required", "true");
+           	if (empresa != 21) {
+				observacionesElemento.setAttribute("required", "true");
+			}
         } else {
             let idObservacionesElemento = nombre + "_OBS";
             let observacionesElemento = document.getElementById(idObservacionesElemento);

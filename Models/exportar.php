@@ -22,6 +22,7 @@ class Exportar
         Seguridad::generarHoja($spreadsheet, $fechaInicio, $fechaFin, $empresa);
         Limpieza::generarHoja($spreadsheet, $fechaInicio, $fechaFin, $empresa);
         Pegatinas::generarHoja($spreadsheet, $fechaInicio, $fechaFin, $empresa);
+        Repostaje::generarHoja($spreadsheet, $fechaInicio, $fechaFin, $empresa);
 
         $spreadsheet->removeSheetByIndex(0);
         $spreadsheet->setActiveSheetIndex(0);

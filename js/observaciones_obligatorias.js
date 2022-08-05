@@ -6,9 +6,9 @@ radiobuttons.forEach(function(element) {
             if (element.value == 0) {
                 let idObservacionesElemento = element.getAttribute('name') + "_OBS";
                 let observacionesElemento = document.getElementById(idObservacionesElemento);
-                if (empresa != 10) {
-                    observacionesElemento.setAttribute("required", "true");
-                }
+				if (empresa != 21) {
+					observacionesElemento.setAttribute("required", "true");
+				}
             } else {
                 let idObservacionesElemento = element.getAttribute('name') + "_OBS";
                 let observacionesElemento = document.getElementById(idObservacionesElemento);

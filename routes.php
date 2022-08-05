@@ -7,6 +7,11 @@ function call($controller, $action)
     require_once('Controllers/' . $controller . '_controller.php');
     //crea el controlador
     switch ($controller) {
+        case 'repostaje':
+            require_once('Models/repostaje.php');
+            require_once('Models/usuario.php');
+            $controller = new RepostajeController();
+            break;
         case 'accesibilidad':
             require_once('Models/accesibilidad.php');
             require_once('Models/usuario.php');
@@ -43,6 +48,7 @@ function call($controller, $action)
             require_once('Models/pegatinas.php');
             require_once('Models/limpieza.php');
             require_once('Models/seguridad.php');
+            require_once('Models/repostaje.php');
             $controller = new ExportarController();
             break;
         case 'menu':
@@ -62,6 +68,7 @@ $controllers = array(
     'error' =>  ['error'],
     'menu' =>  ['index'],
     'accesibilidad' => ['index', 'formulario', 'procesarFormulario'],
+    'repostaje' => ['index', 'formulario', 'procesarFormulario'],
     'documentacion' => ['index', 'formulario', 'procesarFormulario'],
     'limpieza' => ['index', 'formulario', 'procesarFormulario'],
     'pegatinas' => ['index', 'formulario', 'procesarFormulario'],
