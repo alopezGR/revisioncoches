@@ -49,20 +49,44 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                     </div>
                     <div class="mb-5">
                         <div class="form-group">
+                            <label for="">SURTIDOR GASÓLEO</label>
+                            <select name="SURTIDORGASOLEO" class="custom-select mb-3">
+                                <option value="1">Surtidor 1</option>
+                                <option value="2">Surtidor 2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <div class="form-group">
                             <label for="UREA">UREA (Litros)</label>
                             <input type="number" class="form-control" id="UREA" name="UREA" placeholder="">
                         </div>
                     </div>
                     <div class="mb-5">
                         <div class="form-group">
-                            <label for="KM">KILÓMETROS</label>
-                            <input type="text" class="form-control" id="KM" name="KM" placeholder="">
+                            <label for="">SURTIDOR URÉA</label>
+                            <select name="SURTIDORUREA" class="custom-select mb-3">
+                                <option value="1">Surtidor 1</option>
+                                <option value="2">Surtidor 2</option>
+                            </select>
                         </div>
                     </div>
                     <div class="mb-5">
                         <div class="form-group">
-                            <label for="CODIGOREPOSTADOR">CODIGO REPOSTADOR</label>
-                            <input type="text" class="form-control" id="CODIGOREPOSTADOR" name="CODIGOREPOSTADOR" placeholder="">
+                            <label for="NIVELACEITE">NIVEL ACEITE</label>
+                            <input type="text" class="form-control" id="NIVELACEITE" name="NIVELACEITE" placeholder="">
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <div class="form-group">
+                            <label for="NIVELREFRIGERANTE">NIVEL REFRIGERANTE</label>
+                            <input type="text" class="form-control" id="NIVELREFRIGERANTE" name="NIVELREFRIGERANTE" placeholder="">
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <div class="form-group">
+                            <label for="KM">KILÓMETROS</label>
+                            <input type="text" class="form-control" id="KM" name="KM" placeholder="">
                         </div>
                     </div>
                 </div>

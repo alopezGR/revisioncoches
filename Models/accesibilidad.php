@@ -74,6 +74,23 @@ class Accesibilidad extends Vehiculo
         }
     }
 
+    public static function obtenerUltimaRevision()
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT * FROM estado_accesibilidad order by fecha desc limit 1";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            return $st->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
     public static function generarHoja($spreadsheet, $fechaInicio, $fechaFin, $empresa)
     {
 

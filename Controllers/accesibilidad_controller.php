@@ -30,12 +30,14 @@ class AccesibilidadController
             $vehiculo = strtoupper($_POST['vehiculo']);
 
             $resultado = Accesibilidad::getInfoVehiculo($vehiculo);
+            $ultimaRevision = Accesibilidad::obtenerUltimaRevision();
 
             if ($resultado == false || $resultado['id'] == '1478') {
                 $_SESSION['vehiculoIncorrecto'] = 'true';
                 require_once 'Views/Accesibilidad/index.php';
             } else {
                 $rampas = Accesibilidad::getRampasVehiculo($vehiculo);
+                $fechaActual = date('y-m-d');
                 require_once 'Views/Accesibilidad/formulario.php';
             }
         } else {

@@ -14,8 +14,9 @@ class Repostaje extends Vehiculo
         $hora = date_format($datetime, 'H:i:s');
 
         $queryFlota = " INSERT INTO `repostajes` (`id`, `idempresa`, `idvehiculo`, codigo_vehiculo, `idusuario`, `fecha`, `hora`, `gasoleo`, 
-        `urea`, `km`, `codigorepostador`, `traspasado`, usuario) 
-        VALUES (NULL, :IDEMPRESA, :IDVEHICULO, :CODIGO_VEHICULO, :IDUSUARIO, :FECHA, :HORA, :GASOLEO, :UREA, :KM, :CODIGOREPOSTADOR, '0', :USUARIO)";
+        `urea`, `km`, SURTIDORGASOLEO, `SURTIDORUREA`, NIVELACEITE, NIVELREFRIGERANTE, `traspasado`, usuario) 
+        VALUES (NULL, :IDEMPRESA, :IDVEHICULO, :CODIGO_VEHICULO, :IDUSUARIO, :FECHA, :HORA, :GASOLEO, :UREA, :KM, :SURTIDORGASOLEO, :SURTIDORUREA,
+         :NIVELACEITE, :NIVELREFRIGERANTE, '0', :USUARIO)";
 
         $stFlota = $conn->prepare($queryFlota);
 
@@ -27,8 +28,12 @@ class Repostaje extends Vehiculo
         $stFlota->bindValue(":HORA", $hora);
         $stFlota->bindValue(":GASOLEO", $datos['GASOLEO']);
         $stFlota->bindValue(":UREA", $datos['UREA']);
+        $stFlota->bindValue(":SURTIDORGASOLEO", $datos['SURTIDORGASOLEO']);
+        $stFlota->bindValue(":SURTIDORUREA", $datos['SURTIDORUREA']);
+        $stFlota->bindValue(":NIVELACEITE", $datos['NIVELACEITE']);
+        $stFlota->bindValue(":NIVELREFRIGERANTE", $datos['NIVELREFRIGERANTE']);
         $stFlota->bindValue(":KM", $datos['KM']);
-        $stFlota->bindValue(":CODIGOREPOSTADOR", $datos['CODIGOREPOSTADOR']);
+        $stFlota->bindValue(":SURTIDORUREA", $datos['SURTIDORUREA']);
         $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
 
         $stFlota->execute();
@@ -119,6 +124,12 @@ class Repostaje extends Vehiculo
             $sheet->setCellValue("D$fila", "GASOLEO");
             $sheet->setCellValue("E$fila", $revision['gasoleo']);
 
+            $fila++;
+            $sheet->setCellValue("A$fila", $revision['fecha'] . ' ' . $revision['hora']);
+            $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
+            $sheet->setCellValue("C$fila", $revision['usuario']);
+            $sheet->setCellValue("D$fila", "SURTIDOR GASOLEO");
+            $sheet->setCellValue("E$fila", $revision['surtidorgasoleo']);
 
             $fila++;
             $sheet->setCellValue("A$fila", $revision['fecha'] . ' ' . $revision['hora']);
@@ -131,15 +142,30 @@ class Repostaje extends Vehiculo
             $sheet->setCellValue("A$fila", $revision['fecha'] . ' ' . $revision['hora']);
             $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
             $sheet->setCellValue("C$fila", $revision['usuario']);
-            $sheet->setCellValue("D$fila", "KM");
-            $sheet->setCellValue("E$fila", $revision['km']);
+            $sheet->setCellValue("D$fila", "SURTIDOR UREA");
+            $sheet->setCellValue("E$fila", $revision['surtidorurea']);
 
             $fila++;
             $sheet->setCellValue("A$fila", $revision['fecha'] . ' ' . $revision['hora']);
             $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
             $sheet->setCellValue("C$fila", $revision['usuario']);
-            $sheet->setCellValue("D$fila", "CODIGO REPOSTADOR");
-            $sheet->setCellValue("E$fila", $revision['codigorepostador']);
+            $sheet->setCellValue("D$fila", "NIVEL ACEITE");
+            $sheet->setCellValue("E$fila", $revision['nivelaceite']);
+
+            $fila++;
+            $sheet->setCellValue("A$fila", $revision['fecha'] . ' ' . $revision['hora']);
+            $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
+            $sheet->setCellValue("C$fila", $revision['usuario']);
+            $sheet->setCellValue("D$fila", "NIVEL REFRIGERANTE");
+            $sheet->setCellValue("E$fila", $revision['nivelrefrigerante']);
+
+            $fila++;
+            $sheet->setCellValue("A$fila", $revision['fecha'] . ' ' . $revision['hora']);
+            $sheet->setCellValue("B$fila", $revision['codigo_vehiculo']);
+            $sheet->setCellValue("C$fila", $revision['usuario']);
+            $sheet->setCellValue("D$fila", "KM");
+            $sheet->setCellValue("E$fila", $revision['km']);
+
 
 
             $fila += 2;
