@@ -35,8 +35,18 @@ class DocumentacionController
                 $_SESSION['vehiculoIncorrecto'] = 'true';
                 require_once 'Views/Documentacion/index.php';
             } else {
+                // $rampas = Accesibilidad::getRampasVehiculo($vehiculo);
+                $revision = Documentacion::obtenerUltimaRevision();
+                $fechaActual = date('Y-m-d');
+                $fechaUltimaRevision = $revision['FECHA'];
+                $revisionCorrecta = Documentacion::comprobarRevision($revision['ID']);
+
+                if($revision && $fechaActual == $fechaUltimaRevision){
+                    require_once 'Views/Documentacion/revision.php';
+                } else {
+                    require_once 'Views/Documentacion/formulario.php';
+                }
                 $rampas = Documentacion::getRampasVehiculo($vehiculo);
-                require_once 'Views/Documentacion/formulario.php';
             }
         } else {
             require_once 'Views/Usuario/login.php';
@@ -52,6 +62,29 @@ class DocumentacionController
             $datos['USUARIO'] = $_SESSION['user'];
 
             $resultadoFlota = Documentacion::insertDatos($datos);
+
+            if ($resultadoFlota) {
+                Usuario::registroLogin($_SESSION['user'], 'Realizada revision de documentacion al coche ' . $datos['IDVEHICULO']);
+                $_SESSION['exito'] = "true";
+            } else {
+                $_SESSION['error'] = "true";
+            }
+
+            header("Location: index.php");
+        } else {
+            require_once 'Views/Usuario/login.php';
+        }
+    }
+
+    public function actualizarFormulario()
+    {
+        if (isset($_SESSION['logged'])) {
+
+            $datos = $_POST;
+
+            $datos['USUARIO'] = $_SESSION['user'];
+
+            $resultadoFlota = Documentacion::actualizarDatos($datos, $datos['IDREVISION']);
 
             if ($resultadoFlota) {
                 Usuario::registroLogin($_SESSION['user'], 'Realizada revision de documentacion al coche ' . $datos['IDVEHICULO']);

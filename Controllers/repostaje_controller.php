@@ -35,8 +35,16 @@ class RepostajeController
                 $_SESSION['vehiculoIncorrecto'] = 'true';
                 require_once 'Views/Repostaje/index.php';
             } else {
-                $rampas = Repostaje::getRampasVehiculo($vehiculo);
-                require_once 'Views/Repostaje/formulario.php';
+                // $rampas = Accesibilidad::getRampasVehiculo($vehiculo);
+                $revision = Repostaje::obtenerUltimaRevision();
+                $fechaActual = date('Y-m-d');
+                $fechaUltimaRevision = $revision['fecha'];
+
+                if ($revision && $fechaActual == $fechaUltimaRevision) {
+                    require_once 'Views/Repostaje/revision.php';
+                } else {
+                    require_once 'Views/Repostaje/formulario.php';
+                }
             }
         } else {
             require_once 'Views/Usuario/login.php';
@@ -55,6 +63,29 @@ class RepostajeController
 
             if ($resultadoFlota) {
                 Usuario::registroLogin($_SESSION['user'], 'Realizada introducción de datos de repostaje al coche ' . $datos['IDVEHICULO']);
+                $_SESSION['exito'] = "true";
+            } else {
+                $_SESSION['error'] = "true";
+            }
+
+            header("Location: index.php");
+        } else {
+            require_once 'Views/Usuario/login.php';
+        }
+    }
+
+    public function actualizarFormulario()
+    {
+        if (isset($_SESSION['logged'])) {
+
+            $datos = $_POST;
+
+            $datos['USUARIO'] = $_SESSION['user'];
+
+            $resultadoFlota = Repostaje::actualizarDatos($datos, $datos['IDREVISION']);
+
+            if ($resultadoFlota) {
+                Usuario::registroLogin($_SESSION['user'], 'Realizada actualización de datos de repostaje al coche ' . $datos['IDVEHICULO']);
                 $_SESSION['exito'] = "true";
             } else {
                 $_SESSION['error'] = "true";

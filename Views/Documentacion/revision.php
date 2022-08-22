@@ -2,8 +2,9 @@
 $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa Ruiz');
 ?>
 
-<form method="post" action="index.php?controller=documentacion&action=procesarFormulario">
+<form method="post" action="index.php?controller=documentacion&action=actualizarFormulario">
     <input type="hidden" value="<?php echo $resultado['id'] ?>" name="IDVEHICULO">
+    <input type="hidden" value="<?php echo $revision['ID'] ?>" name="IDREVISION">
     <div class="row align-items-center bordes">
         <div class="col-12">
             <h5>VEHÍCULO</h5>
@@ -11,7 +12,7 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
         <div class="col-6" style=" height: 200px">
             <div class="form-group">
                 <label for="NUMERO">NÚMERO</label>
-                <input type="text" class="form-control" id="NUMERO" name="CODIGO_VEHICULO" readonly value="<?php echo $vehiculo; ?>">
+                <input type="text" class="form-control <?php echo $revisionCorrecta ? 'revision-correcta' : 'revision-incorrecta'?>" id="NUMERO" name="CODIGO_VEHICULO" readonly value="<?php echo $vehiculo; ?>">
             </div>
             <div class="form-group">
                 <label for="EMPRESA">Empresa</label>
@@ -33,7 +34,7 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
 
     <div class="row align-items-center mt-5 bordes">
         <div class="col-12">
-            <h5>ESTADO DOCUMENTACIÓN</h5>
+            <h5>ESTADO DOCUMENTACIÓN (Revisado)</h5>
         </div>
         <div class="col-11 offset-1 mt-2">
             <div class="row bordes">
@@ -44,76 +45,76 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                     <div class="mb-2">
                         <span class="mr-2">LIBRO RECLAMACIONES</span>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="LIBRO_RECLAMACIONES" id="LIBRO_RECLAMACIONES" value="1" required>
+                            <input class="form-check-input" type="radio" name="LIBRO_RECLAMACIONES" id="LIBRO_RECLAMACIONES" value="1" required <?php if($revision['LIBRO_RECLAMACIONES'] == '1') echo 'checked'?>>
                             <label class="form-check-label" for="LIBRO_RECLAMACIONES">Ok</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="LIBRO_RECLAMACIONES" id="LIBRO_RECLAMACIONESNo" value="0" required>
+                            <input class="form-check-input" type="radio" name="LIBRO_RECLAMACIONES" id="LIBRO_RECLAMACIONESNo" value="0" required <?php if($revision['LIBRO_RECLAMACIONES'] == '0') echo 'checked'?>>
                             <label class="form-check-label" for="LIBRO_RECLAMACIONESNo">No ok</label>
                         </div>
                         <div class="form-group">
                             <label for="LIBRO_RECLAMACIONES_OBS">OBSERVACIONES</label>
-                            <textarea class="form-control" id="LIBRO_RECLAMACIONES_OBS" rows="2" name="LIBRO_RECLAMACIONES_OBS"></textarea>
+                            <textarea class="form-control" id="LIBRO_RECLAMACIONES_OBS" rows="2" name="LIBRO_RECLAMACIONES_OBS"><?php echo $revision['LIBRO_RECLAMACIONES_OBS']?></textarea>
                         </div>
                     </div>
                     <div class="mb-2">
                         <span class="mr-2">SEGURO DEL VEHÍCULO</span>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="SEGURO_VEHICULO" id="SEGURO_VEHICULO" value="1" required>
+                            <input class="form-check-input" type="radio" name="SEGURO_VEHICULO" id="SEGURO_VEHICULO" value="1" required <?php if($revision['SEGURO_VEHICULO'] == '1') echo 'checked'?>>
                             <label class="form-check-label" for="SEGURO_VEHICULO">Ok</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="SEGURO_VEHICULO" id="SEGURO_VEHICULONo" value="0" required>
+                            <input class="form-check-input" type="radio" name="SEGURO_VEHICULO" id="SEGURO_VEHICULONo" value="0" required <?php if($revision['SEGURO_VEHICULO'] == '0') echo 'checked'?>>
                             <label class="form-check-label" for="SEGURO_VEHICULONo">No ok</label>
                         </div>
                         <div class="form-group">
                             <label for="SEGURO_VEHICULO_OBS">OBSERVACIONES</label>
-                            <textarea class="form-control" id="SEGURO_VEHICULO_OBS" rows="2" name="SEGURO_VEHICULO_OBS"></textarea>
+                            <textarea class="form-control" id="SEGURO_VEHICULO_OBS" rows="2" name="SEGURO_VEHICULO_OBS"><?php echo $revision['SEGURO_VEHICULO_OBS']?></textarea>
                         </div>
                     </div>
                     <div class="mb-2">
                         <span class="mr-2">ITV</span>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="ITV" id="ITV" value="1" required>
+                            <input class="form-check-input" type="radio" name="ITV" id="ITV" value="1" required <?php if($revision['ITV'] == '1') echo 'checked'?>>
                             <label class="form-check-label" for="ITV">Ok</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="ITV" id="ITVNo" value="0" required>
+                            <input class="form-check-input" type="radio" name="ITV" id="ITVNo" value="0" required <?php if($revision['ITV'] == '0') echo 'checked'?>>
                             <label class="form-check-label" for="ITVNo">No ok</label>
                         </div>
                         <div class="form-group">
                             <label for="ITV_OBS">OBSERVACIONES</label>
-                            <textarea class="form-control" id="ITV_OBS" rows="2" name="ITV_OBS"></textarea>
+                            <textarea class="form-control" id="ITV_OBS" rows="2" name="ITV_OBS"><?php echo $revision['ITV_OBS']?></textarea>
                         </div>
                     </div>
                     <div class="mb-2">
                         <span class="mr-2">FICHA TÉCNICA</span>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="FICHA_TECNICA" id="FICHA_TECNICA" value="1" required>
+                            <input class="form-check-input" type="radio" name="FICHA_TECNICA" id="FICHA_TECNICA" value="1" required <?php if($revision['FICHA_TECNICA'] == '1') echo 'checked'?>>
                             <label class="form-check-label" for="FICHA_TECNICA">Ok</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="FICHA_TECNICA" id="FICHA_TECNICANo" value="0" required>
+                            <input class="form-check-input" type="radio" name="FICHA_TECNICA" id="FICHA_TECNICANo" value="0" required <?php if($revision['FICHA_TECNICA'] == '0') echo 'checked'?>>
                             <label class="form-check-label" for="FICHA_TECNICANo">No ok</label>
                         </div>
                         <div class="form-group">
                             <label for="FICHA_TECNICA_OBS">OBSERVACIONES</label>
-                            <textarea class="form-control" id="FICHA_TECNICA_OBS" rows="2" name="FICHA_TECNICA_OBS"></textarea>
+                            <textarea class="form-control" id="FICHA_TECNICA_OBS" rows="2" name="FICHA_TECNICA_OBS"><?php echo $revision['FICHA_TECNICA_OBS']?></textarea>
                         </div>
                     </div>
                     <div class="mb-2">
                         <span class="mr-2">TACOGRAFO</span>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="TACOGRAFO" id="TACOGRAFO" value="1" required>
+                            <input class="form-check-input" type="radio" name="TACOGRAFO" id="TACOGRAFO" value="1" required <?php if($revision['TACOGRAFO'] == '1') echo 'checked'?>>
                             <label class="form-check-label" for="TACOGRAFO">Ok</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="TACOGRAFO" id="TACOGRAFONo" value="0" required>
+                            <input class="form-check-input" type="radio" name="TACOGRAFO" id="TACOGRAFONo" value="0" required <?php if($revision['TACOGRAFO'] == '0') echo 'checked'?>>
                             <label class="form-check-label" for="TACOGRAFONo">No ok</label>
                         </div>
                         <div class="form-group">
                             <label for="TACOGRAFO_OBS">OBSERVACIONES</label>
-                            <textarea class="form-control" id="TACOGRAFO_OBS" rows="2" name="TACOGRAFO_OBS"></textarea>
+                            <textarea class="form-control" id="TACOGRAFO_OBS" rows="2" name="TACOGRAFO_OBS"><?php echo $revision['TACOGRAFO_OBS']?></textarea>
                         </div>
                     </div>
                 </div>
@@ -124,7 +125,7 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
     <div class="row align-items-center mt-5">
         <div class="col-12 d-flex justify-content-center">
             <div class="custom-control custom-checkbox">
-                <button type="submit" class="btn btn-success">GRABAR</button>
+                <button type="submit" class="btn btn-success">ACTUALIZAR</button>
             </div>
         </div>
     </div>

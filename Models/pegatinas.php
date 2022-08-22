@@ -35,6 +35,37 @@ class Pegatinas extends Vehiculo
     }
 
     /**
+     * Método para actulizar las revisiones realizadas a la pegatinas del vehículo revisado.
+     * 
+     * @access public
+     * 
+     * @param array $datos Array con los datos de las revisiones realizadas
+     * 
+     * @return bool resultado de la operación 
+     */
+    public static function actualizarDatos($datos)
+    {
+
+        $stFlota = Pegatinas::actualizarPegatinasExteriorFrontal($datos);
+        $stFlota &= Pegatinas::actualizarPegatinasExteriorLateralDerecho($datos);
+        $stFlota &= Pegatinas::actualizarPegatinasExteriorLateralIzquierdo($datos);
+        $stFlota &= Pegatinas::actualizarPegatinasLunaExteriorTrasera($datos);
+        $stFlota &= Pegatinas::actualizarPegatinasExteriorTrasero($datos);
+
+        $stFlota &= Pegatinas::actualizarPegatinasInteriorCentral($datos);
+        $stFlota &= Pegatinas::actualizarPegatinasInteriorDelantero($datos);
+        $stFlota &= Pegatinas::actualizarPegatinasLunaInterior($datos);
+        $stFlota &= Pegatinas::actualizarPegatinasInteriorMampara($datos);
+        $stFlota &= Pegatinas::actualizarPegatinasInteriorTrasera($datos);
+
+        if ($stFlota) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Método para insertar las revision de las pegatinas del exterior frontal del vehículo.
      * 
      * @access private
@@ -47,8 +78,8 @@ class Pegatinas extends Vehiculo
     {
         $conn = Db::getConector();
 
-        $queryFlota = " INSERT INTO `peg_ext_frontal` (`ID`, ID_EMPRESA, ID_VEHICULO, CODIGO_VEHICULO, ID_USUARIO, FECHA, HORA, `CRTM_LOGO`, `LOGO_EMPRESA`, `MINUSVALIDO`, `NUMERO_VEHICULO`, `CRTM_LOGO_OBS`, 
-        `LOGO_EMPRESA_OBS`, `MINUSVALIDO_OBS`, `NUMERO_VEHICULO_OBS`, TRASPASADO, USUARIO) 
+        $queryFlota = " INSERT INTO `peg_ext_frontal` (`ID`, ID_EMPRESA, ID_VEHICULO, CODIGO_VEHICULO, ID_USUARIO, FECHA, HORA, `CRTM_LOGO`, `LOGO_EMPRESA`, `MINUSVALIDO`, 
+        `NUMERO_VEHICULO`, `CRTM_LOGO_OBS`, `LOGO_EMPRESA_OBS`, `MINUSVALIDO_OBS`, `NUMERO_VEHICULO_OBS`, TRASPASADO, USUARIO) 
         VALUES (NULL, :ID_EMPRESA, :ID_VEHICULO, :CODIGO_VEHICULO, :ID_USUARIO, :FECHA, :HORA, :CRTM_LOGO, :LOGO_EMPRESA, :MINUSVALIDO, :NUMERO_VEHICULO, :CRTM_LOGO_OBS, 
         :LOGO_EMPRESA_OBS, :MINUSVALIDO_OBS, :NUMERO_VEHICULO_OBS, '0', :USUARIO)";
 
@@ -60,6 +91,48 @@ class Pegatinas extends Vehiculo
         $stFlota->bindParam(":ID_VEHICULO", $datos['IDVEHICULO']);
         $stFlota->bindParam(":CODIGO_VEHICULO", $datos['CODIGO_VEHICULO']);
         $stFlota->bindValue(":ID_USUARIO", isset($datos['IDUSUARIO']) ? $datos['IDUSUARIO'] : 0);
+        $stFlota->bindParam(":FECHA", $fecha);
+        $stFlota->bindValue(":HORA", $hora);
+        $stFlota->bindValue(":CRTM_LOGO", isset($datos['CRTM_LOGO_EF']) ? $datos['CRTM_LOGO_EF'] : NULL);
+        $stFlota->bindValue(":LOGO_EMPRESA", isset($datos['LOGO_EMPRESA_EF']) ? $datos['LOGO_EMPRESA_EF'] : NULL);
+        $stFlota->bindValue(":MINUSVALIDO", isset($datos['MINUSVALIDO_EF']) ? $datos['MINUSVALIDO_EF'] : NULL);
+        $stFlota->bindValue(":NUMERO_VEHICULO", isset($datos['NUMERO_VEHICULO_EF']) ? $datos['NUMERO_VEHICULO_EF'] : NULL);
+        $stFlota->bindValue(":CRTM_LOGO_OBS", (!empty($datos['CRTM_LOGO_EF_OBS'])) ? $datos['CRTM_LOGO_EF_OBS'] : NULL);
+        $stFlota->bindValue(":LOGO_EMPRESA_OBS", (!empty($datos['LOGO_EMPRESA_EF_OBS'])) ? $datos['LOGO_EMPRESA_EF_OBS'] : NULL);
+        $stFlota->bindValue(":MINUSVALIDO_OBS", (!empty($datos['MINUSVALIDO_EF_OBS'])) ? $datos['MINUSVALIDO_EF_OBS'] : NULL);
+        $stFlota->bindValue(":NUMERO_VEHICULO_OBS", (!empty($datos['NUMERO_VEHICULO_EF_OBS'])) ? $datos['NUMERO_VEHICULO_EF_OBS'] : NULL);
+        $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
+
+        $stFlota->execute();
+
+        if ($stFlota) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /**
+     * Método para insertar las revision de las pegatinas del exterior frontal del vehículo.
+     * 
+     * @access private
+     * 
+     * @param array $datos Array con los datos de las revisiones realizadas
+     * 
+     * @return bool resultado de la operación 
+     */
+    private static function actualizarPegatinasExteriorFrontal($datos)
+    {
+        $conn = Db::getConector();
+
+        $queryFlota = " UPDATE `peg_ext_frontal` SET FECHA = :FECHA, HORA = :HORA, `CRTM_LOGO` = :CRTM_LOGO, `LOGO_EMPRESA` = :LOGO_EMPRESA, `MINUSVALIDO` = :MINUSVALIDO, 
+        `NUMERO_VEHICULO` = :NUMERO_VEHICULO, `CRTM_LOGO_OBS` = :CRTM_LOGO_OBS, `LOGO_EMPRESA_OBS` = :LOGO_EMPRESA_OBS, `MINUSVALIDO_OBS` = :MINUSVALIDO_OBS, 
+        `NUMERO_VEHICULO_OBS` = :NUMERO_VEHICULO_OBS, TRASPASADO = 0, USUARIO = :USUARIO WHERE ID = {$datos['IDEF']}";
+
+        $stFlota = $conn->prepare($queryFlota);
+
+        $fecha = date('Y-m-d');
+        $hora = date('H:i:s');
+
         $stFlota->bindParam(":FECHA", $fecha);
         $stFlota->bindValue(":HORA", $hora);
         $stFlota->bindValue(":CRTM_LOGO", isset($datos['CRTM_LOGO_EF']) ? $datos['CRTM_LOGO_EF'] : NULL);
@@ -112,6 +185,72 @@ class Pegatinas extends Vehiculo
         $stFlota->bindParam(":ID_VEHICULO", $datos['IDVEHICULO']);
         $stFlota->bindParam(":CODIGO_VEHICULO", $datos['CODIGO_VEHICULO']);
         $stFlota->bindValue(":ID_USUARIO", isset($datos['IDUSUARIO']) ? $datos['IDUSUARIO'] : 0);
+        $stFlota->bindParam(":FECHA", $fecha);
+        $stFlota->bindValue(":HORA", $hora);
+        $stFlota->bindValue(":LOGO_EMPRESA", isset($datos['LOGO_EMPRESA_ELD']) ? $datos['LOGO_EMPRESA_ELD'] : NULL);
+        $stFlota->bindValue(":WEB_CRTM", isset($datos['WEB_CRTM_ELD']) ? $datos['WEB_CRTM_ELD'] : NULL);
+        $stFlota->bindValue(":PMR", isset($datos['PMR_ELD']) ? $datos['PMR_ELD'] : NULL);
+        $stFlota->bindValue(":STOP_COVID", isset($datos['STOP_COVID_ELD']) ? $datos['STOP_COVID_ELD'] : NULL);
+        $stFlota->bindValue(":SALIDA", isset($datos['SALIDA_ELD']) ? $datos['SALIDA_ELD'] : NULL);
+        $stFlota->bindValue(":ENTRADA", isset($datos['ENTRADA_ELD']) ? $datos['ENTRADA_ELD'] : NULL);
+        $stFlota->bindValue(":MINUSVALIDO", isset($datos['MINUSVALIDO_ELD']) ? $datos['MINUSVALIDO_ELD'] : NULL);
+        $stFlota->bindValue(":CAMARA_COMERCIO", isset($datos['CAMARA_COMERCIO_ELD']) ? $datos['CAMARA_COMERCIO_ELD'] : NULL);
+        $stFlota->bindValue(":SALIDA_EMERGENCIA", isset($datos['SALIDA_EMERGENCIA_ELD']) ? $datos['SALIDA_EMERGENCIA_ELD'] : NULL);
+        $stFlota->bindValue(":GRUPO_RUIZ", isset($datos['GRUPO_RUIZ_ELD']) ? $datos['GRUPO_RUIZ_ELD'] : NULL);
+        $stFlota->bindValue(":NUMERO_VEHICULO", isset($datos['NUMERO_VEHICULO_ELD']) ? $datos['NUMERO_VEHICULO_ELD'] : NULL);
+        $stFlota->bindValue(":APERTURA_EMERGENCIA", isset($datos['APERTURA_EMERGENCIA_ELD']) ? $datos['APERTURA_EMERGENCIA_ELD'] : NULL);
+        $stFlota->bindValue(":SOLICITUD_RAMPA", isset($datos['SOLICITUD_RAMPA_ELD']) ? $datos['SOLICITUD_RAMPA_ELD'] : NULL);
+        $stFlota->bindValue(":LOGO_EMPRESA_OBS", (!empty($datos['LOGO_EMPRESA_ELD_OBS'])) ? $datos['LOGO_EMPRESA_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":WEB_CRTM_OBS", (!empty($datos['WEB_CRTM_ELD_OBS'])) ? $datos['WEB_CRTM_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":PMR_OBS", (!empty($datos['PMR_ELD_OBS'])) ? $datos['PMR_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":STOP_COVID_OBS", (!empty($datos['STOP_COVID_ELD_OBS'])) ? $datos['STOP_COVID_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":SALIDA_OBS", (!empty($datos['SALIDA_ELD_OBS'])) ? $datos['SALIDA_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":ENTRADA_OBS", (!empty($datos['ENTRADA_ELD_OBS'])) ? $datos['ENTRADA_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":MINUSVALIDO_OBS", (!empty($datos['MINUSVALIDO_ELD_OBS'])) ? $datos['MINUSVALIDO_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":CAMARA_COMERCIO_OBS", (!empty($datos['CAMARA_COMERCIO_ELD_OBS'])) ? $datos['CAMARA_COMERCIO_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":SALIDA_EMERGENCIA_OBS", (!empty($datos['SALIDA_EMERGENCIA_ELD_OBS'])) ? $datos['SALIDA_EMERGENCIA_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":GRUPO_RUIZ_OBS", (!empty($datos['GRUPO_RUIZ_ELD_OBS'])) ? $datos['GRUPO_RUIZ_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":NUMERO_VEHICULO_OBS", (!empty($datos['NUMERO_VEHICULO_ELD_OBS'])) ? $datos['NUMERO_VEHICULO_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":APERTURA_EMERGENCIA_OBS", (!empty($datos['APERTURA_EMERGENCIA_ELD_OBS'])) ? $datos['APERTURA_EMERGENCIA_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":SOLICITUD_RAMPA_OBS", (!empty($datos['SOLICITUD_RAMPA_ELD_OBS'])) ? $datos['SOLICITUD_RAMPA_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
+
+        $stFlota->execute();
+
+        if ($stFlota) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /**
+     * Método para insertar las revision de las pegatinas del exterior lateral derecho del vehículo.
+     * 
+     * @access private
+     * 
+     * @param array $datos Array con los datos de las revisiones realizadas
+     * 
+     * @return bool resultado de la operación 
+     */
+    private static function actualizarPegatinasExteriorLateralDerecho($datos)
+    {
+        $conn = Db::getConector();
+
+
+        $queryFlota = "UPDATE `peg_ext_lateral_derecho` SET FECHA = :FECHA, HORA = :HORA, `LOGO_EMPRESA` = :LOGO_EMPRESA, `WEB_CRTM` = :WEB_CRTM, `PMR` = :PMR, 
+        `STOP_COVID` = :STOP_COVID, `SALIDA` = :SALIDA, `ENTRADA` = :ENTRADA, `MINUSVALIDO` = :MINUSVALIDO, `CAMARA_COMERCIO` = :CAMARA_COMERCIO, 
+        `SALIDA_EMERGENCIA` = :SALIDA_EMERGENCIA, `GRUPO_RUIZ` = :GRUPO_RUIZ, `NUMERO_VEHICULO` = :NUMERO_VEHICULO, `APERTURA_EMERGENCIA` = :APERTURA_EMERGENCIA, 
+        `SOLICITUD_RAMPA` = :SOLICITUD_RAMPA, `LOGO_EMPRESA_OBS` = :LOGO_EMPRESA_OBS, `WEB_CRTM_OBS` = :WEB_CRTM_OBS, `PMR_OBS` = :PMR_OBS, `STOP_COVID_OBS` = :STOP_COVID_OBS, 
+        `SALIDA_OBS` = :SALIDA_OBS, `ENTRADA_OBS` = :ENTRADA_OBS, `MINUSVALIDO_OBS` = :MINUSVALIDO_OBS, `CAMARA_COMERCIO_OBS` = :CAMARA_COMERCIO_OBS, 
+        `SALIDA_EMERGENCIA_OBS` = :SALIDA_EMERGENCIA_OBS, `GRUPO_RUIZ_OBS` = :GRUPO_RUIZ_OBS, `NUMERO_VEHICULO_OBS` = :NUMERO_VEHICULO_OBS, 
+        `APERTURA_EMERGENCIA_OBS` = :APERTURA_EMERGENCIA_OBS, `SOLICITUD_RAMPA_OBS` = :SOLICITUD_RAMPA_OBS, TRASPASADO = 0, USUARIO = :USUARIO WHERE ID = {$datos['IDELD']}";
+
+
+        $stFlota = $conn->prepare($queryFlota);
+
+        $fecha = date('Y-m-d');
+        $hora = date('H:i:s');
+
         $stFlota->bindParam(":FECHA", $fecha);
         $stFlota->bindValue(":HORA", $hora);
         $stFlota->bindValue(":LOGO_EMPRESA", isset($datos['LOGO_EMPRESA_ELD']) ? $datos['LOGO_EMPRESA_ELD'] : NULL);
@@ -207,6 +346,57 @@ class Pegatinas extends Vehiculo
     }
 
     /**
+     * Método para insertar las revision de las pegatinas del lateral exterior izquierdo del vehículo.
+     * 
+     * @access private
+     * 
+     * @param array $datos Array con los datos de las revisiones realizadas
+     * 
+     * @return bool resultado de la operación 
+     */
+    private static function actualizarPegatinasExteriorLateralIzquierdo($datos)
+    {
+        $conn = Db::getConector();
+
+        $queryFlota = "UPDATE `peg_ext_lateral_izq` SET FECHA = :FECHA, HORA = :HORA, `CRTM_LOGO` = :CRTM_LOGO, `LOGO_EMPRESA` = :LOGO_EMPRESA, `WEB_CRTM` = :WEB_CRTM, 
+        `CAMARA_COMERCIO` = :CAMARA_COMERCIO, `SALIDA_EMERGENCIA` = :SALIDA_EMERGENCIA, `GRUPO_RUIZ` = :GRUPO_RUIZ, `NUMERO_VEHICULO` = :NUMERO_VEHICULO, 
+        `CRTM_LOGO_OBS` = :CRTM_LOGO_OBS, `LOGO_EMPRESA_OBS` = :LOGO_EMPRESA_OBS, `WEB_CRTM_OBS` = :WEB_CRTM_OBS, `CAMARA_COMERCIO_OBS` = :CAMARA_COMERCIO_OBS, 
+        `SALIDA_EMERGENCIA_OBS` = :SALIDA_EMERGENCIA_OBS, `GRUPO_RUIZ_OBS` = :GRUPO_RUIZ_OBS, `NUMERO_VEHICULO_OBS` = :NUMERO_VEHICULO_OBS, TRASPASADO = 0, USUARIO = :USUARIO
+        WHERE id = {$datos['IDELI']}";
+
+        $stFlota = $conn->prepare($queryFlota);
+
+        $fecha = date('Y-m-d');
+        $hora = date('H:i:s');
+
+        $stFlota->bindParam(":FECHA", $fecha);
+        $stFlota->bindValue(":HORA", $hora);
+        $stFlota->bindValue(":CRTM_LOGO", isset($datos['CRTM_LOGO_ELI']) ? $datos['CRTM_LOGO_ELI'] : NULL);
+        $stFlota->bindValue(":LOGO_EMPRESA", isset($datos['LOGO_EMPRESA_ELI']) ? $datos['LOGO_EMPRESA_ELI'] : NULL);
+        $stFlota->bindValue(":WEB_CRTM", isset($datos['WEB_CRTM_ELI']) ? $datos['WEB_CRTM_ELI'] : NULL);
+        $stFlota->bindValue(":CAMARA_COMERCIO", isset($datos['CAMARA_COMERCIO_ELI']) ? $datos['CAMARA_COMERCIO_ELI'] : NULL);
+        $stFlota->bindValue(":SALIDA_EMERGENCIA", isset($datos['SALIDA_EMERGENCIA_ELI']) ? $datos['SALIDA_EMERGENCIA_ELI'] : NULL);
+        $stFlota->bindValue(":GRUPO_RUIZ", isset($datos['GRUPO_RUIZ_ELI']) ? $datos['GRUPO_RUIZ_ELI'] : NULL);
+        $stFlota->bindValue(":NUMERO_VEHICULO", isset($datos['NUMERO_VEHICULO_ELI']) ? $datos['NUMERO_VEHICULO_ELI'] : NULL);
+        $stFlota->bindValue(":CRTM_LOGO_OBS", (!empty($datos['CRTM_LOGO_ELI_OBS'])) ? $datos['CRTM_LOGO_ELI_OBS'] : NULL);
+        $stFlota->bindValue(":LOGO_EMPRESA_OBS", (!empty($datos['LOGO_EMPRESA_ELI_OBS'])) ? $datos['LOGO_EMPRESA_ELI_OBS'] : NULL);
+        $stFlota->bindValue(":WEB_CRTM_OBS", (!empty($datos['WEB_CRTM_ELI_OBS'])) ? $datos['WEB_CRTM_ELI_OBS'] : NULL);
+        $stFlota->bindValue(":CAMARA_COMERCIO_OBS", (!empty($datos['CAMARA_COMERCIO_ELI_OBS'])) ? $datos['CAMARA_COMERCIO_ELI_OBS'] : NULL);
+        $stFlota->bindValue(":SALIDA_EMERGENCIA_OBS", (!empty($datos['SALIDA_EMERGENCIA_ELI_OBS'])) ? $datos['SALIDA_EMERGENCIA_ELI_OBS'] : NULL);
+        $stFlota->bindValue(":GRUPO_RUIZ_OBS", (!empty($datos['GRUPO_RUIZ_ELI_OBS'])) ? $datos['GRUPO_RUIZ_ELI_OBS'] : NULL);
+        $stFlota->bindValue(":NUMERO_VEHICULO_OBS", (!empty($datos['NUMERO_VEHICULO_ELI_OBS'])) ? $datos['NUMERO_VEHICULO_ELI_OBS'] : NULL);
+        $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
+
+        $stFlota->execute();
+
+        if ($stFlota) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Método para insertar las revision de las pegatinas de la luna trasera del vehículo.
      * 
      * @access private
@@ -231,6 +421,44 @@ class Pegatinas extends Vehiculo
         $stFlota->bindParam(":ID_VEHICULO", $datos['IDVEHICULO']);
         $stFlota->bindParam(":CODIGO_VEHICULO", $datos['CODIGO_VEHICULO']);
         $stFlota->bindValue(":ID_USUARIO", isset($datos['IDUSUARIO']) ? $datos['IDUSUARIO'] : 0);
+        $stFlota->bindParam(":FECHA", $fecha);
+        $stFlota->bindValue(":HORA", $hora);
+        $stFlota->bindValue(":SALIDA_EMERGENCIA", isset($datos['SALIDA_EMERGENCIA_EL']) ? $datos['SALIDA_EMERGENCIA_EL'] : NULL);
+        $stFlota->bindValue(":GRUPO_RUIZ", isset($datos['GRUPO_RUIZ_EL']) ? $datos['GRUPO_RUIZ_EL'] : NULL);
+        $stFlota->bindValue(":SALIDA_EMERGENCIA_OBS", isset($datos['SALIDA_EMERGENCIA_EL_OBS']) ? $datos['SALIDA_EMERGENCIA_EL_OBS'] : NULL);
+        $stFlota->bindValue(":GRUPO_RUIZ_OBS", isset($datos['GRUPO_RUIZ_EL_OBS']) ? $datos['GRUPO_RUIZ_EL_OBS'] : NULL);
+        $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
+
+        $stFlota->execute();
+
+        if ($stFlota) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+        /**
+     * Método para insertar las revision de las pegatinas de la luna trasera del vehículo.
+     * 
+     * @access private
+     * 
+     * @param array $datos Array con los datos de las revisiones realizadas
+     * 
+     * @return bool resultado de la operación 
+     */
+    private static function actualizarPegatinasLunaExteriorTrasera($datos)
+    {
+        $conn = Db::getConector();
+
+        $queryFlota = "UPDATE `peg_ext_lunas` SET FECHA = :FECHA, HORA = :HORA, `SALIDA_EMERGENCIA` = :SALIDA_EMERGENCIA, `GRUPO_RUIZ` = :GRUPO_RUIZ, 
+        `SALIDA_EMERGENCIA_OBS` = :SALIDA_EMERGENCIA_OBS, `GRUPO_RUIZ_OBS` = :GRUPO_RUIZ_OBS, TRASPASADO = 0, USUARIO = :USUARIO WHERE id = {$datos['IDELuna']}";
+
+        $stFlota = $conn->prepare($queryFlota);
+
+        $fecha = date('Y-m-d');
+        $hora = date('H:i:s');
+
         $stFlota->bindParam(":FECHA", $fecha);
         $stFlota->bindValue(":HORA", $hora);
         $stFlota->bindValue(":SALIDA_EMERGENCIA", isset($datos['SALIDA_EMERGENCIA_EL']) ? $datos['SALIDA_EMERGENCIA_EL'] : NULL);
@@ -274,6 +502,52 @@ class Pegatinas extends Vehiculo
         $stFlota->bindParam(":ID_VEHICULO", $datos['IDVEHICULO']);
         $stFlota->bindParam(":CODIGO_VEHICULO", $datos['CODIGO_VEHICULO']);
         $stFlota->bindValue(":ID_USUARIO", isset($datos['IDUSUARIO']) ? $datos['IDUSUARIO'] : 0);
+        $stFlota->bindParam(":FECHA", $fecha);
+        $stFlota->bindValue(":HORA", $hora);
+        $stFlota->bindValue(":CRTM_LOGO", isset($datos['CRTM_LOGO_ET']) ? $datos['CRTM_LOGO_ET'] : NULL);
+        $stFlota->bindValue(":LOGO_EMPRESA", isset($datos['LOGO_EMPRESA_ET']) ? $datos['LOGO_EMPRESA_ET'] : NULL);
+        $stFlota->bindValue(":WEB_CRTM", isset($datos['WEB_CRTM_ET']) ? $datos['WEB_CRTM_ET'] : NULL);
+        $stFlota->bindValue(":WEB_EMPRESA", isset($datos['WEB_EMPRESA_ET']) ? $datos['WEB_EMPRESA_ET'] : NULL);
+        $stFlota->bindValue(":NUMERO_VEHICULO", isset($datos['NUMERO_VEHICULO_ET']) ? $datos['NUMERO_VEHICULO_ET'] : NULL);
+        $stFlota->bindValue(":SALIDA_EMERGENCIA", isset($datos['SALIDA_EMERGENCIA_ET']) ? $datos['SALIDA_EMERGENCIA_ET'] : NULL);
+        $stFlota->bindValue(":CRTM_LOGO_OBS", isset($datos['CRTM_LOGO_ET_OBS']) ? $datos['CRTM_LOGO_ET_OBS'] : NULL);
+        $stFlota->bindValue(":LOGO_EMPRESA_OBS", isset($datos['LOGO_EMPRESA_ET_OBS']) ? $datos['LOGO_EMPRESA_ET_OBS'] : NULL);
+        $stFlota->bindValue(":WEB_CRTM_OBS", isset($datos['WEB_CRTM_ET_OBS']) ? $datos['WEB_CRTM_ET_OBS'] : NULL);
+        $stFlota->bindValue(":WEB_EMPRESA_OBS", isset($datos['WEB_EMPRESA_ET_OBS']) ? $datos['WEB_EMPRESA_ET_OBS'] : NULL);
+        $stFlota->bindValue(":NUMERO_VEHICULO_OBS", isset($datos['NUMERO_VEHICULO_ET_OBS']) ? $datos['NUMERO_VEHICULO_ET_OBS'] : NULL);
+        $stFlota->bindValue(":SALIDA_EMERGENCIA_OBS", isset($datos['SALIDA_EMERGENCIA_ET_OBS']) ? $datos['SALIDA_EMERGENCIA_ET_OBS'] : NULL);
+        $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
+        $stFlota->execute();
+
+        if ($stFlota) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /**
+     * Método para insertar las revision de las pegatinas del exterior trasero del vehículo.
+     * 
+     * @access private
+     * 
+     * @param array $datos Array con los datos de las revisiones realizadas
+     * 
+     * @return bool resultado de la operación 
+     */
+    private static function actualizarPegatinasExteriorTrasero($datos)
+    {
+        $conn = Db::getConector();
+
+        $queryFlota = "UPDATE `peg_ext_trasera` SET FECHA = :FECHA, HORA = :HORA, `CRTM_LOGO` = :CRTM_LOGO, `LOGO_EMPRESA` = :LOGO_EMPRESA, `WEB_CRTM` = :WEB_CRTM, 
+        `WEB_EMPRESA` = :WEB_EMPRESA, `NUMERO_VEHICULO` = :NUMERO_VEHICULO, `SALIDA_EMERGENCIA` = :SALIDA_EMERGENCIA, `CRTM_LOGO_OBS` = :CRTM_LOGO_OBS, 
+        `LOGO_EMPRESA_OBS` = :LOGO_EMPRESA_OBS, `WEB_CRTM_OBS` = :WEB_CRTM_OBS, `WEB_EMPRESA_OBS` = :WEB_EMPRESA_OBS, `NUMERO_VEHICULO_OBS` = :NUMERO_VEHICULO_OBS, 
+        `SALIDA_EMERGENCIA_OBS` = :SALIDA_EMERGENCIA_OBS, TRASPASADO = 0, USUARIO = :USUARIO WHERE id = {$datos['IDET']}";
+
+        $stFlota = $conn->prepare($queryFlota);
+
+        $fecha = date('Y-m-d');
+        $hora = date('H:i:s');
+
         $stFlota->bindParam(":FECHA", $fecha);
         $stFlota->bindValue(":HORA", $hora);
         $stFlota->bindValue(":CRTM_LOGO", isset($datos['CRTM_LOGO_ET']) ? $datos['CRTM_LOGO_ET'] : NULL);
@@ -356,6 +630,59 @@ class Pegatinas extends Vehiculo
     }
 
     /**
+     * Método para insertar las revision de las pegatinas del interior delantero del vehículo.
+     * 
+     * @access private
+     * 
+     * @param array $datos Array con los datos de las revisiones realizadas
+     * 
+     * @return bool resultado de la operación 
+     */
+    private static function actualizarPegatinasInteriorDelantero($datos)
+    {
+        $conn = Db::getConector();
+
+        $queryFlota = "UPDATE `peg_int_del` SET FECHA = :FECHA, HORA = :HORA, `VIDEOVIGILANCIA` = :VIDEOVIGILANCIA, `PROHIBIDO_FUMAR` = :PROHIBIDO_FUMAR, `PTM` = :PTM, `CAMBIO_MAXIMO` = :CAMBIO_MAXIMO, 
+        `TARIFAS` = :TARIFAS, `OCUPACION_MAXIMA` = :OCUPACION_MAXIMA, `BOTIQUIN` = :BOTIQUIN, `SALIDA_EMERGENCIA` = :SALIDA_EMERGENCIA, `VIDEOVIGILANCIA_OBS` = :VIDEOVIGILANCIA_OBS, 
+        `PROHIBIDO_FUMAR_OBS` = :PROHIBIDO_FUMAR_OBS, `PTM_OBS` = :PTM_OBS, `CAMBIO_MAXIMO_OBS` = :CAMBIO_MAXIMO_OBS, `TARIFAS_OBS` = :TARIFAS_OBS, 
+        `OCUPACION_MAXIMA_OBS` = :OCUPACION_MAXIMA_OBS, `BOTIQUIN_OBS` = :BOTIQUIN_OBS, `SALIDA_EMERGENCIA_OBS` = :SALIDA_EMERGENCIA_OBS, TRASPASADO = 0, 
+        USUARIO = :USUARIO WHERE id = {$datos['IDID']}";
+
+        $stFlota = $conn->prepare($queryFlota);
+
+        $fecha = date('Y-m-d');
+        $hora = date('H:i:s');
+
+        $stFlota->bindParam(":FECHA", $fecha);
+        $stFlota->bindValue(":HORA", $hora);
+        $stFlota->bindValue(":VIDEOVIGILANCIA", isset($datos['VIDEOVIGILANCIA_ID']) ? $datos['VIDEOVIGILANCIA_ID'] : NULL);
+        $stFlota->bindValue(":PROHIBIDO_FUMAR", isset($datos['PROHIBIDO_FUMAR_ID']) ? $datos['PROHIBIDO_FUMAR_ID'] : NULL);
+        $stFlota->bindValue(":PTM", isset($datos['PTM_ID']) ? $datos['PTM_ID'] : NULL);
+        $stFlota->bindValue(":CAMBIO_MAXIMO", isset($datos['CAMBIO_MAXIMO_ID']) ? $datos['CAMBIO_MAXIMO_ID'] : NULL);
+        $stFlota->bindValue(":TARIFAS", isset($datos['TARIFAS_ID']) ? $datos['TARIFAS_ID'] : NULL);
+        $stFlota->bindValue(":OCUPACION_MAXIMA", isset($datos['OCUPACION_MAXIMA_ID']) ? $datos['OCUPACION_MAXIMA_ID'] : NULL);
+        $stFlota->bindValue(":BOTIQUIN", isset($datos['BOTIQUIN_ID']) ? $datos['BOTIQUIN_ID'] : NULL);
+        $stFlota->bindValue(":SALIDA_EMERGENCIA", isset($datos['SALIDA_EMERGENCIA_ID']) ? $datos['SALIDA_EMERGENCIA_ID'] : NULL);
+        $stFlota->bindValue(":VIDEOVIGILANCIA_OBS", isset($datos['VIDEOVIGILANCIA_ID_OBS']) ? $datos['VIDEOVIGILANCIA_ID_OBS'] : NULL);
+        $stFlota->bindValue(":PROHIBIDO_FUMAR_OBS", isset($datos['PROHIBIDO_FUMAR_ID_OBS']) ? $datos['PROHIBIDO_FUMAR_ID_OBS'] : NULL);
+        $stFlota->bindValue(":PTM_OBS", isset($datos['PTM_ID_OBS']) ? $datos['PTM_ID_OBS'] : NULL);
+        $stFlota->bindValue(":CAMBIO_MAXIMO_OBS", isset($datos['CAMBIO_MAXIMO_ID_OBS']) ? $datos['CAMBIO_MAXIMO_ID_OBS'] : NULL);
+        $stFlota->bindValue(":TARIFAS_OBS", isset($datos['TARIFAS_ID_OBS']) ? $datos['TARIFAS_ID_OBS'] : NULL);
+        $stFlota->bindValue(":OCUPACION_MAXIMA_OBS", isset($datos['OCUPACION_MAXIMA_ID_OBS']) ? $datos['OCUPACION_MAXIMA_ID_OBS'] : NULL);
+        $stFlota->bindValue(":BOTIQUIN_OBS", isset($datos['BOTIQUIN_ID_OBS']) ? $datos['BOTIQUIN_ID_OBS'] : NULL);
+        $stFlota->bindValue(":SALIDA_EMERGENCIA_OBS", isset($datos['SALIDA_EMERGENCIA_ID_OBS']) ? $datos['SALIDA_EMERGENCIA_ID_OBS'] : NULL);
+        $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
+
+        $stFlota->execute();
+
+        if ($stFlota) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Método para insertar las revision de las pegatinas del interior central del vehículo.
      * 
      * @access private
@@ -381,6 +708,47 @@ class Pegatinas extends Vehiculo
         $stFlota->bindParam(":ID_VEHICULO", $datos['IDVEHICULO']);
         $stFlota->bindParam(":CODIGO_VEHICULO", $datos['CODIGO_VEHICULO']);
         $stFlota->bindValue(":ID_USUARIO", isset($datos['IDUSUARIO']) ? $datos['IDUSUARIO'] : 0);
+        $stFlota->bindParam(":FECHA", $fecha);
+        $stFlota->bindValue(":HORA", $hora);
+        $stFlota->bindValue(":TARIFAS", isset($datos['TARIFAS_IC']) ? $datos['TARIFAS_IC'] : NULL);
+        $stFlota->bindValue(":PLAN_EVACUACION", isset($datos['PLAN_EVACUACION_IC']) ? $datos['PLAN_EVACUACION_IC'] : NULL);
+        $stFlota->bindValue(":COVID", isset($datos['COVID_IC']) ? $datos['COVID_IC'] : NULL);
+        $stFlota->bindValue(":QR_ENCUESTA", isset($datos['QR_ENCUESTA_IC']) ? $datos['QR_ENCUESTA_IC'] : NULL);
+        $stFlota->bindValue(":TARIFAS_OBS", isset($datos['TARIFAS_IC_OBS']) ? $datos['TARIFAS_IC_OBS'] : NULL);
+        $stFlota->bindValue(":PLAN_EVACUACION_OBS", isset($datos['PLAN_EVACUACION_IC_OBS']) ? $datos['PLAN_EVACUACION_IC_OBS'] : NULL);
+        $stFlota->bindValue(":COVID_OBS", isset($datos['COVID_IC_OBS']) ? $datos['COVID_IC_OBS'] : NULL);
+        $stFlota->bindValue(":QR_ENCUESTA_OBS", isset($datos['QR_ENCUESTA_IC_OBS']) ? $datos['QR_ENCUESTA_IC_OBS'] : NULL);
+        $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
+        $stFlota->execute();
+
+        if ($stFlota) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /**
+     * Método para insertar las revision de las pegatinas del interior central del vehículo.
+     * 
+     * @access private
+     * 
+     * @param array $datos Array con los datos de las revisiones realizadas
+     * 
+     * @return bool resultado de la operación 
+     */
+    private static function actualizarPegatinasInteriorCentral($datos)
+    {
+        $conn = Db::getConector();
+
+        $queryFlota = "UPDATE `peg_int_central` SET FECHA = :FECHA, HORA = :HORA, `TARIFAS` = :TARIFAS, `PLAN_EVACUACION` = :PLAN_EVACUACION, `COVID` = :COVID, 
+        `QR_ENCUESTA` = :QR_ENCUESTA, `TARIFAS_OBS` = :TARIFAS_OBS, `PLAN_EVACUACION_OBS` = :PLAN_EVACUACION_OBS, `COVID_OBS` = :COVID_OBS, 
+        `QR_ENCUESTA_OBS` = :QR_ENCUESTA_OBS, TRASPASADO = 0, USUARIO = :USUARIO";
+
+        $stFlota = $conn->prepare($queryFlota);
+
+        $fecha = date('Y-m-d');
+        $hora = date('H:i:s');
+
         $stFlota->bindParam(":FECHA", $fecha);
         $stFlota->bindValue(":HORA", $hora);
         $stFlota->bindValue(":TARIFAS", isset($datos['TARIFAS_IC']) ? $datos['TARIFAS_IC'] : NULL);
@@ -427,6 +795,46 @@ class Pegatinas extends Vehiculo
         $stFlota->bindParam(":ID_VEHICULO", $datos['IDVEHICULO']);
         $stFlota->bindParam(":CODIGO_VEHICULO", $datos['CODIGO_VEHICULO']);
         $stFlota->bindValue(":ID_USUARIO", isset($datos['IDUSUARIO']) ? $datos['IDUSUARIO'] : 0);
+        $stFlota->bindParam(":FECHA", $fecha);
+        $stFlota->bindValue(":HORA", $hora);
+        $stFlota->bindValue(":CINTURON_SEGURIDAD", isset($datos['CINTURON_SEGURIDAD_IL']) ? $datos['CINTURON_SEGURIDAD_IL'] : NULL);
+        $stFlota->bindValue(":MARTILLOS", isset($datos['MARTILLOS_IL']) ? $datos['MARTILLOS_IL'] : NULL);
+        $stFlota->bindValue(":EXTINTORES", isset($datos['EXTINTORES_IL']) ? $datos['EXTINTORES_IL'] : NULL);
+        $stFlota->bindValue(":CINTURON_SEGURIDAD_OBS", isset($datos['CINTURON_SEGURIDAD_IL_OBS']) ? $datos['CINTURON_SEGURIDAD_IL_OBS'] : NULL);
+        $stFlota->bindValue(":MARTILLOS_OBS", isset($datos['MARTILLOS_IL_OBS']) ? $datos['MARTILLOS_IL_OBS'] : NULL);
+        $stFlota->bindValue(":EXTINTORES_OBS", isset($datos['EXTINTORES_IL_OBS']) ? $datos['EXTINTORES_IL_OBS'] : NULL);
+        $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
+
+        $stFlota->execute();
+
+        if ($stFlota) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /**
+     * Método para insertar las revision de las pegatinas de la luna interior del vehículo.
+     * 
+     * @access private
+     * 
+     * @param array $datos Array con los datos de las revisiones realizadas
+     * 
+     * @return bool resultado de la operación 
+     */
+    private static function actualizarPegatinasLunaInterior($datos)
+    {
+        $conn = Db::getConector();
+
+        $queryFlota = "UPDATE `peg_int_luna` SET FECHA = :FECHA, HORA = :HORA, `CINTURON_SEGURIDAD` = :CINTURON_SEGURIDAD, `MARTILLOS` = :MARTILLOS, `EXTINTORES` = :EXTINTORES, 
+        `CINTURON_SEGURIDAD_OBS` = :CINTURON_SEGURIDAD_OBS, `MARTILLOS_OBS` = :MARTILLOS_OBS, `EXTINTORES_OBS` = :EXTINTORES_OBS, TRASPASADO = 0, USUARIO = :USUARIO  
+        WHERE id = {$datos['IDILuna']}";
+
+        $stFlota = $conn->prepare($queryFlota);
+
+        $fecha = date('Y-m-d');
+        $hora = date('H:i:s');
+
         $stFlota->bindParam(":FECHA", $fecha);
         $stFlota->bindValue(":HORA", $hora);
         $stFlota->bindValue(":CINTURON_SEGURIDAD", isset($datos['CINTURON_SEGURIDAD_IL']) ? $datos['CINTURON_SEGURIDAD_IL'] : NULL);
@@ -498,6 +906,54 @@ class Pegatinas extends Vehiculo
     }
 
     /**
+     * Método para insertar las revision de las pegatinas de la luna interior del vehículo.
+     * 
+     * @access private
+     * 
+     * @param array $datos Array con los datos de las revisiones realizadas
+     * 
+     * @return bool resultado de la operación 
+     */
+    private static function actualizarPegatinasInteriorMampara($datos)
+    {
+        $conn = Db::getConector();
+
+        $queryFlota = "UPDATE `peg_int_mampara` SET FECHA = :FECHA, HORA = :HORA, `TARIFAS` = :TARIFAS, `PERRO_GUIA` = :PERRO_GUIA, `ZONA_RESERVADA_PMR` = :ZONA_RESERVADA_PMR, 
+        `TELEFONO_OPERADOR` = :TELEFONO_OPERADOR, `WEB_CRTM` = :WEB_CRTM, `WEB_EMPRESA` = :WEB_EMPRESA, `TARIFAS_OBS` = :TARIFAS_OBS, `PERRO_GUIA_OBS` = :PERRO_GUIA_OBS, 
+        `ZONA_RESERVADA_PMR_OBS` = :ZONA_RESERVADA_PMR_OBS, `TELEFONO_OPERADOR_OBS` = :TELEFONO_OPERADOR_OBS, `WEB_CRTM_OBS` = :WEB_CRTM_OBS, 
+        `WEB_EMPRESA_OBS` = :WEB_EMPRESA_OBS, TRASPASADO = 0, USUARIO = :USUARIO WHERE id = {$datos['IDMI']}";
+
+        $stFlota = $conn->prepare($queryFlota);
+
+        $fecha = date('Y-m-d');
+        $hora = date('H:i:s');
+
+        $stFlota->bindParam(":FECHA", $fecha);
+        $stFlota->bindValue(":HORA", $hora);
+        $stFlota->bindValue(":TARIFAS", isset($datos['TARIFAS_IM']) ? $datos['TARIFAS_IM'] : NULL);
+        $stFlota->bindValue(":PERRO_GUIA", isset($datos['PERRO_GUIA_IM']) ? $datos['PERRO_GUIA_IM'] : NULL);
+        $stFlota->bindValue(":ZONA_RESERVADA_PMR", isset($datos['ZONA_RESERVADA_PMR_IM']) ? $datos['ZONA_RESERVADA_PMR_IM'] : NULL);
+        $stFlota->bindValue(":TELEFONO_OPERADOR", isset($datos['TELEFONO_OPERADOR_IM']) ? $datos['TELEFONO_OPERADOR_IM'] : NULL);
+        $stFlota->bindValue(":WEB_CRTM", isset($datos['WEB_CRTM_IM']) ? $datos['WEB_CRTM_IM'] : NULL);
+        $stFlota->bindValue(":WEB_EMPRESA", isset($datos['WEB_EMPRESA_IM']) ? $datos['WEB_EMPRESA_IM'] : NULL);
+        $stFlota->bindValue(":TARIFAS_OBS", isset($datos['TARIFAS_IM_OBS']) ? $datos['TARIFAS_IM_OBS'] : NULL);
+        $stFlota->bindValue(":PERRO_GUIA_OBS", isset($datos['PERRO_GUIA_IM_OBS']) ? $datos['PERRO_GUIA_IM_OBS'] : NULL);
+        $stFlota->bindValue(":ZONA_RESERVADA_PMR_OBS", isset($datos['ZONA_RESERVADA_PMR_IM_OBS']) ? $datos['ZONA_RESERVADA_PMR_IM_OBS'] : NULL);
+        $stFlota->bindValue(":TELEFONO_OPERADOR_OBS", isset($datos['TELEFONO_OPERADOR_IM_OBS']) ? $datos['TELEFONO_OPERADOR_IM_OBS'] : NULL);
+        $stFlota->bindValue(":WEB_CRTM_OBS", isset($datos['WEB_CRTM_IM_OBS']) ? $datos['WEB_CRTM_IM_OBS'] : NULL);
+        $stFlota->bindValue(":WEB_EMPRESA_OBS", isset($datos['WEB_EMPRESA_IM_OBS']) ? $datos['WEB_EMPRESA_IM_OBS'] : NULL);
+        $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
+
+        $stFlota->execute();
+
+        if ($stFlota) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Método para insertar las revision de las pegatinas del interior trasero del vehículo.
      * 
      * @access private
@@ -522,6 +978,50 @@ class Pegatinas extends Vehiculo
         $stFlota->bindParam(":ID_VEHICULO", $datos['IDVEHICULO']);
         $stFlota->bindParam(":CODIGO_VEHICULO", $datos['CODIGO_VEHICULO']);
         $stFlota->bindValue(":ID_USUARIO", isset($datos['IDUSUARIO']) ? $datos['IDUSUARIO'] : 0);
+        $stFlota->bindParam(":FECHA", $fecha);
+        $stFlota->bindValue(":HORA", $hora);
+        $stFlota->bindValue(":MARTILLO", isset($datos['MARTILLO_IT']) ? $datos['MARTILLO_IT'] : NULL);
+        $stFlota->bindValue(":PROHIBIDO_FUMAR", isset($datos['PROHIBIDO_FUMAR_IT']) ? $datos['PROHIBIDO_FUMAR_IT'] : NULL);
+        $stFlota->bindValue(":PMR", isset($datos['PMR_IT']) ? $datos['PMR_IT'] : NULL);
+        $stFlota->bindValue(":VIDEOVIGILANCIA", isset($datos['VIDEOVIGILANCIA_IT']) ? $datos['VIDEOVIGILANCIA_IT'] : NULL);
+
+        $stFlota->bindValue(":MARTILLO_OBS", isset($datos['MARTILLO_IT_OBS']) ? $datos['MARTILLO_IT_OBS'] : NULL);
+        $stFlota->bindValue(":PROHIBIDO_FUMAR_OBS", isset($datos['PROHIBIDO_FUMAR_IT_OBS']) ? $datos['PROHIBIDO_FUMAR_IT_OBS'] : NULL);
+        $stFlota->bindValue(":PMR_OBS", isset($datos['PMR_IT_OBS']) ? $datos['PMR_IT_OBS'] : NULL);
+        $stFlota->bindValue(":VIDEOVIGILANCIA_OBS", isset($datos['VIDEOVIGILANCIA_IT_OBS']) ? $datos['VIDEOVIGILANCIA_IT_OBS'] : NULL);
+        $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
+
+        $stFlota->execute();
+
+        if ($stFlota) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Método para insertar las revision de las pegatinas del interior trasero del vehículo.
+     * 
+     * @access private
+     * 
+     * @param array $datos Array con los datos de las revisiones realizadas
+     * 
+     * @return bool resultado de la operación 
+     */
+    private static function actualizarPegatinasInteriorTrasera($datos)
+    {
+        $conn = Db::getConector();
+
+        $queryFlota = "UPDATE `peg_int_trasera` SET FECHA = :FECHA, HORA = :FECHA, `MARTILLO` = :MARTILLO, `PROHIBIDO_FUMAR` = :PROHIBIDO_FUMAR, `PMR` = :PMR, 
+        `VIDEOVIGILANCIA` = :VIDEOVIGILANCIA, `MARTILLO_OBS` = :MARTILLO_OBS, `PROHIBIDO_FUMAR_OBS` = :PROHIBIDO_FUMAR_OBS, `PMR_OBS` = :PMR_OBS, 
+        `VIDEOVIGILANCIA_OBS` = :VIDEOVIGILANCIA_OBS, TRASPASADO = 0, USUARIO = :USUARIO WHERE id = {$datos['IDIT']}";
+
+        $stFlota = $conn->prepare($queryFlota);
+
+        $fecha = date('Y-m-d');
+        $hora = date('H:i:s');
+
         $stFlota->bindParam(":FECHA", $fecha);
         $stFlota->bindValue(":HORA", $hora);
         $stFlota->bindValue(":MARTILLO", isset($datos['MARTILLO_IT']) ? $datos['MARTILLO_IT'] : NULL);
@@ -709,6 +1209,439 @@ class Pegatinas extends Vehiculo
 
         if ($st) {
             return $st->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+    public static function obtenerUltimaRevisionEF()
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT * FROM peg_ext_frontal order by fecha desc limit 1";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            return $st->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+    public static function obtenerUltimaRevisionET()
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT * FROM peg_ext_trasera order by fecha desc limit 1";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            return $st->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+    public static function obtenerUltimaRevisionELD()
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT * FROM peg_ext_lateral_derecho order by fecha desc limit 1";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            return $st->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+    public static function obtenerUltimaRevisionELI()
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT * FROM peg_ext_lateral_izq order by fecha desc limit 1";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            return $st->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+    public static function obtenerUltimaRevisionELuna()
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT * FROM peg_ext_lunas order by fecha desc limit 1";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            return $st->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+    public static function obtenerUltimaRevisionIC()
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT * FROM peg_int_central order by fecha desc limit 1";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            return $st->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+    public static function obtenerUltimaRevisionID()
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT * FROM peg_int_del order by fecha desc limit 1";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            return $st->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+    public static function obtenerUltimaRevisionIT()
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT * FROM peg_int_trasera order by fecha desc limit 1";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            return $st->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+    public static function obtenerUltimaRevisionMI()
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT * FROM peg_int_mampara order by fecha desc limit 1";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            return $st->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+    public static function obtenerUltimaRevisionILuna()
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT * FROM peg_int_luna order by fecha desc limit 1";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            return $st->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+    public static function comprobarRevisionEF($idRevision)
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT `CRTM_LOGO`, `LOGO_EMPRESA`, `MINUSVALIDO`, `NUMERO_VEHICULO` FROM peg_ext_frontal WHERE id = $idRevision";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            $revision = $st->fetch(PDO::FETCH_ASSOC);
+
+            $correcto = true;
+
+            foreach ($revision as $value) {
+                if ($value != 1) {
+                    $correcto = false;
+                }
+            }
+            return $correcto;
+        } else {
+            return false;
+        }
+    }
+
+    public static function comprobarRevisionET($idRevision)
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT `CRTM_LOGO`, `LOGO_EMPRESA`, `WEB_CRTM`, `WEB_EMPRESA`, `NUMERO_VEHICULO`, `SALIDA_EMERGENCIA` FROM peg_ext_trasera WHERE id = $idRevision";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            $revision = $st->fetch(PDO::FETCH_ASSOC);
+
+            $correcto = true;
+
+            foreach ($revision as $value) {
+                if ($value != 1) {
+                    $correcto = false;
+                }
+            }
+            return $correcto;
+        } else {
+            return false;
+        }
+    }
+
+    public static function comprobarRevisionELD($idRevision)
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT `LOGO_EMPRESA`, `WEB_CRTM`, `PMR`, `STOP_COVID`, `SALIDA`, `ENTRADA`, `MINUSVALIDO`, `CAMARA_COMERCIO`, `SALIDA_EMERGENCIA`, 
+        `GRUPO_RUIZ`, `NUMERO_VEHICULO`, `APERTURA_EMERGENCIA`, `SOLICITUD_RAMPA` FROM peg_ext_lateral_derecho WHERE id = $idRevision";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            $revision = $st->fetch(PDO::FETCH_ASSOC);
+
+            $correcto = true;
+
+            foreach ($revision as $value) {
+                if ($value != 1) {
+                    $correcto = false;
+                }
+            }
+            return $correcto;
+        } else {
+            return false;
+        }
+    }
+
+    public static function comprobarRevisionELI($idRevision)
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT `CRTM_LOGO`, `LOGO_EMPRESA`, `WEB_CRTM`, `CAMARA_COMERCIO`, `SALIDA_EMERGENCIA`, `GRUPO_RUIZ`, `NUMERO_VEHICULO` 
+        FROM peg_ext_lateral_izq WHERE id = $idRevision";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            $revision = $st->fetch(PDO::FETCH_ASSOC);
+
+            $correcto = true;
+
+            foreach ($revision as $value) {
+                if ($value != 1) {
+                    $correcto = false;
+                }
+            }
+            return $correcto;
+        } else {
+            return false;
+        }
+    }
+
+    public static function comprobarRevisionELuna($idRevision)
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT `SALIDA_EMERGENCIA`, `GRUPO_RUIZ` FROM peg_ext_lunas WHERE id = $idRevision";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            $revision = $st->fetch(PDO::FETCH_ASSOC);
+
+            $correcto = true;
+
+            foreach ($revision as $value) {
+                if ($value != 1) {
+                    $correcto = false;
+                }
+            }
+            return $correcto;
+        } else {
+            return false;
+        }
+    }
+
+    public static function comprobarRevisionIC($idRevision)
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT `TARIFAS`, `PLAN_EVACUACION`, `COVID`, `QR_ENCUESTA` FROM peg_int_central WHERE id = $idRevision";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            $revision = $st->fetch(PDO::FETCH_ASSOC);
+
+            $correcto = true;
+
+            foreach ($revision as $value) {
+                if ($value != 1) {
+                    $correcto = false;
+                }
+            }
+            return $correcto;
+        } else {
+            return false;
+        }
+    }
+
+    public static function comprobarRevisionID($idRevision)
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT `VIDEOVIGILANCIA`, `PROHIBIDO_FUMAR`, `PTM`, `CAMBIO_MAXIMO`, `TARIFAS`, `OCUPACION_MAXIMA`, `BOTIQUIN`, `SALIDA_EMERGENCIA` 
+        FROM peg_int_del WHERE id = $idRevision";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            $revision = $st->fetch(PDO::FETCH_ASSOC);
+
+            $correcto = true;
+
+            foreach ($revision as $value) {
+                if ($value != 1) {
+                    $correcto = false;
+                }
+            }
+            return $correcto;
+        } else {
+            return false;
+        }
+    }
+
+    public static function comprobarRevisionIT($idRevision)
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT `MARTILLO`, `PROHIBIDO_FUMAR`, `PMR`, `VIDEOVIGILANCIA` FROM peg_int_trasera WHERE id = $idRevision";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            $revision = $st->fetch(PDO::FETCH_ASSOC);
+
+            $correcto = true;
+
+            foreach ($revision as $value) {
+                if ($value != 1) {
+                    $correcto = false;
+                }
+            }
+            return $correcto;
+        } else {
+            return false;
+        }
+    }
+
+    public static function comprobarRevisionMI($idRevision)
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT `TARIFAS`, `PERRO_GUIA`, `ZONA_RESERVADA_PMR`, `TELEFONO_OPERADOR`, `WEB_CRTM`, `WEB_EMPRESA` FROM peg_int_mampara WHERE id = $idRevision";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            $revision = $st->fetch(PDO::FETCH_ASSOC);
+
+            $correcto = true;
+
+            foreach ($revision as $value) {
+                if ($value != 1) {
+                    $correcto = false;
+                }
+            }
+            return $correcto;
+        } else {
+            return false;
+        }
+    }
+
+    public static function comprobarRevisionILuna($idRevision)
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT `CINTURON_SEGURIDAD`, `MARTILLOS`, `EXTINTORES` FROM peg_int_luna WHERE id = $idRevision";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            $revision = $st->fetch(PDO::FETCH_ASSOC);
+
+            $correcto = true;
+
+            foreach ($revision as $value) {
+                if ($value != 1) {
+                    $correcto = false;
+                }
+            }
+            return $correcto;
         } else {
             return false;
         }

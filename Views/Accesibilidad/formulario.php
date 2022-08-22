@@ -193,4 +193,4 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
 
 </form>
 <script src="js/script.js"></script>
-<script src="js/observaciones_obligatorias.js"></script>
+<!-- <script src="js/observaciones_obligatorias.js"></script> -->

@@ -36,7 +36,55 @@ class Accesibilidad extends Vehiculo
         $stFlota->bindValue(":RAMPAAUTO", $datos['RAMPAAUTO']);
         $stFlota->bindValue(":PULSADORESRAMPA", $datos['PULSADORESRAMPA']);
         $stFlota->bindValue(":SENLUMRAMPA", $datos['SENLUMRAMPA']);
-        $stFlota->bindValue(":ACUSTICARAMPA", !empty($datos['ACUSTICARAMPA']) ? $datos['ACUSTICARAMPA'] : NULL);
+        $stFlota->bindValue(":ACUSTICARAMPA", $datos['ACUSTICARAMPA']);
+        $stFlota->bindValue(":ELEVADOR_OBS", !empty($datos['ELEVADOR_OBS']) ? $datos['ELEVADOR_OBS'] : NULL);
+        $stFlota->bindValue(":KNEELING_OBS", !empty($datos['KNEELING_OBS']) ? $datos['KNEELING_OBS'] : NULL);
+        $stFlota->bindValue(":CINTURONESPMR_OBS", !empty($datos['CINTURONESPMR_OBS']) ? $datos['CINTURONESPMR_OBS'] : NULL);
+        $stFlota->bindValue(":BARRAS_OBS", !empty($datos['BARRAS_OBS']) ? $datos['BARRAS_OBS'] : NULL);
+        $stFlota->bindValue(":RAMPA_OBS", !empty($datos['RAMPA_OBS']) ? $datos['RAMPA_OBS'] : NULL);
+        $stFlota->bindValue(":RAMPAAUTO_OBS", !empty($datos['RAMPAAUTO_OBS']) ? $datos['RAMPAAUTO_OBS'] : NULL);
+        $stFlota->bindValue(":PULSADORESRAMPA_OBS", !empty($datos['PULSADORESRAMPA_OBS']) ? $datos['PULSADORESRAMPA_OBS'] : NULL);
+        $stFlota->bindValue(":SENLUMRAMPA_OBS", !empty($datos['SENLUMRAMPA_OBS']) ? $datos['SENLUMRAMPA_OBS'] : NULL);
+        $stFlota->bindValue(":ACUSTICARAMPA_OBS", !empty($datos['ACUSTICARAMPA_OBS']) ? $datos['ACUSTICARAMPA_OBS'] : NULL);
+        $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
+
+        $stFlota->execute();
+
+        if ($stFlota) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function actualizarDatos($datos, $idRevision)
+    {
+        $conn = Db::getConector();
+
+        $datetime = date_create();
+
+        $fecha = date_format($datetime, 'Y-m-d');
+        $hora = date_format($datetime, 'H:i:s');
+
+        $queryFlota = " UPDATE `estado_accesibilidad` SET fecha = :FECHA, hora = :HORA,  elevador = :ELEVADOR, `kneeling` = :KNEELING, `cinturonespmr` = :CINTURONESPMR, `barras` = :BARRAS, 
+        `rampa` = :RAMPA, rampaauto = :RAMPAAUTO, `pulsadoresrampa` = :PULSADORESRAMPA, `senlumrampa` = :SENLUMRAMPA, `acusticarampa` = :ACUSTICARAMPA, 
+        elevador_obs = :ELEVADOR_OBS, `kneeling_obs` = :KNEELING_OBS, `cinturonespmr_obs` = :CINTURONESPMR_OBS, `barras_obs` = :BARRAS_OBS, `rampa_obs` = :RAMPA_OBS, 
+        rampaauto_obs = :RAMPAAUTO_OBS, `pulsadoresrampa_obs` = :PULSADORESRAMPA_OBS, `senlumrampa_obs` = :SENLUMRAMPA_OBS, `acusticarampa_obs` = :ACUSTICARAMPA_OBS, 
+        `traspasado` = 0, usuario = :USUARIO WHERE ID = $idRevision";
+
+        $stFlota = $conn->prepare($queryFlota);
+
+        $stFlota->bindValue(":FECHA", $fecha);
+        $stFlota->bindValue(":HORA", $hora);
+        $stFlota->bindValue(":ELEVADOR", $datos['ELEVADOR']);
+        $stFlota->bindValue(":KNEELING", $datos['KNEELING']);
+        $stFlota->bindValue(":CINTURONESPMR", $datos['CINTURONESPMR']);
+        $stFlota->bindValue(":BARRAS", $datos['BARRAS']);
+        $stFlota->bindValue(":RAMPA", $datos['RAMPA']);
+        $stFlota->bindValue(":RAMPAAUTO", $datos['RAMPAAUTO']);
+        $stFlota->bindValue(":PULSADORESRAMPA", $datos['PULSADORESRAMPA']);
+        $stFlota->bindValue(":SENLUMRAMPA", $datos['SENLUMRAMPA']);
+        $stFlota->bindValue(":ACUSTICARAMPA", $datos['ACUSTICARAMPA']);
         $stFlota->bindValue(":ELEVADOR_OBS", !empty($datos['ELEVADOR_OBS']) ? $datos['ELEVADOR_OBS'] : NULL);
         $stFlota->bindValue(":KNEELING_OBS", !empty($datos['KNEELING_OBS']) ? $datos['KNEELING_OBS'] : NULL);
         $stFlota->bindValue(":CINTURONESPMR_OBS", !empty($datos['CINTURONESPMR_OBS']) ? $datos['CINTURONESPMR_OBS'] : NULL);
@@ -85,7 +133,34 @@ class Accesibilidad extends Vehiculo
         $st->execute();
 
         if ($st) {
-            return $st->fetchAll(PDO::FETCH_ASSOC);
+            return $st->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+    public static function comprobarRevision($idRevision)
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT elevador, `kneeling`, `cinturonespmr`, `barras`, `rampa`, rampaauto, `pulsadoresrampa`, `senlumrampa`, `acusticarampa` FROM estado_accesibilidad 
+        WHERE id = $idRevision";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            $revision = $st->fetch(PDO::FETCH_ASSOC);
+
+            $correcto = true;
+
+            foreach ($revision as $value) {
+                if ($value != 1) {
+                    $correcto = false;
+                }
+            }
+            return $correcto;
         } else {
             return false;
         }

@@ -45,6 +45,45 @@ class Documentacion Extends Vehiculo{
         }
     }
 
+    public static function actualizarDatos($datos, $idRevision) {
+        $conn = Db::getConector();
+
+        $datetime = date_create();
+
+        $fecha = date_format($datetime, 'Y-m-d');
+        $hora = date_format($datetime, 'H:i:s');
+
+        $queryFlota = "UPDATE `estado_documentacion` SET `FECHA` = :FECHA, `HORA` = :HORA, `LIBRO_RECLAMACIONES` = :LIBRO_RECLAMACIONES, 
+        `SEGURO_VEHICULO` = :SEGURO_VEHICULO, `ITV` = :ITV, `FICHA_TECNICA` = :FICHA_TECNICA, `TACOGRAFO` = :TACOGRAFO, `LIBRO_RECLAMACIONES_OBS` = :LIBRO_RECLAMACIONES_OBS, 
+        `SEGURO_VEHICULO_OBS` = :SEGURO_VEHICULO_OBS, `ITV_OBS` = :ITV_OBS, `FICHA_TECNICA_OBS` = :FICHA_TECNICA_OBS, TACOGRAFO_OBS = :TACOGRAFO_OBS, 
+        USUARIO = :USUARIO WHERE ID = $idRevision";
+
+        $stFlota = $conn->prepare($queryFlota);
+
+
+        $stFlota->bindValue(":FECHA", $fecha);
+        $stFlota->bindValue(":HORA", $hora);
+        $stFlota->bindValue(":LIBRO_RECLAMACIONES", isset($datos['LIBRO_RECLAMACIONES']) ? $datos['LIBRO_RECLAMACIONES'] : NULL);
+        $stFlota->bindValue(":SEGURO_VEHICULO", isset($datos['SEGURO_VEHICULO']) ? $datos['SEGURO_VEHICULO'] : NULL);
+        $stFlota->bindValue(":ITV", isset($datos['ITV']) ? $datos['ITV'] : NULL);
+        $stFlota->bindValue(":FICHA_TECNICA", isset($datos['FICHA_TECNICA']) ? $datos['FICHA_TECNICA'] : NULL);
+        $stFlota->bindValue(":TACOGRAFO", (!empty($datos['TACOGRAFO'])) ? $datos['TACOGRAFO'] : NULL);
+        $stFlota->bindValue(":LIBRO_RECLAMACIONES_OBS", !empty($datos['LIBRO_RECLAMACIONES_OBS']) ? $datos['LIBRO_RECLAMACIONES_OBS'] : NULL);
+        $stFlota->bindValue(":SEGURO_VEHICULO_OBS", !empty($datos['SEGURO_VEHICULO_OBS']) ? $datos['SEGURO_VEHICULO_OBS'] : NULL);
+        $stFlota->bindValue(":ITV_OBS", !empty($datos['ITV_OBS']) ? $datos['ITV_OBS'] : NULL);
+        $stFlota->bindValue(":FICHA_TECNICA_OBS", !empty($datos['FICHA_TECNICA_OBS']) ? $datos['FICHA_TECNICA_OBS'] : NULL);
+        $stFlota->bindValue(":TACOGRAFO_OBS", (!empty($datos['TACOGRAFO_OBS'])) ? $datos['TACOGRAFO_OBS'] : NULL);
+        $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
+        
+        $stFlota->execute();
+        
+        if($stFlota){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static function obtenerRevisionesPorFecha($fechaInicio, $fechaFin, $empresa){
         $conn = Db::getConector();
 
@@ -56,6 +95,49 @@ class Documentacion Extends Vehiculo{
 
         if($st){
             return $st->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+    public static function obtenerUltimaRevision()
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT * FROM estado_documentacion order by fecha desc limit 1";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            return $st->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+    public static function comprobarRevision($idRevision)
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT `LIBRO_RECLAMACIONES`, `SEGURO_VEHICULO`, `ITV`, `FICHA_TECNICA`, `TACOGRAFO` FROM estado_documentacion WHERE id = $idRevision";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            $revision = $st->fetch(PDO::FETCH_ASSOC);
+
+            $correcto = true;
+
+            foreach ($revision as $value) {
+                if ($value != 1) {
+                    $correcto = false;
+                }
+            }
+            return $correcto;
         } else {
             return false;
         }

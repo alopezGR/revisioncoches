@@ -30,15 +30,22 @@ class AccesibilidadController
             $vehiculo = strtoupper($_POST['vehiculo']);
 
             $resultado = Accesibilidad::getInfoVehiculo($vehiculo);
-            $ultimaRevision = Accesibilidad::obtenerUltimaRevision();
-
+            
             if ($resultado == false || $resultado['id'] == '1478') {
                 $_SESSION['vehiculoIncorrecto'] = 'true';
                 require_once 'Views/Accesibilidad/index.php';
             } else {
-                $rampas = Accesibilidad::getRampasVehiculo($vehiculo);
-                $fechaActual = date('y-m-d');
-                require_once 'Views/Accesibilidad/formulario.php';
+                // $rampas = Accesibilidad::getRampasVehiculo($vehiculo);
+                $revision = Accesibilidad::obtenerUltimaRevision();
+                $fechaActual = date('Y-m-d');
+                $fechaUltimaRevision = $revision['fecha'];
+                $revisionCorrecta = Accesibilidad::comprobarRevision($revision['id']);
+
+                if($revision && $fechaActual == $fechaUltimaRevision){
+                    require_once 'Views/Accesibilidad/revision.php';
+                } else {
+                    require_once 'Views/Accesibilidad/formulario.php';
+                }
             }
         } else {
             require_once 'Views/Usuario/login.php';
@@ -57,6 +64,29 @@ class AccesibilidadController
 
             if ($resultadoFlota) {
                 Usuario::registroLogin($_SESSION['user'], 'Realizada revision de accesibilidad al coche ' . $datos['IDVEHICULO']);
+                $_SESSION['exito'] = "true";
+            } else {
+                $_SESSION['error'] = "true";
+            }
+
+            header("Location: index.php");
+        } else {
+            require_once 'Views/Usuario/login.php';
+        }
+    }
+
+    public function actualizarFormulario()
+    {
+        if (isset($_SESSION['logged'])) {
+
+            $datos = $_POST;
+
+            $datos['USUARIO'] = $_SESSION['user'];
+
+            $resultadoFlota = Accesibilidad::actualizarDatos($datos, $datos['IDREVISION']);
+
+            if ($resultadoFlota) {
+                Usuario::registroLogin($_SESSION['user'], 'Realizada actualización de revision de accesibilidad al coche ' . $datos['IDVEHICULO']);
                 $_SESSION['exito'] = "true";
             } else {
                 $_SESSION['error'] = "true";
