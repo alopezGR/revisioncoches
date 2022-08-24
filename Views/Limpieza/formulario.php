@@ -31,17 +31,31 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
         </div>
     </div>
 
-    <div class="row align-items-center mt-5 bordes">
+    <div class="row align-items-center mt-5 bordes" id="estado_limpieza">
         <div class="col-12">
             <h5>ESTADO LIMPIEZA</h5>
         </div>
-        <div class="col-11 offset-1 mt-2">
+        <div class="col-11 offset-1 mb-3 mt-3">
+            <div class="row">
+                <div class="col"><a href="javascript:void(0)" class="btn btn-success" onclick="marcarTodoOk('estado_limpieza')">OK</a></div>
+                <div class="col"><a href="javascript:void(0)" class="btn btn-danger" onclick="marcarTodoNoOk('estado_limpieza')">NO</a></div>
+                <div class="col"><a href="javascript:void(0)" class="btn btn-warning" onclick="desmarcarTodo('estado_limpieza')">Limpiar</a></div>
+            </div>
+        </div>
+        <div class="col-11 offset-1 mt-2" id="estado_limpieza_exterior">
             <div class="row bordes">
                 <div class="col-12 mb-3">
                     <h6>ESTADO LIMPIEZA EXTERIOR</h6>
                     <div id="REVISION_LIMPIEZA_EXTERIOR" class="custom-control custom-checkbox display-none" style="margin: 25px 0px 50px 0px;">
                         <input type="checkbox" class="custom-control-input" id="NO_LIMPIEZA_EXTERIOR">
                         <label class="custom-control-label" for="NO_LIMPIEZA_EXTERIOR">No realizar revisión</label>
+                    </div>
+                </div>
+                <div class="col-12 mb-3 mt-3">
+                    <div class="row">
+                        <div class="col"><a href="javascript:void(0)" class="btn btn-success" onclick="marcarTodoOk('estado_limpieza_exterior')">OK</a></div>
+                        <div class="col"><a href="javascript:void(0)" class="btn btn-danger" onclick="marcarTodoNoOk('estado_limpieza_exterior')">NO</a></div>
+                        <div class="col"><a href="javascript:void(0)" class="btn btn-warning" onclick="desmarcarTodo('estado_limpieza_exterior')">Limpiar</a></div>
                     </div>
                 </div>
                 <div class="col-12">
@@ -246,10 +260,17 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                 </div>
             </div>
         </div>
-        <div class="col-11 offset-1 mt-5">
+        <div class="col-11 offset-1 mt-5" id="estado_limpieza_interior">
             <div class="row bordes">
                 <div class="col-12 mb-3">
                     <h6>REVISIÓN LIMPIEZA INTERIOR</h6>
+                </div>
+                <div class="col-12 mb-3 mt-3">
+                    <div class="row">
+                        <div class="col"><a href="javascript:void(0)" class="btn btn-success" onclick="marcarTodoOk('estado_limpieza_interior')">OK</a></div>
+                        <div class="col"><a href="javascript:void(0)" class="btn btn-danger" onclick="marcarTodoNoOk('estado_limpieza_interior')">NO</a></div>
+                        <div class="col"><a href="javascript:void(0)" class="btn btn-warning" onclick="desmarcarTodo('estado_limpieza_interior')">Limpiar</a></div>
+                    </div>
                 </div>
                 <div class="col-12">
                     <div class="mt-5">
@@ -576,3 +597,30 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
 </form>
 <script src="js/script.js"></script>
 <!-- <script src="js/observaciones_obligatorias_lc.js"></script> -->
+<script>
+    
+    function marcarTodoOk(formulario) {
+        let inputsOk = document.querySelectorAll(`#${formulario} input[value="1"]`);
+        inputsOk.forEach(function(inputOk) {
+            inputOk.checked = true;
+        })
+    }
+    
+    function marcarTodoNoOk(formulario) {
+        let inputsNoOk = document.querySelectorAll(`#${formulario} input[value="0"]`);
+        inputsNoOk.forEach(function(inputOk) {
+            inputOk.checked = true;
+        })
+    }
+    
+    function desmarcarTodo(formulario) {
+        let inputsOk = document.querySelectorAll(`#${formulario} input[value="1"]`);
+        let inputsNoOk = document.querySelectorAll(`#${formulario} input[value="0"]`);
+        inputsOk.forEach(function(inputOk) {
+            inputOk.checked = false;
+        })
+        inputsNoOk.forEach(function(inputOk) {
+            inputOk.checked = false;
+        })
+    }
+</script>

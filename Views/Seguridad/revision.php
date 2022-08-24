@@ -36,7 +36,14 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
         <div class="col-12">
             <h5>ESTADO ELEMENTOS DE SEGURIDAD (Revisado)</h5>
         </div>
-        <div class="col-11 offset-1 mt-2">
+        <div class="col-11 offset-1 mb-3 mt-3">
+            <div class="row">
+                <div class="col"><a href="javascript:void(0)" class="btn btn-success" onclick="marcarTodoOk()">OK</a></div>
+                <div class="col"><a href="javascript:void(0)" class="btn btn-danger" onclick="marcarTodoNoOk()">NO</a></div>
+                <div class="col"><a href="javascript:void(0)" class="btn btn-warning" onclick="desmarcarTodo()">Limpiar</a></div>
+            </div>
+        </div>
+        <div class="col-11 offset-1 mt-2" id="estado_seguridad">
             <div class="row bordes">
                 <div class="col-12 mb-3">
                     <h6>REVISIÓN ELEMENTOS DE SEGURIDAD DEL VEHÍCULO</h6>
@@ -178,3 +185,28 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
 </form>
 <script src="js/script.js"></script>
 <!-- <script src="js/observaciones_obligatorias.js"></script> -->
+<script>
+    let inputsOk = document.querySelectorAll('#estado_seguridad input[value="1"]');
+    let inputsNoOk = document.querySelectorAll('#estado_seguridad input[value="0"]');
+
+    function marcarTodoOk() {
+        inputsOk.forEach(function(inputOk) {
+            inputOk.checked = true;
+        })
+    }
+
+    function marcarTodoNoOk() {
+        inputsNoOk.forEach(function(inputOk) {
+            inputOk.checked = true;
+        })
+    }
+
+    function desmarcarTodo() {
+        inputsOk.forEach(function(inputOk) {
+            inputOk.checked = false;
+        })
+        inputsNoOk.forEach(function(inputOk) {
+            inputOk.checked = false;
+        })
+    }
+</script>
