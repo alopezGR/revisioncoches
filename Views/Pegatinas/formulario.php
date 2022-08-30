@@ -449,6 +449,111 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                             <textarea class="form-control" id="SOLICITUD_RAMPA_ELD_OBS" rows="2" name="SOLICITUD_RAMPA_ELD_OBS"></textarea>
                         </div>
                     </div>
+                    <div class="mt-2">
+                        <span class="mr-2">ACCESO PMR</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ACCESO_PMR_ELD" id="ACCESO_PMR_ELD" value="1">
+                            <label class="form-check-label" for="ACCESO_PMR_ELD">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ACCESO_PMR_ELD" id="ACCESO_PMR_ELD_No" value="0">
+                            <label class="form-check-label" for="ACCESO_PMR_ELD_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="ACCESO_PMR_ELD_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="ACCESO_PMR_ELD_OBS" rows="2" name="ACCESO_PMR_ELD_OBS"></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">LOGO CRTM</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="LOGO_CRTM_ELD" id="LOGO_CRTM_ELD" value="1">
+                            <label class="form-check-label" for="LOGO_CRTM_ELD">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="LOGO_CRTM_ELD" id="LOGO_CRTM_ELD_No" value="0">
+                            <label class="form-check-label" for="LOGO_CRTM_ELD_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="LOGO_CRTM_ELD_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="LOGO_CRTM_ELD_OBS" rows="2" name="LOGO_CRTM_ELD_OBS"></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">SALIDA PUERTAS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="SALIDA_PUERTAS_ELD" id="SALIDA_PUERTAS_ELD" value="1">
+                            <label class="form-check-label" for="SALIDA_PUERTAS_ELD">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="SALIDA_PUERTAS_ELD" id="SALIDA_PUERTAS_ELD_No" value="0">
+                            <label class="form-check-label" for="SALIDA_PUERTAS_ELD_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="SALIDA_PUERTAS_ELD_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="SALIDA_PUERTAS_ELD_OBS" rows="2" name="SALIDA_PUERTAS_ELD_OBS"></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">SILLA DE RUEDAS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="SILLA_RUEDAS_ELD" id="SILLA_RUEDAS_ELD" value="1">
+                            <label class="form-check-label" for="SILLA_RUEDAS_ELD">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="SILLA_RUEDAS_ELD" id="SILLA_RUEDAS_ELD_No" value="0">
+                            <label class="form-check-label" for="SILLA_RUEDAS_ELD_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="SILLA_RUEDAS_ELD_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="SILLA_RUEDAS_ELD_OBS" rows="2" name="SILLA_RUEDAS_ELD_OBS"></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">CARRITO</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="CARRITO_ELD" id="CARRITO_ELD" value="1">
+                            <label class="form-check-label" for="CARRITO_ELD">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="CARRITO_ELD" id="CARRITO_ELD_No" value="0">
+                            <label class="form-check-label" for="CARRITO_ELD_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="CARRITO_ELD_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="CARRITO_ELD_OBS" rows="2" name="CARRITO_ELD_OBS"></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">PUBLICIDAD</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="PUBLICIDAD_ELD" id="PUBLICIDAD_ELD" value="1">
+                            <label class="form-check-label" for="PUBLICIDAD_ELD">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="PUBLICIDAD_ELD" id="PUBLICIDAD_ELD_No" value="0">
+                            <label class="form-check-label" for="PUBLICIDAD_ELD_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="PUBLICIDAD_ELD_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="PUBLICIDAD_ELD_OBS" rows="2" name="PUBLICIDAD_ELD_OBS"></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">OTROS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="OTROS_ELD" id="OTROS_ELD" value="1">
+                            <label class="form-check-label" for="OTROS_ELD">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="OTROS_ELD" id="OTROS_ELD_No" value="0">
+                            <label class="form-check-label" for="OTROS_ELD_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="OTROS_ELD_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="OTROS_ELD_OBS" rows="2" name="OTROS_ELD_OBS"></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -174,11 +174,15 @@ class Pegatinas extends Vehiculo
 
         $queryFlota = " INSERT INTO `peg_ext_lateral_derecho` (`ID`, ID_EMPRESA, ID_VEHICULO, CODIGO_VEHICULO, ID_USUARIO, FECHA, HORA, `LOGO_EMPRESA`, `WEB_CRTM`, `PMR`, `STOP_COVID`, `SALIDA`, 
         `ENTRADA`, `MINUSVALIDO`, `CAMARA_COMERCIO`, `SALIDA_EMERGENCIA`, `GRUPO_RUIZ`, `NUMERO_VEHICULO`, `APERTURA_EMERGENCIA`, 
-        `SOLICITUD_RAMPA`, `LOGO_EMPRESA_OBS`, `WEB_CRTM_OBS`, `PMR_OBS`, `STOP_COVID_OBS`, `SALIDA_OBS`, `ENTRADA_OBS`, `MINUSVALIDO_OBS`, 
-        `CAMARA_COMERCIO_OBS`, `SALIDA_EMERGENCIA_OBS`, `GRUPO_RUIZ_OBS`, `NUMERO_VEHICULO_OBS`, `APERTURA_EMERGENCIA_OBS`, `SOLICITUD_RAMPA_OBS`, TRASPASADO, USUARIO) 
-        VALUES (NULL, :ID_EMPRESA, :ID_VEHICULO, :CODIGO_VEHICULO, :ID_USUARIO, :FECHA, :HORA, :LOGO_EMPRESA, :WEB_CRTM, :PMR, :STOP_COVID, :SALIDA, :ENTRADA, :MINUSVALIDO, :CAMARA_COMERCIO, :SALIDA_EMERGENCIA, :GRUPO_RUIZ, 
-         :NUMERO_VEHICULO, :APERTURA_EMERGENCIA, :SOLICITUD_RAMPA, :LOGO_EMPRESA_OBS, :WEB_CRTM_OBS, :PMR_OBS, :STOP_COVID_OBS, :SALIDA_OBS, :ENTRADA_OBS, :MINUSVALIDO_OBS, 
-         :CAMARA_COMERCIO_OBS, :SALIDA_EMERGENCIA_OBS, :GRUPO_RUIZ_OBS, :NUMERO_VEHICULO_OBS, :APERTURA_EMERGENCIA_OBS, :SOLICITUD_RAMPA_OBS, '0', :USUARIO)";
+        `SOLICITUD_RAMPA`, ACCESO_PMR, LOGO_CRTM, SALIDA_PUERTAS, SILLA_RUEDAS, CARRITO, PUBLICIDAD, OTROS, `LOGO_EMPRESA_OBS`, `WEB_CRTM_OBS`, `PMR_OBS`, 
+        `STOP_COVID_OBS`, `SALIDA_OBS`, `ENTRADA_OBS`, `MINUSVALIDO_OBS`, `CAMARA_COMERCIO_OBS`, `SALIDA_EMERGENCIA_OBS`, `GRUPO_RUIZ_OBS`, `NUMERO_VEHICULO_OBS`, 
+        `APERTURA_EMERGENCIA_OBS`, `SOLICITUD_RAMPA_OBS`, ACCESO_PMR_OBS, LOGO_CRTM_OBS, SALIDA_PUERTAS_OBS, SILLA_RUEDAS_OBS, CARRITO_OBS, PUBLICIDAD_OBS, OTROS_OBS, 
+        TRASPASADO, USUARIO) 
+        VALUES (NULL, :ID_EMPRESA, :ID_VEHICULO, :CODIGO_VEHICULO, :ID_USUARIO, :FECHA, :HORA, :LOGO_EMPRESA, :WEB_CRTM, :PMR, :STOP_COVID, :SALIDA, :ENTRADA, 
+        :MINUSVALIDO, :CAMARA_COMERCIO, :SALIDA_EMERGENCIA, :GRUPO_RUIZ, :NUMERO_VEHICULO, :APERTURA_EMERGENCIA, :SOLICITUD_RAMPA, :ACCESO_PMR, :LOGO_CRTM, 
+        :SALIDA_PUERTAS, :SILLA_RUEDAS, :CARRITO, :PUBLICIDAD, :OTROS, :LOGO_EMPRESA_OBS, :WEB_CRTM_OBS, :PMR_OBS, :STOP_COVID_OBS, :SALIDA_OBS, :ENTRADA_OBS, 
+        :MINUSVALIDO_OBS, :CAMARA_COMERCIO_OBS, :SALIDA_EMERGENCIA_OBS, :GRUPO_RUIZ_OBS, :NUMERO_VEHICULO_OBS, :APERTURA_EMERGENCIA_OBS, :SOLICITUD_RAMPA_OBS, 
+        :ACCESO_PMR_OBS, :LOGO_CRTM_OBS, :SALIDA_PUERTAS_OBS, :SILLA_RUEDAS_OBS, :CARRITO_OBS, :PUBLICIDAD_OBS, :OTROS_OBS, '0', :USUARIO)";
 
 
         $stFlota = $conn->prepare($queryFlota);
@@ -204,6 +208,13 @@ class Pegatinas extends Vehiculo
         $stFlota->bindValue(":NUMERO_VEHICULO", isset($datos['NUMERO_VEHICULO_ELD']) ? $datos['NUMERO_VEHICULO_ELD'] : NULL);
         $stFlota->bindValue(":APERTURA_EMERGENCIA", isset($datos['APERTURA_EMERGENCIA_ELD']) ? $datos['APERTURA_EMERGENCIA_ELD'] : NULL);
         $stFlota->bindValue(":SOLICITUD_RAMPA", isset($datos['SOLICITUD_RAMPA_ELD']) ? $datos['SOLICITUD_RAMPA_ELD'] : NULL);
+        $stFlota->bindValue(":ACCESO_PMR", isset($datos['ACCESO_PMR_ELD']) ? $datos['ACCESO_PMR_ELD'] : NULL);
+        $stFlota->bindValue(":LOGO_CRTM", isset($datos['LOGO_CRTM_ELD']) ? $datos['LOGO_CRTM_ELD'] : NULL);
+        $stFlota->bindValue(":SALIDA_PUERTAS", isset($datos['SALIDA_PUERTAS_ELD']) ? $datos['SALIDA_PUERTAS_ELD'] : NULL);
+        $stFlota->bindValue(":SILLA_RUEDAS", isset($datos['SILLA_RUEDAS_ELD']) ? $datos['SILLA_RUEDAS_ELD'] : NULL);
+        $stFlota->bindValue(":CARRITO", isset($datos['CARRITO_ELD']) ? $datos['CARRITO_ELD'] : NULL);
+        $stFlota->bindValue(":PUBLICIDAD", isset($datos['PUBLICIDAD_ELD']) ? $datos['PUBLICIDAD_ELD'] : NULL);
+        $stFlota->bindValue(":OTROS", isset($datos['OTROS_ELD']) ? $datos['OTROS_ELD'] : NULL);
         $stFlota->bindValue(":LOGO_EMPRESA_OBS", (!empty($datos['LOGO_EMPRESA_ELD_OBS'])) ? $datos['LOGO_EMPRESA_ELD_OBS'] : NULL);
         $stFlota->bindValue(":WEB_CRTM_OBS", (!empty($datos['WEB_CRTM_ELD_OBS'])) ? $datos['WEB_CRTM_ELD_OBS'] : NULL);
         $stFlota->bindValue(":PMR_OBS", (!empty($datos['PMR_ELD_OBS'])) ? $datos['PMR_ELD_OBS'] : NULL);
@@ -217,6 +228,13 @@ class Pegatinas extends Vehiculo
         $stFlota->bindValue(":NUMERO_VEHICULO_OBS", (!empty($datos['NUMERO_VEHICULO_ELD_OBS'])) ? $datos['NUMERO_VEHICULO_ELD_OBS'] : NULL);
         $stFlota->bindValue(":APERTURA_EMERGENCIA_OBS", (!empty($datos['APERTURA_EMERGENCIA_ELD_OBS'])) ? $datos['APERTURA_EMERGENCIA_ELD_OBS'] : NULL);
         $stFlota->bindValue(":SOLICITUD_RAMPA_OBS", (!empty($datos['SOLICITUD_RAMPA_ELD_OBS'])) ? $datos['SOLICITUD_RAMPA_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":ACCESO_PMR_OBS", (!empty($datos['ACCESO_PMR_ELD_OBS'])) ? $datos['ACCESO_PMR_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":LOGO_CRTM_OBS", (!empty($datos['LOGO_CRTM_ELD_OBS'])) ? $datos['LOGO_CRTM_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":SALIDA_PUERTOS_OBS", (!empty($datos['SALIDA_PUERTOS_ELD_OBS'])) ? $datos['SALIDA_PUERTOS_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":SILLA_RUEDAS_OBS", (!empty($datos['SILLA_RUEDAS_ELD_OBS'])) ? $datos['SILLA_RUEDAS_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":CARRITO_OBS", (!empty($datos['CARRITO_ELD_OBS'])) ? $datos['CARRITO_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":PUBLICIDAD_OBS", (!empty($datos['PUBLICIDAD_ELD_OBS'])) ? $datos['PUBLICIDAD_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":OTROS_OBS", (!empty($datos['OTROS_ELD_OBS'])) ? $datos['OTROS_ELD_OBS'] : NULL);
         $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
 
         $stFlota->execute();
@@ -244,10 +262,14 @@ class Pegatinas extends Vehiculo
         $queryFlota = "UPDATE `peg_ext_lateral_derecho` SET FECHA = :FECHA, HORA = :HORA, `LOGO_EMPRESA` = :LOGO_EMPRESA, `WEB_CRTM` = :WEB_CRTM, `PMR` = :PMR, 
         `STOP_COVID` = :STOP_COVID, `SALIDA` = :SALIDA, `ENTRADA` = :ENTRADA, `MINUSVALIDO` = :MINUSVALIDO, `CAMARA_COMERCIO` = :CAMARA_COMERCIO, 
         `SALIDA_EMERGENCIA` = :SALIDA_EMERGENCIA, `GRUPO_RUIZ` = :GRUPO_RUIZ, `NUMERO_VEHICULO` = :NUMERO_VEHICULO, `APERTURA_EMERGENCIA` = :APERTURA_EMERGENCIA, 
-        `SOLICITUD_RAMPA` = :SOLICITUD_RAMPA, `LOGO_EMPRESA_OBS` = :LOGO_EMPRESA_OBS, `WEB_CRTM_OBS` = :WEB_CRTM_OBS, `PMR_OBS` = :PMR_OBS, `STOP_COVID_OBS` = :STOP_COVID_OBS, 
-        `SALIDA_OBS` = :SALIDA_OBS, `ENTRADA_OBS` = :ENTRADA_OBS, `MINUSVALIDO_OBS` = :MINUSVALIDO_OBS, `CAMARA_COMERCIO_OBS` = :CAMARA_COMERCIO_OBS, 
-        `SALIDA_EMERGENCIA_OBS` = :SALIDA_EMERGENCIA_OBS, `GRUPO_RUIZ_OBS` = :GRUPO_RUIZ_OBS, `NUMERO_VEHICULO_OBS` = :NUMERO_VEHICULO_OBS, 
-        `APERTURA_EMERGENCIA_OBS` = :APERTURA_EMERGENCIA_OBS, `SOLICITUD_RAMPA_OBS` = :SOLICITUD_RAMPA_OBS, TRASPASADO = 0, USUARIO = :USUARIO WHERE ID = {$datos['IDELD']}";
+        `SOLICITUD_RAMPA` = :SOLICITUD_RAMPA, ACCESO_PMR = :ACCESO_PMR, LOGO_CRTM = :LOGO_CRTM, SALIDA_PUERTAS = :SALIDA_PUERTAS, SILLA_RUEDAS = :SILLA_RUEDAS, 
+        CARRITO = :CARRITO, PUBLICIDAD = :PUBLICIDAD, OTROS = :OTROS, `LOGO_EMPRESA_OBS` = :LOGO_EMPRESA_OBS, `WEB_CRTM_OBS` = :WEB_CRTM_OBS, `PMR_OBS` = :PMR_OBS, 
+        `STOP_COVID_OBS` = :STOP_COVID_OBS, `SALIDA_OBS` = :SALIDA_OBS, `ENTRADA_OBS` = :ENTRADA_OBS, `MINUSVALIDO_OBS` = :MINUSVALIDO_OBS, 
+        `CAMARA_COMERCIO_OBS` = :CAMARA_COMERCIO_OBS, `SALIDA_EMERGENCIA_OBS` = :SALIDA_EMERGENCIA_OBS, `GRUPO_RUIZ_OBS` = :GRUPO_RUIZ_OBS, 
+        `NUMERO_VEHICULO_OBS` = :NUMERO_VEHICULO_OBS, `APERTURA_EMERGENCIA_OBS` = :APERTURA_EMERGENCIA_OBS, `SOLICITUD_RAMPA_OBS` = :SOLICITUD_RAMPA_OBS, 
+        ACCESO_PMR_OBS = :ACCESO_PMR_OBS, LOGO_CRTM_OBS = :LOGO_CRTM_OBS, SALIDA_PUERTAS_OBS = :SALIDA_PUERTAS_OBS, SILLA_RUEDAS_OBS = :SILLA_RUEDAS_OBS, 
+        CARRITO_OBS = :CARRITO_OBS, PUBLICIDAD_OBS = :PUBLICIDAD_OBS, OTROS_OBS = :OTROS_OBS, 
+        TRASPASADO = 0, USUARIO = :USUARIO WHERE ID = {$datos['IDELD']}";
 
 
         $stFlota = $conn->prepare($queryFlota);
@@ -270,6 +292,13 @@ class Pegatinas extends Vehiculo
         $stFlota->bindValue(":NUMERO_VEHICULO", isset($datos['NUMERO_VEHICULO_ELD']) ? $datos['NUMERO_VEHICULO_ELD'] : NULL);
         $stFlota->bindValue(":APERTURA_EMERGENCIA", isset($datos['APERTURA_EMERGENCIA_ELD']) ? $datos['APERTURA_EMERGENCIA_ELD'] : NULL);
         $stFlota->bindValue(":SOLICITUD_RAMPA", isset($datos['SOLICITUD_RAMPA_ELD']) ? $datos['SOLICITUD_RAMPA_ELD'] : NULL);
+        $stFlota->bindValue(":ACCESO_PMR", isset($datos['ACCESO_PMR_ELD']) ? $datos['ACCESO_PMR_ELD'] : NULL);
+        $stFlota->bindValue(":LOGO_CRTM", isset($datos['LOGO_CRTM_ELD']) ? $datos['LOGO_CRTM_ELD'] : NULL);
+        $stFlota->bindValue(":SALIDA_PUERTAS", isset($datos['SALIDA_PUERTAS_ELD']) ? $datos['SALIDA_PUERTAS_ELD'] : NULL);
+        $stFlota->bindValue(":SILLA_RUEDAS", isset($datos['SILLA_RUEDAS_ELD']) ? $datos['SILLA_RUEDAS_ELD'] : NULL);
+        $stFlota->bindValue(":CARRITO", isset($datos['CARRITO_ELD']) ? $datos['CARRITO_ELD'] : NULL);
+        $stFlota->bindValue(":PUBLICIDAD", isset($datos['PUBLICIDAD_ELD']) ? $datos['PUBLICIDAD_ELD'] : NULL);
+        $stFlota->bindValue(":OTROS", isset($datos['OTROS_ELD']) ? $datos['OTROS_ELD'] : NULL);
         $stFlota->bindValue(":LOGO_EMPRESA_OBS", (!empty($datos['LOGO_EMPRESA_ELD_OBS'])) ? $datos['LOGO_EMPRESA_ELD_OBS'] : NULL);
         $stFlota->bindValue(":WEB_CRTM_OBS", (!empty($datos['WEB_CRTM_ELD_OBS'])) ? $datos['WEB_CRTM_ELD_OBS'] : NULL);
         $stFlota->bindValue(":PMR_OBS", (!empty($datos['PMR_ELD_OBS'])) ? $datos['PMR_ELD_OBS'] : NULL);
@@ -283,6 +312,13 @@ class Pegatinas extends Vehiculo
         $stFlota->bindValue(":NUMERO_VEHICULO_OBS", (!empty($datos['NUMERO_VEHICULO_ELD_OBS'])) ? $datos['NUMERO_VEHICULO_ELD_OBS'] : NULL);
         $stFlota->bindValue(":APERTURA_EMERGENCIA_OBS", (!empty($datos['APERTURA_EMERGENCIA_ELD_OBS'])) ? $datos['APERTURA_EMERGENCIA_ELD_OBS'] : NULL);
         $stFlota->bindValue(":SOLICITUD_RAMPA_OBS", (!empty($datos['SOLICITUD_RAMPA_ELD_OBS'])) ? $datos['SOLICITUD_RAMPA_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":ACCESO_PMR_OBS", (!empty($datos['ACCESO_PMR_ELD_OBS'])) ? $datos['ACCESO_PMR_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":LOGO_CRTM_OBS", (!empty($datos['LOGO_CRTM_ELD_OBS'])) ? $datos['LOGO_CRTM_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":SALIDA_PUERTOS_OBS", (!empty($datos['SALIDA_PUERTOS_ELD_OBS'])) ? $datos['SALIDA_PUERTOS_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":SILLA_RUEDAS_OBS", (!empty($datos['SILLA_RUEDAS_ELD_OBS'])) ? $datos['SILLA_RUEDAS_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":CARRITO_OBS", (!empty($datos['CARRITO_ELD_OBS'])) ? $datos['CARRITO_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":PUBLICIDAD_OBS", (!empty($datos['PUBLICIDAD_ELD_OBS'])) ? $datos['PUBLICIDAD_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":OTROS_OBS", (!empty($datos['OTROS_ELD_OBS'])) ? $datos['OTROS_ELD_OBS'] : NULL);
         $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
 
         $stFlota->execute();
@@ -1762,6 +1798,18 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorFrontal[$i]['NUMERO_VEHICULO_OBS']}");
             $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorFrontal[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorFrontal[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorFrontal[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorFrontal[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Exterior Frontal');
+            $sheet->setCellValue("E$fila", "OTROS");
+            if ($revisionesPegatinasExteriorFrontal[$i]['OTROS'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorFrontal[$i]['OTROS_OBS']}");
+            $fila++;
 
             //Pegatina exterior lateral derecho
             $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
@@ -1919,6 +1967,90 @@ class Pegatinas extends Vehiculo
                 $sheet->setCellValue("G$fila", "X");
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['SOLICITUD_RAMPA_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
+            $sheet->setCellValue("E$fila", "ACCESO PMR");
+            if ($revisionesPegatinasExteriorLateralDerecho[$i]['ACCESO_PMR'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['ACCESO_PMR_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
+            $sheet->setCellValue("E$fila", "LOGO CRTM");
+            if ($revisionesPegatinasExteriorLateralDerecho[$i]['LOGO_CRTM'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['LOGO_CRTM_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
+            $sheet->setCellValue("E$fila", "SALIDA PUERTAS");
+            if ($revisionesPegatinasExteriorLateralDerecho[$i]['SALIDA_PUERTAS'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['SALIDA_PUERTAS_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
+            $sheet->setCellValue("E$fila", "SILLA RUEDAS");
+            if ($revisionesPegatinasExteriorLateralDerecho[$i]['SILLA_RUEDAS'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['SILLA_RUEDAS_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
+            $sheet->setCellValue("E$fila", "CARRITO");
+            if ($revisionesPegatinasExteriorLateralDerecho[$i]['CARRITO'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['CARRITO_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
+            $sheet->setCellValue("E$fila", "PUBLICIDAD");
+            if ($revisionesPegatinasExteriorLateralDerecho[$i]['PUBLICIDAD'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['PUBLICIDAD_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralDerecho[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralDerecho[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Exterior Lateral Derecho');
+            $sheet->setCellValue("E$fila", "OTROS");
+            if ($revisionesPegatinasExteriorLateralDerecho[$i]['OTROS'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralDerecho[$i]['OTROS_OBS']}");
             $fila++;
 
             //Pegatinas exterior lateral izquierdo
