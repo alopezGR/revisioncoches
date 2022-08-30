@@ -79,9 +79,9 @@ class Pegatinas extends Vehiculo
         $conn = Db::getConector();
 
         $queryFlota = " INSERT INTO `peg_ext_frontal` (`ID`, ID_EMPRESA, ID_VEHICULO, CODIGO_VEHICULO, ID_USUARIO, FECHA, HORA, `CRTM_LOGO`, `LOGO_EMPRESA`, `MINUSVALIDO`, 
-        `NUMERO_VEHICULO`, `CRTM_LOGO_OBS`, `LOGO_EMPRESA_OBS`, `MINUSVALIDO_OBS`, `NUMERO_VEHICULO_OBS`, TRASPASADO, USUARIO) 
-        VALUES (NULL, :ID_EMPRESA, :ID_VEHICULO, :CODIGO_VEHICULO, :ID_USUARIO, :FECHA, :HORA, :CRTM_LOGO, :LOGO_EMPRESA, :MINUSVALIDO, :NUMERO_VEHICULO, :CRTM_LOGO_OBS, 
-        :LOGO_EMPRESA_OBS, :MINUSVALIDO_OBS, :NUMERO_VEHICULO_OBS, '0', :USUARIO)";
+        `NUMERO_VEHICULO`, OTROS, `CRTM_LOGO_OBS`, `LOGO_EMPRESA_OBS`, `MINUSVALIDO_OBS`, `NUMERO_VEHICULO_OBS`, OTROS_OBS, TRASPASADO, USUARIO) 
+        VALUES (NULL, :ID_EMPRESA, :ID_VEHICULO, :CODIGO_VEHICULO, :ID_USUARIO, :FECHA, :HORA, :CRTM_LOGO, :LOGO_EMPRESA, :MINUSVALIDO, :NUMERO_VEHICULO, :OTROS, :CRTM_LOGO_OBS, 
+        :LOGO_EMPRESA_OBS, :MINUSVALIDO_OBS, :NUMERO_VEHICULO_OBS, :OTROS_OBS, '0', :USUARIO)";
 
         $stFlota = $conn->prepare($queryFlota);
 
@@ -97,10 +97,12 @@ class Pegatinas extends Vehiculo
         $stFlota->bindValue(":LOGO_EMPRESA", isset($datos['LOGO_EMPRESA_EF']) ? $datos['LOGO_EMPRESA_EF'] : NULL);
         $stFlota->bindValue(":MINUSVALIDO", isset($datos['MINUSVALIDO_EF']) ? $datos['MINUSVALIDO_EF'] : NULL);
         $stFlota->bindValue(":NUMERO_VEHICULO", isset($datos['NUMERO_VEHICULO_EF']) ? $datos['NUMERO_VEHICULO_EF'] : NULL);
+        $stFlota->bindValue(":OTROS", isset($datos['OTROS_EF']) ? $datos['OTROS_EF'] : NULL);
         $stFlota->bindValue(":CRTM_LOGO_OBS", (!empty($datos['CRTM_LOGO_EF_OBS'])) ? $datos['CRTM_LOGO_EF_OBS'] : NULL);
         $stFlota->bindValue(":LOGO_EMPRESA_OBS", (!empty($datos['LOGO_EMPRESA_EF_OBS'])) ? $datos['LOGO_EMPRESA_EF_OBS'] : NULL);
         $stFlota->bindValue(":MINUSVALIDO_OBS", (!empty($datos['MINUSVALIDO_EF_OBS'])) ? $datos['MINUSVALIDO_EF_OBS'] : NULL);
         $stFlota->bindValue(":NUMERO_VEHICULO_OBS", (!empty($datos['NUMERO_VEHICULO_EF_OBS'])) ? $datos['NUMERO_VEHICULO_EF_OBS'] : NULL);
+        $stFlota->bindValue(":OTROS_OBS", (!empty($datos['OTROS_EF_OBS'])) ? $datos['OTROS_EF_OBS'] : NULL);
         $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
 
         $stFlota->execute();
@@ -125,8 +127,8 @@ class Pegatinas extends Vehiculo
         $conn = Db::getConector();
 
         $queryFlota = " UPDATE `peg_ext_frontal` SET FECHA = :FECHA, HORA = :HORA, `CRTM_LOGO` = :CRTM_LOGO, `LOGO_EMPRESA` = :LOGO_EMPRESA, `MINUSVALIDO` = :MINUSVALIDO, 
-        `NUMERO_VEHICULO` = :NUMERO_VEHICULO, `CRTM_LOGO_OBS` = :CRTM_LOGO_OBS, `LOGO_EMPRESA_OBS` = :LOGO_EMPRESA_OBS, `MINUSVALIDO_OBS` = :MINUSVALIDO_OBS, 
-        `NUMERO_VEHICULO_OBS` = :NUMERO_VEHICULO_OBS, TRASPASADO = 0, USUARIO = :USUARIO WHERE ID = {$datos['IDEF']}";
+        `NUMERO_VEHICULO` = :NUMERO_VEHICULO, OTROS = :OTROS, `CRTM_LOGO_OBS` = :CRTM_LOGO_OBS, `LOGO_EMPRESA_OBS` = :LOGO_EMPRESA_OBS, `MINUSVALIDO_OBS` = :MINUSVALIDO_OBS, 
+        `NUMERO_VEHICULO_OBS` = :NUMERO_VEHICULO_OBS, OTROS_OBS = :OTROS_OBS, TRASPASADO = 0, USUARIO = :USUARIO WHERE ID = {$datos['IDEF']}";
 
         $stFlota = $conn->prepare($queryFlota);
 
@@ -139,10 +141,12 @@ class Pegatinas extends Vehiculo
         $stFlota->bindValue(":LOGO_EMPRESA", isset($datos['LOGO_EMPRESA_EF']) ? $datos['LOGO_EMPRESA_EF'] : NULL);
         $stFlota->bindValue(":MINUSVALIDO", isset($datos['MINUSVALIDO_EF']) ? $datos['MINUSVALIDO_EF'] : NULL);
         $stFlota->bindValue(":NUMERO_VEHICULO", isset($datos['NUMERO_VEHICULO_EF']) ? $datos['NUMERO_VEHICULO_EF'] : NULL);
+        $stFlota->bindValue(":OTROS", isset($datos['OTROS_EF']) ? $datos['OTROS_EF'] : NULL);
         $stFlota->bindValue(":CRTM_LOGO_OBS", (!empty($datos['CRTM_LOGO_EF_OBS'])) ? $datos['CRTM_LOGO_EF_OBS'] : NULL);
         $stFlota->bindValue(":LOGO_EMPRESA_OBS", (!empty($datos['LOGO_EMPRESA_EF_OBS'])) ? $datos['LOGO_EMPRESA_EF_OBS'] : NULL);
         $stFlota->bindValue(":MINUSVALIDO_OBS", (!empty($datos['MINUSVALIDO_EF_OBS'])) ? $datos['MINUSVALIDO_EF_OBS'] : NULL);
         $stFlota->bindValue(":NUMERO_VEHICULO_OBS", (!empty($datos['NUMERO_VEHICULO_EF_OBS'])) ? $datos['NUMERO_VEHICULO_EF_OBS'] : NULL);
+        $stFlota->bindValue(":OTROS_OBS", (!empty($datos['OTROS_EF_OBS'])) ? $datos['OTROS_EF_OBS'] : NULL);
         $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
 
         $stFlota->execute();

@@ -127,6 +127,21 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                             <textarea class="form-control" id="NUMERO_VEHICULO_EF_OBS" rows="2" name="NUMERO_VEHICULO_EF_OBS"><?php echo $revisionEF['NUMERO_VEHICULO_OBS'] ?></textarea>
                         </div>
                     </div>
+                    <div class="mt-2">
+                        <span class="mr-2">OTROS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="OTROS_EF" id="OTROS_EF" value="1" <?php if ($revisionEF['OTROS'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="OTROS_EF">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="OTROS_EF" id="OTROS_EF_No" value="0" <?php if ($revisionEF['OTROS'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="OTROS_EF_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="OTROS_EF_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="OTROS_EF_OBS" rows="2" name="OTROS_EF_OBS"><?php echo $revisionEF['OTROS_OBS'] ?></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
