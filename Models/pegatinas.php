@@ -487,7 +487,7 @@ class Pegatinas extends Vehiculo
         }
     }
 
-        /**
+    /**
      * Método para insertar las revision de las pegatinas de la luna trasera del vehículo.
      * 
      * @access private
@@ -538,10 +538,12 @@ class Pegatinas extends Vehiculo
     {
         $conn = Db::getConector();
 
-        $queryFlota = " INSERT INTO `peg_ext_trasera` (`ID`, ID_EMPRESA, ID_VEHICULO, CODIGO_VEHICULO, ID_USUARIO, FECHA, HORA, `CRTM_LOGO`, `LOGO_EMPRESA`, `WEB_CRTM`, `WEB_EMPRESA`, `NUMERO_VEHICULO`, 
-        `SALIDA_EMERGENCIA`, `CRTM_LOGO_OBS`, `LOGO_EMPRESA_OBS`, `WEB_CRTM_OBS`, `WEB_EMPRESA_OBS`, `NUMERO_VEHICULO_OBS`, `SALIDA_EMERGENCIA_OBS`, TRASPASADO, USUARIO) 
-        VALUES (NULL, :ID_EMPRESA, :ID_VEHICULO, :CODIGO_VEHICULO, :ID_USUARIO, :FECHA, :HORA, :CRTM_LOGO, :LOGO_EMPRESA, :WEB_CRTM, :WEB_EMPRESA, :NUMERO_VEHICULO, :SALIDA_EMERGENCIA, 
-        :CRTM_LOGO_OBS, :LOGO_EMPRESA_OBS, :WEB_CRTM_OBS, :WEB_EMPRESA_OBS, :NUMERO_VEHICULO_OBS, :SALIDA_EMERGENCIA_OBS, '0', :USUARIO)";
+        $queryFlota = " INSERT INTO `peg_ext_trasera` (`ID`, ID_EMPRESA, ID_VEHICULO, CODIGO_VEHICULO, ID_USUARIO, FECHA, HORA, `CRTM_LOGO`, `LOGO_EMPRESA`, `WEB_CRTM`, 
+        `WEB_EMPRESA`, `NUMERO_VEHICULO`, `SALIDA_EMERGENCIA`, PUBLICIDAD, OTROS, `CRTM_LOGO_OBS`, `LOGO_EMPRESA_OBS`, `WEB_CRTM_OBS`, `WEB_EMPRESA_OBS`, 
+        `NUMERO_VEHICULO_OBS`, `SALIDA_EMERGENCIA_OBS`, PUBLICIDAD_OBS, OTROS_OBS, TRASPASADO, USUARIO) 
+        VALUES (NULL, :ID_EMPRESA, :ID_VEHICULO, :CODIGO_VEHICULO, :ID_USUARIO, :FECHA, :HORA, :CRTM_LOGO, :LOGO_EMPRESA, :WEB_CRTM, :WEB_EMPRESA, :NUMERO_VEHICULO, 
+        :SALIDA_EMERGENCIA, :PUBLICIDAD, :OTROS, :CRTM_LOGO_OBS, :LOGO_EMPRESA_OBS, :WEB_CRTM_OBS, :WEB_EMPRESA_OBS, :NUMERO_VEHICULO_OBS, 
+        :SALIDA_EMERGENCIA_OBS, :PUBLICIDAD_OBS, :OTROS_OBS, '0', :USUARIO)";
 
         $stFlota = $conn->prepare($queryFlota);
 
@@ -559,12 +561,16 @@ class Pegatinas extends Vehiculo
         $stFlota->bindValue(":WEB_EMPRESA", isset($datos['WEB_EMPRESA_ET']) ? $datos['WEB_EMPRESA_ET'] : NULL);
         $stFlota->bindValue(":NUMERO_VEHICULO", isset($datos['NUMERO_VEHICULO_ET']) ? $datos['NUMERO_VEHICULO_ET'] : NULL);
         $stFlota->bindValue(":SALIDA_EMERGENCIA", isset($datos['SALIDA_EMERGENCIA_ET']) ? $datos['SALIDA_EMERGENCIA_ET'] : NULL);
+        $stFlota->bindValue(":PUBLICIDAD", isset($datos['PUBLICIDAD_ET']) ? $datos['PUBLICIDAD_ET'] : NULL);
+        $stFlota->bindValue(":OTROS", isset($datos['OTROS_ET']) ? $datos['OTROS_ET'] : NULL);
         $stFlota->bindValue(":CRTM_LOGO_OBS", isset($datos['CRTM_LOGO_ET_OBS']) ? $datos['CRTM_LOGO_ET_OBS'] : NULL);
         $stFlota->bindValue(":LOGO_EMPRESA_OBS", isset($datos['LOGO_EMPRESA_ET_OBS']) ? $datos['LOGO_EMPRESA_ET_OBS'] : NULL);
         $stFlota->bindValue(":WEB_CRTM_OBS", isset($datos['WEB_CRTM_ET_OBS']) ? $datos['WEB_CRTM_ET_OBS'] : NULL);
         $stFlota->bindValue(":WEB_EMPRESA_OBS", isset($datos['WEB_EMPRESA_ET_OBS']) ? $datos['WEB_EMPRESA_ET_OBS'] : NULL);
         $stFlota->bindValue(":NUMERO_VEHICULO_OBS", isset($datos['NUMERO_VEHICULO_ET_OBS']) ? $datos['NUMERO_VEHICULO_ET_OBS'] : NULL);
         $stFlota->bindValue(":SALIDA_EMERGENCIA_OBS", isset($datos['SALIDA_EMERGENCIA_ET_OBS']) ? $datos['SALIDA_EMERGENCIA_ET_OBS'] : NULL);
+        $stFlota->bindValue(":PUBLICIDAD_OBS", isset($datos['PUBLICIDAD_ET_OBS']) ? $datos['PUBLICIDAD_ET_OBS'] : NULL);
+        $stFlota->bindValue(":OTROS_OBS", isset($datos['OTROS_ET_OBS']) ? $datos['OTROS_ET_OBS'] : NULL);
         $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
         $stFlota->execute();
 
@@ -605,12 +611,16 @@ class Pegatinas extends Vehiculo
         $stFlota->bindValue(":WEB_EMPRESA", isset($datos['WEB_EMPRESA_ET']) ? $datos['WEB_EMPRESA_ET'] : NULL);
         $stFlota->bindValue(":NUMERO_VEHICULO", isset($datos['NUMERO_VEHICULO_ET']) ? $datos['NUMERO_VEHICULO_ET'] : NULL);
         $stFlota->bindValue(":SALIDA_EMERGENCIA", isset($datos['SALIDA_EMERGENCIA_ET']) ? $datos['SALIDA_EMERGENCIA_ET'] : NULL);
+        $stFlota->bindValue(":PUBLICIDAD", isset($datos['PUBLICIDAD_ET']) ? $datos['PUBLICIDAD_ET'] : NULL);
+        $stFlota->bindValue(":OTROS", isset($datos['OTROS_ET']) ? $datos['OTROS_ET'] : NULL);
         $stFlota->bindValue(":CRTM_LOGO_OBS", isset($datos['CRTM_LOGO_ET_OBS']) ? $datos['CRTM_LOGO_ET_OBS'] : NULL);
         $stFlota->bindValue(":LOGO_EMPRESA_OBS", isset($datos['LOGO_EMPRESA_ET_OBS']) ? $datos['LOGO_EMPRESA_ET_OBS'] : NULL);
         $stFlota->bindValue(":WEB_CRTM_OBS", isset($datos['WEB_CRTM_ET_OBS']) ? $datos['WEB_CRTM_ET_OBS'] : NULL);
         $stFlota->bindValue(":WEB_EMPRESA_OBS", isset($datos['WEB_EMPRESA_ET_OBS']) ? $datos['WEB_EMPRESA_ET_OBS'] : NULL);
         $stFlota->bindValue(":NUMERO_VEHICULO_OBS", isset($datos['NUMERO_VEHICULO_ET_OBS']) ? $datos['NUMERO_VEHICULO_ET_OBS'] : NULL);
         $stFlota->bindValue(":SALIDA_EMERGENCIA_OBS", isset($datos['SALIDA_EMERGENCIA_ET_OBS']) ? $datos['SALIDA_EMERGENCIA_ET_OBS'] : NULL);
+        $stFlota->bindValue(":PUBLICIDAD_OBS", isset($datos['PUBLICIDAD_ET_OBS']) ? $datos['PUBLICIDAD_ET_OBS'] : NULL);
+        $stFlota->bindValue(":OTROS_OBS", isset($datos['OTROS_ET_OBS']) ? $datos['OTROS_ET_OBS'] : NULL);
         $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
         $stFlota->execute();
 
@@ -634,12 +644,16 @@ class Pegatinas extends Vehiculo
     {
         $conn = Db::getConector();
 
-        $queryFlota = " INSERT INTO `peg_int_del` (`ID`, ID_EMPRESA, ID_VEHICULO, CODIGO_VEHICULO, ID_USUARIO, FECHA, HORA, `VIDEOVIGILANCIA`, `PROHIBIDO_FUMAR`, `PTM`, `CAMBIO_MAXIMO`, 
-        `TARIFAS`, `OCUPACION_MAXIMA`, `BOTIQUIN`, `SALIDA_EMERGENCIA`, `VIDEOVIGILANCIA_OBS`, `PROHIBIDO_FUMAR_OBS`, 
-        `PTM_OBS`, `CAMBIO_MAXIMO_OBS`, `TARIFAS_OBS`, `OCUPACION_MAXIMA_OBS`, `BOTIQUIN_OBS`, `SALIDA_EMERGENCIA_OBS`, TRASPASADO, USUARIO) 
+        $queryFlota = " INSERT INTO `peg_int_del` (`ID`, ID_EMPRESA, ID_VEHICULO, CODIGO_VEHICULO, ID_USUARIO, FECHA, HORA, `VIDEOVIGILANCIA`, `PROHIBIDO_FUMAR`, `PTM`, 
+        `CAMBIO_MAXIMO`, `TARIFAS`, `OCUPACION_MAXIMA`, `BOTIQUIN`, `SALIDA_EMERGENCIA`, EXTINTOR, MARTILLOS, DESINSECTACION, VALIDAR_TARJETA, ASIENTOS_RESERVADOS, 
+        PMR, PERRO_GUIA, WEB_EMPRESA, WEB_CRTM, APERTURA_EMERGENCIA, OTROS, `VIDEOVIGILANCIA_OBS`, `PROHIBIDO_FUMAR_OBS`, 
+        `PTM_OBS`, `CAMBIO_MAXIMO_OBS`, `TARIFAS_OBS`, `OCUPACION_MAXIMA_OBS`, `BOTIQUIN_OBS`, `SALIDA_EMERGENCIA_OBS`, EXTINTOR_OBS, MARTILLOS_OBS, DESINSECTACION_OBS, 
+        VALIDAR_TARJETA_OBS, ASIENTOS_RESERVADOS_OBS, PMR_OBS, PERRO_GUIA_OBS, WEB_EMPRESA_OBS, WEB_CRTM_OBS, APERTURA_EMERGENCIA_OBS, OTROS_OBS, TRASPASADO, USUARIO) 
         VALUES (NULL, :ID_EMPRESA, :ID_VEHICULO, :CODIGO_VEHICULO, :ID_USUARIO, :FECHA, :HORA,  :VIDEOVIGILANCIA, :PROHIBIDO_FUMAR, :PTM, :CAMBIO_MAXIMO, :TARIFAS, 
-        :OCUPACION_MAXIMA, :BOTIQUIN, :SALIDA_EMERGENCIA, :VIDEOVIGILANCIA_OBS, :PROHIBIDO_FUMAR_OBS, :PTM_OBS, :CAMBIO_MAXIMO_OBS, :TARIFAS_OBS, 
-        :OCUPACION_MAXIMA_OBS, :BOTIQUIN_OBS, :SALIDA_EMERGENCIA_OBS, '0', :USUARIO)";
+        :OCUPACION_MAXIMA, :BOTIQUIN, :SALIDA_EMERGENCIA, :EXTINTOR, :MARTILLOS, :DESINSECTACION, :VALIDAR_TARJETA, :ASIENTOS_RESERVADOS,  
+        :PMR, :PERRO_GUIA, :WEB_EMPRESA, :WEB_CRTM, :APERTURA_EMERGENCIA, :OTROS, :VIDEOVIGILANCIA_OBS, :PROHIBIDO_FUMAR_OBS, :PTM_OBS, :CAMBIO_MAXIMO_OBS, :TARIFAS_OBS, 
+        :OCUPACION_MAXIMA_OBS, :BOTIQUIN_OBS, :SALIDA_EMERGENCIA_OBS, :EXTINTOR_OBS, :MARTILLOS_OBS, :DESINSECTACION_OBS, :VALIDAR_TARJETA_OBS, :ASIENTOS_RESERVADOS_OBS, 
+        :PMR_OBS, :PERRO_GUIA_OBS, :WEB_EMPRESA_OBS, :WEB_CRTM_OBS, :APERTURA_EMERGENCIA_OBS, :OTROS_OBS, '0', :USUARIO)";
 
         $stFlota = $conn->prepare($queryFlota);
 
@@ -659,6 +673,17 @@ class Pegatinas extends Vehiculo
         $stFlota->bindValue(":OCUPACION_MAXIMA", isset($datos['OCUPACION_MAXIMA_ID']) ? $datos['OCUPACION_MAXIMA_ID'] : NULL);
         $stFlota->bindValue(":BOTIQUIN", isset($datos['BOTIQUIN_ID']) ? $datos['BOTIQUIN_ID'] : NULL);
         $stFlota->bindValue(":SALIDA_EMERGENCIA", isset($datos['SALIDA_EMERGENCIA_ID']) ? $datos['SALIDA_EMERGENCIA_ID'] : NULL);
+        $stFlota->bindValue(":EXTINTOR", isset($datos['EXTINTOR_ID']) ? $datos['EXTINTOR_ID'] : NULL);
+        $stFlota->bindValue(":MARTILLOS", isset($datos['MARTILLOS_ID']) ? $datos['MARTILLOS_ID'] : NULL);
+        $stFlota->bindValue(":DESINSECTACION", isset($datos['DESINSECTACION_ID']) ? $datos['DESINSECTACION_ID'] : NULL);
+        $stFlota->bindValue(":VALIDAR_TARJETA", isset($datos['VALIDAR_TARJETA_ID']) ? $datos['VALIDAR_TARJETA_ID'] : NULL);
+        $stFlota->bindValue(":ASIENTOS_RESERVADOS", isset($datos['ASIENTOS_RESERVADOS_ID']) ? $datos['ASIENTOS_RESERVADOS_ID'] : NULL);
+        $stFlota->bindValue(":PMR", isset($datos['PMR_ID']) ? $datos['PMR_ID'] : NULL);
+        $stFlota->bindValue(":PERRO_GUIA", isset($datos['PERRO_GUIA_ID']) ? $datos['PERRO_GUIA_ID'] : NULL);
+        $stFlota->bindValue(":WEB_EMPRESA", isset($datos['WEB_EMPRESA_ID']) ? $datos['WEB_EMPRESA_ID'] : NULL);
+        $stFlota->bindValue(":WEB_CRTM", isset($datos['WEB_CRTM_ID']) ? $datos['WEB_CRTM_ID'] : NULL);
+        $stFlota->bindValue(":APERTURA_EMERGENCIA", isset($datos['APERTURA_EMERGENCIA_ID']) ? $datos['APERTURA_EMERGENCIA_ID'] : NULL);
+        $stFlota->bindValue(":OTROS", isset($datos['OTROS_ID']) ? $datos['OTROS_ID'] : NULL);
         $stFlota->bindValue(":VIDEOVIGILANCIA_OBS", isset($datos['VIDEOVIGILANCIA_ID_OBS']) ? $datos['VIDEOVIGILANCIA_ID_OBS'] : NULL);
         $stFlota->bindValue(":PROHIBIDO_FUMAR_OBS", isset($datos['PROHIBIDO_FUMAR_ID_OBS']) ? $datos['PROHIBIDO_FUMAR_ID_OBS'] : NULL);
         $stFlota->bindValue(":PTM_OBS", isset($datos['PTM_ID_OBS']) ? $datos['PTM_ID_OBS'] : NULL);
@@ -667,6 +692,17 @@ class Pegatinas extends Vehiculo
         $stFlota->bindValue(":OCUPACION_MAXIMA_OBS", isset($datos['OCUPACION_MAXIMA_ID_OBS']) ? $datos['OCUPACION_MAXIMA_ID_OBS'] : NULL);
         $stFlota->bindValue(":BOTIQUIN_OBS", isset($datos['BOTIQUIN_ID_OBS']) ? $datos['BOTIQUIN_ID_OBS'] : NULL);
         $stFlota->bindValue(":SALIDA_EMERGENCIA_OBS", isset($datos['SALIDA_EMERGENCIA_ID_OBS']) ? $datos['SALIDA_EMERGENCIA_ID_OBS'] : NULL);
+        $stFlota->bindValue(":EXTINTOR_OBS", isset($datos['EXTINTOR_OBS_ID']) ? $datos['EXTINTOR_OBS_ID'] : NULL);
+        $stFlota->bindValue(":MARTILLOS_OBS", isset($datos['MARTILLOS_OBS_ID']) ? $datos['MARTILLOS_OBS_ID'] : NULL);
+        $stFlota->bindValue(":DESINSECTACION_OBS", isset($datos['DESINSECTACION_OBS_ID']) ? $datos['DESINSECTACION_OBS_ID'] : NULL);
+        $stFlota->bindValue(":VALIDAR_TARJETA_OBS", isset($datos['VALIDAR_TARJETA_OBS_ID']) ? $datos['VALIDAR_TARJETA_OBS_ID'] : NULL);
+        $stFlota->bindValue(":ASIENTOS_RESERVADOS_OBS", isset($datos['ASIENTOS_RESERVADOS_OBS_ID']) ? $datos['ASIENTOS_RESERVADOS_OBS_ID'] : NULL);
+        $stFlota->bindValue(":PMR_OBS", isset($datos['PMR_OBS_ID']) ? $datos['PMR_OBS_ID'] : NULL);
+        $stFlota->bindValue(":PERRO_GUIA_OBS", isset($datos['PERRO_GUIA_OBS_ID']) ? $datos['PERRO_GUIA_OBS_ID'] : NULL);
+        $stFlota->bindValue(":WEB_EMPRESA_OBS", isset($datos['WEB_EMPRESA_OBS_ID']) ? $datos['WEB_EMPRESA_OBS_ID'] : NULL);
+        $stFlota->bindValue(":WEB_CRTM_OBS", isset($datos['WEB_CRTM_OBS_ID']) ? $datos['WEB_CRTM_OBS_ID'] : NULL);
+        $stFlota->bindValue(":APERTURA_EMERGENCIA_OBS", isset($datos['APERTURA_EMERGENCIA_OBS_ID']) ? $datos['APERTURA_EMERGENCIA_OBS_ID'] : NULL);
+        $stFlota->bindValue(":OTROS_OBS", isset($datos['OTROS_OBS_ID']) ? $datos['OTROS_OBS_ID'] : NULL);
         $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
 
         $stFlota->execute();
@@ -691,11 +727,15 @@ class Pegatinas extends Vehiculo
     {
         $conn = Db::getConector();
 
-        $queryFlota = "UPDATE `peg_int_del` SET FECHA = :FECHA, HORA = :HORA, `VIDEOVIGILANCIA` = :VIDEOVIGILANCIA, `PROHIBIDO_FUMAR` = :PROHIBIDO_FUMAR, `PTM` = :PTM, `CAMBIO_MAXIMO` = :CAMBIO_MAXIMO, 
-        `TARIFAS` = :TARIFAS, `OCUPACION_MAXIMA` = :OCUPACION_MAXIMA, `BOTIQUIN` = :BOTIQUIN, `SALIDA_EMERGENCIA` = :SALIDA_EMERGENCIA, `VIDEOVIGILANCIA_OBS` = :VIDEOVIGILANCIA_OBS, 
-        `PROHIBIDO_FUMAR_OBS` = :PROHIBIDO_FUMAR_OBS, `PTM_OBS` = :PTM_OBS, `CAMBIO_MAXIMO_OBS` = :CAMBIO_MAXIMO_OBS, `TARIFAS_OBS` = :TARIFAS_OBS, 
-        `OCUPACION_MAXIMA_OBS` = :OCUPACION_MAXIMA_OBS, `BOTIQUIN_OBS` = :BOTIQUIN_OBS, `SALIDA_EMERGENCIA_OBS` = :SALIDA_EMERGENCIA_OBS, TRASPASADO = 0, 
-        USUARIO = :USUARIO WHERE id = {$datos['IDID']}";
+        $queryFlota = "UPDATE `peg_int_del` SET FECHA = :FECHA, HORA = :HORA, `VIDEOVIGILANCIA` = :VIDEOVIGILANCIA, `PROHIBIDO_FUMAR` = :PROHIBIDO_FUMAR, `PTM` = :PTM, 
+        `CAMBIO_MAXIMO` = :CAMBIO_MAXIMO, `TARIFAS` = :TARIFAS, `OCUPACION_MAXIMA` = :OCUPACION_MAXIMA, `BOTIQUIN` = :BOTIQUIN, `SALIDA_EMERGENCIA` = :SALIDA_EMERGENCIA, 
+        EXTINTOR = :EXTINTOR, MARTILLOS = :MARTILLOS, DESINSECTACION = :DESINSECTACION, VALIDAR_TARJETA = :VALIDAR_TARJETA, ASIENTOS_RESERVADOS = :ASIENTOS_RESERVADOS, 
+        PMR = :PMR, PERRO_GUIA = :PERRO_GUIA, WEB_EMPRESA = :WEB_EMPRESA, WEB_CRTM = :WEB_CRTM, APERTURA_EMERGENCIA = :APERTURA_EMERGENCIA, OTROS = :OTROS, 
+        `VIDEOVIGILANCIA_OBS` = :VIDEOVIGILANCIA_OBS, `PROHIBIDO_FUMAR_OBS` = :PROHIBIDO_FUMAR_OBS, `PTM_OBS` = :PTM_OBS, `CAMBIO_MAXIMO_OBS` = :CAMBIO_MAXIMO_OBS, 
+        `TARIFAS_OBS` = :TARIFAS_OBS, `OCUPACION_MAXIMA_OBS` = :OCUPACION_MAXIMA_OBS, `BOTIQUIN_OBS` = :BOTIQUIN_OBS, `SALIDA_EMERGENCIA_OBS` = :SALIDA_EMERGENCIA_OBS, 
+        EXTINTOR_OBS = :EXTINTOR_OBS, MARTILLOS_OBS = :MARTILLOS_OBS, DESINSECTACION_OBS = :DESINSECTACION_OBS, VALIDAR_TARJETA_OBS = :VALIDAR_TARJETA_OBS, 
+        ASIENTOS_RESERVADOS_OBS = :ASIENTOS_RESERVADOS_OBS, PMR_OBS = :PMR_OBS, PERRO_GUIA_OBS = :PERRO_GUIA_OBS, WEB_EMPRESA_OBS = :WEB_EMPRESA_OBS, WEB_CRTM_OBS = :WEB_CRTM_OBS, 
+        APERTURA_EMERGENCIA_OBS = :APERTURA_EMERGENCIA_OBS, OTROS_OBS = :OTROS_OBS, TRASPASADO = 0, USUARIO = :USUARIO WHERE id = {$datos['IDID']}";
 
         $stFlota = $conn->prepare($queryFlota);
 
@@ -712,6 +752,17 @@ class Pegatinas extends Vehiculo
         $stFlota->bindValue(":OCUPACION_MAXIMA", isset($datos['OCUPACION_MAXIMA_ID']) ? $datos['OCUPACION_MAXIMA_ID'] : NULL);
         $stFlota->bindValue(":BOTIQUIN", isset($datos['BOTIQUIN_ID']) ? $datos['BOTIQUIN_ID'] : NULL);
         $stFlota->bindValue(":SALIDA_EMERGENCIA", isset($datos['SALIDA_EMERGENCIA_ID']) ? $datos['SALIDA_EMERGENCIA_ID'] : NULL);
+        $stFlota->bindValue(":EXTINTOR", isset($datos['EXTINTOR_ID']) ? $datos['EXTINTOR_ID'] : NULL);
+        $stFlota->bindValue(":MARTILLOS", isset($datos['MARTILLOS_ID']) ? $datos['MARTILLOS_ID'] : NULL);
+        $stFlota->bindValue(":DESINSECTACION", isset($datos['DESINSECTACION_ID']) ? $datos['DESINSECTACION_ID'] : NULL);
+        $stFlota->bindValue(":VALIDAR_TARJETA", isset($datos['VALIDAR_TARJETA_ID']) ? $datos['VALIDAR_TARJETA_ID'] : NULL);
+        $stFlota->bindValue(":ASIENTOS_RESERVADOS", isset($datos['ASIENTOS_RESERVADOS_ID']) ? $datos['ASIENTOS_RESERVADOS_ID'] : NULL);
+        $stFlota->bindValue(":PMR", isset($datos['PMR_ID']) ? $datos['PMR_ID'] : NULL);
+        $stFlota->bindValue(":PERRO_GUIA", isset($datos['PERRO_GUIA_ID']) ? $datos['PERRO_GUIA_ID'] : NULL);
+        $stFlota->bindValue(":WEB_EMPRESA", isset($datos['WEB_EMPRESA_ID']) ? $datos['WEB_EMPRESA_ID'] : NULL);
+        $stFlota->bindValue(":WEB_CRTM", isset($datos['WEB_CRTM_ID']) ? $datos['WEB_CRTM_ID'] : NULL);
+        $stFlota->bindValue(":APERTURA_EMERGENCIA", isset($datos['APERTURA_EMERGENCIA_ID']) ? $datos['APERTURA_EMERGENCIA_ID'] : NULL);
+        $stFlota->bindValue(":OTROS", isset($datos['OTROS_ID']) ? $datos['OTROS_ID'] : NULL);
         $stFlota->bindValue(":VIDEOVIGILANCIA_OBS", isset($datos['VIDEOVIGILANCIA_ID_OBS']) ? $datos['VIDEOVIGILANCIA_ID_OBS'] : NULL);
         $stFlota->bindValue(":PROHIBIDO_FUMAR_OBS", isset($datos['PROHIBIDO_FUMAR_ID_OBS']) ? $datos['PROHIBIDO_FUMAR_ID_OBS'] : NULL);
         $stFlota->bindValue(":PTM_OBS", isset($datos['PTM_ID_OBS']) ? $datos['PTM_ID_OBS'] : NULL);
@@ -720,6 +771,17 @@ class Pegatinas extends Vehiculo
         $stFlota->bindValue(":OCUPACION_MAXIMA_OBS", isset($datos['OCUPACION_MAXIMA_ID_OBS']) ? $datos['OCUPACION_MAXIMA_ID_OBS'] : NULL);
         $stFlota->bindValue(":BOTIQUIN_OBS", isset($datos['BOTIQUIN_ID_OBS']) ? $datos['BOTIQUIN_ID_OBS'] : NULL);
         $stFlota->bindValue(":SALIDA_EMERGENCIA_OBS", isset($datos['SALIDA_EMERGENCIA_ID_OBS']) ? $datos['SALIDA_EMERGENCIA_ID_OBS'] : NULL);
+        $stFlota->bindValue(":EXTINTOR_OBS", isset($datos['EXTINTOR_OBS_ID']) ? $datos['EXTINTOR_OBS_ID'] : NULL);
+        $stFlota->bindValue(":MARTILLOS_OBS", isset($datos['MARTILLOS_OBS_ID']) ? $datos['MARTILLOS_OBS_ID'] : NULL);
+        $stFlota->bindValue(":DESINSECTACION_OBS", isset($datos['DESINSECTACION_OBS_ID']) ? $datos['DESINSECTACION_OBS_ID'] : NULL);
+        $stFlota->bindValue(":VALIDAR_TARJETA_OBS", isset($datos['VALIDAR_TARJETA_OBS_ID']) ? $datos['VALIDAR_TARJETA_OBS_ID'] : NULL);
+        $stFlota->bindValue(":ASIENTOS_RESERVADOS_OBS", isset($datos['ASIENTOS_RESERVADOS_OBS_ID']) ? $datos['ASIENTOS_RESERVADOS_OBS_ID'] : NULL);
+        $stFlota->bindValue(":PMR_OBS", isset($datos['PMR_OBS_ID']) ? $datos['PMR_OBS_ID'] : NULL);
+        $stFlota->bindValue(":PERRO_GUIA_OBS", isset($datos['PERRO_GUIA_OBS_ID']) ? $datos['PERRO_GUIA_OBS_ID'] : NULL);
+        $stFlota->bindValue(":WEB_EMPRESA_OBS", isset($datos['WEB_EMPRESA_OBS_ID']) ? $datos['WEB_EMPRESA_OBS_ID'] : NULL);
+        $stFlota->bindValue(":WEB_CRTM_OBS", isset($datos['WEB_CRTM_OBS_ID']) ? $datos['WEB_CRTM_OBS_ID'] : NULL);
+        $stFlota->bindValue(":APERTURA_EMERGENCIA_OBS", isset($datos['APERTURA_EMERGENCIA_OBS_ID']) ? $datos['APERTURA_EMERGENCIA_OBS_ID'] : NULL);
+        $stFlota->bindValue(":OTROS_OBS", isset($datos['OTROS_OBS_ID']) ? $datos['OTROS_OBS_ID'] : NULL);
         $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
 
         $stFlota->execute();
@@ -2148,6 +2210,30 @@ class Pegatinas extends Vehiculo
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralIzquierdo[$i]['NUMERO_VEHICULO_OBS']}");
             $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralIzquierdo[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Exterior Lateral Izquierdo');
+            $sheet->setCellValue("E$fila", "PUBLICIDAD");
+            if ($revisionesPegatinasExteriorLateralIzquierdo[$i]['PUBLICIDAD'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralIzquierdo[$i]['PUBLICIDAD_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorLateralIzquierdo[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorLateralIzquierdo[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Exterior Lateral Izquierdo');
+            $sheet->setCellValue("E$fila", "OTROS");
+            if ($revisionesPegatinasExteriorLateralIzquierdo[$i]['OTROS'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorLateralIzquierdo[$i]['OTROS_OBS']}");
+            $fila++;
 
             //Pegatinas exterior luna
 
@@ -2237,6 +2323,30 @@ class Pegatinas extends Vehiculo
                 $sheet->setCellValue("G$fila", "X");
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorTrasera[$i]['SALIDA_EMERGENCIA_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorTrasera[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorTrasera[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorTrasera[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorTrasera[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Exterior Trasero');
+            $sheet->setCellValue("E$fila", "PUBLICIDAD");
+            if ($revisionesPegatinasExteriorTrasera[$i]['PUBLICIDAD'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorTrasera[$i]['PUBLICIDAD_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasExteriorTrasera[$i]['FECHA'] . ' ' . $revisionesPegatinasExteriorTrasera[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasExteriorTrasera[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasExteriorTrasera[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Exterior Trasero');
+            $sheet->setCellValue("E$fila", "OTROS");
+            if ($revisionesPegatinasExteriorTrasera[$i]['OTROS'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasExteriorTrasera[$i]['OTROS_OBS']}");
             $fila++;
 
             //Pegatinas Interior Central
@@ -2387,6 +2497,138 @@ class Pegatinas extends Vehiculo
                 $sheet->setCellValue("G$fila", "X");
             }
             $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorDelantero[$i]['SALIDA_EMERGENCIA_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorDelantero[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorDelantero[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorDelantero[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior Delantero');
+            $sheet->setCellValue("E$fila", "EXTINTOR");
+            if ($revisionesPegatinasInteriorDelantero[$i]['EXTINTOR'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorDelantero[$i]['EXTINTOR_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorDelantero[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorDelantero[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorDelantero[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior Delantero');
+            $sheet->setCellValue("E$fila", "MARTILLOS");
+            if ($revisionesPegatinasInteriorDelantero[$i]['MARTILLOS'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorDelantero[$i]['MARTILLOS_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorDelantero[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorDelantero[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorDelantero[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior Delantero');
+            $sheet->setCellValue("E$fila", "DESINSECTACION");
+            if ($revisionesPegatinasInteriorDelantero[$i]['DESINSECTACION'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorDelantero[$i]['DESINSECTACION_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorDelantero[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorDelantero[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorDelantero[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior Delantero');
+            $sheet->setCellValue("E$fila", "VALIDAR TARJETAS");
+            if ($revisionesPegatinasInteriorDelantero[$i]['VALIDAR_TARJETAS'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorDelantero[$i]['VALIDAR_TARJETAS_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorDelantero[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorDelantero[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorDelantero[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior Delantero');
+            $sheet->setCellValue("E$fila", "ASIENTOS RESERVADOS");
+            if ($revisionesPegatinasInteriorDelantero[$i]['ASIENTOS_RESERVADOS'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorDelantero[$i]['ASIENTOS_RESERVADOS_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorDelantero[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorDelantero[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorDelantero[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior Delantero');
+            $sheet->setCellValue("E$fila", "PMR");
+            if ($revisionesPegatinasInteriorDelantero[$i]['PMR'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorDelantero[$i]['PMR_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorDelantero[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorDelantero[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorDelantero[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior Delantero');
+            $sheet->setCellValue("E$fila", "PERRO GUIA");
+            if ($revisionesPegatinasInteriorDelantero[$i]['PERRO_GUIA'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorDelantero[$i]['PERRO_GUIA_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorDelantero[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorDelantero[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorDelantero[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior Delantero');
+            $sheet->setCellValue("E$fila", "WEB_EMPRESA");
+            if ($revisionesPegatinasInteriorDelantero[$i]['WEB_EMPRESA'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorDelantero[$i]['WEB_EMPRESA_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorDelantero[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorDelantero[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorDelantero[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior Delantero');
+            $sheet->setCellValue("E$fila", "WEB CRTM");
+            if ($revisionesPegatinasInteriorDelantero[$i]['WEB_CRTM'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorDelantero[$i]['WEB_CRTM_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorDelantero[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorDelantero[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorDelantero[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior Delantero');
+            $sheet->setCellValue("E$fila", "APERTURA EMERGENCIA");
+            if ($revisionesPegatinasInteriorDelantero[$i]['APERTURA_EMERGENCIA'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorDelantero[$i]['APERTURA_EMERGENCIA_OBS']}");
+            $fila++;
+            $sheet->setCellValue("A$fila", $revisionesPegatinasInteriorDelantero[$i]['FECHA'] . ' ' . $revisionesPegatinasInteriorDelantero[$i]['HORA']);
+            $sheet->setCellValue("B$fila", $revisionesPegatinasInteriorDelantero[$i]['CODIGO_VEHICULO']);
+            $sheet->setCellValue("C$fila", $revisionesPegatinasInteriorDelantero[$i]['USUARIO']);
+            $sheet->setCellValue("D$fila", 'Interior Delantero');
+            $sheet->setCellValue("E$fila", "OTROS");
+            if ($revisionesPegatinasInteriorDelantero[$i]['OTROS'] == 1) {
+                $sheet->setCellValue("F$fila", "X");
+            } else {
+                $sheet->setCellValue("G$fila", "X");
+            }
+            $sheet->setCellValue("H$fila", "{$revisionesPegatinasInteriorDelantero[$i]['OTROS_OBS']}");
             $fila++;
 
 

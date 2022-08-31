@@ -248,6 +248,36 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                             <textarea class="form-control" id="SALIDA_EMERGENCIA_ET_OBS" rows="2" name="SALIDA_EMERGENCIA_ET_OBS"><?php echo $revisionET['SALIDA_EMERGENCIA_OBS'] ?></textarea>
                         </div>
                     </div>
+                    <div class="mt-2">
+                        <span class="mr-2">PUBLICIDAD</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="PUBLICIDAD_ET" id="PUBLICIDAD_ET" value="1" <?php if ($revisionET['PUBLICIDAD'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="PUBLICIDAD_ET">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="PUBLICIDAD_ET" id="PUBLICIDAD_ET_No" value="0" <?php if ($revisionET['PUBLICIDAD'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="PUBLICIDAD_ET_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="PUBLICIDAD_ET_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="PUBLICIDAD_ET_OBS" rows="2" name="PUBLICIDAD_ET_OBS"><?php echo $revisionET['PUBLICIDAD_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">OTROS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="OTROS_ET" id="OTROS_ET" value="1" <?php if ($revisionET['OTROS'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="OTROS_ET">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="OTROS_ET" id="OTROS_ET_No" value="0" <?php if ($revisionET['OTROS'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="OTROS_ET_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="OTROS_ET_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="OTROS_ET_OBS" rows="2" name="OTROS_ET_OBS"><?php echo $revisionET['OTROS_OBS'] ?></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -988,6 +1018,171 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                         <div class="form-group">
                             <label for="SALIDA_EMERGENCIA_ID_OBS">OBSERVACIONES</label>
                             <textarea class="form-control" id="SALIDA_EMERGENCIA_ID_OBS" rows="2" name="SALIDA_EMERGENCIA_ID_OBS"><?php echo $revisionID['SALIDA_EMERGENCIA_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">EXTINTOR</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="EXTINTOR_ID" id="EXTINTOR_ID" value="1" <?php if ($revisionID['EXTINTOR'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="EXTINTOR_ID">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="EXTINTOR_ID" id="EXTINTOR_ID_No" value="0" <?php if ($revisionID['EXTINTOR'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="EXTINTOR_ID_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="EXTINTOR_ID_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="EXTINTOR_ID_OBS" rows="2" name="EXTINTOR_ID_OBS"><?php echo $revisionID['EXTINTOR_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">MARTILLOS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="MARTILLOS_ID" id="MARTILLOS_ID" value="1" <?php if ($revisionID['MARTILLOS'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="MARTILLOS_ID">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="MARTILLOS_ID" id="MARTILLOS_ID_No" value="0" <?php if ($revisionID['MARTILLOS'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="MARTILLOS_ID_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="MARTILLOS_ID_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="MARTILLOS_ID_OBS" rows="2" name="MARTILLOS_ID_OBS"><?php echo $revisionID['MARTILLOS_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">DESINSECTACIÓN</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="DESINSECTACION_ID" id="DESINSECTACION_ID" value="1" <?php if ($revisionID['DESINSECTACION'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="DESINSECTACION_ID">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="DESINSECTACION_ID" id="DESINSECTACION_ID_No" value="0" <?php if ($revisionID['DESINSECTACION'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="DESINSECTACION_ID_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="DESINSECTACION_ID_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="DESINSECTACION_ID_OBS" rows="2" name="DESINSECTACION_ID_OBS"><?php echo $revisionID['DESINSECTACION_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">VALIDAR TARJETAS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="VALIDAR_TARJETAS_ID" id="VALIDAR_TARJETAS_ID" value="1" <?php if ($revisionID['VALIDAR_TARJETAS'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="VALIDAR_TARJETAS_ID">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="VALIDAR_TARJETAS_ID" id="VALIDAR_TARJETAS_ID_No" value="0" <?php if ($revisionID['VALIDAR_TARJETAS'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="VALIDAR_TARJETAS_ID_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="VALIDAR_TARJETAS_ID_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="VALIDAR_TARJETAS_ID_OBS" rows="2" name="VALIDAR_TARJETAS_ID_OBS"><?php echo $revisionID['VALIDAR_TARJETAS_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">ASIENTOS RESERVADOS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ASIENTOS_RESERVADOS_ID" id="ASIENTOS_RESERVADOS_ID" value="1" <?php if ($revisionID['ASIENTOS_RESERVADOS'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="ASIENTOS_RESERVADOS_ID">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ASIENTOS_RESERVADOS_ID" id="ASIENTOS_RESERVADOS_ID_No" value="0" <?php if ($revisionID['ASIENTOS_RESERVADOS'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="ASIENTOS_RESERVADOS_ID_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="ASIENTOS_RESERVADOS_ID_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="ASIENTOS_RESERVADOS_ID_OBS" rows="2" name="ASIENTOS_RESERVADOS_ID_OBS"><?php echo $revisionID['ASIENTOS_RESERVADOS_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">PMR</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="PMR_ID" id="PMR_ID" value="1" <?php if ($revisionID['PMR'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="PMR_ID">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="PMR_ID" id="PMR_ID_No" value="0" <?php if ($revisionID['PMR'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="PMR_ID_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="PMR_ID_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="PMR_ID_OBS" rows="2" name="PMR_ID_OBS"><?php echo $revisionID['PMR_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">PERRO GUÍA</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="PERRO_GUIA_ID" id="PERRO_GUIA_ID" value="1" <?php if ($revisionID['PERRO_GUIA'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="PERRO_GUIA_ID">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="PERRO_GUIA_ID" id="PERRO_GUIA_ID_No" value="0" <?php if ($revisionID['PERRO_GUIA'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="PERRO_GUIA_ID_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="PERRO_GUIA_ID_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="PERRO_GUIA_ID_OBS" rows="2" name="PERRO_GUIA_ID_OBS"><?php echo $revisionID['PERRO_GUIA_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">WEB EMPRESA</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="WEB_EMPRESA_ID" id="WEB_EMPRESA_ID" value="1" <?php if ($revisionID['WEB_EMPRESA'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="WEB_EMPRESA_ID">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="WEB_EMPRESA_ID" id="WEB_EMPRESA_ID_No" value="0" <?php if ($revisionID['WEB_EMPRESA'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="WEB_EMPRESA_ID_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="WEB_EMPRESA_ID_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="WEB_EMPRESA_ID_OBS" rows="2" name="WEB_EMPRESA_ID_OBS"><?php echo $revisionID['WEB_EMPRESA_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">WEB CRTM</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="WEB_CRTM_ID" id="WEB_CRTM_ID" value="1" <?php if ($revisionID['WEB_CRTM'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="WEB_CRTM_ID">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="WEB_CRTM_ID" id="WEB_CRTM_ID_No" value="0" <?php if ($revisionID['WEB_CRTM'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="WEB_CRTM_ID_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="WEB_CRTM_ID_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="WEB_CRTM_ID_OBS" rows="2" name="WEB_CRTM_ID_OBS"><?php echo $revisionID['WEB_CRTM_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">APERTURA DE EMERGENCIA</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="APERTURA_EMERGENCIA_ID" id="APERTURA_EMERGENCIA_ID" value="1" <?php if ($revisionID['APERTURA_EMERGENCIA'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="APERTURA_EMERGENCIA_ID">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="APERTURA_EMERGENCIA_ID" id="APERTURA_EMERGENCIA_ID_No" value="0" <?php if ($revisionID['APERTURA_EMERGENCIA'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="APERTURA_EMERGENCIA_ID_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="APERTURA_EMERGENCIA_ID_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="APERTURA_EMERGENCIA_ID_OBS" rows="2" name="APERTURA_EMERGENCIA_ID_OBS"><?php echo $revisionID['APERTURA_EMERGENCIA_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">OTROS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="OTROS_ID" id="OTROS_ID" value="1" <?php if ($revisionID['OTROS'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="OTROS_ID">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="OTROS_ID" id="OTROS_ID_No" value="0" <?php if ($revisionID['OTROS'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="OTROS_ID_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="OTROS_ID_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="OTROS_ID_OBS" rows="2" name="OTROS_ID_OBS"><?php echo $revisionID['OTROS_OBS'] ?></textarea>
                         </div>
                     </div>
                 </div>
