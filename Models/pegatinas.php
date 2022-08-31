@@ -172,8 +172,8 @@ class Pegatinas extends Vehiculo
         $conn = Db::getConector();
 
 
-        $queryFlota = " INSERT INTO `peg_ext_lateral_derecho` (`ID`, ID_EMPRESA, ID_VEHICULO, CODIGO_VEHICULO, ID_USUARIO, FECHA, HORA, `LOGO_EMPRESA`, `WEB_CRTM`, `PMR`, `STOP_COVID`, `SALIDA`, 
-        `ENTRADA`, `MINUSVALIDO`, `CAMARA_COMERCIO`, `SALIDA_EMERGENCIA`, `GRUPO_RUIZ`, `NUMERO_VEHICULO`, `APERTURA_EMERGENCIA`, 
+        $queryFlota = " INSERT INTO `peg_ext_lateral_derecho` (`ID`, ID_EMPRESA, ID_VEHICULO, CODIGO_VEHICULO, ID_USUARIO, FECHA, HORA, `LOGO_EMPRESA`, `WEB_CRTM`, `PMR`, 
+        `STOP_COVID`, `SALIDA`, `ENTRADA`, `MINUSVALIDO`, `CAMARA_COMERCIO`, `SALIDA_EMERGENCIA`, `GRUPO_RUIZ`, `NUMERO_VEHICULO`, `APERTURA_EMERGENCIA`, 
         `SOLICITUD_RAMPA`, ACCESO_PMR, LOGO_CRTM, SALIDA_PUERTAS, SILLA_RUEDAS, CARRITO, PUBLICIDAD, OTROS, `LOGO_EMPRESA_OBS`, `WEB_CRTM_OBS`, `PMR_OBS`, 
         `STOP_COVID_OBS`, `SALIDA_OBS`, `ENTRADA_OBS`, `MINUSVALIDO_OBS`, `CAMARA_COMERCIO_OBS`, `SALIDA_EMERGENCIA_OBS`, `GRUPO_RUIZ_OBS`, `NUMERO_VEHICULO_OBS`, 
         `APERTURA_EMERGENCIA_OBS`, `SOLICITUD_RAMPA_OBS`, ACCESO_PMR_OBS, LOGO_CRTM_OBS, SALIDA_PUERTAS_OBS, SILLA_RUEDAS_OBS, CARRITO_OBS, PUBLICIDAD_OBS, OTROS_OBS, 
@@ -230,7 +230,7 @@ class Pegatinas extends Vehiculo
         $stFlota->bindValue(":SOLICITUD_RAMPA_OBS", (!empty($datos['SOLICITUD_RAMPA_ELD_OBS'])) ? $datos['SOLICITUD_RAMPA_ELD_OBS'] : NULL);
         $stFlota->bindValue(":ACCESO_PMR_OBS", (!empty($datos['ACCESO_PMR_ELD_OBS'])) ? $datos['ACCESO_PMR_ELD_OBS'] : NULL);
         $stFlota->bindValue(":LOGO_CRTM_OBS", (!empty($datos['LOGO_CRTM_ELD_OBS'])) ? $datos['LOGO_CRTM_ELD_OBS'] : NULL);
-        $stFlota->bindValue(":SALIDA_PUERTOS_OBS", (!empty($datos['SALIDA_PUERTOS_ELD_OBS'])) ? $datos['SALIDA_PUERTOS_ELD_OBS'] : NULL);
+        $stFlota->bindValue(":SALIDA_PUERTAS_OBS", (!empty($datos['SALIDA_PUERTAS_ELD_OBS'])) ? $datos['SALIDA_PUERTAS_ELD_OBS'] : NULL);
         $stFlota->bindValue(":SILLA_RUEDAS_OBS", (!empty($datos['SILLA_RUEDAS_ELD_OBS'])) ? $datos['SILLA_RUEDAS_ELD_OBS'] : NULL);
         $stFlota->bindValue(":CARRITO_OBS", (!empty($datos['CARRITO_ELD_OBS'])) ? $datos['CARRITO_ELD_OBS'] : NULL);
         $stFlota->bindValue(":PUBLICIDAD_OBS", (!empty($datos['PUBLICIDAD_ELD_OBS'])) ? $datos['PUBLICIDAD_ELD_OBS'] : NULL);
@@ -344,11 +344,11 @@ class Pegatinas extends Vehiculo
         $conn = Db::getConector();
 
         $queryFlota = " INSERT INTO `peg_ext_lateral_izq` (`ID`, ID_EMPRESA, ID_VEHICULO, CODIGO_VEHICULO, ID_USUARIO, FECHA, HORA, `CRTM_LOGO`, `LOGO_EMPRESA`, `WEB_CRTM`, `CAMARA_COMERCIO`, 
-        `SALIDA_EMERGENCIA`, `GRUPO_RUIZ`, `NUMERO_VEHICULO`, `CRTM_LOGO_OBS`, `LOGO_EMPRESA_OBS`, `WEB_CRTM_OBS`, 
-        `CAMARA_COMERCIO_OBS`, `SALIDA_EMERGENCIA_OBS`, `GRUPO_RUIZ_OBS`, `NUMERO_VEHICULO_OBS`, TRASPASADO, USUARIO) 
+        `SALIDA_EMERGENCIA`, `GRUPO_RUIZ`, `NUMERO_VEHICULO`, PUBLICIDAD, OTROS, `CRTM_LOGO_OBS`, `LOGO_EMPRESA_OBS`, `WEB_CRTM_OBS`, 
+        `CAMARA_COMERCIO_OBS`, `SALIDA_EMERGENCIA_OBS`, `GRUPO_RUIZ_OBS`, `NUMERO_VEHICULO_OBS`, PUBLICIDAD_OBS, OTROS_OBS, TRASPASADO, USUARIO) 
         VALUES (NULL, :ID_EMPRESA, :ID_VEHICULO, :CODIGO_VEHICULO, :ID_USUARIO, :FECHA, :HORA, :CRTM_LOGO, :LOGO_EMPRESA, :WEB_CRTM, :CAMARA_COMERCIO, :SALIDA_EMERGENCIA, 
-        :GRUPO_RUIZ, :NUMERO_VEHICULO, :CRTM_LOGO_OBS, :LOGO_EMPRESA_OBS, :WEB_CRTM_OBS, :CAMARA_COMERCIO_OBS, :SALIDA_EMERGENCIA_OBS, :GRUPO_RUIZ_OBS, 
-        :NUMERO_VEHICULO_OBS, '0', :USUARIO)";
+        :GRUPO_RUIZ, :NUMERO_VEHICULO, :PUBLICIDAD, :OTROS, :CRTM_LOGO_OBS, :LOGO_EMPRESA_OBS, :WEB_CRTM_OBS, :CAMARA_COMERCIO_OBS, :SALIDA_EMERGENCIA_OBS, :GRUPO_RUIZ_OBS, 
+        :NUMERO_VEHICULO_OBS, :PUBLICIDAD_OBS, :OTROS_OBS, '0', :USUARIO)";
 
         $stFlota = $conn->prepare($queryFlota);
 
@@ -367,6 +367,8 @@ class Pegatinas extends Vehiculo
         $stFlota->bindValue(":SALIDA_EMERGENCIA", isset($datos['SALIDA_EMERGENCIA_ELI']) ? $datos['SALIDA_EMERGENCIA_ELI'] : NULL);
         $stFlota->bindValue(":GRUPO_RUIZ", isset($datos['GRUPO_RUIZ_ELI']) ? $datos['GRUPO_RUIZ_ELI'] : NULL);
         $stFlota->bindValue(":NUMERO_VEHICULO", isset($datos['NUMERO_VEHICULO_ELI']) ? $datos['NUMERO_VEHICULO_ELI'] : NULL);
+        $stFlota->bindValue(":PUBLICIDAD", isset($datos['PUBLICIDAD_ELI']) ? $datos['PUBLICIDAD_ELI'] : NULL);
+        $stFlota->bindValue(":OTROS", isset($datos['OTROS_ELI']) ? $datos['OTROS_ELI'] : NULL);
         $stFlota->bindValue(":CRTM_LOGO_OBS", (!empty($datos['CRTM_LOGO_ELI_OBS'])) ? $datos['CRTM_LOGO_ELI_OBS'] : NULL);
         $stFlota->bindValue(":LOGO_EMPRESA_OBS", (!empty($datos['LOGO_EMPRESA_ELI_OBS'])) ? $datos['LOGO_EMPRESA_ELI_OBS'] : NULL);
         $stFlota->bindValue(":WEB_CRTM_OBS", (!empty($datos['WEB_CRTM_ELI_OBS'])) ? $datos['WEB_CRTM_ELI_OBS'] : NULL);
@@ -374,6 +376,8 @@ class Pegatinas extends Vehiculo
         $stFlota->bindValue(":SALIDA_EMERGENCIA_OBS", (!empty($datos['SALIDA_EMERGENCIA_ELI_OBS'])) ? $datos['SALIDA_EMERGENCIA_ELI_OBS'] : NULL);
         $stFlota->bindValue(":GRUPO_RUIZ_OBS", (!empty($datos['GRUPO_RUIZ_ELI_OBS'])) ? $datos['GRUPO_RUIZ_ELI_OBS'] : NULL);
         $stFlota->bindValue(":NUMERO_VEHICULO_OBS", (!empty($datos['NUMERO_VEHICULO_ELI_OBS'])) ? $datos['NUMERO_VEHICULO_ELI_OBS'] : NULL);
+        $stFlota->bindValue(":PUBLICIDAD_OBS", (!empty($datos['PUBLICIDAD_ELI_OBS'])) ? $datos['PUBLICIDAD_ELI_OBS'] : NULL);
+        $stFlota->bindValue(":OTROS_OBS", (!empty($datos['OTROS_ELI_OBS'])) ? $datos['OTROS_ELI_OBS'] : NULL);
         $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
 
         $stFlota->execute();
@@ -400,8 +404,9 @@ class Pegatinas extends Vehiculo
 
         $queryFlota = "UPDATE `peg_ext_lateral_izq` SET FECHA = :FECHA, HORA = :HORA, `CRTM_LOGO` = :CRTM_LOGO, `LOGO_EMPRESA` = :LOGO_EMPRESA, `WEB_CRTM` = :WEB_CRTM, 
         `CAMARA_COMERCIO` = :CAMARA_COMERCIO, `SALIDA_EMERGENCIA` = :SALIDA_EMERGENCIA, `GRUPO_RUIZ` = :GRUPO_RUIZ, `NUMERO_VEHICULO` = :NUMERO_VEHICULO, 
-        `CRTM_LOGO_OBS` = :CRTM_LOGO_OBS, `LOGO_EMPRESA_OBS` = :LOGO_EMPRESA_OBS, `WEB_CRTM_OBS` = :WEB_CRTM_OBS, `CAMARA_COMERCIO_OBS` = :CAMARA_COMERCIO_OBS, 
-        `SALIDA_EMERGENCIA_OBS` = :SALIDA_EMERGENCIA_OBS, `GRUPO_RUIZ_OBS` = :GRUPO_RUIZ_OBS, `NUMERO_VEHICULO_OBS` = :NUMERO_VEHICULO_OBS, TRASPASADO = 0, USUARIO = :USUARIO
+        PUBLICIDAD = :PUBLICIDAD, OTROS = :OTROS, `CRTM_LOGO_OBS` = :CRTM_LOGO_OBS, `LOGO_EMPRESA_OBS` = :LOGO_EMPRESA_OBS, `WEB_CRTM_OBS` = :WEB_CRTM_OBS, 
+        `CAMARA_COMERCIO_OBS` = :CAMARA_COMERCIO_OBS, `SALIDA_EMERGENCIA_OBS` = :SALIDA_EMERGENCIA_OBS, `GRUPO_RUIZ_OBS` = :GRUPO_RUIZ_OBS, 
+        `NUMERO_VEHICULO_OBS` = :NUMERO_VEHICULO_OBS, PUBLICIDAD_OBS = :PUBLICDAD_OBS, OTROS_OBS = :OTROS_OBS, TRASPASADO = 0, USUARIO = :USUARIO
         WHERE id = {$datos['IDELI']}";
 
         $stFlota = $conn->prepare($queryFlota);
@@ -418,6 +423,8 @@ class Pegatinas extends Vehiculo
         $stFlota->bindValue(":SALIDA_EMERGENCIA", isset($datos['SALIDA_EMERGENCIA_ELI']) ? $datos['SALIDA_EMERGENCIA_ELI'] : NULL);
         $stFlota->bindValue(":GRUPO_RUIZ", isset($datos['GRUPO_RUIZ_ELI']) ? $datos['GRUPO_RUIZ_ELI'] : NULL);
         $stFlota->bindValue(":NUMERO_VEHICULO", isset($datos['NUMERO_VEHICULO_ELI']) ? $datos['NUMERO_VEHICULO_ELI'] : NULL);
+        $stFlota->bindValue(":PUBLICIDAD", isset($datos['PUBLICIDAD_ELI']) ? $datos['PUBLICIDAD_ELI'] : NULL);
+        $stFlota->bindValue(":OTROS", isset($datos['OTROS_ELI']) ? $datos['OTROS_ELI'] : NULL);
         $stFlota->bindValue(":CRTM_LOGO_OBS", (!empty($datos['CRTM_LOGO_ELI_OBS'])) ? $datos['CRTM_LOGO_ELI_OBS'] : NULL);
         $stFlota->bindValue(":LOGO_EMPRESA_OBS", (!empty($datos['LOGO_EMPRESA_ELI_OBS'])) ? $datos['LOGO_EMPRESA_ELI_OBS'] : NULL);
         $stFlota->bindValue(":WEB_CRTM_OBS", (!empty($datos['WEB_CRTM_ELI_OBS'])) ? $datos['WEB_CRTM_ELI_OBS'] : NULL);
@@ -425,6 +432,8 @@ class Pegatinas extends Vehiculo
         $stFlota->bindValue(":SALIDA_EMERGENCIA_OBS", (!empty($datos['SALIDA_EMERGENCIA_ELI_OBS'])) ? $datos['SALIDA_EMERGENCIA_ELI_OBS'] : NULL);
         $stFlota->bindValue(":GRUPO_RUIZ_OBS", (!empty($datos['GRUPO_RUIZ_ELI_OBS'])) ? $datos['GRUPO_RUIZ_ELI_OBS'] : NULL);
         $stFlota->bindValue(":NUMERO_VEHICULO_OBS", (!empty($datos['NUMERO_VEHICULO_ELI_OBS'])) ? $datos['NUMERO_VEHICULO_ELI_OBS'] : NULL);
+        $stFlota->bindValue(":PUBLICIDAD_OBS", (!empty($datos['PUBLICIDAD_ELI_OBS'])) ? $datos['PUBLICIDAD_ELI_OBS'] : NULL);
+        $stFlota->bindValue(":OTROS_OBS", (!empty($datos['OTROS_ELI_OBS'])) ? $datos['OTROS_ELI_OBS'] : NULL);
         $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
 
         $stFlota->execute();
