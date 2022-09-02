@@ -13,6 +13,8 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
     <input type="hidden" value="<?php echo $revisionELuna['ID'] ?>" name="IDELuna">
     <input type="hidden" value="<?php echo $revisionIC['ID'] ?>" name="IDIC">
     <input type="hidden" value="<?php echo $revisionID['ID'] ?>" name="IDID">
+    <input type="hidden" value="<?php echo $revisionILI['ID'] ?>" name="IDILI">
+    <input type="hidden" value="<?php echo $revisionILD['ID'] ?>" name="IDILD">
     <input type="hidden" value="<?php echo $revisionIT['ID'] ?>" name="IDIT">
     <input type="hidden" value="<?php echo $revisionMI['ID'] ?>" name="IDMI">
     <input type="hidden" value="<?php echo $revisionILuna['ID'] ?>" name="IDILuna">
@@ -1068,16 +1070,16 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                     <div class="mt-2">
                         <span class="mr-2">VALIDAR TARJETAS</span>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="VALIDAR_TARJETAS_ID" id="VALIDAR_TARJETAS_ID" value="1" <?php if ($revisionID['VALIDAR_TARJETAS'] == '1') echo 'checked' ?>>
-                            <label class="form-check-label" for="VALIDAR_TARJETAS_ID">Ok</label>
+                            <input class="form-check-input" type="radio" name="VALIDAR_TARJETA_ID" id="VALIDAR_TARJETA_ID" value="1" <?php if ($revisionID['VALIDAR_TARJETA'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="VALIDAR_TARJETA_ID">Ok</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="VALIDAR_TARJETAS_ID" id="VALIDAR_TARJETAS_ID_No" value="0" <?php if ($revisionID['VALIDAR_TARJETAS'] == '0') echo 'checked' ?>>
-                            <label class="form-check-label" for="VALIDAR_TARJETAS_ID_No">No ok</label>
+                            <input class="form-check-input" type="radio" name="VALIDAR_TARJETA_ID" id="VALIDAR_TARJETA_ID_No" value="0" <?php if ($revisionID['VALIDAR_TARJETA'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="VALIDAR_TARJETA_ID_No">No ok</label>
                         </div>
                         <div class="form-group">
-                            <label for="VALIDAR_TARJETAS_ID_OBS">OBSERVACIONES</label>
-                            <textarea class="form-control" id="VALIDAR_TARJETAS_ID_OBS" rows="2" name="VALIDAR_TARJETAS_ID_OBS"><?php echo $revisionID['VALIDAR_TARJETAS_OBS'] ?></textarea>
+                            <label for="VALIDAR_TARJETA_ID_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="VALIDAR_TARJETA_ID_OBS" rows="2" name="VALIDAR_TARJETA_ID_OBS"><?php echo $revisionID['VALIDAR_TARJETA_OBS'] ?></textarea>
                         </div>
                     </div>
                     <div class="mt-2">
@@ -1188,6 +1190,429 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                 </div>
             </div>
         </div>
+        <div class="col-11 offset-1 mt-5" id="estado_pegatinas_ili">
+            <div class="row bordes">
+                <div class="col-12 mb-2">
+                    <h6>INTERIOR LATERAL IZQUIERDO</h6>
+                </div>
+                <div class="col-12 mb-3 mt-3">
+                    <div class="row">
+                        <div class="col"><a href="javascript:void(0)" class="btn btn-success" onclick="marcarTodoOk('estado_pegatinas_ili')">OK</a></div>
+                        <div class="col"><a href="javascript:void(0)" class="btn btn-danger" onclick="marcarTodoNoOk('estado_pegatinas_ili')">NO</a></div>
+                        <div class="col"><a href="javascript:void(0)" class="btn btn-warning" onclick="desmarcarTodo('estado_pegatinas_ili')">Limpiar</a></div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">CIVISMO</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="CIVISMO_ILI" id="CIVISMO_ILI" value="1" <?php if ($revisionILI['CIVISMO'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="CIVISMO_ILI">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="CIVISMO_ILI" id="CIVISMO_ILI_No" value="0" <?php if ($revisionILI['CIVISMO'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="CIVISMO_ILI_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="CIVISMO_ILI_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="CIVISMO_ILI_OBS" rows="2" name="CIVISMO_ILI_OBS"><?php echo $revisionILI['CIVISMO_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">SALIDAS EMERGENCIA</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="SALIDAS_EMERGENCIA_ILI" id="SALIDAS_EMERGENCIA_ILI" value="1" <?php if ($revisionILI['SALIDAS_EMERGENCIA'] == '1') echo 'checked' ?> >
+                            <label class="form-check-label" for="SALIDAS_EMERGENCIA_ILI">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="SALIDAS_EMERGENCIA_ILI" id="SALIDAS_EMERGENCIA_ILI_No" value="0" <?php if ($revisionILI['SALIDAS_EMERGENCIA'] == '0') echo 'checked' ?> >
+                            <label class="form-check-label" for="SALIDAS_EMERGENCIA_ILI_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="SALIDAS_EMERGENCIA_ILI_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="SALIDAS_EMERGENCIA_ILI_OBS" rows="2" name="SALIDAS_EMERGENCIA_ILI_OBS"><?php echo $revisionILI['SALIDAS_EMERGENCIA_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">ASIENTOS RESERVADOS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ASIENTOS_RESERVADOS_ILI" id="ASIENTOS_RESERVADOS_ILI" value="1" <?php if ($revisionILI['ASIENTOS_RESERVADOS'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="ASIENTOS_RESERVADOS_ILI">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ASIENTOS_RESERVADOS_ILI" id="ASIENTOS_RESERVADOS_ILI_No" value="0" <?php if ($revisionILI['ASIENTOS_RESERVADOS'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="ASIENTOS_RESERVADOS_ILI_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="ASIENTOS_RESERVADOS_ILI_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="ASIENTOS_RESERVADOS_ILI_OBS" rows="2" name="ASIENTOS_RESERVADOS_ILI_OBS"><?php echo $revisionILI['ASIENTOS_RESERVADOS_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">PERRO GUÍA</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="PERRO_GUIA_ILI" id="PERRO_GUIA_ILI" value="1" <?php if ($revisionILI['PERRO_GUIA'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="PERRO_GUIA_ILI">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="PERRO_GUIA_ILI" id="PERRO_GUIA_ILI_No" value="0" <?php if ($revisionILI['PERRO_GUIA'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="PERRO_GUIA_ILI_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="PERRO_GUIA_ILI_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="PERRO_GUIA_ILI_OBS" rows="2" name="PERRO_GUIA_ILI_OBS"><?php echo $revisionILI['PERRO_GUIA_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">PLAN EVACUACIÓN</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="PLAN_EVACUACION_ILI" id="PLAN_EVACUACION_ILI" value="1" <?php if ($revisionILI['PLAN_EVACUACION'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="PLAN_EVACUACION_ILI">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="PLAN_EVACUACION_ILI" id="PLAN_EVACUACION_ILI_No" value="0" <?php if ($revisionILI['PLAN_EVACUACION'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="PLAN_EVACUACION_ILI_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="PLAN_EVACUACION_ILI_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="PLAN_EVACUACION_ILI_OBS" rows="2" name="PLAN_EVACUACION_ILI_OBS"><?php echo $revisionILI['PLAN_EVACUACION_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">ASIDEROS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ASIDEROS_ILI" id="ASIDEROS_ILI" value="1" <?php if ($revisionILI['ASIDEROS'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="ASIDEROS_ILI">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ASIDEROS_ILI" id="ASIDEROS_ILI_No" value="0" <?php if ($revisionILI['ASIDEROS'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="ASIDEROS_ILI_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="ASIDEROS_ILI_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="ASIDEROS_ILI_OBS" rows="2" name="ASIDEROS_ILI_OBS"><?php echo $revisionILI['ASIDEROS_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">VIDEOVIGILANCIA</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="VIDEOVIGILANCIA_ILI" id="VIDEOVIGILANCIA_ILI" value="1" <?php if ($revisionILI['VIDEOVIGILANCIA'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="VIDEOVIGILANCIA_ILI">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="VIDEOVIGILANCIA_ILI" id="VIDEOVIGILANCIA_ILI_No" value="0" <?php if ($revisionILI['VIDEOVIGILANCIA'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="VIDEOVIGILANCIA_ILI_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="VIDEOVIGILANCIA_ILI_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="VIDEOVIGILANCIA_ILI_OBS" rows="2" name="VIDEOVIGILANCIA_ILI_OBS"><?php echo $revisionILI['VIDEOVIGILANCIA_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">PROHIBIDO FUMAR</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="PROHIBIDO_FUMAR_ILI" id="PROHIBIDO_FUMAR_ILI" value="1" <?php if ($revisionILI['PROHIBIDO_FUMAR'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="PROHIBIDO_FUMAR_ILI">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="PROHIBIDO_FUMAR_ILI" id="PROHIBIDO_FUMAR_ILI_No" value="0" <?php if ($revisionILI['PROHIBIDO_FUMAR'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="PROHIBIDO_FUMAR_ILI_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="PROHIBIDO_FUMAR_ILI_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="PROHIBIDO_FUMAR_ILI_OBS" rows="2" name="PROHIBIDO_FUMAR_ILI_OBS"><?php echo $revisionILI['PROHIBIDO_FUMAR_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">CINTURON</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="CINTURON_ILI" id="CINTURON_ILI" value="1" <?php if ($revisionILI['CINTURON'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="CINTURON_ILI">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="CINTURON_ILI" id="CINTURON_ILI_No" value="0" <?php if ($revisionILI['CINTURON'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="CINTURON_ILI_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="CINTURON_ILI_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="CINTURON_ILI_OBS" rows="2" name="CINTURON_ILI_OBS"><?php echo $revisionILI['CINTURON_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">TARIFAS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="TARIFAS_ILI" id="TARIFAS_ILI" value="1" <?php if ($revisionILI['TARIFAS'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="TARIFAS_ILI">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="TARIFAS_ILI" id="TARIFAS_ILI_No" value="0" <?php if ($revisionILI['TARIFAS'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="TARIFAS_ILI_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="TARIFAS_ILI_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="TARIFAS_ILI_OBS" rows="2" name="TARIFAS_ILI_OBS"><?php echo $revisionILI['TARIFAS_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">QR EMPRESA</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="QR_EMPRESA_ILI" id="QR_EMPRESA_ILI" value="1" <?php if ($revisionILI['QR_EMPRESA'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="QR_EMPRESA_ILI">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="QR_EMPRESA_ILI" id="QR_EMPRESA_ILI_No" value="0" <?php if ($revisionILI['QR_EMPRESA'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="QR_EMPRESA_ILI_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="QR_EMPRESA_ILI_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="QR_EMPRESA_ILI_OBS" rows="2" name="QR_EMPRESA_ILI_OBS"><?php echo $revisionILI['QR_EMPRESA_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">SILLA DE RUEDAS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="SILLA_RUEDAS_ILI" id="SILLA_RUEDAS_ILI" value="1" <?php if ($revisionILI['SILLA_RUEDAS'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="SILLA_RUEDAS_ILI">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="SILLA_RUEDAS_ILI" id="SILLA_RUEDAS_ILI_No" value="0" <?php if ($revisionILI['SILLA_RUEDAS'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="SILLA_RUEDAS_ILI_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="SILLA_RUEDAS_ILI_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="SILLA_RUEDAS_ILI_OBS" rows="2" name="SILLA_RUEDAS_ILI_OBS"><?php echo $revisionILI['SILLA_RUEDAS_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">COLOCACIÓN</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="COLOCACION_ILI" id="COLOCACION_ILI" value="1" <?php if ($revisionILI['COLOCACION'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="COLOCACION_ILI">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="COLOCACION_ILI" id="COLOCACION_ILI_No" value="0" <?php if ($revisionILI['COLOCACION'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="COLOCACION_ILI_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="COLOCACION_ILI_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="COLOCACION_ILI_OBS" rows="2" name="COLOCACION_ILI_OBS"><?php echo $revisionILI['COLOCACION_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">RESERVADO SILLA/CARRO</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="RESERVADO_ILI" id="RESERVADO_ILI" value="1" <?php if ($revisionILI['RESERVADO'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="RESERVADO_ILI">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="RESERVADO_ILI" id="RESERVADO_ILI_No" value="0" <?php if ($revisionILI['RESERVADO'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="RESERVADO_ILI_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="RESERVADO_ILI_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="RESERVADO_ILI_OBS" rows="2" name="RESERVADO_ILI_OBS"><?php echo $revisionILI['RESERVADO_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">MARTILLOS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="MARTILLOS_ILI" id="MARTILLOS_ILI" value="1" <?php if ($revisionILI['MARTILLOS'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="MARTILLOS_ILI">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="MARTILLOS_ILI" id="MARTILLOS_ILI_No" value="0" <?php if ($revisionILI['MARTILLOS'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="MARTILLOS_ILI_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="MARTILLOS_ILI_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="MARTILLOS_ILI_OBS" rows="2" name="MARTILLOS_ILI_OBS"><?php echo $revisionILI['MARTILLOS_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">OTROS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="OTROS_ILI" id="OTROS_ILI" value="1" <?php if ($revisionILI['OTROS'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="OTROS_ILI">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="OTROS_ILI" id="OTROS_ILI_No" value="0" <?php if ($revisionILI['OTROS'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="OTROS_ILI_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="OTROS_ILI_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="OTROS_ILI_OBS" rows="2" name="OTROS_ILI_OBS"><?php echo $revisionILI['OTROS_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 offset-1 mt-5" id="estado_pegatinas_ild">
+            <div class="row bordes">
+                <div class="col-12 mb-2">
+                    <h6>INTERIOR LATERAL DERECHO</h6>
+                </div>
+                <div class="col-12 mb-3 mt-3">
+                    <div class="row">
+                        <div class="col"><a href="javascript:void(0)" class="btn btn-success" onclick="marcarTodoOk('estado_pegatinas_ild')">OK</a></div>
+                        <div class="col"><a href="javascript:void(0)" class="btn btn-danger" onclick="marcarTodoNoOk('estado_pegatinas_ild')">NO</a></div>
+                        <div class="col"><a href="javascript:void(0)" class="btn btn-warning" onclick="desmarcarTodo('estado_pegatinas_ild')">Limpiar</a></div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">CIVISMO</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="CIVISMO_ILD" id="CIVISMO_ILD" value="1" <?php if ($revisionILD['CIVISMO'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="CIVISMO_ILD">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="CIVISMO_ILD" id="CIVISMO_ILD_No" value="0" <?php if ($revisionILD['CIVISMO'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="CIVISMO_ILD_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="CIVISMO_ILD_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="CIVISMO_ILD_OBS" rows="2" name="CIVISMO_ILD_OBS"><?php echo $revisionILD['CIVISMO_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">SALIDAS EMERGENCIA</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="SALIDAS_EMERGENCIA_ILD" id="SALIDAS_EMERGENCIA_ILD" value="1" <?php if ($revisionILD['SALIDAS_EMERGENCIA'] == '1') echo 'checked' ?> >
+                            <label class="form-check-label" for="SALIDAS_EMERGENCIA_ILD">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="SALIDAS_EMERGENCIA_ILD" id="SALIDAS_EMERGENCIA_ILD_No" value="0" <?php if ($revisionILD['SALIDAS_EMERGENCIA'] == '0') echo 'checked' ?> >
+                            <label class="form-check-label" for="SALIDAS_EMERGENCIA_ILD_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="SALIDAS_EMERGENCIA_ILD_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="SALIDAS_EMERGENCIA_ILD_OBS" rows="2" name="SALIDAS_EMERGENCIA_ILD_OBS"><?php echo $revisionILD['SALIDAS_EMERGENCIA_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">ASIENTOS RESERVADOS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ASIENTOS_RESERVADOS_ILD" id="ASIENTOS_RESERVADOS_ILD" value="1" <?php if ($revisionILD['ASIENTOS_RESERVADOS'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="ASIENTOS_RESERVADOS_ILD">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ASIENTOS_RESERVADOS_ILD" id="ASIENTOS_RESERVADOS_ILD_No" value="0" <?php if ($revisionILD['ASIENTOS_RESERVADOS'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="ASIENTOS_RESERVADOS_ILD_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="ASIENTOS_RESERVADOS_ILD_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="ASIENTOS_RESERVADOS_ILD_OBS" rows="2" name="ASIENTOS_RESERVADOS_ILD_OBS"><?php echo $revisionILD['ASIENTOS_RESERVADOS_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">SILLA DE RUEDAS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="SILLA_RUEDAS_ILD" id="SILLA_RUEDAS_ILD" value="1" <?php if ($revisionILD['SILLA_RUEDAS'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="SILLA_RUEDAS_ILD">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="SILLA_RUEDAS_ILD" id="SILLA_RUEDAS_ILD_No" value="0" <?php if ($revisionILD['SILLA_RUEDAS'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="SILLA_RUEDAS_ILD_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="SILLA_RUEDAS_ILD_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="SILLA_RUEDAS_ILD_OBS" rows="2" name="SILLA_RUEDAS_ILD_OBS"><?php echo $revisionILD['SILLA_RUEDAS_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">CARRITO</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="CARRITO_ILD" id="CARRITO_ILD" value="1" <?php if ($revisionILD['CARRITO'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="CARRITO_ILD">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="CARRITO_ILD" id="CARRITO_ILD_No" value="0" <?php if ($revisionILD['CARRITO'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="CARRITO_ILD_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="CARRITO_ILD_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="CARRITO_ILD_OBS" rows="2" name="CARRITO_ILD_OBS"><?php echo $revisionILD['CARRITO_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">APERTURA DE EMERGENCIA</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="APERTURA_EMERGENCIA_ILD" id="APERTURA_EMERGENCIA_ILD" value="1" <?php if ($revisionILD['APERTURA_EMERGENCIA'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="APERTURA_EMERGENCIA_ILD">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="APERTURA_EMERGENCIA_ILD" id="APERTURA_EMERGENCIA_ILD_No" value="0" <?php if ($revisionILD['APERTURA_EMERGENCIA'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="APERTURA_EMERGENCIA_ILD_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="APERTURA_EMERGENCIA_ILD_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="APERTURA_EMERGENCIA_ILD_OBS" rows="2" name="APERTURA_EMERGENCIA_ILD_OBS"><?php echo $revisionILD['APERTURA_EMERGENCIA_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2">
+                        <span class="mr-2">OTROS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="OTROS_ILD" id="OTROS_ILD" value="1" <?php if ($revisionILD['OTROS'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="OTROS_ILD">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="OTROS_ILD" id="OTROS_ILD_No" value="0" <?php if ($revisionILD['OTROS'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="OTROS_ILD_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="OTROS_ILD_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="OTROS_ILD_OBS" rows="2" name="OTROS_ILD_OBS"><?php echo $revisionILI['OTROS_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INTERIOR TRASERA -->
+
+ 
         <div class="col-11 offset-1 mt-5" id="estado_pegatinas_it">
             <div class="row bordes">
                 <div class="col-12 mb-2">
@@ -1259,6 +1684,51 @@ $empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa 
                         <div class="form-group">
                             <label for="VIDEOVIGILANCIA_IT_OBS">OBSERVACIONES</label>
                             <textarea class="form-control" id="VIDEOVIGILANCIA_IT_OBS" rows="2" name="VIDEOVIGILANCIA_IT_OBS"><?php echo $revisionIT['VIDEOVIGILANCIA_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">ASIDEROS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ASIDEROS_IT" id="ASIDEROS_IT" value="1" <?php if ($revisionIT['ASIDEROS'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="ASIDEROS_IT">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ASIDEROS_IT" id="ASIDEROS_IT_No" value="0" <?php if ($revisionIT['ASIDEROS'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="ASIDEROS_IT_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="ASIDEROS_IT_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="ASIDEROS_IT_OBS" rows="2" name="ASIDEROS_IT_OBS"><?php echo $revisionIT['ASIDEROS_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">SALIDAS EMERGENCIA</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="SALIDA_EMERGENCIA_IT" id="SALIDA_EMERGENCIA_IT" value="1" <?php if ($revisionIT['SALIDA_EMERGENCIA'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="SALIDA_EMERGENCIA_IT">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="SALIDA_EMERGENCIA_IT" id="SALIDA_EMERGENCIA_IT_No" value="0" <?php if ($revisionIT['SALIDA_EMERGENCIA'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="SALIDA_EMERGENCIA_IT_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="SALIDA_EMERGENCIA_IT_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="SALIDA_EMERGENCIA_IT_OBS" rows="2" name="SALIDA_EMERGENCIA_IT_OBS"><?php echo $revisionIT['SALIDA_EMERGENCIA_OBS'] ?></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mr-2">OTROS</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="OTROS_IT" id="OTROS_IT" value="1" <?php if ($revisionIT['OTROS'] == '1') echo 'checked' ?>>
+                            <label class="form-check-label" for="OTROS_IT">Ok</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="OTROS_IT" id="OTROS_IT_No" value="0" <?php if ($revisionIT['OTROS'] == '0') echo 'checked' ?>>
+                            <label class="form-check-label" for="OTROS_IT_No">No ok</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="OTROS_IT_OBS">OBSERVACIONES</label>
+                            <textarea class="form-control" id="OTROS_IT_OBS" rows="2" name="OTROS_IT_OBS"><?php echo $revisionIT['OTROS_OBS'] ?></textarea>
                         </div>
                     </div>
                 </div>

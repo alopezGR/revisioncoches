@@ -43,20 +43,22 @@ class PegatinasController
                 $revisionELuna = Pegatinas::obtenerUltimaRevisionELuna();
                 $revisionIC = Pegatinas::obtenerUltimaRevisionIC();
                 $revisionID = Pegatinas::obtenerUltimaRevisionID();
+                $revisionILI = Pegatinas::obtenerUltimaRevisionILI();
+                $revisionILD = Pegatinas::obtenerUltimaRevisionILD();
                 $revisionIT = Pegatinas::obtenerUltimaRevisionIT();
                 $revisionMI = Pegatinas::obtenerUltimaRevisionMI();
                 $revisionILuna = Pegatinas::obtenerUltimaRevisionILuna();
 
-                // var_dump($revisionLI); exit;
-
+                //  var_dump($revisionILD); exit;
+                
                 $revision = $revisionEF && $revisionET && $revisionELD && $revisionELI && $revisionELuna 
-                && $revisionIC && $revisionID && $revisionIT && $revisionMI && $revisionILuna;
-
+                && $revisionIC && $revisionID && $revisionILI && $revisionILD && $revisionIT && $revisionMI && $revisionILuna;
+                
                 $fechaActual = date('Y-m-d');
-
+                
                 if ($revision) {
                     $fechaUltimaRevision = $revision ? $revisionEF['FECHA'] : false;
-
+                    
                     $revisionCorrectaEF = Pegatinas::comprobarRevisionEF($revisionEF['ID']);
                     $revisionCorrectaET = Pegatinas::comprobarRevisionET($revisionET['ID']);
                     $revisionCorrectaELD = Pegatinas::comprobarRevisionELD($revisionELD['ID']);
@@ -64,13 +66,17 @@ class PegatinasController
                     $revisionCorrectaELuna = Pegatinas::comprobarRevisionELuna($revisionELuna['ID']);
                     $revisionCorrectaIC = Pegatinas::comprobarRevisionIC($revisionIC['ID']);
                     $revisionCorrectaID = Pegatinas::comprobarRevisionID($revisionID['ID']);
+                    $revisionCorrectaILI = Pegatinas::comprobarRevisionILI($revisionILI['ID']);
+                    $revisionCorrectaILD = Pegatinas::comprobarRevisionILD($revisionILD['ID']);
                     $revisionCorrectaIT = Pegatinas::comprobarRevisionIT($revisionIT['ID']);
                     $revisionCorrectaMI = Pegatinas::comprobarRevisionMI($revisionMI['ID']);
                     $revisionCorrectaILuna = Pegatinas::comprobarRevisionILuna($revisionILuna['ID']);
-
-
+                    
+                    
                     $revisionCorrecta = $revisionCorrectaEF && $revisionCorrectaET && $revisionCorrectaELD && $revisionCorrectaELI && $revisionCorrectaELuna 
-                && $revisionCorrectaIC && $revisionCorrectaID && $revisionCorrectaIT && $revisionCorrectaMI && $revisionCorrectaILuna;
+                    && $revisionCorrectaIC && $revisionCorrectaID && $revisionCorrectaILI && $revisionCorrectaILD && $revisionCorrectaIT && $revisionCorrectaMI 
+                    && $revisionCorrectaILuna;
+                    // var_dump($revisionCorrecta); exit;
 
                     if ($fechaActual == $fechaUltimaRevision) {
                         require_once 'Views/Pegatinas/revision.php';
