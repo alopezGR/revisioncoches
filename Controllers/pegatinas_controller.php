@@ -36,18 +36,18 @@ class PegatinasController
                 require_once 'Views/Pegatinas/index.php';
             } else {
                 // $rampas = Pegatinas::getRampasVehiculo($vehiculo);
-                $revisionEF = Pegatinas::obtenerUltimaRevisionEF();
-                $revisionET = Pegatinas::obtenerUltimaRevisionET();
-                $revisionELD = Pegatinas::obtenerUltimaRevisionELD();
-                $revisionELI = Pegatinas::obtenerUltimaRevisionELI();
-                $revisionELuna = Pegatinas::obtenerUltimaRevisionELuna();
-                $revisionIC = Pegatinas::obtenerUltimaRevisionIC();
-                $revisionID = Pegatinas::obtenerUltimaRevisionID();
-                $revisionILI = Pegatinas::obtenerUltimaRevisionILI();
-                $revisionILD = Pegatinas::obtenerUltimaRevisionILD();
-                $revisionIT = Pegatinas::obtenerUltimaRevisionIT();
-                $revisionMI = Pegatinas::obtenerUltimaRevisionMI();
-                $revisionILuna = Pegatinas::obtenerUltimaRevisionILuna();
+                $revisionEF = Pegatinas::obtenerUltimaRevisionEF($resultado['id']);
+                $revisionET = Pegatinas::obtenerUltimaRevisionET($resultado['id']);
+                $revisionELD = Pegatinas::obtenerUltimaRevisionELD($resultado['id']);
+                $revisionELI = Pegatinas::obtenerUltimaRevisionELI($resultado['id']);
+                $revisionELuna = Pegatinas::obtenerUltimaRevisionELuna($resultado['id']);
+                $revisionIC = Pegatinas::obtenerUltimaRevisionIC($resultado['id']);
+                $revisionID = Pegatinas::obtenerUltimaRevisionID($resultado['id']);
+                $revisionILI = Pegatinas::obtenerUltimaRevisionILI($resultado['id']);
+                $revisionILD = Pegatinas::obtenerUltimaRevisionILD($resultado['id']);
+                $revisionIT = Pegatinas::obtenerUltimaRevisionIT($resultado['id']);
+                $revisionMI = Pegatinas::obtenerUltimaRevisionMI($resultado['id']);
+                $revisionILuna = Pegatinas::obtenerUltimaRevisionILuna($resultado['id']);
 
                 //  var_dump($revisionILD); exit;
                 
