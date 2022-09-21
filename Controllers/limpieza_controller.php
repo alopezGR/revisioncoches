@@ -35,7 +35,36 @@ class LimpiezaController
                 $_SESSION['vehiculoIncorrecto'] = 'true';
                 require_once 'Views/Limpieza/index.php';
             } else {
-                require_once 'Views/Limpieza/formulario.php';
+                // $rampas = Accesibilidad::getRampasVehiculo($vehiculo);
+                $revisionLI = Limpieza::obtenerUltimaRevisionLI();
+                $revisionLE = Limpieza::obtenerUltimaRevisionLE();
+                $revisionCI = Limpieza::obtenerUltimaRevisionCI();
+                $revisionCE = Limpieza::obtenerUltimaRevisionCE();
+
+                // var_dump($revisionLI); exit;
+
+                $revision = $revisionCE && $revisionCI && $revisionLI && $revisionLE;
+
+                $fechaActual = date('Y-m-d');
+
+                if ($revision) {
+                    $fechaUltimaRevision = $revision ? $revisionLI['FECHA'] : false;
+
+                    $revisionCorrectaLI = Limpieza::comprobarRevisionLI($revisionLI['ID']);
+                    $revisionCorrectaLE = Limpieza::comprobarRevisionLE($revisionLE['ID']);
+                    $revisionCorrectaCI = Limpieza::comprobarRevisionCI($revisionCI['ID']);
+                    $revisionCorrectaCE = Limpieza::comprobarRevisionCE($revisionCE['ID']);
+
+                    $revisionCorrecta = $revisionCorrectaLI && $revisionCorrectaLE && $revisionCorrectaCI && $revisionCorrectaCE;
+
+                    if ($fechaActual == $fechaUltimaRevision) {
+                        require_once 'Views/Limpieza/revision.php';
+                    } else {
+                        require_once 'Views/Limpieza/formulario.php';
+                    }
+                } else {
+                    require_once 'Views/Limpieza/formulario.php';
+                }
             }
         } else {
             require_once 'Views/Usuario/login.php';
@@ -51,6 +80,30 @@ class LimpiezaController
             $datos['USUARIO'] = $_SESSION['user'];
 
             $resultadoFlota = Limpieza::insertDatos($datos);
+
+            if ($resultadoFlota) {
+                Usuario::registroLogin($_SESSION['user'], 'Realizada revision de limpieza al coche ' . $datos['IDVEHICULO']);
+                $_SESSION['exito'] = "true";
+            } else {
+                $_SESSION['error'] = "true";
+            }
+
+            header("Location: index.php");
+        } else {
+            require_once 'Views/Usuario/login.php';
+        }
+    }
+
+    public function actualizarFormulario()
+    {
+        if (isset($_SESSION['logged'])) {
+
+            $datos = $_POST;
+
+            $datos['USUARIO'] = $_SESSION['user'];
+
+
+            $resultadoFlota = Limpieza::actualizarDatos($datos);
 
             if ($resultadoFlota) {
                 Usuario::registroLogin($_SESSION['user'], 'Realizada revision de limpieza al coche ' . $datos['IDVEHICULO']);

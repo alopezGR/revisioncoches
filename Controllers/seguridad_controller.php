@@ -35,8 +35,17 @@ class SeguridadController
                 $_SESSION['vehiculoIncorrecto'] = 'true';
                 require_once 'Views/Seguridad/index.php';
             } else {
-                $rampas = Seguridad::getRampasVehiculo($vehiculo);
-                require_once 'Views/Seguridad/formulario.php';
+                // $rampas = Accesibilidad::getRampasVehiculo($vehiculo);
+                $revision = Seguridad::obtenerUltimaRevision();
+                $fechaActual = date('Y-m-d');
+                $fechaUltimaRevision = $revision['FECHA'];
+                $revisionCorrecta = Seguridad::comprobarRevision($revision['ID']);
+
+                if($revision && $fechaActual == $fechaUltimaRevision){
+                    require_once 'Views/Seguridad/revision.php';
+                } else {
+                    require_once 'Views/Seguridad/formulario.php';
+                }
             }
         } else {
             require_once 'Views/Usuario/login.php';
@@ -52,6 +61,29 @@ class SeguridadController
             $datos['USUARIO'] = $_SESSION['user'];
 
             $resultadoFlota = Seguridad::insertDatos($datos);
+
+            if ($resultadoFlota) {
+                Usuario::registroLogin($_SESSION['user'], 'Realizada revision  de seguridad al coche ' . $datos['IDVEHICULO']);
+                $_SESSION['exito'] = "true";
+            } else {
+                $_SESSION['error'] = "true";
+            }
+
+            header("Location: index.php");
+        } else {
+            require_once 'Views/Usuario/login.php';
+        }
+    }
+
+    public function actualizarFormulario()
+    {
+        if (isset($_SESSION['logged'])) {
+
+            $datos = $_POST;
+
+            $datos['USUARIO'] = $_SESSION['user'];
+
+            $resultadoFlota = Seguridad::actualizarDatos($datos, $datos['IDREVISION']);
 
             if ($resultadoFlota) {
                 Usuario::registroLogin($_SESSION['user'], 'Realizada revision  de seguridad al coche ' . $datos['IDVEHICULO']);

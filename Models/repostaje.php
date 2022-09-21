@@ -45,6 +45,42 @@ class Repostaje extends Vehiculo
         }
     }
 
+    public static function actualizarDatos($datos, $idRevision)
+    {
+        $conn = Db::getConector();
+
+        $datetime = date_create();
+
+        $fecha = date_format($datetime, 'Y-m-d');
+        $hora = date_format($datetime, 'H:i:s');
+
+        $queryFlota = " UPDATE `repostajes` SET `fecha` = :FECHA, `hora` = :HORA, `gasoleo` = :GASOLEO, 
+        `urea` = :UREA, `km` = :KM, SURTIDORGASOLEO = :SURTIDORGASOLEO, `SURTIDORUREA` = :SURTIDORUREA, NIVELACEITE = :NIVELACEITE, 
+        NIVELREFRIGERANTE = :NIVELREFRIGERANTE, `traspasado` = 0, usuario = :USUARIO WHERE ID = $idRevision";
+
+        $stFlota = $conn->prepare($queryFlota);
+
+        $stFlota->bindValue(":FECHA", $fecha);
+        $stFlota->bindValue(":HORA", $hora);
+        $stFlota->bindValue(":GASOLEO", $datos['GASOLEO']);
+        $stFlota->bindValue(":UREA", $datos['UREA']);
+        $stFlota->bindValue(":SURTIDORGASOLEO", $datos['SURTIDORGASOLEO']);
+        $stFlota->bindValue(":SURTIDORUREA", $datos['SURTIDORUREA']);
+        $stFlota->bindValue(":NIVELACEITE", $datos['NIVELACEITE']);
+        $stFlota->bindValue(":NIVELREFRIGERANTE", $datos['NIVELREFRIGERANTE']);
+        $stFlota->bindValue(":KM", $datos['KM']);
+        $stFlota->bindValue(":SURTIDORUREA", $datos['SURTIDORUREA']);
+        $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
+
+        $stFlota->execute();
+
+        if ($stFlota) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static function obtenerRevisionesPorFecha($fechaInicio, $fechaFin, $empresa)
     {
         $conn = Db::getConector();
@@ -57,6 +93,24 @@ class Repostaje extends Vehiculo
 
         if ($st) {
             return $st->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+    
+    public static function obtenerUltimaRevision()
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT * FROM repostajes order by fecha desc limit 1";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            return $st->fetch(PDO::FETCH_ASSOC);
         } else {
             return false;
         }

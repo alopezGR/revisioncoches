@@ -83,3 +83,11 @@ footer {
 .display-none {
     display: none !important;
 }
+
+.revision-correcta {
+    background-color: #b7d5ac !important;
+}
+
+.revision-incorrecta {
+    background-color: #ff9d91 !important;
+}

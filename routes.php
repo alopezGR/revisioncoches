@@ -67,12 +67,12 @@ function call($controller, $action)
 $controllers = array(
     'error' =>  ['error'],
     'menu' =>  ['index'],
-    'accesibilidad' => ['index', 'formulario', 'procesarFormulario'],
-    'repostaje' => ['index', 'formulario', 'procesarFormulario'],
-    'documentacion' => ['index', 'formulario', 'procesarFormulario'],
-    'limpieza' => ['index', 'formulario', 'procesarFormulario'],
-    'pegatinas' => ['index', 'formulario', 'procesarFormulario'],
-    'seguridad' => ['index', 'formulario', 'procesarFormulario'],
+    'accesibilidad' => ['index', 'formulario', 'procesarFormulario', 'actualizarFormulario'],
+    'repostaje' => ['index', 'formulario', 'procesarFormulario', 'actualizarFormulario'],
+    'documentacion' => ['index', 'formulario', 'procesarFormulario', 'actualizarFormulario'],
+    'limpieza' => ['index', 'formulario', 'procesarFormulario', 'actualizarFormulario'],
+    'pegatinas' => ['index', 'formulario', 'procesarFormulario', 'actualizarFormulario'],
+    'seguridad' => ['index', 'formulario', 'procesarFormulario', 'actualizarFormulario'],
     'exportar' => ['index', 'exportarRevisiones'],
     'usuario' => ['login', 'checkLogin', 'salir', 'registroLogin', 'formularioCambioPassword', 'cambiarPassword']
 );

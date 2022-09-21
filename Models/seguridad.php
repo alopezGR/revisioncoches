@@ -31,10 +31,56 @@ class Seguridad extends Vehiculo
         $stFlota->bindValue(":TRIANGULOS", isset($datos['TRIANGULOS']) ? $datos['TRIANGULOS'] : NULL);
         $stFlota->bindValue(":CALZO", isset($datos['CALZO']) ? $datos['CALZO'] : NULL);
         $stFlota->bindValue(":CHALECO", isset($datos['CHALECO']) ? $datos['CHALECO'] : NULL);
-        $stFlota->bindValue(":GUANTES", (!empty($datos['GUANTES'])) ? $datos['GUANTES'] : NULL);
-        $stFlota->bindValue(":BOTIQUIN", (!empty($datos['BOTIQUIN'])) ? $datos['BOTIQUIN'] : NULL);
-        $stFlota->bindValue(":MARTILLOS", (!empty($datos['MARTILLOS'])) ? $datos['MARTILLOS'] : NULL);
-        $stFlota->bindValue(":CINTURONES_ASIENTOS", (!empty($datos['CINTURONES_ASIENTOS'])) ? $datos['CINTURONES_ASIENTOS'] : NULL);
+        $stFlota->bindValue(":GUANTES", (isset($datos['GUANTES'])) ? $datos['GUANTES'] : NULL);
+        $stFlota->bindValue(":BOTIQUIN", (isset($datos['BOTIQUIN'])) ? $datos['BOTIQUIN'] : NULL);
+        $stFlota->bindValue(":MARTILLOS", (isset($datos['MARTILLOS'])) ? $datos['MARTILLOS'] : NULL);
+        $stFlota->bindValue(":CINTURONES_ASIENTOS", (isset($datos['CINTURONES_ASIENTOS'])) ? $datos['CINTURONES_ASIENTOS'] : NULL);
+        $stFlota->bindValue(":EXTINTORES_OBS", !empty($datos['EXTINTORES_OBS']) ? $datos['EXTINTORES_OBS'] : NULL);
+        $stFlota->bindValue(":TRIANGULOS_OBS", !empty($datos['TRIANGULOS_OBS']) ? $datos['TRIANGULOS_OBS'] : NULL);
+        $stFlota->bindValue(":CALZO_OBS", !empty($datos['CALZO_OBS']) ? $datos['CALZO_OBS'] : NULL);
+        $stFlota->bindValue(":CHALECO_OBS", !empty($datos['CHALECO_OBS']) ? $datos['CHALECO_OBS'] : NULL);
+        $stFlota->bindValue(":GUANTES_OBS", (!empty($datos['GUANTES_OBS'])) ? $datos['GUANTES_OBS'] : NULL);
+        $stFlota->bindValue(":BOTIQUIN_OBS", (!empty($datos['BOTIQUIN_OBS'])) ? $datos['BOTIQUIN_OBS'] : NULL);
+        $stFlota->bindValue(":MARTILLOS_OBS", (!empty($datos['MARTILLOS_OBS'])) ? $datos['MARTILLOS_OBS'] : NULL);
+        $stFlota->bindValue(":CINTURONES_ASIENTOS_OBS", (!empty($datos['CINTURONES_ASIENTOS_OBS'])) ? $datos['CINTURONES_ASIENTOS_OBS'] : NULL);
+        $stFlota->bindValue(":USUARIO", !empty($datos['USUARIO']) ? $datos['USUARIO'] : NULL);
+
+        $stFlota->execute();
+
+        if ($stFlota) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function actualizarDatos($datos, $idRevision)
+    {
+        $conn = Db::getConector();
+
+        $datetime = date_create();
+
+        $fecha = date_format($datetime, 'Y-m-d');
+        $hora = date_format($datetime, 'H:i:s');
+
+        $queryFlota = "UPDATE `estado_seguridad` SET `FECHA` = :FECHA, `HORA` = :HORA, `EXTINTORES` = :EXTINTORES, `TRIANGULOS` = :TRIANGULOS, 
+         `CALZO` = :CALZO, `CHALECO` = :CHALECO, `GUANTES` = :GUANTES, `BOTIQUIN` = :BOTIQUIN, `MARTILLOS` = :MARTILLOS, `CINTURONES_ASIENTOS` = :CINTURONES_ASIENTOS, 
+         `EXTINTORES_OBS` = :EXTINTORES_OBS, `TRIANGULOS_OBS` = :TRIANGULOS_OBS, `CALZO_OBS` = :CALZO_OBS, `CHALECO_OBS` = :CHALECO_OBS, 
+         `GUANTES_OBS` = :GUANTES_OBS, `BOTIQUIN_OBS` = :BOTIQUIN_OBS, `MARTILLOS_OBS` = :MARTILLOS_OBS, `CINTURONES_ASIENTOS_OBS` = :CINTURONES_ASIENTOS_OBS, 
+         `TRASPASADO` = 0, `USUARIO` = :USUARIO WHERE ID = $idRevision";
+
+        $stFlota = $conn->prepare($queryFlota);
+
+        $stFlota->bindParam(":FECHA", $fecha);
+        $stFlota->bindValue(":HORA", $hora);
+        $stFlota->bindValue(":EXTINTORES", isset($datos['EXTINTORES']) ? $datos['EXTINTORES'] : NULL);
+        $stFlota->bindValue(":TRIANGULOS", isset($datos['TRIANGULOS']) ? $datos['TRIANGULOS'] : NULL);
+        $stFlota->bindValue(":CALZO", isset($datos['CALZO']) ? $datos['CALZO'] : NULL);
+        $stFlota->bindValue(":CHALECO", isset($datos['CHALECO']) ? $datos['CHALECO'] : NULL);
+        $stFlota->bindValue(":GUANTES", (isset($datos['GUANTES'])) ? $datos['GUANTES'] : NULL);
+        $stFlota->bindValue(":BOTIQUIN", (isset($datos['BOTIQUIN'])) ? $datos['BOTIQUIN'] : NULL);
+        $stFlota->bindValue(":MARTILLOS", (isset($datos['MARTILLOS'])) ? $datos['MARTILLOS'] : NULL);
+        $stFlota->bindValue(":CINTURONES_ASIENTOS", (isset($datos['CINTURONES_ASIENTOS'])) ? $datos['CINTURONES_ASIENTOS'] : NULL);
         $stFlota->bindValue(":EXTINTORES_OBS", !empty($datos['EXTINTORES_OBS']) ? $datos['EXTINTORES_OBS'] : NULL);
         $stFlota->bindValue(":TRIANGULOS_OBS", !empty($datos['TRIANGULOS_OBS']) ? $datos['TRIANGULOS_OBS'] : NULL);
         $stFlota->bindValue(":CALZO_OBS", !empty($datos['CALZO_OBS']) ? $datos['CALZO_OBS'] : NULL);
@@ -66,6 +112,51 @@ class Seguridad extends Vehiculo
 
         if ($st) {
             return $st->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+
+    public static function obtenerUltimaRevision()
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT * FROM estado_seguridad order by fecha desc limit 1";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            return $st->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+
+    public static function comprobarRevision($idRevision)
+    {
+        $conn = Db::getConector();
+
+        $query = "SELECT `EXTINTORES`, `TRIANGULOS`, `CALZO`, `CHALECO`, `GUANTES`, `BOTIQUIN`, `MARTILLOS`, `CINTURONES_ASIENTOS` FROM estado_seguridad WHERE id = $idRevision";
+
+        $st = $conn->prepare($query);
+
+        $st->execute();
+
+        if ($st) {
+            $revision = $st->fetch(PDO::FETCH_ASSOC);
+
+            $correcto = true;
+
+            foreach ($revision as $value) {
+                if ($value != 1) {
+                    $correcto = false;
+                }
+            }
+            return $correcto;
         } else {
             return false;
         }
