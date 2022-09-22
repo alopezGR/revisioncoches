@@ -118,11 +118,11 @@ class Seguridad extends Vehiculo
     }
 
 
-    public static function obtenerUltimaRevision()
+    public static function obtenerUltimaRevision($idVehiculo)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM estado_seguridad order by fecha desc limit 1";
+        $query = "SELECT * FROM estado_seguridad where ID_VEHICULO = $idVehiculo order by fecha desc limit 1";
 
         $st = $conn->prepare($query);
 

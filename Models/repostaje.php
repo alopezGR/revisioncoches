@@ -99,11 +99,11 @@ class Repostaje extends Vehiculo
     }
 
     
-    public static function obtenerUltimaRevision()
+    public static function obtenerUltimaRevision($idVehiculo)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM repostajes order by fecha desc limit 1";
+        $query = "SELECT * FROM repostajes where idvehiculo = $idVehiculo order by fecha desc limit 1";
 
         $st = $conn->prepare($query);
 

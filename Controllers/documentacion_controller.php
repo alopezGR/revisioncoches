@@ -36,12 +36,12 @@ class DocumentacionController
                 require_once 'Views/Documentacion/index.php';
             } else {
                 // $rampas = Accesibilidad::getRampasVehiculo($vehiculo);
-                $revision = Documentacion::obtenerUltimaRevision();
+                $revision = Documentacion::obtenerUltimaRevision($resultado['id']);
                 $fechaActual = date('Y-m-d');
                 $fechaUltimaRevision = $revision['FECHA'];
-                $revisionCorrecta = Documentacion::comprobarRevision($revision['ID']);
-
+                
                 if($revision && $fechaActual == $fechaUltimaRevision){
+                    $revisionCorrecta = Documentacion::comprobarRevision($revision['ID']);
                     require_once 'Views/Documentacion/revision.php';
                 } else {
                     require_once 'Views/Documentacion/formulario.php';

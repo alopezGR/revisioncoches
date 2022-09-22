@@ -36,10 +36,10 @@ class RepostajeController
                 require_once 'Views/Repostaje/index.php';
             } else {
                 // $rampas = Accesibilidad::getRampasVehiculo($vehiculo);
-                $revision = Repostaje::obtenerUltimaRevision();
+                $revision = Repostaje::obtenerUltimaRevision($resultado['id']);
                 $fechaActual = date('Y-m-d');
                 $fechaUltimaRevision = $revision['fecha'];
-
+                
                 if ($revision && $fechaActual == $fechaUltimaRevision) {
                     require_once 'Views/Repostaje/revision.php';
                 } else {

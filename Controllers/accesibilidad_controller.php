@@ -36,12 +36,12 @@ class AccesibilidadController
                 require_once 'Views/Accesibilidad/index.php';
             } else {
                 // $rampas = Accesibilidad::getRampasVehiculo($vehiculo);
-                $revision = Accesibilidad::obtenerUltimaRevision();
+                $revision = Accesibilidad::obtenerUltimaRevision($resultado['id']);
                 $fechaActual = date('Y-m-d');
                 $fechaUltimaRevision = $revision['fecha'];
-                $revisionCorrecta = Accesibilidad::comprobarRevision($revision['id']);
-
+                
                 if($revision && $fechaActual == $fechaUltimaRevision){
+                    $revisionCorrecta = Accesibilidad::comprobarRevision($revision['id']);
                     require_once 'Views/Accesibilidad/revision.php';
                 } else {
                     require_once 'Views/Accesibilidad/formulario.php';

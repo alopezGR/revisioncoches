@@ -519,11 +519,11 @@ class Limpieza extends Vehiculo
     }
 
     
-    public static function obtenerUltimaRevisionLI()
+    public static function obtenerUltimaRevisionLI($idVehiculo)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM estado_limpieza_interior order by fecha desc limit 1";
+        $query = "SELECT * FROM estado_limpieza_interior where ID_VEHICULO = $idVehiculo order by fecha desc limit 1";
 
         $st = $conn->prepare($query);
 
@@ -536,11 +536,11 @@ class Limpieza extends Vehiculo
         }
     }
     
-    public static function obtenerUltimaRevisionLE()
+    public static function obtenerUltimaRevisionLE($idVehiculo)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM estado_limpieza_exterior order by fecha desc limit 1";
+        $query = "SELECT * FROM estado_limpieza_exterior where ID_VEHICULO = $idVehiculo order by fecha desc limit 1";
 
         $st = $conn->prepare($query);
 
@@ -553,11 +553,11 @@ class Limpieza extends Vehiculo
         }
     }
     
-    public static function obtenerUltimaRevisionCI()
+    public static function obtenerUltimaRevisionCI($idVehiculo)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM estado_conservacion_interior order by fecha desc limit 1";
+        $query = "SELECT * FROM estado_conservacion_interior where ID_VEHICULO = $idVehiculo order by fecha desc limit 1";
 
         $st = $conn->prepare($query);
 
@@ -570,11 +570,11 @@ class Limpieza extends Vehiculo
         }
     }
     
-    public static function obtenerUltimaRevisionCE()
+    public static function obtenerUltimaRevisionCE($idVehiculo)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM estado_conservacion_exterior order by fecha desc limit 1";
+        $query = "SELECT * FROM estado_conservacion_exterior where ID_VEHICULO = $idVehiculo order by fecha desc limit 1";
 
         $st = $conn->prepare($query);
 

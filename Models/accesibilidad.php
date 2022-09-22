@@ -122,11 +122,11 @@ class Accesibilidad extends Vehiculo
         }
     }
 
-    public static function obtenerUltimaRevision()
+    public static function obtenerUltimaRevision($idVehiculo)
     {
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM estado_accesibilidad order by fecha desc limit 1";
+        $query = "SELECT * FROM estado_accesibilidad where idvehiculo = $idVehiculo order by fecha desc limit 1";
 
         $st = $conn->prepare($query);
 

@@ -36,12 +36,12 @@ class SeguridadController
                 require_once 'Views/Seguridad/index.php';
             } else {
                 // $rampas = Accesibilidad::getRampasVehiculo($vehiculo);
-                $revision = Seguridad::obtenerUltimaRevision();
+                $revision = Seguridad::obtenerUltimaRevision($resultado['id']);
                 $fechaActual = date('Y-m-d');
                 $fechaUltimaRevision = $revision['FECHA'];
-                $revisionCorrecta = Seguridad::comprobarRevision($revision['ID']);
-
+                
                 if($revision && $fechaActual == $fechaUltimaRevision){
+                    $revisionCorrecta = Seguridad::comprobarRevision($revision['ID']);
                     require_once 'Views/Seguridad/revision.php';
                 } else {
                     require_once 'Views/Seguridad/formulario.php';

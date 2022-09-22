@@ -36,10 +36,10 @@ class LimpiezaController
                 require_once 'Views/Limpieza/index.php';
             } else {
                 // $rampas = Accesibilidad::getRampasVehiculo($vehiculo);
-                $revisionLI = Limpieza::obtenerUltimaRevisionLI();
-                $revisionLE = Limpieza::obtenerUltimaRevisionLE();
-                $revisionCI = Limpieza::obtenerUltimaRevisionCI();
-                $revisionCE = Limpieza::obtenerUltimaRevisionCE();
+                $revisionLI = Limpieza::obtenerUltimaRevisionLI($resultado['id']);
+                $revisionLE = Limpieza::obtenerUltimaRevisionLE($resultado['id']);
+                $revisionCI = Limpieza::obtenerUltimaRevisionCI($resultado['id']);
+                $revisionCE = Limpieza::obtenerUltimaRevisionCE($resultado['id']);
 
                 // var_dump($revisionLI); exit;
 
