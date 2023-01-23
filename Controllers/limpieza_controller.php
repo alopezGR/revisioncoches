@@ -28,8 +28,9 @@ class LimpiezaController
     {
         if (isset($_SESSION['logged'])) {
             $vehiculo = strtoupper($_POST['vehiculo']);
+            $empresa = $_POST['EMPRESA'];
 
-            $resultado = Limpieza::getInfoVehiculo($vehiculo);
+            $resultado = Limpieza::getInfoVehiculo($vehiculo, $empresa);
 
             if ($resultado == false || $resultado['id'] == '1478') {
                 $_SESSION['vehiculoIncorrecto'] = 'true';

@@ -1,7 +1,7 @@
 <?php
 
 class Vehiculo{
-    public static function getInfoVehiculo($vehiculo) {
+    public static function getInfoVehiculo($vehiculo, $empresa) {
 
         if (!empty($vehiculo)) {
             if ($vehiculo[0] == 'A' || $vehiculo[0] == 'a') {
@@ -17,11 +17,12 @@ class Vehiculo{
 
         $conn = Db::getConector();
 
-        $query = "SELECT * FROM vehiculo WHERE codbus = :vehiculo";
+        $query = "SELECT * FROM vehiculo WHERE codbus = :vehiculo and idempresa = :empresa";
 
         $st = $conn->prepare($query);
 
         $st->bindParam(":vehiculo", $vehiculo);
+        $st->bindParam(":empresa", $empresa);
 
         $st->execute();
 

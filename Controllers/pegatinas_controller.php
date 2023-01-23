@@ -28,8 +28,9 @@ class PegatinasController
     {
         if (isset($_SESSION['logged'])) {
             $vehiculo = strtoupper($_POST['vehiculo']);
+            $empresa = $_POST['EMPRESA'];
 
-            $resultado = Pegatinas::getInfoVehiculo($vehiculo);
+            $resultado = Pegatinas::getInfoVehiculo($vehiculo, $empresa);
 
             if ($resultado == false || $resultado['id'] == '1478') {
                 $_SESSION['vehiculoIncorrecto'] = 'true';
@@ -50,15 +51,15 @@ class PegatinasController
                 $revisionILuna = Pegatinas::obtenerUltimaRevisionILuna($resultado['id']);
 
                 //  var_dump($revisionILD); exit;
-                
-                $revision = $revisionEF && $revisionET && $revisionELD && $revisionELI && $revisionELuna 
-                && $revisionIC && $revisionID && $revisionILI && $revisionILD && $revisionIT && $revisionMI && $revisionILuna;
-                
+
+                $revision = $revisionEF && $revisionET && $revisionELD && $revisionELI && $revisionELuna
+                    && $revisionIC && $revisionID && $revisionILI && $revisionILD && $revisionIT && $revisionMI && $revisionILuna;
+
                 $fechaActual = date('Y-m-d');
-                
+
                 if ($revision) {
                     $fechaUltimaRevision = $revision ? $revisionEF['FECHA'] : false;
-                    
+
                     $revisionCorrectaEF = Pegatinas::comprobarRevisionEF($revisionEF['ID']);
                     $revisionCorrectaET = Pegatinas::comprobarRevisionET($revisionET['ID']);
                     $revisionCorrectaELD = Pegatinas::comprobarRevisionELD($revisionELD['ID']);
@@ -71,11 +72,11 @@ class PegatinasController
                     $revisionCorrectaIT = Pegatinas::comprobarRevisionIT($revisionIT['ID']);
                     $revisionCorrectaMI = Pegatinas::comprobarRevisionMI($revisionMI['ID']);
                     $revisionCorrectaILuna = Pegatinas::comprobarRevisionILuna($revisionILuna['ID']);
-                    
-                    
-                    $revisionCorrecta = $revisionCorrectaEF && $revisionCorrectaET && $revisionCorrectaELD && $revisionCorrectaELI && $revisionCorrectaELuna 
-                    && $revisionCorrectaIC && $revisionCorrectaID && $revisionCorrectaILI && $revisionCorrectaILD && $revisionCorrectaIT && $revisionCorrectaMI 
-                    && $revisionCorrectaILuna;
+
+
+                    $revisionCorrecta = $revisionCorrectaEF && $revisionCorrectaET && $revisionCorrectaELD && $revisionCorrectaELI && $revisionCorrectaELuna
+                        && $revisionCorrectaIC && $revisionCorrectaID && $revisionCorrectaILI && $revisionCorrectaILD && $revisionCorrectaIT && $revisionCorrectaMI
+                        && $revisionCorrectaILuna;
                     // var_dump($revisionCorrecta); exit;
 
                     if ($fechaActual == $fechaUltimaRevision) {

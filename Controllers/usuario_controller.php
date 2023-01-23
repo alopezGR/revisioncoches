@@ -37,6 +37,7 @@ class UsuarioController
         $password = $_POST['password'];
         $logged = Usuario::checkLogin($email, $password); // Obtiene la repuesta de la BD si el usuario existe o no y lo guarda en la variable $logged
         if (!$logged) { // Si las credenciales no son correctas, muestra un error y direcciona de nuevo a la página de login
+            $_SESSION['errorLogin'] = true;
             header('Location: index.php?controller=usuario&action=login');
         } else { // sino redirecciona a la página de inicio
             Usuario::registroLogin($email, 'login');

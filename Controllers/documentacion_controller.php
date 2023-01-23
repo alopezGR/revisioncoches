@@ -28,8 +28,9 @@ class DocumentacionController
     {
         if (isset($_SESSION['logged'])) {
             $vehiculo = strtoupper($_POST['vehiculo']);
+            $empresa = $_POST['EMPRESA'];
 
-            $resultado = Documentacion::getInfoVehiculo($vehiculo);
+            $resultado = Documentacion::getInfoVehiculo($vehiculo, $empresa);
 
             if ($resultado == false || $resultado['id'] == '1478') {
                 $_SESSION['vehiculoIncorrecto'] = 'true';
@@ -39,8 +40,8 @@ class DocumentacionController
                 $revision = Documentacion::obtenerUltimaRevision($resultado['id']);
                 $fechaActual = date('Y-m-d');
                 $fechaUltimaRevision = $revision['FECHA'];
-                
-                if($revision && $fechaActual == $fechaUltimaRevision){
+
+                if ($revision && $fechaActual == $fechaUltimaRevision) {
                     $revisionCorrecta = Documentacion::comprobarRevision($revision['ID']);
                     require_once 'Views/Documentacion/revision.php';
                 } else {

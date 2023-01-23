@@ -28,8 +28,9 @@ class SeguridadController
     {
         if (isset($_SESSION['logged'])) {
             $vehiculo = strtoupper($_POST['vehiculo']);
+            $empresa = $_POST['EMPRESA'];
 
-            $resultado = Seguridad::getInfoVehiculo($vehiculo);
+            $resultado = Seguridad::getInfoVehiculo($vehiculo, $empresa);
 
             if ($resultado == false || $resultado['id'] == '1478') {
                 $_SESSION['vehiculoIncorrecto'] = 'true';
@@ -39,8 +40,8 @@ class SeguridadController
                 $revision = Seguridad::obtenerUltimaRevision($resultado['id']);
                 $fechaActual = date('Y-m-d');
                 $fechaUltimaRevision = $revision['FECHA'];
-                
-                if($revision && $fechaActual == $fechaUltimaRevision){
+
+                if ($revision && $fechaActual == $fechaUltimaRevision) {
                     $revisionCorrecta = Seguridad::comprobarRevision($revision['ID']);
                     require_once 'Views/Seguridad/revision.php';
                 } else {

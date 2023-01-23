@@ -28,9 +28,10 @@ class AccesibilidadController
     {
         if (isset($_SESSION['logged'])) {
             $vehiculo = strtoupper($_POST['vehiculo']);
+            $empresa = $_POST['EMPRESA'];
 
-            $resultado = Accesibilidad::getInfoVehiculo($vehiculo);
-            
+            $resultado = Accesibilidad::getInfoVehiculo($vehiculo, $empresa);
+
             if ($resultado == false || $resultado['id'] == '1478') {
                 $_SESSION['vehiculoIncorrecto'] = 'true';
                 require_once 'Views/Accesibilidad/index.php';
@@ -39,8 +40,8 @@ class AccesibilidadController
                 $revision = Accesibilidad::obtenerUltimaRevision($resultado['id']);
                 $fechaActual = date('Y-m-d');
                 $fechaUltimaRevision = $revision['fecha'];
-                
-                if($revision && $fechaActual == $fechaUltimaRevision){
+
+                if ($revision && $fechaActual == $fechaUltimaRevision) {
                     $revisionCorrecta = Accesibilidad::comprobarRevision($revision['id']);
                     require_once 'Views/Accesibilidad/revision.php';
                 } else {

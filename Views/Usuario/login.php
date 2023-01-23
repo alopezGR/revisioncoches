@@ -1,10 +1,13 @@
 
 <div class="row justify-content-center">
     <?php
-    if (isset($_GET['error']) && $_GET['error'])
+    if (isset($_SESSION['errorLogin'])){
         echo " <div class='col-12 alert alert-danger' role='alert'>
                     El ususario o la contraseña son incorrectos.
                  </div>";
+        unset($_SESSION['errorLogin']);
+    }
+
     ?>
     <div class="col-8 formulario">
         <form action='index.php?controller=usuario&action=checkLogin' method='post'>

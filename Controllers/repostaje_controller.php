@@ -28,8 +28,9 @@ class RepostajeController
     {
         if (isset($_SESSION['logged'])) {
             $vehiculo = strtoupper($_POST['vehiculo']);
+            $empresa = $_POST['EMPRESA'];
 
-            $resultado = Repostaje::getInfoVehiculo($vehiculo);
+            $resultado = Repostaje::getInfoVehiculo($vehiculo, $empresa);
 
             if ($resultado == false || $resultado['id'] == '1478') {
                 $_SESSION['vehiculoIncorrecto'] = 'true';
@@ -39,7 +40,7 @@ class RepostajeController
                 $revision = Repostaje::obtenerUltimaRevision($resultado['id']);
                 $fechaActual = date('Y-m-d');
                 $fechaUltimaRevision = $revision['fecha'];
-                
+
                 if ($revision && $fechaActual == $fechaUltimaRevision) {
                     require_once 'Views/Repostaje/revision.php';
                 } else {

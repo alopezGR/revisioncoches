@@ -1,31 +1,10 @@
 <div class="row justify-content-center">
     <?php
-    if (isset($_SESSION['error']) && $_SESSION['error'])
-        echo " <div class='col-12 alert alert-danger' role='alert'>
-                    Se ha producido un error. Inténtelo de nuevo más tarde.
-                 </div>";
-    unset($_SESSION['error']);
-    ?>
-    <?php
-    if (isset($_SESSION['exito']) && $_SESSION['exito'] == "true")
-        echo " <div class='col-12 alert alert-success' role='alert'>
-                    La revisión del vehículo se ha guardado con éxito.
-                 </div>";
-    unset($_SESSION['exito']);
-    ?>
-    <?php
     if (isset($_SESSION['vehiculoIncorrecto']) && $_SESSION['vehiculoIncorrecto'] == "true")
         echo " <div class='col-12 alert alert-warning' role='alert'>
                     El vehículo introducido no se encuentra registrado. Prueba de nuevo.
                  </div>";
     unset($_SESSION['vehiculoIncorrecto']);
-    ?>
-    <?php
-    if (isset($_SESSION['passwordCambiada']) && $_SESSION['passwordCambiada'] == "true")
-        echo " <div class='col-12 alert alert-success' role='alert'>
-                    La contraseña se ha actualizado correctamente.
-                 </div>";
-    unset($_SESSION['passwordCambiada']);
     ?>
     <div class="col-md-5 col-8 formulario">
         <form action='index.php?controller=documentacion&action=formulario' method='post'>
@@ -33,6 +12,14 @@
             <div class="form-group">
                 <label for="vehiculo">Número de vehículo</label>
                 <input type="text" class="form-control" name="vehiculo" id="vehiculo">
+            </div>
+            <div class="form-group">
+                <label for="empresa">Empresa</label>
+                <select id="EMPRESA" name="EMPRESA" class="form-control">
+                    <option value="21">Autoperiferia</option>
+                    <option value="8">Martin</option>
+                    <option value="10">Ruiz</option>
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
