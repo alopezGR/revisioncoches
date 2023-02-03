@@ -14,10 +14,14 @@ class Vehiculo{
         } else {
             return false;
         }
+        if($empresa == 14){
+            $conn = DBMurcia::getConector();
+            $query = "SELECT id, IDEMPRESA, kilometros as klm, matricula FROM vehiculos WHERE NUMERO = :vehiculo and idempresa = :empresa";
+        } else {
+            $conn = Db::getConector();
+            $query = "SELECT * FROM vehiculo WHERE codbus = :vehiculo and idempresa = :empresa";
+        }
 
-        $conn = Db::getConector();
-
-        $query = "SELECT * FROM vehiculo WHERE codbus = :vehiculo and idempresa = :empresa";
 
         $st = $conn->prepare($query);
 
