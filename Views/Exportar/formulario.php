@@ -6,7 +6,7 @@
         <div class="col-8 mt-5" style=" height: auto">
             <div class="form-group">
                 <label for="FECHA_INICIO">FECHA INICIO</label>
-                <input id="FECHA_INICIO" class="form-control" type="text" name="FECHA_INICIO" placeholder="YYYY/MM/DD" required/>
+                <input id="FECHA_INICIO" class="form-control" type="text" name="FECHA_INICIO" placeholder="YYYY/MM/DD" required />
                 <label for="FECHA_FIN">FECHA FIN</label>
                 <input type="text" class="form-control" name="FECHA_FIN" id="FECHA_FIN" placeholder="YYYY/MM/DD" required>
             </div>
@@ -18,6 +18,7 @@
                     <option value="10">Ruiz</option>
                     <option value="5">Unauto</option>
                     <option value="14">Murcia</option>
+                    <option value="22">Mallorca</option>
                 </select>
             </div>
         </div>

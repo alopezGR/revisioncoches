@@ -1,5 +1,5 @@
 <?php
-$empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa Ruiz', 14 => 'TMURCIA', 5 => 'Unauto');
+$empresas = array(8 => "Empresa Martín", 21 => "Autoperiferia", 10 => 'Empresa Ruiz', 14 => 'TMURCIA', 5 => 'Unauto', 22 => 'Mallorca');
 ?>
 
 <form method="post" action="index.php?controller=limpieza&action=actualizarFormulario">

@@ -21,6 +21,7 @@
                     <option value="10">Ruiz</option>
                     <option value="5">Unauto</option>
                     <option value="14">Murcia</option>
+                    <option value="22">Mallorca</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Enviar</button>
