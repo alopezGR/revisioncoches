@@ -15,11 +15,14 @@
             </div>
             <div class="form-group">
                 <label for="empresa">Empresa</label>
-                <select id="EMPRESA" name="EMPRESA" class="form-control">
+                <select required id="EMPRESA" name="EMPRESA" class="form-control">
+                    <option value=""></option>
                     <option value="21">Autoperiferia</option>
                     <option value="8">Martin</option>
                     <option value="10">Ruiz</option>
-                    <option value="10">Murcia</option>
+                    <option value="5">Unauto</option>
+                    <option value="14">Murcia</option>
+                    <option value="22">Mallorca</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Enviar</button>
