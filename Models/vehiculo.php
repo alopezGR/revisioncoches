@@ -1,7 +1,9 @@
 <?php
 
-class Vehiculo{
-    public static function getInfoVehiculo($vehiculo, $empresa) {
+class Vehiculo
+{
+    public static function getInfoVehiculo($vehiculo, $empresa)
+    {
 
         if (!empty($vehiculo)) {
             if ($vehiculo[0] == 'A' || $vehiculo[0] == 'a') {
@@ -14,13 +16,14 @@ class Vehiculo{
         } else {
             return false;
         }
-        if($empresa == 14){
+
+        if ($empresa == 14) {
             $conn = DBMurcia::getConector();
             $query = "SELECT id, IDEMPRESA, kilometros as klm, matricula FROM vehiculos WHERE NUMERO = :vehiculo and idempresa = :empresa";
-        } else if ($empresa = 22){
+        } else if ($empresa == 22) {
             $conn = DBCascaisMallorca::getConector();
             $query = "SELECT * FROM vehiculo WHERE codbus = :vehiculo and idempresa = :empresa";
-        }else {
+        } else {
             $conn = Db::getConector();
             $query = "SELECT * FROM vehiculo WHERE codbus = :vehiculo and idempresa = :empresa";
         }
@@ -33,14 +36,17 @@ class Vehiculo{
 
         $st->execute();
 
+        
         if ($st) {
-            return $st->fetch(PDO::FETCH_ASSOC);
+            $var = $st->fetch(PDO::FETCH_ASSOC);
+            return $var;
         } else {
             return false;
         }
     }
 
-    public static function getRampasVehiculo($vehiculo) {
+    public static function getRampasVehiculo($vehiculo)
+    {
 
         $conn = Db::getConector();
 
@@ -58,5 +64,4 @@ class Vehiculo{
             return false;
         }
     }
-
 }
